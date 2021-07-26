@@ -13,7 +13,7 @@ export default function ChallengePagePopup(props) {
     }
     return (
         <div style={{position: 'fixed', zIndex: 1, top:'50%', left: '50%', border: '1px solid black'}}>
-            <a href="" onClick={closePopup}>x</a>
+            <button onClick={closePopup}>x</button>
             <p ref={linkEl}>Placeholder copy and paste</p>
             <button onClick={copyToClipboard}>Copy</button>
         </div>
