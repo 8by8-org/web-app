@@ -59,7 +59,7 @@ export default function Login() {
                     setError(errorMessage(e));
                 }
             };
-    
+
             const storedEmail = window.localStorage.getItem(localStorageEmailKey);
             if (!storedEmail) {
                 setMessage('Please re-enter your email');
@@ -69,6 +69,7 @@ export default function Login() {
                 verifyEmail(storedEmail);
             }
         }
+        // eslint-disable-next-line
     }, [currentUser]);
 
     return (
