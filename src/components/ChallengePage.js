@@ -2,7 +2,7 @@ import React, {useState} from 'react'
 import { useHistory } from 'react-router-dom';
 import { useAuth } from '../contexts/AuthContext';
 import ChallengePagePopup from './ChallengePagePopup';
-import SVGIcon from "./IconComponent";
+import ChallengeIcon from "./ChallengeIcon";
 
 export default function ChallengePage() {
     const { currentUser } = useAuth();
@@ -15,15 +15,15 @@ export default function ChallengePage() {
         <div>
             <p>current login status (debug purposes): {currentUser === null ? 'Logged out' : currentUser.email}</p>
             <p>Challenge page</p>
-            <SVGIcon name="icon1uncompleted" width={100} />
-            <SVGIcon name="icon2uncompleted" width={100} />
-            <SVGIcon name="icon3uncompleted" width={100} />
-            <SVGIcon name="icon4uncompleted" width={100} />
+            <ChallengeIcon day='1' completed />
+            <ChallengeIcon day='2' completed />
+            <ChallengeIcon day='3' />
+            <ChallengeIcon day='4' />
             <br/>
-            <SVGIcon name="icon5uncompleted" width={100} />
-            <SVGIcon name="icon6uncompleted" width={100} />
-            <SVGIcon name="icon7uncompleted" width={100} />
-            <SVGIcon name="icon8uncompleted" width={100} />
+            <ChallengeIcon day='5' />
+            <ChallengeIcon day='6' />
+            <ChallengeIcon day='7' />
+            <ChallengeIcon day='8' />
             <br/>
             {<button onClick={togglePopup}>Invite friends</button>}
             <ChallengePagePopup show={popupVisible} togglePopup={togglePopup}/>
