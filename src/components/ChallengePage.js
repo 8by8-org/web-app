@@ -14,7 +14,6 @@ export default function ChallengePage() {
     return (
         <div>
             <p>current login status (debug purposes): {currentUser === null ? 'Logged out' : currentUser.email}</p>
-            <p>I've changed this!</p>
             <p>Challenge page</p>
             <SVGIcon name="icon1uncompleted" width={100} />
             <SVGIcon name="icon2uncompleted" width={100} />
@@ -27,7 +26,7 @@ export default function ChallengePage() {
             <SVGIcon name="icon8uncompleted" width={100} />
             <br/>
             {<button onClick={togglePopup}>Invite friends</button>}
-            {popupVisible && <ChallengePagePopup togglePopup={togglePopup}/>}
+            <ChallengePagePopup show={popupVisible} togglePopup={togglePopup}/>
             <button onClick={() => history.push('/logout')}>Logout</button>
         </div>
     )
