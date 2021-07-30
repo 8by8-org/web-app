@@ -1,4 +1,5 @@
 import React, { useRef } from "react";
+import { Modal } from "react-bootstrap";
 import {
   WhatsappShareButton,
   WhatsappIcon,
@@ -13,7 +14,6 @@ import {
 export default function ChallengePagePopup(props) {
   const linkEl = useRef(null);
   const closePopup = (e) => {
-    e.preventDefault();
     props.togglePopup();
   };
   // Will have to check the availability of navigator on different browsers and systems
@@ -33,54 +33,50 @@ export default function ChallengePagePopup(props) {
   };
 
   return (
-    <div
-      style={{
-        position: "fixed",
-        zIndex: 1,
-        top: "50%",
-        left: "50%",
-        border: "1px solid black",
-      }}
-    >
-      <button onClick={closePopup}>x</button>
+    <div>
+      <Modal show={props.show} onHide={closePopup}>
+        <Modal.Header closeButton>Invite 8 Friends</Modal.Header>  
+        <Modal.Body>  
+          <p>Share this post at</p>
+          <WhatsappShareButton
+            url={shareButtonData.url}
+            title={shareButtonData.title}
+            separator={shareButtonData.separator}
+          >
+            <WhatsappIcon size={40} round={true} />
+          </WhatsappShareButton>
 
-      <p>Share this post at</p>
-      <WhatsappShareButton
-        url={shareButtonData.url}
-        title={shareButtonData.title}
-        separator={shareButtonData.separator}
-      >
-        <WhatsappIcon size={40} round={true} />
-      </WhatsappShareButton>
+          <FacebookShareButton
+            url={shareButtonData.url}
+            quote={shareButtonData.body}
+            hashtag={shareButtonData.hashtag}
+          >
+            <FacebookIcon size={40} round={true} />
+          </FacebookShareButton>
 
-      <FacebookShareButton
-        url={shareButtonData.url}
-        quote={shareButtonData.body}
-        hashtag={shareButtonData.hashtag}
-      >
-        <FacebookIcon size={40} round={true} />
-      </FacebookShareButton>
+          <TwitterShareButton
+            url={shareButtonData.url}
+            title={shareButtonData.title}
+            via={shareButtonData.twitterAccount}
+            hashtags={shareButtonData.hashtags}
+          >
+            <TwitterIcon size={40} round={true} />
+          </TwitterShareButton>
 
-      <TwitterShareButton
-        url={shareButtonData.url}
-        title={shareButtonData.title}
-        via={shareButtonData.twitterAccount}
-        hashtags={shareButtonData.hashtags}
-      >
-        <TwitterIcon size={40} round={true} />
-      </TwitterShareButton>
-
-      <EmailShareButton
-        url={shareButtonData.url}
-        subject={shareButtonData.title}
-        body={shareButtonData.body}
-        separator={shareButtonData.separator}
-      >
-        <EmailIcon size={40} round={true} />
-      </EmailShareButton>
-
-      <p ref={linkEl}>Placeholder copy and paste</p>
-      <button onClick={copyToClipboard}>Copy</button>
+          <EmailShareButton
+            url={shareButtonData.url}
+            subject={shareButtonData.title}
+            body={shareButtonData.body}
+            separator={shareButtonData.separator}
+          >
+            <EmailIcon size={40} round={true} />
+          </EmailShareButton>
+        </Modal.Body>  
+        <Modal.Footer>
+          <p ref={linkEl}>Placeholder Link</p>
+          <button onClick={copyToClipboard}>Copy</button>
+        </Modal.Footer>
+      </Modal>
     </div>
   );
 }

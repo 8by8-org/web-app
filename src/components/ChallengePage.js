@@ -13,10 +13,9 @@ export default function ChallengePage() {
     return (
         <div>
             <p>current login status (debug purposes): {currentUser === null ? 'Logged out' : currentUser.email}</p>
-            <p>I've changed this!</p>
             <p>Challenge page</p>
             {<button onClick={togglePopup}>Invite friends</button>}
-            {popupVisible && <ChallengePagePopup togglePopup={togglePopup}/>}
+            <ChallengePagePopup show={popupVisible} togglePopup={togglePopup}/>
             <button onClick={() => history.push('/logout')}>Logout</button>
         </div>
     )
