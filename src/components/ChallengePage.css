@@ -1,15 +1,13 @@
 @import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@600&display=swap");
 
-body {
-  min-height: 100vh;
-}
-
-.container {
+.container-styles {
   background-color: #142a38;
   color: white;
+  min-height: 100vh;
+  vertical-align: middle;
 }
 
-/* Cannot find the Helena Font */
+/* Cannot access Helena Font */
 .primary {
   color: #d2513d;
   font-size: 14px;
@@ -18,7 +16,6 @@ body {
 
 .secondary {
   font-family: Montserrat;
-  font-style: normal;
   font-size: 10px;
   line-height: 14px;
   letter-spacing: 0.02em;
@@ -27,7 +24,6 @@ body {
 
 .tertiary {
   font-family: Montserrat;
-  font-style: normal;
   font-size: 12px;
   line-height: 15px;
   color: #addefc;
@@ -44,13 +40,13 @@ body {
   border: 2px solid #d2513d;
   box-sizing: border-box;
   border-radius: 8px;
-  font-size: 12px;
+  font-size: 14px;
   width: 100%;
   font-family: Montserrat;
 }
 
-/* .divider {
+#divider {
+  height: 3px;
   color: #d2513d;
   opacity: 1;
-  size: 3px;
-} */
+}

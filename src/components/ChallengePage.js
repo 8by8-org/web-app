@@ -12,16 +12,16 @@ export default function ChallengePage() {
         togglePopupVisible(!popupVisible);
     }
     return (
-        <Container className="container-fluid py-3 px-5">
+        <Container fluid className="py-4 px-5 container-styles" >
             <div>
                 <p className="primary">Your Challenge Badges</p>
                 <p className="secondary">Thanks for taking on the 8by8 Challenge! You will earn a badge for each friend who responds to your invite. Earn 8 to win! See restaurant rewards</p>
-                <p className="tertiary" style={{ fontSize: '0.6rem' }}>Badges for {currentUser.email}:</p>
+                <p className="tertiary">Badges for {currentUser.email}:</p>
             </div>
-            <div className="mb-4">
+            <div>
                 <Row>
                     <Col className="p-2">
-                        <ChallengeIcon day="1" completed/>
+                        <ChallengeIcon day="1" />
                     </Col>
                     <Col className="p-2">
                         <ChallengeIcon day="2" />
@@ -48,11 +48,11 @@ export default function ChallengePage() {
                     </Col>                    
                 </Row>
             </div>
-            <hr className="divider" style={{height: '3px', color: '#d2513d', opacity: '1'}}/>    
-            <div className="py-3">            
+            <hr className="mt-5 mb-4" id="divider"/>
+            <div>            
                 <Row>
                     <Col>                
-                        <p className="secondary" style={{color: 'white', fontSize: '12px'}}>Send invitations to 8 AAPI friends to earn your badges!</p>
+                        <p className="tertiary" style={{color: 'white'}}>Send invitations to 8 AAPI friends to earn your badges!</p>
                     </Col>
                 </Row>
                 <Row>
