@@ -5,7 +5,7 @@ import { useAuth } from '../contexts/AuthContext'
 export default function SiteNavbar() {
     const { currentUser } = useAuth();
     return (
-        <Navbar expand="sm" bg="light" className="px-sm-5 px-2">
+        <Navbar expand="sm" bg="light" className="px-sm-5 px-2" sticky="top">
             <Navbar.Brand href="/">
                 8by8
             </Navbar.Brand>
