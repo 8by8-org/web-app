@@ -1,5 +1,4 @@
 import React, {useState} from 'react'
-import { useHistory } from 'react-router-dom';
 import { useAuth } from '../contexts/AuthContext';
 import ChallengePagePopup from './ChallengePagePopup';
 import ChallengeIcon from "./ChallengeIcon";
@@ -12,51 +11,57 @@ export default function ChallengePage() {
     const togglePopup = () => {
         togglePopupVisible(!popupVisible);
     }
-    const history = useHistory();
     return (
-        <Container className="p-5">
-            <div className="">
+        <Container className="container-fluid py-3 px-5">
+            <div>
                 <p className="primary">Your Challenge Badges</p>
-                <p className="secondary">Earn a badge for every friend who responds to your invite. Earn 8 to win!</p>
-                <p className="tertiary">Badges for {currentUser.email}</p>
+                <p className="secondary">Thanks for taking on the 8by8 Challenge! You will earn a badge for each friend who responds to your invite. Earn 8 to win! See restaurant rewards</p>
+                <p className="tertiary" style={{ fontSize: '0.6rem' }}>Badges for {currentUser.email}:</p>
             </div>
-                <div className="">
-                    <Row>
-                         <Col className="p-2">
-                            <ChallengeIcon day="1" completed/>
-                        </Col>
-                        <Col className="p-2">
-                            <ChallengeIcon day="2" />
-                        </Col>
-                        <Col className="p-2">
-                            <ChallengeIcon day="3" />
-                        </Col>
-                        <Col className="p-2">
-                            <ChallengeIcon day="4" />
-                        </Col>
-                    </Row>
-                    <Row>
+            <div className="mb-4">
+                <Row>
+                    <Col className="p-2">
+                        <ChallengeIcon day="1" completed/>
+                    </Col>
+                    <Col className="p-2">
+                        <ChallengeIcon day="2" />
+                    </Col>
+                    <Col className="p-2">
+                        <ChallengeIcon day="3" />
+                    </Col>
+                    <Col className="p-2">
+                        <ChallengeIcon day="4" />
+                    </Col>
+                </Row>
+                <Row>
                     <Col className="p-2">
                             <ChallengeIcon day="5" />
-                        </Col>
-                        <Col className="p-2">
+                    </Col>
+                    <Col className="p-2">
                             <ChallengeIcon day="6" />
-                        </Col>
-                        <Col className="p-2">
+                    </Col>
+                    <Col className="p-2">
                             <ChallengeIcon day="7" />
-                        </Col>
-                        <Col className="p-2">
+                    </Col>
+                    <Col className="p-2">
                             <ChallengeIcon day="8" />
-                        </Col>                    
-                    </Row>
-                </div>
-                <div>
-                     <p>Invite 8 AAPI friends now to earn your badges!</p>
-                     <Button onClick={togglePopup} className="px-5 btn-primary" id="button-style">Invite friends</Button>
-                </div>
-                    
-                <ChallengePagePopup show={popupVisible} togglePopup={togglePopup}/>
-                        {/* <Button onClick={() => history.push('/logout')}>Logout</Button> */}
+                    </Col>                    
+                </Row>
+            </div>
+            <hr className="divider" style={{height: '3px', color: '#d2513d', opacity: '1'}}/>    
+            <div className="py-3">            
+                <Row>
+                    <Col>                
+                        <p className="secondary" style={{color: 'white', fontSize: '12px'}}>Send invitations to 8 AAPI friends to earn your badges!</p>
+                    </Col>
+                </Row>
+                <Row>
+                    <Col>                    
+                        <Button onClick={togglePopup} className="py-2" id="button-style">Invite friends</Button>
+                    </Col>
+                </Row>
+            </div>            
+            <ChallengePagePopup show={popupVisible} togglePopup={togglePopup}/> 
         </Container>
     )
 }

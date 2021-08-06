@@ -1,43 +1,56 @@
-@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@600&display=swap");
+
+body {
+  min-height: 100vh;
+}
 
 .container {
-  display: flex;
-  flex-direction: column;
   background-color: #142a38;
   color: white;
-  font-family: Montserrat;
-  font-weight: 15pt;
 }
 
-#button-style {
-  background: #d2513d !important;
-  border: 0px;
-}
-
+/* Cannot find the Helena Font */
 .primary {
   color: #d2513d;
+  font-size: 14px;
+  font-family: Montserrat;
 }
 
 .secondary {
+  font-family: Montserrat;
+  font-style: normal;
+  font-size: 10px;
+  line-height: 14px;
+  letter-spacing: 0.02em;
   color: #87b4d0;
-  font-size: 13;
 }
 
 .tertiary {
+  font-family: Montserrat;
+  font-style: normal;
+  font-size: 12px;
+  line-height: 15px;
   color: #addefc;
-  font-size: 14;
 }
 
 .svg-container {
-  display: inline-block;
-  position: relative;
   width: 10%;
   padding: 5px;
   vertical-align: middle;
 }
 
-#badge {
-  padding: 5px;
-  height: 5vh;
-  width: auto;
+#button-style {
+  background: #d2513d;
+  border: 2px solid #d2513d;
+  box-sizing: border-box;
+  border-radius: 8px;
+  font-size: 12px;
+  width: 100%;
+  font-family: Montserrat;
 }
+
+/* .divider {
+  color: #d2513d;
+  opacity: 1;
+  size: 3px;
+} */
