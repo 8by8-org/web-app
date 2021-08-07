@@ -1,5 +1,13 @@
 #root {
-    background-color: #142a38;
-    color: white;
-    height: 100vh;
+  background-color: #142a38;
+  color: white;
+  height: 100vh;
+}
+#app-outer-wrapper {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+#app-wrapper {
+  max-width: 500px;
 }
