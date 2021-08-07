@@ -7,6 +7,7 @@ import Login from './LoginPage';
 import Logout from './Logout';
 import PrivateRoute from './PrivateRoute';
 import SiteNavbar from './SiteNavbar';
+import './App.css';
 
 function App() {
     return (
