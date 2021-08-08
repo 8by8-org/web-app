@@ -14,14 +14,18 @@ function App() {
         <>
             <AuthProvider>
                 <SiteNavbar />
-                <Router>
-                    <Switch>
-                        <Route exact path='/' component={LandingPage} />
-                        <Route path='/login' component={Login} />
-                        <PrivateRoute path='/challenge' component={ChallengePage} />
-                        <PrivateRoute path='/logout' component={Logout} />
-                    </Switch>
-                </Router>
+                <div id='app-outer-wrapper'>
+                    <div id='app-wrapper'>
+                        <Router>
+                            <Switch>
+                                <Route exact path='/' component={LandingPage} />
+                                <Route path='/login' component={Login} />
+                                <PrivateRoute path='/challenge' component={ChallengePage} />
+                                <PrivateRoute path='/logout' component={Logout} />
+                            </Switch>
+                        </Router>
+                    </div>
+                </div>
             </AuthProvider>
         </>
     );

@@ -12,7 +12,7 @@ export default function ChallengePage() {
         togglePopupVisible(!popupVisible);
     }
     return (
-        <Container fluid className="py-4 px-5 challenge-wrapper" >
+        <Container fluid className="py-4 px-5" >
             <div>
                 <p className="primary">Your Challenge Badges</p>
                 <p className="secondary">Thanks for taking on the 8by8 Challenge! You will earn a badge for each friend who responds to your invite. Earn 8 to win! See restaurant rewards</p>
