@@ -10,6 +10,9 @@ import {
   TwitterShareButton,
   TwitterIcon,
 } from "react-share";
+import ModalImage from "../assets/images/challenge-popup/modal_image.png";
+import './ChallengePagePopup.css'
+
 
 export default function ChallengePagePopup(props) {
   const linkEl = useRef(null);
@@ -33,50 +36,57 @@ export default function ChallengePagePopup(props) {
   };
 
   return (
-    <div>
       <Modal show={props.show} onHide={closePopup}>
-        <Modal.Header closeButton>Invite 8 Friends</Modal.Header>  
         <Modal.Body>  
-          <p>Share this post at</p>
-          <WhatsappShareButton
-            url={shareButtonData.url}
-            title={shareButtonData.title}
-            separator={shareButtonData.separator}
-          >
-            <WhatsappIcon size={40} round={true} />
-          </WhatsappShareButton>
+          <img className="img-responsive d-block mx-auto" src={ModalImage} 
+          alt="#StopAsianHate. Take the 8by8 challenge by registering to vote - and enjoy
+          free food from sponsor restaurants."/>
+          <p className="modal-image-description">“I’m taking on the #8by8Challenge! 
+             Help me complete this challenge by registering to vote or spreading the word. 
+            Visit my link to take action. Together we can #StopAsianHate. 
+            Learn more at <a href="https://www.8by8.us/">8by8.us.</a>”</p>
+          <p className="modal-primary text-center">Share this post at</p>
+          <div className="d-flex justify-content-center">
+            <WhatsappShareButton id="modal-icon"
+              url={shareButtonData.url}
+              title={shareButtonData.title}
+              separator={shareButtonData.separator}
+            >
+              <WhatsappIcon size={40} round={true} />
+            </WhatsappShareButton>
 
-          <FacebookShareButton
-            url={shareButtonData.url}
-            quote={shareButtonData.body}
-            hashtag={shareButtonData.hashtag}
-          >
-            <FacebookIcon size={40} round={true} />
-          </FacebookShareButton>
+            <FacebookShareButton id="modal-icon"
+              url={shareButtonData.url}
+              quote={shareButtonData.body}
+              hashtag={shareButtonData.hashtag}
+            >
+              <FacebookIcon size={40} round={true} />
+            </FacebookShareButton>
 
-          <TwitterShareButton
-            url={shareButtonData.url}
-            title={shareButtonData.title}
-            via={shareButtonData.twitterAccount}
-            hashtags={shareButtonData.hashtags}
-          >
-            <TwitterIcon size={40} round={true} />
-          </TwitterShareButton>
+            <TwitterShareButton id="modal-icon"
+              url={shareButtonData.url}
+              title={shareButtonData.title}
+              via={shareButtonData.twitterAccount}
+              hashtags={shareButtonData.hashtags}
+            >
+              <TwitterIcon size={40} round={true} />
+            </TwitterShareButton>
 
-          <EmailShareButton
-            url={shareButtonData.url}
-            subject={shareButtonData.title}
-            body={shareButtonData.body}
-            separator={shareButtonData.separator}
-          >
-            <EmailIcon size={40} round={true} />
-          </EmailShareButton>
+            <EmailShareButton id="modal-icon"
+              url={shareButtonData.url}
+              subject={shareButtonData.title}
+              body={shareButtonData.body}
+              separator={shareButtonData.separator}
+            >
+              <EmailIcon size={40} round={true} />
+            </EmailShareButton>
+          </div>
+          <p className="modal-secondary">Or share your unique link</p>
+          <div className="modal-link-wrapper d-flex justify-content-center">
+            <p className="modal-link"ref={linkEl}>https://8by8.com/share/..</p>
+            <button className="modal-link-btn btn btn-light" onClick={copyToClipboard}>Copy</button>
+          </div>
         </Modal.Body>  
-        <Modal.Footer>
-          <p ref={linkEl}>Placeholder Link</p>
-          <button onClick={copyToClipboard}>Copy</button>
-        </Modal.Footer>
       </Modal>
-    </div>
   );
 }

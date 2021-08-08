@@ -1,0 +1,55 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap');
+
+.modal-dialog {
+    overflow: hidden;
+    max-width: 340px;
+    border-radius: 20px;
+}
+
+.modal-image-description {
+    font-family: Montserrat;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 1rem;
+    line-height: 1.7rem;
+    margin-top: 1em;
+    color: #333333;
+    white-space: pre-wrap;
+}
+
+.modal-primary {
+    font-family: Montserrat;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 1.15rem;
+    color: #0D3446;
+}
+
+#modal-icon {
+    margin: 0.4em;
+}
+.modal-secondary {
+    font-family: Montserrat;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 1.05rem;
+    text-align: center;
+    color: #0D3446;
+    margin-top: 1.1rem;
+}
+
+.modal-link-wrapper {
+    margin-top: 1rem;
+    background: #F3F3F3;
+    border: 0.06rem dashed #D2513D;
+    border-radius: 0.5rem;
+    padding: 0.5rem 0.5rem 0.5rem 0.5rem;
+}
+
+.modal-link {
+    margin-top: 1rem;
+}
+
+.btn-light {
+    color: #D2513D;
+}
