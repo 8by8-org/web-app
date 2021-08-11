@@ -82,9 +82,11 @@ export default function ChallengePagePopup(props) {
             </EmailShareButton>
           </div>
           <p className="modal-secondary">Or share your unique link</p>
-          <div className="modal-link-wrapper d-flex justify-content-center">
-            <p className="modal-link"ref={linkEl}>https://8by8.com/share/..</p>
-            <button className="modal-link-btn btn btn-light" onClick={copyToClipboard}>Copy</button>
+          <div className="d-flex justify-content-center">
+            <button className="btn modal-link-btn" onClick={copyToClipboard}>
+              <span className="modal-link d-block-inline" ref={linkEl}>https://8by8.com/share/..</span>
+              <span className="modal-link-copy d-block-inline">Copy</span>
+            </button>
           </div>
         </Modal.Body>  
       </Modal>

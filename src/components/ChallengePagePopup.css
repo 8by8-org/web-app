@@ -12,9 +12,13 @@
     font-weight: normal;
     font-size: 1rem;
     line-height: 1.7rem;
-    margin-top: 1em;
+    margin-top: 1rem;
+    margin-left: 1rem;
+    margin-right: 1rem;
     color: #333333;
     white-space: pre-wrap;
+    text-align: justify;
+    text-justify: inter-word;
 }
 
 .modal-primary {
@@ -26,7 +30,7 @@
 }
 
 #modal-icon {
-    margin: 0.4em;
+    margin: 0.4rem;
 }
 .modal-secondary {
     font-family: Montserrat;
@@ -38,18 +42,27 @@
     margin-top: 1.1rem;
 }
 
-.modal-link-wrapper {
-    margin-top: 1rem;
-    background: #F3F3F3;
-    border: 0.06rem dashed #D2513D;
-    border-radius: 0.5rem;
-    padding: 0.5rem 0.5rem 0.5rem 0.5rem;
+.modal-link-btn {
+    margin-top: 0.5rem;
+    margin-bottom: 1rem;
+    background: #F3F3F3 !important;
+    border: 0.1rem dashed #D2513D !important;
+    border-radius: 0.5rem !important;
+    padding: 0.8rem !important;
 }
 
 .modal-link {
-    margin-top: 1rem;
+    margin-left: 0.5rem;
+    font-family: Montserrat;
+    font-style: normal;
 }
 
-.btn-light {
+.modal-link-copy {
+    margin-left: 2rem;
+    margin-right: 0.5rem;
+    font-family: Montserrat;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 1.15rem;
     color: #D2513D;
 }
