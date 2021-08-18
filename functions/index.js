@@ -40,12 +40,14 @@ exports.onSignup = functions.auth.user().onCreate(async (user) => {
         return currentRandom;
     }
 
-    db.collection("users").doc(user.uid).set({
-        email: user.email,
-        name: user.displayName,
-        inviteCode: await generateUniqueInviteCode(),
-        isRegisteredVoter: false,
-        lastActive: admin.firestore.FieldValue.serverTimestamp()
-
-    });
+    const userRef = db.collection("users").doc(user.uid);
+    if (!await userRef.get().exists) {
+        userRef.set({
+            email: user.email,
+            name: user.displayName,
+            inviteCode: await generateUniqueInviteCode(),
+            isRegisteredVoter: false,
+            lastActive: admin.firestore.FieldValue.serverTimestamp()
+        });
+    }
 });
