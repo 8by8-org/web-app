@@ -88,6 +88,7 @@ export default function ChallengePagePopup(props) {
               <span className="modal-link-copy d-block-inline">Copy</span>
             </button>
           </div>
+          <button className="btn d-block mx-auto" onClick={closePopup}>Close</button>
         </Modal.Body>  
       </Modal>
   );

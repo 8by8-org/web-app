@@ -48,6 +48,7 @@ export default function Login() {
           window.localStorage.setItem(localStorageEmailKey, email);
           setEmailVisible(false);
           setButtonMessage(null);
+          setError(null);
           setMessage("Check your email for an email login link");
         } catch (e) {
           setError(errorMessage(e));
