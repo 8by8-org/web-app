@@ -1,0 +1,172 @@
+.navbar {
+  background-color: white;
+  height: 60px;
+  padding: 10px 30px;
+  display: flex;
+  flex-direction: row;
+}
+
+#icons-tray {
+  display: flex;
+  flex-direction: row;
+  width: 80px;
+  justify-content: space-between;
+}
+
+.menu-icons {
+  font-size: 30px;
+}
+
+a.nav-link {
+  padding: 0;
+  color: black;
+}
+
+a.nav-link:hover {
+  color: black;
+}
+
+/* Sidebar */
+.nav-menu {
+  background-color: white;
+  color: black;
+  max-width: 80vw;
+  width: 400px;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  position: fixed;
+  top: 0;
+  right: -100%;
+  transition: 1200ms;
+}
+
+.nav-menu.active {
+  right: 0;
+  transition: 800ms;
+}
+
+.menu-header {
+  width: 100%;
+  height: 60px;
+  display: flex;
+  justify-content: space-between;
+  font-size: 30px;
+}
+
+.menu-items {
+  width: 100%;
+  overflow: auto;
+  padding: 20px;
+}
+
+.menu-greeting {
+  font-size: 30px;
+  margin: 30px 0;
+  text-transform: uppercase;
+}
+
+.nav-text {
+  display: flex;
+  align-items: center;
+  text-align: left;
+  list-style: none;
+  height: 60px;
+  text-transform: uppercase;
+  border-radius: 10px;
+  padding: 0 5px;
+}
+
+.nav-text:hover {
+  background-color: rgba(130, 130, 130, 0.25);
+}
+
+.nav-text a {
+  text-decoration: none;
+  font-size: 18px;
+  width: 95%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  border-radius: 4px;
+  padding: 0;
+}
+
+.nav-text p {
+  margin: 0;
+  margin-left: 10px;
+}
+
+.menu-settings {
+  margin: 10px 0;
+}
+
+.menu-settings a.nav-link {
+  margin: 10px 0;
+}
+
+/* Notifications tray */
+.notif-menu {
+  height: 80vh;
+  width: 100vw;
+  max-width: 500px;
+  position: fixed;
+  bottom: -100%;
+  transition: 1200ms;
+  background-color: white;
+  color: black;
+  border-top: 2px solid black;
+  width: 100vw;
+}
+
+.notif-menu.active {
+  bottom: 0;
+  transition: 800ms;
+}
+
+.notif-toggle {
+  width: 100%;
+  height: 60px;
+  display: flex;
+}
+
+.notif-menu-items {
+  width: 100%;
+  overflow: auto;
+  padding: 10px;
+}
+
+.notif-title {
+  margin: auto;
+  font-size: 30px;
+}
+
+.notif-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  width: 100%;
+  padding: 10px 20px;
+}
+
+.false {
+  font-weight: bolder;
+}
+
+.notif-icon {
+  display: flex;
+  align-items: center;
+  width: 12.5%;
+  text-align: center;
+  font-size: 30px;
+}
+
+.notif-text {
+  width: 65%;
+}
+
+.notif-date {
+  width: 22.5%;
+  text-align: end;
+}
