@@ -131,7 +131,7 @@ a.nav-link:hover {
   display: flex;
 }
 
-.notif-menu-items {
+.notif-items {
   width: 100%;
   overflow: auto;
   padding: 10px;
