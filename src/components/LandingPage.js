@@ -7,7 +7,7 @@ export default function LandingPage() {
   return (
     <div>
       <LandingPageInfo />
-      <button onClick={() => history.push("/login")}>Take the challenge</button>
+      <button onClick={() => history.push("/signup")}>Take the challenge</button>
     </div>
   );
 }

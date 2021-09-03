@@ -24,9 +24,13 @@ export default function Login() {
   const [error, setError] = useState(null);
   const [message, setMessage] = useState(null);
   const [emailVisible, setEmailVisible] = useState(true);
+  const [textVisible, setTextVisible] = useState(true);
   const [buttonMessage, setButtonMessage] = useState(" "); // leave blank to hide button
+  const [usernameVisible, setUsernameVisible] = useState(true);
 
   const emailRef = useRef();
+  const emailConfirmRef = useRef();
+  const usernameRef = useRef();
   const buttonRef = useRef();
 
   useEffect(() => {
@@ -35,27 +39,35 @@ export default function Login() {
       return;
     }
     if (!auth.isSignInWithEmailLink(window.location.href)) {
-      // login step 1
-      setButtonMessage("Sign in");
+      // Signup step 1
+      setButtonMessage("Continue");
       setMessage("Join now to #StopAsianHate at the ballot box.");
       buttonRef.current.onclick = async function () {
         const email = emailRef.current.value;
-        try {
-          await auth.sendSignInLinkToEmail(email, {
-            url: `${window.location.protocol}//${window.location.host}${window.location.pathname}`,
-            handleCodeInApp: true,
-          });
+        const emailConfirm = emailConfirmRef.current.value;
+        try { 
+          if (email === emailConfirm) {
+              await auth.sendSignInLinkToEmail(email, {
+              url: `${window.location.protocol}//${window.location.host}${window.location.pathname}`,
+              handleCodeInApp: true,});
+          }
+          else {
+            setError('email-match')
+          }
           window.localStorage.setItem(localStorageEmailKey, email);
           setEmailVisible(false);
           setButtonMessage(null);
           setError(null);
-          setMessage("Check your email for an email login link");
+          setTextVisible(null);
+          setUsernameVisible(null);
+          setMessage("Check your email for a signup link");
         } catch (e) {
           setError(errorMessage(e));
         }
+      
       };
     } else {
-      // login step 2
+      // Signup step 2
       const verifyEmail = async (email) => {
         try {
           await auth.signInWithEmailLink(email, window.location.href);
@@ -83,10 +95,18 @@ export default function Login() {
         <Form className="d-grid">
           <p>
             current login status (debug purposes):{" "}
-            {currentUser === null ? "Logged out" : currentUser.email}
+            {currentUser === null ? "Logged out" : currentUser.username !== "" ? currentUser.username : currentUser.email}
           </p>
           {message && <Form.Label>{message}</Form.Label>}
           {error && <p className="error-col">{error}</p>}
+          {usernameVisible && (
+            <Form.Control
+              className="montserrat input mb-3 p-2"
+              type="email"
+              placeholder="Name (optional):"
+              ref={usernameRef}
+            ></Form.Control>
+          )}
           {emailVisible && (
             <Form.Control
               className="montserrat input mb-3 p-2"
@@ -95,11 +115,22 @@ export default function Login() {
               ref={emailRef}
             ></Form.Control>
           )}
+          {emailVisible && (
+            <Form.Control
+              className="montserrat input mb-3 p-2"
+              type="email"
+              placeholder="Confirm email:"
+              ref={emailConfirmRef}
+            ></Form.Control>
+          )}
+          {textVisible && (<p>By clicking on “Continue,” 
+            I agree to the Terms of Service and Privacy Policy*</p>)}
           {buttonMessage && (
             <Button className="p-2" variant="secondary" ref={buttonRef}>
               {buttonMessage}
             </Button>
           )}
+          {textVisible && (<p>Already have an account? <a href="/signin">Sign in</a></p>)}
         </Form>
       </div>
     </>
