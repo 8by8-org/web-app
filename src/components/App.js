@@ -20,7 +20,7 @@ function App() {
                     <div id='app-wrapper'>
                         <Router>
                             <Switch>
-                                <Route exact path='/' component={HomePage} />
+                                <Route path='/homepage' component={HomePage} />
                                 <Route path='/login' component={Login} />
                                 <PrivateRoute path='/challenge' component={ChallengePage} />
                                 <PrivateRoute path='/logout' component={Logout} />
