@@ -10,6 +10,7 @@ import SiteNavbar from './SiteNavbar';
 import PlayerWelcome from './PlayerWelcome';
 import './App.css';
 import Actions from './Actions';
+import VoterRegistration from './VoterRegistration';
 
 
 function App() {
@@ -27,6 +28,7 @@ function App() {
                                 <PrivateRoute path='/logout' component={Logout} />
                                 <PrivateRoute path='/playerwelcome' component={PlayerWelcome} />
                                 <PrivateRoute path='/actions' component={Actions} />
+                                <PrivateRoute path='/voterreg' component={VoterRegistration} />
                             </Switch>
                         </Router>
                     </div>
