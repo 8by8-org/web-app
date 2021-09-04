@@ -8,6 +8,8 @@ import Logout from './Logout';
 import PrivateRoute from './PrivateRoute';
 import SiteNavbar from './SiteNavbar';
 import './App.css';
+import HomePageInfo from './HomePageInfo';
+import HomePage from './HomePage'
 
 function App() {
     return (
@@ -18,7 +20,7 @@ function App() {
                     <div id='app-wrapper'>
                         <Router>
                             <Switch>
-                                <Route exact path='/' component={LandingPage} />
+                                <Route exact path='/' component={HomePage} />
                                 <Route path='/login' component={Login} />
                                 <PrivateRoute path='/challenge' component={ChallengePage} />
                                 <PrivateRoute path='/logout' component={Logout} />

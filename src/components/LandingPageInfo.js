@@ -1,5 +1,5 @@
 import React from "react";
-import Background from "../assets/images/Rally.png";
+import Background from "../assets/images/MaskGroup.png";
 import "react-bootstrap";
 import "./LandingPageInfo.css";
 
