@@ -7,7 +7,10 @@ import Login from './LoginPage';
 import Logout from './Logout';
 import PrivateRoute from './PrivateRoute';
 import SiteNavbar from './SiteNavbar';
+import PlayerWelcome from './PlayerWelcome';
 import './App.css';
+import Actions from './Actions';
+
 
 function App() {
     return (
@@ -22,6 +25,8 @@ function App() {
                                 <Route path='/login' component={Login} />
                                 <PrivateRoute path='/challenge' component={ChallengePage} />
                                 <PrivateRoute path='/logout' component={Logout} />
+                                <PrivateRoute path='/playerwelcome' component={PlayerWelcome} />
+                                <PrivateRoute path='/actions' component={Actions} />
                             </Switch>
                         </Router>
                     </div>
