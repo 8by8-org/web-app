@@ -23,10 +23,6 @@ button + button{
   margin-top: 20px;
 }
 
-.justify-content{
-  justify-content: center;
-}
-
 h2{
   font-size: 30pt !important;
 }
