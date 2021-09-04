@@ -59,7 +59,7 @@ export default function HomePage() {
               </div>
         </div>
         <div id="info" style={{paddingTop: "15px"}}>
-        <HomePageInfo/>
+          <HomePageInfo/>
         </div>
       </div>
     );
