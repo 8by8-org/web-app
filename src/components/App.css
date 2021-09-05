@@ -1,12 +1,13 @@
 #root {
   background-color: #142a38;
   color: white;
-  height: 100vh;
+  height: 100%;
 }
 #app-outer-wrapper {
   display: flex;
   justify-content: center;
   width: 100%;
+  height: 110vh;
 }
 #app-wrapper {
   max-width: 500px;

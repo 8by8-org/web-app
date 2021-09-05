@@ -6,7 +6,7 @@ export default function LandingPage() {
   const history = useHistory();
   return (
     <div>
-      <LandingPageInfo />
+      <LandingPageInfo /> 
       <button onClick={() => history.push("/login")}>Take the challenge</button>
     </div>
   );

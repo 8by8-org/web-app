@@ -28,6 +28,7 @@ export default function Login() {
 
   const emailRef = useRef();
   const buttonRef = useRef();
+  const passwordRef = useRef();
 
   useEffect(() => {
     if (currentUser) {
@@ -37,20 +38,39 @@ export default function Login() {
     if (!auth.isSignInWithEmailLink(window.location.href)) {
       // login step 1
       setButtonMessage("Take the challenge");
-      setMessage("Join now to #StopAsianHate at the ballot box.");
+      setMessage("Log in and continue your journey to #StopAsianHate at the ballot box.");
       buttonRef.current.onclick = async function () {
         const email = emailRef.current.value;
-        try {
-          await auth.sendSignInLinkToEmail(email, {
-            url: `${window.location.protocol}//${window.location.host}${window.location.pathname}`,
-            handleCodeInApp: true,
-          });
-          window.localStorage.setItem(localStorageEmailKey, email);
-          setEmailVisible(false);
-          setButtonMessage(null);
-          setMessage("Check your email for an email login link");
-        } catch (e) {
-          setError(errorMessage(e));
+        const password = passwordRef.current.value;
+        const emailLogin = async email => {
+          try {
+            await auth.sendSignInLinkToEmail(email, {
+              url: `${window.location.protocol}//${window.location.host}${window.location.pathname}`,
+              handleCodeInApp: true,
+            });
+            window.localStorage.setItem(localStorageEmailKey, email);
+            setEmailVisible(false);
+            setButtonMessage(null);
+            setMessage("Check your email for an email login link");
+          } catch(e) {
+            setError(errorMessage(e));
+          }
+        }
+        const loginTest = async (email) => {
+          try {
+            await auth.signInWithEmailAndPassword(email, password);
+          } catch (e) {
+            console.log(e)
+            setError(errorMessage(e));
+          }
+        };
+        if (!email) {
+          setMessage("Missing email");
+        } else if(!password){
+          emailLogin(email);
+        } 
+        else {
+          loginTest(email);
         }
       };
     } else {
@@ -80,26 +100,37 @@ export default function Login() {
       <LandingPageInfo />
       <div className="content d-grid justify-content-center montserrat p-3">
         <Form className="d-grid">
-          <p>
-            current login status (debug purposes):{" "}
-            {currentUser === null ? "Logged out" : currentUser.email}
-          </p>
           {message && <Form.Label>{message}</Form.Label>}
           {error && <p className="error-col">{error}</p>}
           {emailVisible && (
-            <Form.Control
+            <div>
+              <Form.Control
+                className="montserrat input mb-3 p-2"
+                type="email"
+                placeholder="Email:"
+                ref={emailRef}
+              ></Form.Control>
+              <Form.Control
               className="montserrat input mb-3 p-2"
-              type="email"
-              placeholder="Email:"
-              ref={emailRef}
+              type="password"
+              placeholder="Password (Leave empty for Email Sign-In):"
+              ref={passwordRef}
             ></Form.Control>
+          </div>
           )}
           {buttonMessage && (
             <Button className="p-2" variant="secondary" ref={buttonRef}>
               {buttonMessage}
             </Button>
           )}
+          {buttonMessage && (
+            <a href="/signup" className="btn btn-secondary mt-3">
+              Sign Up
+            </a>
+          )}
+          
         </Form>
+        
       </div>
     </>
   );

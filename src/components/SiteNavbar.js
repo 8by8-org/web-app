@@ -13,7 +13,7 @@ export default function SiteNavbar() {
             <Navbar.Collapse>
                 <Nav className="ms-auto">
                     <Nav.Link href="/challenge">Challenge</Nav.Link>
-                    {currentUser ? <Nav.Link href="/logout">Logout</Nav.Link> : <Nav.Link href="/login">Login</Nav.Link>}
+                    {currentUser ? <Nav.Link href="/logout">Logout</Nav.Link> : <><Nav.Link href="/login">Login</Nav.Link><Nav.Link href="/signup">Sign Up</Nav.Link></>}
                 </Nav>
             </Navbar.Collapse>
         </Navbar>
