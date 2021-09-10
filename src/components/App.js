@@ -26,9 +26,9 @@ function App() {
                                 <Route path='/login' component={Login} />
                                 <PrivateRoute path='/challenge' component={ChallengePage} />
                                 <PrivateRoute path='/logout' component={Logout} />
-                                <Route path='/playerwelcome' component={PlayerWelcome} />
+                                <PrivateRoute path='/playerwelcome' component={PlayerWelcome} />
                                 <Route path='/actions' component={Actions} />
-                                <Route path='/voterreg' component={VoterRegistration} />
+                                <PrivateRoute path='/voterreg' component={VoterRegistration} />
                             </Switch>
                         </Router>
                     </div>

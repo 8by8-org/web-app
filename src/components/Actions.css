@@ -1,0 +1,12 @@
+#button-style {
+  color: black;
+  background: #bfbfbf;
+  border-radius: 0;
+  border-color: #bfbfbf;
+}
+
+img {
+  border-radius: 50%;
+  border-color: red;
+  width: 5%;
+}

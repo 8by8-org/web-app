@@ -3,7 +3,7 @@ import { useAuth } from '../contexts/AuthContext';
 import ChallengePagePopup from './ChallengePagePopup';
 import ChallengeIcon from "./ChallengeIcon";
 import { Button, Col, Container, Row } from 'react-bootstrap';
-import './ChallengePage.css'
+// import './ChallengePage.css'
 
 export default function ChallengePage() {
     const { currentUser } = useAuth();

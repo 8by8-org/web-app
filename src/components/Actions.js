@@ -1,34 +1,36 @@
 import React from 'react'
-import { Row } from 'react-bootstrap'
-import { Button } from 'react-bootstrap'
+import { Row, Button, Container } from 'react-bootstrap'
 import { useHistory } from 'react-router'
+import './Actions.css'
 
 export default function Actions() {
     const history = useHistory();
     return (
         <div>
-            <Row>
-                <h1>Take Action</h1>
-            </Row>
-            <Row>
-                <p>Your actions matter towards better AAPI representation in our country.</p>
-            </Row>
-            <Row>
-                <img href="link to icon" alt="icon" />
-            </Row>
-            <Row>
-                <p>You're taking action for:</p>
-                <p>(Get challenger info from url)</p>
-            </Row>
-            <Row className="py-2">
-                <Button onClick={() => {history.push('/voterreg')}}>Register to vote</Button>
-            </Row>
-            <Row className="py-2">
-                <Button>Get election reminders</Button>
-            </Row>
-            <Row className="py-2">
-                <Button>Take the challenge yourself</Button>
-            </Row>
+            <Container fluid className="py-4 px-5">
+                <Row align="center">
+                    <h1>Take Action</h1>
+                </Row>
+                <Row align="center">
+                    <p>Your actions matter towards better AAPI representation in our country.</p>
+                </Row>
+                <Row>
+                    <p>user icon</p>
+                </Row>
+                <Row>
+                    <p>You're taking action for:</p>
+                    <p>(Get challenger info from url)</p>
+                </Row>
+                <Row className="py-2">
+                    <Button className="py-2" id="button-style" onClick={() => {history.push('/voterreg')}}>Register to vote</Button>
+                </Row>
+                <Row className="py-2">
+                    <Button className="py-2" id="button-style">Get election reminders</Button>
+                </Row>
+                <Row className="py-2">
+                    <Button className="py-2" id="button-style">Take the challenge yourself</Button>
+                </Row>
+            </Container>
         </div>
     )
 }
