@@ -13,9 +13,9 @@ function App() {
   return (
     <>
       <AuthProvider>
+        <Header />
         <div id="app-outer-wrapper">
           <div id="app-wrapper">
-            <Header />
             <Router>
               <Switch>
                 <Route exact path="/" component={LandingPage} />

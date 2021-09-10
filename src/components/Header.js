@@ -6,7 +6,8 @@ import * as FaIcons from "react-icons/fa";
 import * as GiIcons from "react-icons/gi";
 import * as IoIcons from "react-icons/io";
 import * as MdIcons from "react-icons/md";
-import logo from "../assets/images/logo.svg";
+import logo from "../assets/images/logos/logo.svg";
+import sidebarLogo from "../assets/images/logos/sidebar-logo.svg";
 import "./Header.css";
 
 function Header() {
@@ -23,12 +24,37 @@ function Header() {
   };
 
   const { currentUser } = useAuth();
-
   const greeting = "Hi There!";
 
+  // all sidebar links lead to path: /
   const SidebarData = [
     {
       title: "Take the Challenge",
+      path: "/",
+      icon: <GiIcons.GiJeweledChalice />,
+    },
+    {
+      title: "Take Action",
+      path: "/",
+      icon: <GiIcons.GiJeweledChalice />,
+    },
+    {
+      title: "Notifications",
+      path: "/",
+      icon: <GiIcons.GiJeweledChalice />,
+    },
+    {
+      title: "Share",
+      path: "/",
+      icon: <GiIcons.GiJeweledChalice />,
+    },
+    {
+      title: "Why 8by8?",
+      path: "/",
+      icon: <GiIcons.GiJeweledChalice />,
+    },
+    {
+      title: "FAQS",
       path: "/",
       icon: <GiIcons.GiJeweledChalice />,
     },
@@ -67,13 +93,13 @@ function Header() {
       <IconContext.Provider value={{ color: "black" }}>
         <div className="navbar">
           <Navbar.Brand href="/">
-            <img src={logo} alt="8by8 logo" width="60px" />
+            <img src={logo} alt="8by8 logo" id="brand-logo" />
           </Navbar.Brand>
           <div id="icons-tray">
-            <Nav.Link to="#" className="menu-icons">
+            <Nav.Link to="#" id="sidebar-icon">
               <MdIcons.MdNotificationsNone onClick={showNotif} />
             </Nav.Link>
-            <Nav.Link to="#" className="menu-icons">
+            <Nav.Link to="#" id="notif-icon">
               <FaIcons.FaBars onClick={showSidebar} />
             </Nav.Link>
           </div>
@@ -83,10 +109,10 @@ function Header() {
         <nav className={sidebar ? "nav-menu active" : "nav-menu"}>
           <ul className="menu-items" onClick={showSidebar}>
             <li className="menu-header">
-              <Nav.Link to="#" className="menu-icons">
+              <Nav.Link to="#">
                 <IoIcons.IoIosArrowForward />
               </Nav.Link>
-              <img src={logo} alt="8by8 logo" width="60px" />
+              <img src={sidebarLogo} alt="8by8 logo" />
             </li>
             <p className="menu-greeting">{greeting}</p>
             {SidebarData.map((item, index) => {
@@ -112,25 +138,27 @@ function Header() {
         </nav>
 
         {/* Notifications */}
-        <nav className={notif ? "notif-menu active" : "notif-menu"}>
-          <ul className="notif-items" onClick={showNotif}>
-            <li className="notif-toggle">
-              <Nav.Link to="#" className="menu-icons">
-                <MdIcons.MdClose />
-              </Nav.Link>
-              <span className="notif-title">Notifications</span>
-            </li>
-            {NotifData.map((item, index) => {
-              return (
-                <li key={index} className={"notif-container " + item.read}>
-                  <span className="notif-icon">{item.icon}</span>
-                  <span className="notif-text">{item.text}</span>
-                  <span className="notif-date">{item.date}</span>
-                </li>
-              );
-            })}
-          </ul>
-        </nav>
+        <div className="notif-wrapper">
+          <nav className={notif ? "notif-menu active" : "notif-menu"}>
+            <ul className="notif-items" onClick={showNotif}>
+              <li className="notif-toggle">
+                <Nav.Link to="#" id="close-icon">
+                  <MdIcons.MdClose />
+                </Nav.Link>
+                <span className="notif-title">Notifications</span>
+              </li>
+              {NotifData.map((item, index) => {
+                return (
+                  <li key={index} className={"notif-container " + item.read}>
+                    <span className="notif-icon">{item.icon}</span>
+                    <span className="notif-text">{item.text}</span>
+                    <span className="notif-date">{item.date}</span>
+                  </li>
+                );
+              })}
+            </ul>
+          </nav>
+        </div>
       </IconContext.Provider>
     </>
   );
