@@ -11,6 +11,17 @@
   font-family: "Bebas Neue", cursive;
 }
 
+.black-text {
+  color: black;
+  align-self: flex-end;
+  padding: 0px 10px 10px 10px;
+}
+
+.white-background {
+  background: white;
+  padding: 20px 40px;
+}
+
 h1{
   font-size: 36pt !important;
 }

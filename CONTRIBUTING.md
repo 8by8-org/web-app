@@ -56,3 +56,8 @@ First approach involves directly calling the serverless function. Run `npm run s
 Second approach involves separating your code and running it separately as a JS file. For example, if you were writing a serverless functions that checks and then writes to a database, you need to first make sure that function can be executed flawlessly by putting the code in `temp.js` and then running `node temp.js`. An advantage to this method is that you can easily use your IDE's debugging tools to step-through your code.
 
 When you are done working with this type of task, run `npm run deploy` and make a pull request. I will also run `npm run deploy` to make sure the new changes are updated with firebase's serverless functions.
+
+
+## SCSS Integration
+
+To use Sass, first run `npm install node-sass --save`. Then you can rename or create new stylesheets with the file extension `.scss`. Read more about the basics of Sass [here](https://sass-lang.com/guide)
