@@ -2,20 +2,16 @@ import React from 'react';
 import LandingPageInfo from "./LandingPageInfo";
 import { doc, getDoc, getFirestore } from "@firebase/firestore";
 
-
-
 class PlayerWelcome extends React.Component{
     constructor(props) {
-        super(props)
+        super(props);
         this.state ={
             users: null
         }
     }
-    useQuery() {
-        return new URLSearchParams(this.props.location.search);
-    }
+    useQuery = () => new URLSearchParams(this.props.location.search);
     componentDidMount() {
-        this.renderusers();
+        this.renderUsers();
     }
     async GetUserData() {
         try {
@@ -25,7 +21,8 @@ class PlayerWelcome extends React.Component{
             const docSnap = await getDoc(docRef);
             if (docSnap.exists()) {
                 console.log(docSnap.data());
-                const arr = [docSnap.data().email]
+                // This can be changed from email to whatever we need to show
+                const arr = [docSnap.data().email]; 
                 return arr;
             } else {
                 return ("No such document!");
@@ -36,7 +33,8 @@ class PlayerWelcome extends React.Component{
             return 'error';
         }
     }
-    renderusers = async() => {
+
+    renderUsers = async () => {
         try {
             const users = await this.GetUserData();
             this.setState({
