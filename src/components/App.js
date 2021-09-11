@@ -6,6 +6,7 @@ import LandingPage from './LandingPage';
 import Login from './LoginPage';
 import Signup from './SignupPage';
 import Logout from './Logout';
+import PlayerWelcome from './PlayerWelcome';
 import PrivateRoute from './PrivateRoute';
 import SiteNavbar from './SiteNavbar';
 import './App.css';
@@ -22,6 +23,7 @@ function App() {
                                 <Route exact path='/' component={LandingPage} />
                                 <Route path='/login' component={Login} />
                                 <Route path='/signup' component={Signup} />
+                                <Route path='/playerwelcome' component={PlayerWelcome}></Route>
                                 <PrivateRoute path='/challenge' component={ChallengePage} />
                                 <PrivateRoute path='/logout' component={Logout} />
                             </Switch>
