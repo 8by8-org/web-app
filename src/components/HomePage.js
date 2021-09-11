@@ -21,7 +21,7 @@ export default function HomePage() {
     return (
       <div>
           <div style={homePageDivStyle}>
-            <img class="center padded" src={logo}></img>
+            <img class="center padded" src={logo} alt="logo"></img>
               <h1 class="bebas-neue padded white-text">GET <u class="underline">8 FRIENDS</u> <br></br>
                 TO RESISTER <br></br>
                 TO VOTE IN <u class="underline">8 DAYS</u></h1>
