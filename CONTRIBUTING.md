@@ -60,4 +60,4 @@ When you are done working with this type of task, run `npm run deploy` and make 
 
 ## SCSS Integration
 
-To use Sass, first run `npm install node-sass --save`. Then you can rename or create new stylesheets with the file extension `.scss`. Read more about the basics of Sass [here](https://sass-lang.com/guide)
+To use Sass, first run `npm install node-sass --save`. Then you can rename or create new stylesheets with the file extension `.scss`. Follow the convention of creating stylesheets that correspond to components. Read more about the basics of Sass [here](https://sass-lang.com/guide).
