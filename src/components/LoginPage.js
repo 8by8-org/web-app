@@ -9,7 +9,7 @@
 
 import React, { useEffect, useRef, useState } from "react";
 import { useAuth } from "../contexts/AuthContext";
-import { auth } from "../firebase";
+import { auth, signInWithEmailAndPassword, signInWithEmailLink, isSignInWithEmailLink, sendSignInLinkToEmail } from "../firebase";
 import errorMessage from "../errorMessage";
 import { useHistory } from "react-router-dom";
 import LandingPageInfo from "./LandingPageInfo";
@@ -35,7 +35,7 @@ export default function Login() {
       history.push("/challenge");
       return;
     }
-    if (!auth.isSignInWithEmailLink(window.location.href)) {
+    if (!isSignInWithEmailLink(auth, window.location.href)) {
       // login step 1
       setButtonMessage("Take the challenge");
       setMessage("Log in and continue your journey to #StopAsianHate at the ballot box.");
@@ -44,7 +44,7 @@ export default function Login() {
         const password = passwordRef.current.value;
         const emailLogin = async email => {
           try {
-            await auth.sendSignInLinkToEmail(email, {
+            await sendSignInLinkToEmail(email, {
               url: `${window.location.protocol}//${window.location.host}${window.location.pathname}`,
               handleCodeInApp: true,
             });
@@ -58,7 +58,7 @@ export default function Login() {
         }
         const loginTest = async (email) => {
           try {
-            await auth.signInWithEmailAndPassword(email, password);
+            await signInWithEmailAndPassword(auth, email, password);
           } catch (e) {
             console.log(e)
             setError(errorMessage(e));
@@ -77,7 +77,7 @@ export default function Login() {
       // login step 2
       const verifyEmail = async (email) => {
         try {
-          await auth.signInWithEmailLink(email, window.location.href);
+          await signInWithEmailLink(email, window.location.href);
         } catch (e) {
           setError(errorMessage(e));
         }

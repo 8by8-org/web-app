@@ -3,6 +3,9 @@ import LandingPageInfo from "./LandingPageInfo";
 import { doc, getDoc, getFirestore } from "@firebase/firestore";
 
 class PlayerWelcome extends React.Component{
+    // Only these 3 functions are needed
+    // Render is only to show that the data is rendered
+    // Customize render to show what we need
     constructor(props) {
         super(props);
         this.state ={
