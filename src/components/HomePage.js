@@ -30,7 +30,7 @@ export default function HomePage() {
                 <button class="bordered-button"><Link to="info" smooth={true}><b class="lato">See More</b></Link></button>
               </div>
         </div>
-        <div id="info" style={{paddingTop: "15px"}}>
+        <div id="info">
           <HomePageInfo/>
         </div>
       </div>
