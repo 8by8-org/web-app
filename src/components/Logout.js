@@ -8,7 +8,7 @@ export default function Logout() {
     const [error, setError] = useState(null);
 
     useEffect(() => {
-        auth.signOut()
+        auth.getAuth().signOut()
             .then(() => setLoading(false))
             .catch(e => setError(errorMessage(e)));
     }, []);

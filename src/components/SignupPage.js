@@ -1,7 +1,7 @@
 
  import React, { useEffect, useRef, useState } from "react";
  import { useAuth } from "../contexts/AuthContext";
- import { auth, isSignInWithEmailLink, createUserWithEmailAndPassword } from "../firebase";
+ import { auth } from "../firebase";
  import errorMessage from "../errorMessage";
  import { useHistory } from "react-router-dom";
  import LandingPageInfo from "./LandingPageInfo";
@@ -25,7 +25,7 @@
        history.push("/challenge");
        return;
      }
-     if (!isSignInWithEmailLink(auth, window.location.href)) {
+     if (!auth.isSignInWithEmailLink(auth.getAuth(), window.location.href)) {
        // login step 1
        setButtonMessage("Take the challenge");
        setMessage("Join now and #StopAsianHate at the ballot box.");
@@ -34,7 +34,7 @@
         const password = passwordRef.current.value;
         const createUser = async (email) => {
             try {
-                await createUserWithEmailAndPassword(auth, email, password);
+                await auth.createUserWithEmailAndPassword(auth.getAuth(), email, password);
             } catch (e) {
                 console.log(e);
                 setError(errorMessage(e));
