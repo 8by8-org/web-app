@@ -5,7 +5,7 @@ import ChallengePage from './ChallengePage';
 import Login from './LoginPage';
 import Logout from './Logout';
 import PrivateRoute from './PrivateRoute';
-import SiteNavbar from './SiteNavbar';
+import Header from './Header';
 import './App.css';
 import HomePage from './HomePage'
 
@@ -13,7 +13,7 @@ function App() {
     return (
         <>
             <AuthProvider>
-                <SiteNavbar />
+                <Header />
                 <div id='app-outer-wrapper'>
                     <div id='app-wrapper'>
                         <Router>
