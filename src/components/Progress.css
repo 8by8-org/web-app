@@ -1,0 +1,110 @@
+@import url("https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap");
+
+.bebas-neue {
+  font-family: "Bebas Neue";
+  font-weight: normal;
+}
+
+.lato {
+  font-family: Lato;
+}
+
+.white {
+  color: white;
+}
+
+.black {
+  /*8by8 black*/
+  color: #101010;
+}
+.spacing {
+  letter-spacing: 0.03em;
+}
+.yellow-background {
+  position: absolute;
+  left: 8px;
+  top: 9px;
+  width: 72px;
+  height: 72px;
+  /*8by8 yellow*/
+  background-color: #ffed10;
+}
+
+.black-background {
+  position: absolute;
+  width: 72px;
+  height: 72px;
+  background-color: #101010;
+}
+#progress-container {
+  background-color: white;
+  height: 100%;
+}
+
+#navbar {
+  /*Temporary*/
+  width: 100%;
+  height: 57px;
+  border: 1px solid #000000;
+}
+
+#challenge-badge-header {
+  width: 200px;
+  height: 26px;
+  margin: 40px 86px 13px 89px;
+  font-size: 24px;
+  line-height: 29px;
+}
+
+#day-counter-container {
+  position: relative;
+  width: 80px;
+  height: 81px;
+  margin: 0px 142px 17px 153px;
+}
+
+#day-number {
+  position: absolute;
+  left: 27px;
+  top: 2px;
+  font-size: 48px;
+  line-height: 58px;
+}
+
+#days-left {
+  position: absolute;
+  left: 13px;
+  top: 47px;
+  font-weight: 800;
+  font-size: 12px;
+  line-height: 14px;
+}
+
+#thanks-message {
+  margin: 0px 40px 0px 40px;
+  height: 56px;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 17px;
+  text-align: center;
+}
+
+#invite {
+  width: 279px;
+  height: 53.91px;
+  margin: 40px 48px 0px 48px;
+  border: none;
+  font-weight: 800;
+  font-size: 20px;
+  line-height: 24px;
+  background: #c4c4c4;
+}
+
+#register-message {
+  margin-left: 40px;
+  margin-top: 10px;
+  width: 284px;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 17px;
+}
