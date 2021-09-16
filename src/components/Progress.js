@@ -13,6 +13,9 @@ export default function Progress() {
   // Testing code to make sure element placement is correct
   progressArr[0] = true;
   progressArr[4] = true;
+
+  // Passed as callback function to create badge elements based on server call
+  // startNumber is used to number the badges
   const generateBadges = (startNumber) => (element, index) => {
     return (
       <div className="badge-box">
