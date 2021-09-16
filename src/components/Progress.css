@@ -20,22 +20,93 @@
 .spacing {
   letter-spacing: 0.03em;
 }
+
 .yellow-background {
-  position: absolute;
-  left: 8px;
-  top: 9px;
-  width: 72px;
-  height: 72px;
   /*8by8 yellow*/
   background-color: #ffed10;
 }
 
 .black-background {
+  background-color: #101010;
+}
+
+.day-box {
   position: absolute;
   width: 72px;
   height: 72px;
-  background-color: #101010;
 }
+
+.badge-row {
+  display: flex;
+  width: 295px;
+  justify-content: space-between;
+}
+
+.badge-box {
+  position: relative;
+  width: 52px;
+  height: fit-content;
+}
+
+.success {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.failure {
+  height: 52px;
+}
+
+.avatar {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  /*Temporary measure*/
+  background-color: red;
+}
+
+.name-text {
+  font-size: 9px;
+  line-height: 11px;
+  letter-spacing: 0.02em;
+  margin-top: 6px;
+  margin-bottom: 6px;
+}
+
+.send-emoji {
+  width: 60px;
+  height: 20px;
+  border: none;
+  font-size: 9px;
+  white-space: nowrap;
+  text-align: center;
+  padding: 0px;
+}
+
+.up-down-arm {
+  width: 14.68px;
+  height: 58.86px;
+  background-color: #dedede;
+  transform: translate(18.75px, -3px) rotate(-135deg);
+}
+
+.down-up-arm {
+  width: 14.68px;
+  height: 58.86px;
+  background-color: #dedede;
+  transform: translate(18.75px, -62px) rotate(-45deg);
+}
+
+.badge-counter {
+  position: absolute;
+  top: -4px;
+  left: 14px;
+  font-size: 48px;
+  font-weight: 500;
+  line-height: 58px;
+}
+
 #progress-container {
   background-color: white;
   height: 100%;
@@ -63,6 +134,11 @@
   margin: 0px 142px 17px 153px;
 }
 
+#yellow-day-box {
+  top: 9px;
+  left: 8px;
+}
+
 #day-number {
   position: absolute;
   left: 27px;
@@ -87,6 +163,15 @@
   font-size: 14px;
   line-height: 17px;
   text-align: center;
+}
+
+#first-row {
+  height: 72px;
+  margin: 17px 0px 0px 40px;
+}
+
+#second-row {
+  margin: 48px 0px 0px 40px;
 }
 
 #invite {
