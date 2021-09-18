@@ -1,0 +1,48 @@
+@import "./Styles/Components.scss";
+
+.challenger-welcome {
+  background-color: $white;
+  color: $black;
+
+  button {
+    @include button($black);
+    margin: 10px 0;
+  }
+
+  .top {
+    background-image: url("../assets/images/MaskGroup.png");
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 300px;
+
+    .logo {
+      height: 140px;
+    }
+  }
+
+  .info {
+    padding: 20px 40px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    .title {
+      font-size: 30px;
+      text-align: center;
+      margin: 20px 0;
+    }
+
+    .login {
+      text-align: center;
+      .link {
+        color: blue;
+        text-decoration: underline;
+        &:hover {
+          cursor: pointer;
+        }
+      }
+    }
+  }
+}

@@ -13,6 +13,7 @@ import PrivateRoute from "./PrivateRoute";
 import Header from "./Header";
 import "./App.css";
 import HomePage from "./HomePage";
+import ChallengerWelcome from "./ChallengerWelcome";
 
 function App() {
   return (
@@ -29,6 +30,10 @@ function App() {
                   <Redirect to="/homepage" />
                 </Route>
                 <Route path="/homepage" component={HomePage} />
+                <Route
+                  path="/challengerwelcome"
+                  component={ChallengerWelcome}
+                />
                 <Route path="/login" component={Login} />
                 <PrivateRoute path="/challenge" component={ChallengePage} />
                 <PrivateRoute path="/logout" component={Logout} />

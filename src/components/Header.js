@@ -7,7 +7,7 @@ import * as GiIcons from "react-icons/gi";
 import * as IoIcons from "react-icons/io";
 import * as MdIcons from "react-icons/md";
 import logo from "../assets/images/logos/logo.svg";
-import sidebarLogo from "../assets/images/logos/sidebar-logo.svg";
+import sidebarLogo from "../assets/images/logos/black-logo.svg";
 import "./Header.scss";
 
 function Header() {

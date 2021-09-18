@@ -1,8 +1,13 @@
+@import "Variables";
+
 // buttons
 @mixin button($color: $yellow) {
-    padding: 9px;
-    width: 100%;
-    background: $color;
-    border: none;
-    text-align: center;
+  padding: 9px;
+  width: 100%;
+  background: $color;
+  @if $color != $yellow {
+    color: white;
+  }
+  border: none;
+  text-align: center;
 }
