@@ -1,0 +1,8 @@
+// buttons
+@mixin button($color: $yellow) {
+    padding: 9px;
+    width: 100%;
+    background: $color;
+    border: none;
+    text-align: center;
+}
