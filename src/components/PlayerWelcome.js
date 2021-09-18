@@ -57,6 +57,7 @@ class PlayerWelcome extends React.Component{
       
     render() {
         const users = this.state.users;
+        // A testing thing
         const url = this.generateURL('iLjxSYwS3xNlZh3dZuxMrKX3IKo2', ['9/18/2021','John Doe'])
         return (
             
