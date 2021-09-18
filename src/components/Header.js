@@ -8,7 +8,7 @@ import * as IoIcons from "react-icons/io";
 import * as MdIcons from "react-icons/md";
 import logo from "../assets/images/logos/logo.svg";
 import sidebarLogo from "../assets/images/logos/sidebar-logo.svg";
-import "./Header.css";
+import "./Header.scss";
 
 function Header() {
   const [sidebar, setSidebar] = useState(false);

@@ -3,6 +3,9 @@
   color: white;
   height: 100vh;
 }
+#header {
+  position: fixed;
+}
 #app-outer-wrapper {
   display: flex;
   justify-content: center;
