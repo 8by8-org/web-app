@@ -9,6 +9,7 @@
     "@testing-library/react": "^11.1.0",
     "@testing-library/user-event": "^12.1.10",
     "bootstrap": "^5.0.2",
+    "crypto-random-string": "^4.0.0",
     "firebase": "^9.0.2",
     "firebase-admin": "^9.11.1",
     "react": "^17.0.2",

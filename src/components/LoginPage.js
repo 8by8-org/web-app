@@ -41,7 +41,6 @@
        setMessage("Log in and continue your journey to #StopAsianHate at the ballot box.");
        buttonRef.current.onclick = async function () {
          const email = emailRef.current.value;
-         const password = passwordRef.current.value;
          const emailLogin = async email => {
            try {
              await auth.sendSignInLinkToEmail(auth.getAuth(), email, {
@@ -58,7 +57,7 @@
          }
          const loginTest = async (email) => {
            try {
-             await auth.signInWithEmailAndPassword(auth.getAuth(), email, password);
+             await emailLogin(email);
            } catch (e) {
              console.log(e)
              setError(errorMessage(e));
@@ -66,11 +65,10 @@
          };
          if (!email) {
            setMessage("Missing email");
-         } else if(!password){
-           emailLogin(email);
-         } 
+         }
          else {
-           loginTest(email);
+           emailLogin(email);
+           setMessage("Check your email for your login link!");
          }
        };
      } else {
@@ -97,7 +95,6 @@
  
    return (
      <>
-       <LandingPageInfo />
        <div className="content d-grid justify-content-center montserrat p-3">
          <Form className="d-grid">
            {message && <Form.Label>{message}</Form.Label>}
@@ -110,12 +107,6 @@
                  placeholder="Email:"
                  ref={emailRef}
                ></Form.Control>
-               <Form.Control
-               className="montserrat input mb-3 p-2"
-               type="password"
-               placeholder="Password (Leave empty for Email Sign-In):"
-               ref={passwordRef}
-             ></Form.Control>
            </div>
            )}
            {buttonMessage && (

@@ -4,6 +4,7 @@
  import { auth } from "../firebase";
  import errorMessage from "../errorMessage";
  import { useHistory } from "react-router-dom";
+ import cryptoRandomString from 'crypto-random-string';
  import LandingPageInfo from "./LandingPageInfo";
  import { Button, Form } from "react-bootstrap";
  import "./LoginPage.css";
@@ -18,7 +19,6 @@
  
    const emailRef = useRef();
    const buttonRef = useRef();
-   const passwordRef = useRef();
  
    useEffect(() => {
      if (currentUser) {
@@ -31,17 +31,16 @@
        setMessage("Join now and #StopAsianHate at the ballot box.");
        buttonRef.current.onclick = async function () {
         const email = emailRef.current.value;
-        const password = passwordRef.current.value;
         const createUser = async (email) => {
             try {
-                await auth.createUserWithEmailAndPassword(auth.getAuth(), email, password);
+                await auth.createUserWithEmailAndPassword(auth.getAuth(), email, cryptoRandomString({length: 20}));
             } catch (e) {
                 console.log(e);
                 setError(errorMessage(e));
             }
         };
-            if (!email || !password) {
-                setMessage("Missing email or password");
+            if (!email ) {
+                setMessage("Missing email");
             } else {
                 createUser(email);
                 window.location.href = `${workingUrl}/login`
@@ -53,7 +52,6 @@
  
    return (
     <>
-      <LandingPageInfo />
       <div className="content d-flex justify-content-center montserrat p-3 flex-column">
         {message && <Form.Label>{message}</Form.Label>}
         {error && <p className="error-col">{error}</p>}
@@ -67,12 +65,6 @@
                 placeholder="Email:"
                 ref={emailRef}
               ></Form.Control>
-              <Form.Control
-              className="montserrat input mb-3 p-2"
-              type="password"
-              placeholder="Password:"
-              ref={passwordRef}
-            ></Form.Control>
           </div>
           )}
           {buttonMessage && (
