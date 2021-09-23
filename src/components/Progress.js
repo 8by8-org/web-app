@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import { Button } from "react-bootstrap";
+import avatar from "../assets/images/avatars/8BY8-face-icons-3.png";
+import Header from "./Header";
 import "./Progress.css";
 
 export default function Progress() {
@@ -8,7 +10,7 @@ export default function Progress() {
 
   // I chose to represent the badge array with booleans for now
   // String evaluation will probably have to be used to represent player states
-  const progressArr = new Array(8).fill(false);
+  const progressArr = new Array(8).fill(true);
 
   // Testing code to make sure element placement is correct
   progressArr[0] = true;
@@ -21,9 +23,19 @@ export default function Progress() {
       <div className="badge-box">
         {element ? (
           <div className="success">
-            <div className="avatar"></div>
+            <div className="avatar yellow-background">
+              <img src={avatar} />
+            </div>
             <p className="name-text lato black spacing">placeholder</p>
-            <Button className="send-emoji yellow-background lato black">
+            <Button
+              className="send-emoji yellow-background lato black"
+              style={{
+                fontSize: "9px",
+                whiteSpace: "nowrap",
+                textAlign: "center",
+                padding: "0px",
+              }}
+            >
               Send Emoji
             </Button>
           </div>
@@ -40,9 +52,12 @@ export default function Progress() {
     );
   };
 
+  // Processes emoji send to selected user
+  const sendEmoji = () => {
+    console.log("sent");
+  };
   return (
     <div id="progress-container">
-      <div id="navbar"></div>
       <p className="bebas-neue black spacing" id="challenge-badge-header">
         YOUR CHALLENGE BADGES
       </p>
@@ -71,7 +86,7 @@ export default function Progress() {
         Invite friends
       </button>
       <p className="black spacing" id="register-message">
-        Not registered to vote yet? <a href="placeholder">Register now</a> and
+        Not registered to vote yet? <a href="../voterreg">Register now</a> and
         earn your first badge!
       </p>
     </div>
