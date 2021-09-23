@@ -63,6 +63,7 @@ a.navbar-brand {
 .nav-menu.active {
   right: 0;
   transition: 500ms;
+  z-index: 1;
 }
 
 .menu-header {
