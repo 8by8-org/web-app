@@ -6,7 +6,6 @@ import LandingPage from './LandingPage';
 import Login from './LoginPage';
 import Signup from './SignupPage';
 import Logout from './Logout';
-import PlayerWelcome from './PlayerWelcome';
 import PrivateRoute from './PrivateRoute';
 import SiteNavbar from './SiteNavbar';
 import './App.css';
