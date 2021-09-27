@@ -1,26 +1,26 @@
 import React from 'react';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import { BrowserRouter as Router, Redirect, Route, Switch } from 'react-router-dom';
 import { AuthProvider } from '../contexts/AuthContext';
 import ChallengePage from './ChallengePage';
-import LandingPageInfo from './LandingPageInfo';
 import Login from './LoginPage';
-import Signup from './SignupPage';
 import Logout from './Logout';
 import PrivateRoute from './PrivateRoute';
+import Header from './Header';
 import './App.css';
+import HomePage from './HomePage'
 
 function App() {
     return (
         <>
             <AuthProvider>
-                
+                <Header />
                 <div id='app-outer-wrapper'>
                     <div id='app-wrapper'>
                         <Router>
                             <Switch>
-                                <Route exact path='/' component={LandingPageInfo} />
+                            <Route exact path="/"><Redirect to="/homepage" /></Route>
+                                <Route path='/homepage' component={HomePage} />
                                 <Route path='/login' component={Login} />
-                                <Route path='/signup' component={Signup} />
                                 <PrivateRoute path='/challenge' component={ChallengePage} />
                                 <PrivateRoute path='/logout' component={Logout} />
                             </Switch>
