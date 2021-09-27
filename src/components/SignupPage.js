@@ -5,7 +5,6 @@
  import errorMessage from "../errorMessage";
  import { useHistory } from "react-router-dom";
  import cryptoRandomString from 'crypto-random-string';
- import LandingPageInfo from "./LandingPageInfo";
  import { Button, Form } from "react-bootstrap";
  import "./LoginPage.css";
  const workingUrl = 'localhost:3000';

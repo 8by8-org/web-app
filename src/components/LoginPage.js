@@ -27,7 +27,6 @@
  
    const emailRef = useRef();
    const buttonRef = useRef();
-   const passwordRef = useRef();
  
    useEffect(() => {
      if (currentUser) {
@@ -54,14 +53,6 @@
              setError(errorMessage(e));
            }
          }
-         const loginTest = async (email) => {
-           try {
-             await emailLogin(email);
-           } catch (e) {
-             console.log(e)
-             setError(errorMessage(e));
-           }
-         };
          if (!email) {
            setMessage("Missing email");
          }
