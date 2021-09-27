@@ -12,7 +12,6 @@
  import { auth } from "../firebase";
  import errorMessage from "../errorMessage";
  import { useHistory } from "react-router-dom";
- import LandingPageInfo from "./LandingPageInfo";
  import { Button, Form } from "react-bootstrap";
  import "./LoginPage.css";
  
