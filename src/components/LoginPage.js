@@ -105,9 +105,11 @@
              </Button>
            )}
            {buttonMessage && (
-             <a href="/signup" className="btn btn-secondary mt-3">
-               Sign Up
-             </a>
+             <p>
+             Dont have an account? <> </>
+            <a href="/signup" style={{style: 'inline'}}>
+              Sign Up
+            </a></p>
            )}
            
          </Form>

@@ -72,10 +72,11 @@ export default function Login() {
               {buttonMessage}
             </Button>
           )}
-          {buttonMessage && (
-            <a href="/login" className="btn btn-secondary mt-3">
+          {buttonMessage && (<p>
+            Already have an account? <></>
+            <a href="/login">
               Log In
-            </a>
+            </a></p>
           )}
           
         </Form>
