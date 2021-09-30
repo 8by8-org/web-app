@@ -76,7 +76,6 @@ export default function Progress() {
             {element["avatarString"] ? (
               <div className="avatar yellow-background">
                 <img
-                  alt="user-avatar"
                   src={`../assets/images/avatars/${element["avatarString"]}`}
                 />
               </div>
