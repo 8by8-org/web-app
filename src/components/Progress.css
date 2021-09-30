@@ -48,14 +48,16 @@
   height: fit-content;
 }
 
-.success {
+.badge-aligner {
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 
-.failure {
+.no-avatar {
   height: 52px;
+  width: 52px;
+  position: relative;
 }
 
 .avatar {
