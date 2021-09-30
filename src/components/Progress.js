@@ -4,7 +4,7 @@ import "./Progress.css";
 
 export default function Progress() {
   const data = {
-    challengeEndTimestamp: new Date().setFullYear(2021, 8, 30),
+    challengeEndTimestamp: new Date().setFullYear(2021, 9, 3),
     // Would container list of badges that the challenger has accrued so far
     badges: [
       {
@@ -13,6 +13,24 @@ export default function Progress() {
       },
     ],
   };
+
+  // Calculates days remaining in challenge
+  const processDays = (date) => {
+    console.log(date);
+    const DAY_CONVERSION = 24 * 60 * 60 * 1000;
+    const currentDay = new Date();
+    console.log(Math.round((date - currentDay) / DAY_CONVERSION));
+    if (date > currentDay) {
+      return Math.round((date - currentDay) / DAY_CONVERSION);
+    } else {
+      return 0;
+    }
+  };
+
+  // stores days remaining
+  // could not figure out how to do this without temp constant
+  const temp = processDays(data["challengeEndTimestamp"]);
+  const [dayCounter, changeDayCounter] = useState(temp);
 
   // Takes array from data object and fills it to length 8
   // may be redundant depending on database structure
@@ -83,7 +101,7 @@ export default function Progress() {
         <div className="day-box yellow-background" id="yellow-day-box"></div>
         <div className="day-box black-background">
           <p className="bebas-neue white" id="day-number">
-            8
+            {dayCounter}
           </p>
           <p className="lato white spacing" id="days-left">
             days left
