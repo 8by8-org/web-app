@@ -1,20 +1,30 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Button } from "react-bootstrap";
-import avatar from "../assets/images/avatars/8BY8-face-icons-3.png";
-import Header from "./Header";
 import "./Progress.css";
 
 export default function Progress() {
-  // Holds 8 by default; will change to days left according to server call
-  const [dayCounter, changeDayCounter] = useState(8);
+  const data = {
+    challengeEndTimestamp: new Date().setFullYear(2021, 8, 30),
+    // Would container list of badges that the challenger has accrued so far
+    badges: [
+      {
+        avatarString: "8BY8-face-icons-3.png",
+        name: "placeholder",
+      },
+    ],
+  };
 
-  // I chose to represent the badge array with booleans for now
-  // String evaluation will probably have to be used to represent player states
-  const progressArr = new Array(8).fill(true);
+  // Takes array from data object and fills it to length 8
+  // may be redundant depending on database structure
+  const padArray = (arr) => {
+    if (arr.length < 8) {
+      return arr.concat(new Array(8 - arr.length).fill(false));
+    }
+    return arr;
+  };
 
-  // Testing code to make sure element placement is correct
-  progressArr[0] = true;
-  progressArr[4] = true;
+  // saves badges to state
+  const [progressArr, updateProgress] = useState([...padArray(data["badges"])]);
 
   // Passed as callback function to create badge elements based on server call
   // startNumber is used to number the badges
@@ -22,11 +32,23 @@ export default function Progress() {
     return (
       <div className="badge-box">
         {element ? (
-          <div className="success">
-            <div className="avatar yellow-background">
-              <img src={avatar} />
-            </div>
-            <p className="name-text lato black spacing">placeholder</p>
+          <div className="badge-aligner">
+            {element["avatarString"] ? (
+              <div className="avatar yellow-background">
+                <img
+                  src={`../assets/images/avatars/${element["avatarString"]}`}
+                />
+              </div>
+            ) : (
+              <div className="no-avatar">
+                <div className="up-down-arm"></div>
+                <div className="down-up-arm"></div>
+                <p className="bebase-neue black badge-counter">
+                  {index + startNumber}
+                </p>
+              </div>
+            )}
+            <p className="name-text lato black spacing">{element["name"]}</p>
             <Button
               className="send-emoji yellow-background lato black"
               style={{
@@ -40,7 +62,7 @@ export default function Progress() {
             </Button>
           </div>
         ) : (
-          <div className="failure">
+          <div className="no-avatar">
             <div className="up-down-arm"></div>
             <div className="down-up-arm"></div>
             <p className="bebase-neue black badge-counter">
@@ -52,10 +74,6 @@ export default function Progress() {
     );
   };
 
-  // Processes emoji send to selected user
-  const sendEmoji = () => {
-    console.log("sent");
-  };
   return (
     <div id="progress-container">
       <p className="bebas-neue black spacing" id="challenge-badge-header">
@@ -65,7 +83,7 @@ export default function Progress() {
         <div className="day-box yellow-background" id="yellow-day-box"></div>
         <div className="day-box black-background">
           <p className="bebas-neue white" id="day-number">
-            {dayCounter}
+            8
           </p>
           <p className="lato white spacing" id="days-left">
             days left
