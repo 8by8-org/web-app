@@ -16,10 +16,8 @@ export default function Progress() {
 
   // Calculates days remaining in challenge
   const processDays = (date) => {
-    console.log(date);
     const DAY_CONVERSION = 24 * 60 * 60 * 1000;
     const currentDay = new Date();
-    console.log(Math.round((date - currentDay) / DAY_CONVERSION));
     if (date > currentDay) {
       return Math.round((date - currentDay) / DAY_CONVERSION);
     } else {
@@ -44,6 +42,30 @@ export default function Progress() {
   // saves badges to state
   const [progressArr, updateProgress] = useState([...padArray(data["badges"])]);
 
+  // Processes emoji send to selected user
+  const sendEmoji = () => {
+    console.log("sent");
+  };
+
+  // Will handle the situation where 8 badges are achieved
+  const winFunction = () => {
+    console.log("You won!");
+  };
+
+  // Searches for win condition when progressArr does not contain falsey value
+  useEffect(() => {
+    let completed = true;
+    for (let i = 0; i < progressArr.length; i++) {
+      if (!progressArr[i]) {
+        completed = false;
+        break;
+      }
+    }
+    if (completed) {
+      winFunction();
+    }
+  }, [dayCounter, progressArr]);
+
   // Passed as callback function to create badge elements based on server call
   // startNumber is used to number the badges
   const generateBadges = (startNumber) => (element, index) => {
@@ -54,6 +76,7 @@ export default function Progress() {
             {element["avatarString"] ? (
               <div className="avatar yellow-background">
                 <img
+                  alt="user-avatar"
                   src={`../assets/images/avatars/${element["avatarString"]}`}
                 />
               </div>
@@ -75,6 +98,7 @@ export default function Progress() {
                 textAlign: "center",
                 padding: "0px",
               }}
+              onClick={sendEmoji}
             >
               Send Emoji
             </Button>
