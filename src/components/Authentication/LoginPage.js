@@ -8,9 +8,9 @@
  */
 
  import React, { useEffect, useRef, useState } from "react";
- import { useAuth } from "../contexts/AuthContext";
- import { auth } from "../firebase";
- import errorMessage from "../errorMessage";
+ import { useAuth } from "./../../contexts/AuthContext";
+ import { auth } from "./../../firebase";
+ import errorMessage from "./../../errorMessage";
  import { useHistory } from "react-router-dom";
  import { Button, Form } from "react-bootstrap";
  import "./LoginPage.css";

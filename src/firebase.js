@@ -1,5 +1,5 @@
 import * as firebase from 'firebase/app';
-import * as authObject from 'firebase/auth'
+import * as authObject from 'firebase/auth';
 const app = firebase.initializeApp({
     apiKey: "AIzaSyDhMPNp_v1vl1APcbIuwhEYVwm0DJSckZg",
     authDomain: "by8-318322.firebaseapp.com",

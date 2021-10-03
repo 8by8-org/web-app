@@ -6,14 +6,14 @@ import {
   Switch,
 } from "react-router-dom";
 import { AuthProvider } from "../contexts/AuthContext";
-import ChallengePage from "./ChallengePage";
-import Login from "./LoginPage";
-import Logout from "./Logout";
-import PrivateRoute from "./PrivateRoute";
-import Header from "./Header";
+import ChallengePage from "./ChallengePage/ChallengePage";
+import Login from "./Authentication/LoginPage";
+import Logout from "./Authentication/Logout";
+import PrivateRoute from "./Helpers/PrivateRoute";
+import Header from "./Header/Header";
 import "./App.css";
-import HomePage from "./HomePage";
-import ChallengerWelcome from "./ChallengerWelcome";
+import HomePage from "./HomePage/HomePage";
+import ChallengerWelcome from "./ChallengerWelcome/ChallengerWelcome";
 
 function App() {
   return (

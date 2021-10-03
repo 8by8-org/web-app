@@ -1,11 +1,11 @@
 import React from "react";
 import { useHistory } from "react-router-dom";
-import HomePageInfo from "./HomePageInfo";
+import HomePageInfo from "./../HomePage/HomePageInfo";
 import "react-bootstrap";
-import logo from "../assets/images/white_logo.png"
+import logo from "./../../assets/images/white_logo.png"
 // import "./HomePageInfo.scss";
 import "./HomePage.scss";
-import Background from "../assets/images/MaskGroup.png";
+import Background from "./../../assets/images/MaskGroup.png";
 import {Link} from 'react-scroll'
 
 export default function HomePage() {

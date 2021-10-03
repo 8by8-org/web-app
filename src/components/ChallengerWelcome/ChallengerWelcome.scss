@@ -1,4 +1,4 @@
-@import "../Styles/Components.scss";
+@import "./../../Styles/Components.scss";
 
 .challenger-welcome {
   background-color: $white;
@@ -10,7 +10,7 @@
   }
 
   .top {
-    background-image: url("../assets/images/MaskGroup.png");
+    background-image: url("./../../assets/images/MaskGroup.png");
     display: flex;
     justify-content: center;
     align-items: center;
