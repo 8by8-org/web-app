@@ -3,13 +3,13 @@ import { Row, Button, Container, Accordion, Card } from 'react-bootstrap'
 import { useAuth } from "../contexts/AuthContext";
 import { useHistory } from 'react-router';
 
-export default function VoterRegistration() {
+export default function Actions() {
     const { currentUser } = useAuth();
     const history = useHistory();
-
+    
     const handleClick = () => {
-        currentUser ? (
-            window.open(window.open('https://register.rockthevote.com/registrants/new?partner=39079', '_blank'))
+        currentUser? (
+            window.open(window.open('https://www.rockthevote.org/how-to-vote/get-election-reminders/', '_blank'))
         ) : (
             history.push('/login')
         )
@@ -18,9 +18,9 @@ export default function VoterRegistration() {
     return (
         <div>
             <Container fluid className="py-4 px-5">
-                <h1 align="center" className='py-5'>Register To Vote</h1>
-                <p>Great! Registering to vote is easy.</p>
-                <p>8by8 is partnering with Rock The Vote to help you register in just a couple minutes!</p>
+                <Row align="center">
+                    <h1>Election Reminders</h1>
+                </Row>
                 <Accordion id='yes' className='py-3' align='center'>
                     <Card>
                         <Accordion.Toggle as={Card.Header} eventKey="0">
@@ -42,12 +42,10 @@ export default function VoterRegistration() {
                         </Accordion.Collapse>
                     </Card>
                 </Accordion>
-
                 <Row>
-                    <Button id="button-style" onClick={handleClick}>Continue to Rock the Vote</Button>
+                    <Button onClick={handleClick}>Continue to Rock the Vote</Button>
+                    <p align="center">Not eligible? <a href="/actions">Other actions to help</a></p>
                 </Row>
-
-                <p align="center">Not eligible? <a href="/actions">Other actions to help</a></p>
             </Container>
         </div>
     )

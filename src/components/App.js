@@ -11,6 +11,7 @@ import PlayerWelcome from './PlayerWelcome';
 import './App.css';
 import Actions from './Actions';
 import VoterRegistration from './VoterRegistration';
+import Reminders from './Reminders'
 
 
 function App() {
@@ -29,6 +30,7 @@ function App() {
                                 <Route path='/playerwelcome' component={PlayerWelcome} />
                                 <Route path='/actions' component={Actions} />
                                 <PrivateRoute path='/voterreg' component={VoterRegistration} />
+                                <PrivateRoute path='/reminders' component={Reminders} />
                             </Switch>
                         </Router>
                     </div>

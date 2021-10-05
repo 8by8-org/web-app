@@ -34,6 +34,7 @@ export default function Login() {
       history.push("/challenge");
       return;
     }
+    
     if (!auth.isSignInWithEmailLink(window.location.href)) {
       // login step 1
       setButtonMessage("Take the challenge");

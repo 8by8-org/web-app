@@ -25,10 +25,10 @@ export default function Actions() {
                     <Button className="py-2" id="button-style" onClick={() => {history.push('/voterreg')}}>Register to vote</Button>
                 </Row>
                 <Row className="py-2">
-                    <Button className="py-2" id="button-style">Get election reminders</Button>
+                    <Button className="py-2" id="button-style" onClick={() => history.push('/reminders')}>Get election reminders</Button>
                 </Row>
                 <Row className="py-2">
-                    <Button className="py-2" id="button-style">Take the challenge yourself</Button>
+                    <Button className="py-2" id="button-style" onClick={() => history.push('/challengewelcome')}>Take the challenge yourself</Button>
                 </Row>
             </Container>
         </div>
