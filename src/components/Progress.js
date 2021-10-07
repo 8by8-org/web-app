@@ -76,7 +76,11 @@ export default function Progress() {
             {element["avatarString"] ? (
               <div className="avatar yellow-background">
                 <img
-                  src={`../assets/images/avatars/${element["avatarString"]}`}
+                  src={
+                    require(`../assets/images/avatars/${element["avatarString"]}`)
+                      .default
+                  }
+                  alt="avatar"
                 />
               </div>
             ) : (
