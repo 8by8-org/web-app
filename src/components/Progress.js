@@ -11,6 +11,10 @@ export default function Progress() {
         avatarString: "8BY8-face-icons-3.png",
         name: "placeholder",
       },
+      {
+        avatarString: "Boy1-3.png",
+        name: "placeholder",
+      },
     ],
   };
 
