@@ -14,12 +14,15 @@ import Header from "./Header";
 import "./App.css";
 import HomePage from "./HomePage";
 import Progress from "./Progress";
+import ChallengerWelcome from "./ChallengerWelcome";
 
 function App() {
   return (
     <>
       <AuthProvider>
-        <Header />
+        <div id="header">
+          <Header />
+        </div>
         <div id="app-outer-wrapper">
           <div id="app-wrapper">
             <Router>
@@ -28,9 +31,12 @@ function App() {
                   <Redirect to="/homepage" />
                 </Route>
                 <Route path="/homepage" component={HomePage} />
+                <Route
+                  path="/challengerwelcome"
+                  component={ChallengerWelcome}
+                />
                 <Route path="/login" component={Login} />
                 <PrivateRoute path="/challenge" component={ChallengePage} />
-                <PrivateRoute path="/progress" component={Progress} />
                 <PrivateRoute path="/logout" component={Logout} />
               </Switch>
             </Router>

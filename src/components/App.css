@@ -1,13 +1,15 @@
-#root {
-  background-color: #142a38;
-  color: white;
-  height: 100vh;
+#header {
+  position: fixed;
+  z-index: 1;
 }
 #app-outer-wrapper {
+  background-color: #142a38;
   display: flex;
   justify-content: center;
   width: 100%;
   height: 100%;
+  position: relative;
+  top: 57px;
 }
 #app-wrapper {
   max-width: 500px;
