@@ -38,6 +38,7 @@ function App() {
                 <Route path="/login" component={Login} />
                 <PrivateRoute path="/challenge" component={ChallengePage} />
                 <PrivateRoute path="/logout" component={Logout} />
+                <PrivateRoute path="/progress" component={Progress} />
               </Switch>
             </Router>
           </div>
