@@ -9,6 +9,7 @@ import { AuthProvider } from "../contexts/AuthContext";
 import ChallengePage from "./ChallengePage/ChallengePage";
 import Login from "./Authentication/LoginPage";
 import Logout from "./Authentication/Logout";
+import Signup from './Authentication/SignupPage'
 import PrivateRoute from "./Helpers/PrivateRoute";
 import Header from "./Header/Header";
 import "./App.css";
@@ -37,6 +38,7 @@ function App() {
                 <Route path="/login" component={Login} />
                 <PrivateRoute path="/challenge" component={ChallengePage} />
                 <PrivateRoute path="/logout" component={Logout} />
+                <PrivateRoute path="/signup" component={Signup} />
               </Switch>
             </Router>
           </div>

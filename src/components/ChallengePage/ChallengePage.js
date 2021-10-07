@@ -2,6 +2,7 @@ import React, {useState} from 'react'
 import { useAuth } from './../../contexts/AuthContext';
 import ChallengePagePopup from './ChallengePagePopup';
 import ChallengeIcon from "./ChallengeIcon";
+import URLEncoder from './../Helpers/URLEncode';
 import { Button, Col, Container, Row } from 'react-bootstrap';
 import './ChallengePage.css'
 

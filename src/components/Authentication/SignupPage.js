@@ -2,7 +2,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import { useAuth } from "./../../contexts/AuthContext";
 import { auth } from "./../../firebase";
-import errorMessage from "../errorMessage";
+import errorMessage from "./../../errorMessage";
 import { useHistory } from "react-router-dom";
 import cryptoRandomString from 'crypto-random-string';
 import { Button, Form } from "react-bootstrap";

@@ -1,6 +1,7 @@
 /* The generate URL function - call this and it will return an URL with the encoded paramters */
 /* Use as many paramters as you want, but the first parameter MUST be the users UID (this can be changed in the future) */
 
+import * as auth from 'firebase/firestore';
 
 export const generateURL = (...params) => (
     // Change '/playerwelcome' to whatever route recieves this URL
@@ -16,9 +17,9 @@ export const getUserData = async ( url ) => {
         // The first paramter is the UID - it retrieved from the user query
         // This is gettings the user from that
         const uid = atob(url)[0];
-        const db = getFirestore();
-        const docRef = doc(db, 'users', uid);
-        const docSnap = await getDoc(docRef);
+        const db = auth.getFirestore();
+        const docRef = auth.doc(db, 'users', uid);
+        const docSnap = await auth.getDoc(docRef);
         if (docSnap.exists()) {
             const arr = [docSnap.data()]; 
             return arr;
