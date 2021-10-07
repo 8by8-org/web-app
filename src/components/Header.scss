@@ -2,8 +2,10 @@
   background-color: white;
   height: 57px;
   padding: 0px 30px 0px 40px;
-  display: flex;
-  flex-direction: row;
+  overflow: hidden;
+  position: fixed; /* Set the navbar to fixed position */
+  top: 0; /* Position the navbar at the top of the page */
+  width: 100%; /* Full width */
 }
 
 #brand-logo {
@@ -56,14 +58,18 @@ a.navbar-brand {
   justify-content: center;
   position: fixed;
   top: 0;
-  right: -100%;
-  transition: 500ms;
+  right: -380px;
+  transition: 400ms;
 }
 
 .nav-menu.active {
   right: 0;
+<<<<<<< HEAD:src/components/Header.css
   transition: 500ms;
   z-index: 1;
+=======
+  transition: 400ms;
+>>>>>>> 76e886303b0e9730877ead5d86a21043dbf1fb4b:src/components/Header.scss
 }
 
 .menu-header {
@@ -139,8 +145,8 @@ a.navbar-brand {
   width: 100vw;
   max-width: 500px;
   position: fixed;
-  bottom: -100%;
-  transition: 500ms;
+  bottom: -80vh;
+  transition: 400ms;
   background-color: white;
   color: black;
   border-top: 2px solid black;
@@ -149,7 +155,7 @@ a.navbar-brand {
 
 .notif-menu.active {
   bottom: 0;
-  transition: 500ms;
+  transition: 400ms;
 }
 
 .notif-toggle {
