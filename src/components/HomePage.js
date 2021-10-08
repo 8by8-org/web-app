@@ -23,7 +23,7 @@ export default function HomePage() {
           <div style={homePageDivStyle}>
             <img class="center padded" src={logo} alt="logo"></img>
               <h1 class="bebas-neue padded white-text">GET <u class="underline">8 FRIENDS</u> <br></br>
-                TO RESISTER <br></br>
+                TO REGISTER <br></br>
                 TO VOTE IN <u class="underline">8 DAYS</u></h1>
               <div class="padded">
                 <button class="yellow-button" onClick={() => history.push("/challengerwelcome")}><b class="lato">Take the Challenge</b></button>
