@@ -1,0 +1,42 @@
+@import url("https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Montserrat&display=swap");
+
+:root {
+  --primary: #142a38;
+  --secondary: #d2513d;
+  --tertiary: #addefc;
+}
+
+.montserrat {
+  font-family: "Montserrat";
+  font-weight: 600;
+  color: var(--tertiary);
+}
+
+.white-col {
+  color: white;
+}
+
+.error-col {
+  color: red;
+}
+
+.content {
+  background-color: var(--primary);
+}
+
+.input:enabled {
+  background-color: rgba(206, 206, 206, 0.1);
+  border: none;
+  color: var(--tertiary);
+}
+
+.btn-secondary:enabled {
+  background-color: var(--secondary);
+  font-family: "Montserrat";
+  font-weight: 600;
+  color: white;
+  border: none;
+}
+.btn-secondary:hover {
+  background-color: #c2503f;
+}

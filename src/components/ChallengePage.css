@@ -1,0 +1,38 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@600&display=swap");
+
+.primary {
+  color: #d2513d;
+  font-size: 14px;
+  font-family: Montserrat;
+}
+
+.secondary {
+  font-family: Montserrat;
+  font-size: 10px;
+  line-height: 14px;
+  letter-spacing: 0.02em;
+  color: #87b4d0;
+}
+
+.tertiary {
+  font-family: Montserrat;
+  font-size: 12px;
+  line-height: 15px;
+  color: #addefc;
+}
+
+#button-style {
+  background: #d2513d;
+  border: 2px solid #d2513d;
+  box-sizing: border-box;
+  border-radius: 8px;
+  font-size: 14px;
+  width: 100%;
+  font-family: Montserrat;
+}
+
+#divider {
+  height: 3px;
+  color: #d2513d;
+  opacity: 1;
+}
