@@ -12,11 +12,15 @@ export const generateURL = (...params) => (
 /* URL is the query param in the URL that has a code generated from the above function */
 /* Returns an array with the user data*/
 
-export const getUserData = async ( url ) => {
+export const getUrlData = ( urlCode ) => {
+    return atob(urlCode).split(',');
+}
+
+export const getUserData = async ( urlCode ) => {
     try {
         // The first paramter is the UID - it retrieved from the user query
         // This is gettings the user from that
-        const uid = atob(url)[0];
+        const uid = atob(urlCode)[0];
         const db = auth.getFirestore();
         const docRef = auth.doc(db, 'users', uid);
         const docSnap = await auth.getDoc(docRef);

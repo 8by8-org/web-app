@@ -7,10 +7,9 @@ import {
 } from "react-router-dom";
 import { AuthProvider } from "../contexts/AuthContext";
 import ChallengePage from "./ChallengePage/ChallengePage";
-import Login from "./Authentication/LoginPage";
-import Logout from "./Authentication/Logout";
+import Signin from "./Authentication/Signin";
+import Logout from "./Authentication/Signout";
 import Signup from './Authentication/SignupPage'
-import PrivateRoute from "./Helpers/PrivateRoute";
 import Header from "./Header/Header";
 import "./App.css";
 import HomePage from "./HomePage/HomePage";
@@ -35,10 +34,10 @@ function App() {
                   path="/challengerwelcome"
                   component={ChallengerWelcome}
                 />
-                <Route path="/login" component={Login} />
-                <PrivateRoute path="/challenge" component={ChallengePage} />
-                <PrivateRoute path="/logout" component={Logout} />
-                <PrivateRoute path="/signup" component={Signup} />
+                <Route path="/signin" component={Signin} />
+                <Route path="/challenge" component={ChallengePage} />
+                <Route path="/logout" component={Logout} />
+                <Route path="/signup" component={Signup} />
               </Switch>
             </Router>
           </div>

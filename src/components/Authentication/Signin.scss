@@ -1,0 +1,60 @@
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap');
+@import "./../../Styles/Components.scss";
+
+.signin, .signup {
+    font-family: "Lato";
+    background-color: $white;
+    color: $black;
+    min-height: 100%;
+    width: 100%;
+    display: flex;
+    align-items: flex-start;
+
+    button {
+        @include button($yellow);
+        border-radius: 0px;
+        color: black;
+        margin: 10px 0;
+    }
+
+    button:hover {
+        background-color: black;
+        color: white;
+    }
+
+    .login {
+        text-align: center;
+        .link {
+          color: blue;
+          text-decoration: underline;
+          &:hover {
+            cursor: pointer;
+          }
+        }
+      }
+
+    .signin-form {
+        min-height: 90%;
+        padding: 1em;
+        position: relative;
+        bottom: 0px;
+        background-color: rgb(184, 184, 184);
+    }
+
+    .by {
+        font-size: 2rem;
+    }
+
+    .form-header {
+        font-size: 5em;
+        text-align: center;
+    }
+
+    .form-control {
+        display: flex;
+        align-items: flex-end;
+        background-color: white;
+        border-radius: 0px;
+        border: 2px black solid;
+    }
+}

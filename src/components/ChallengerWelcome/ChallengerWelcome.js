@@ -22,7 +22,7 @@ function ChallengerWelcome() {
         <button onClick={() => history.push("/signup")}>Sign up</button>
         <div className="login">
           Already have an account?{" "}
-          <span className="link" onClick={() => history.push("/login")}>
+          <span className="link" onClick={() => history.push("/signin")}>
             Sign in
           </span>
         </div>

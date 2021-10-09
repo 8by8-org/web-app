@@ -4,9 +4,9 @@ import { useAuth } from "./../../contexts/AuthContext";
 import { auth } from "./../../firebase";
 import errorMessage from "./../../errorMessage";
 import { useHistory } from "react-router-dom";
-import cryptoRandomString from 'crypto-random-string';
+import { dummyPassword } from './constants';
 import { Button, Form } from "react-bootstrap";
-import "./LoginPage.css";
+import "./Signin.scss";
 const workingUrl = 'localhost:3000';
 export default function Login() {
   const { currentUser } = useAuth();
@@ -26,14 +26,13 @@ export default function Login() {
     }
     if (!auth.isSignInWithEmailLink(auth.getAuth(), window.location.href)) {
       // login step 1
-      setButtonMessage("Take the challenge");
-      setMessage("Join now and #StopAsianHate at the ballot box.");
+      setButtonMessage("Sign Up");
       buttonRef.current.onclick = async function () {
       const email = emailRef.current.value;
       const createUser = async (email) => {
           try {
             // CryptoRandomString generates a random hash for the password (because it has no use right now)
-            await auth.createUserWithEmailAndPassword(auth.getAuth(), email, cryptoRandomString({length: 20})); 
+            await auth.createUserWithEmailAndPassword(auth.getAuth(), email, dummyPassword); 
           } catch (e) {
             console.log(e);
             setError(errorMessage(e));
@@ -52,34 +51,38 @@ export default function Login() {
 
   return (
     <>
-      <div className="content d-flex justify-content-center montserrat p-3 flex-column">
+      <div className="p-3 signup">
         {message && <Form.Label>{message}</Form.Label>}
         {error && <p className="error-col">{error}</p>}
         <br />
-        <Form className="d-flex flex-column">
-          {emailVisible && (
-            <div className="">
-              <Form.Control
-                className="montserrat input mb-3 p-2"
-                type="email"
-                placeholder="Email:"
-                ref={emailRef}
-              ></Form.Control>
-          </div>
-          )}
-          {buttonMessage && (
-            <Button className="p-2" variant="secondary" ref={buttonRef}>
-              {buttonMessage}
-            </Button>
-          )}
-          {buttonMessage && (<p>
-            Already have an account? <></>
-            <a href="/login">
-              Log In
+        <Form className="d-grid signin-form">
+           <p className="form-header">8 <span className="by">by</span> 8</p>
+           <img src="" alt="placeholder" className="form-image"/>
+           {error && <p className="error-col">{error}</p>}
+           {emailVisible && (
+             <div>
+               <Form.Control
+                 className="form-control"
+                 type="email"
+                 placeholder="Email:"
+                 ref={emailRef}
+               ></Form.Control>
+           </div>
+           )}
+           {buttonMessage && (
+             <Button className="button" ref={buttonRef}>
+               {buttonMessage}
+             </Button>
+           )}
+           {buttonMessage && (
+             <p>
+             Already Have an account? <> </>
+            <a href="/signin" style={{style: 'inline'}}>
+              Sign in
             </a></p>
-          )}
-          
-        </Form>
+           )}
+           
+         </Form>
         
       </div>
     </>

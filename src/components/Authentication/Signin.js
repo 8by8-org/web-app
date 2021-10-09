@@ -7,26 +7,27 @@
  *           second page logs them in, while the first page is useless now
  */
 
- import React, { useEffect, useRef, useState } from "react";
- import { useAuth } from "./../../contexts/AuthContext";
- import { auth } from "./../../firebase";
- import errorMessage from "./../../errorMessage";
- import { useHistory } from "react-router-dom";
- import { Button, Form } from "react-bootstrap";
- import "./LoginPage.css";
- 
- const localStorageEmailKey = "verifyUserEmail";
- 
- export default function Login() {
-   const { currentUser } = useAuth();
-   const history = useHistory();
-   const [error, setError] = useState(null);
-   const [message, setMessage] = useState(null);
-   const [emailVisible, setEmailVisible] = useState(true);
-   const [buttonMessage, setButtonMessage] = useState(" "); // leave blank to hide button
- 
-   const emailRef = useRef();
-   const buttonRef = useRef();
+import React, { useEffect, useRef, useState } from "react";
+import { useAuth } from "../../contexts/AuthContext";
+import { auth } from "../../firebase";
+import errorMessage from "../../errorMessage";
+import { useHistory } from "react-router-dom";
+import { Button, Form } from "react-bootstrap";
+import "./Signin.scss";
+import { dummyPassword } from "./constants";
+
+const localStorageEmailKey = "verifyUserEmail";
+
+export default function Login() {
+const { currentUser } = useAuth();
+const history = useHistory();
+const [error, setError] = useState(null);
+const [message, setMessage] = useState(null);
+const [emailVisible, setEmailVisible] = useState(true);
+const [buttonMessage, setButtonMessage] = useState(" "); // leave blank to hide button
+
+const emailRef = useRef();
+const buttonRef = useRef();
  
    useEffect(() => {
      if (currentUser) {
@@ -35,20 +36,17 @@
      }
      if (!auth.isSignInWithEmailLink(auth.getAuth(), window.location.href)) {
        // login step 1
-       setButtonMessage("Take the challenge");
+       setButtonMessage("Sign In");
        setMessage("Log in and continue your journey to #StopAsianHate at the ballot box.");
        buttonRef.current.onclick = async function () {
          const email = emailRef.current.value;
          const emailLogin = async email => {
            try {
-             await auth.sendSignInLinkToEmail(auth.getAuth(), email, {
-               url: `${window.location.protocol}//${window.location.host}${window.location.pathname}`,
-               handleCodeInApp: true,
-             });
+             await auth.signInWithEmailAndPassword(auth.getAuth(), email, dummyPassword);
              window.localStorage.setItem(localStorageEmailKey, email);
              setEmailVisible(false);
              setButtonMessage(null);
-             setMessage("Check your email for an email login link");
+             setMessage("Logging in...");
            } catch(e) {
              setError(errorMessage(e));
            }
@@ -84,15 +82,15 @@
    }, [currentUser]);
  
    return (
-     <>
-       <div className="content d-grid justify-content-center montserrat p-3">
-         <Form className="d-grid">
-           {message && <Form.Label>{message}</Form.Label>}
+       <div className="signin p-3">
+         <Form className="d-grid signin-form">
+           <p className="form-header">8 <span className="by">by</span> 8</p>
+           <img src="" alt="placeholder" className="form-image"/>
            {error && <p className="error-col">{error}</p>}
            {emailVisible && (
              <div>
                <Form.Control
-                 className="montserrat input mb-3 p-2"
+                 className="form-control"
                  type="email"
                  placeholder="Email:"
                  ref={emailRef}
@@ -100,7 +98,7 @@
            </div>
            )}
            {buttonMessage && (
-             <Button className="p-2" variant="secondary" ref={buttonRef}>
+             <Button className="button" ref={buttonRef}>
                {buttonMessage}
              </Button>
            )}
@@ -115,6 +113,5 @@
          </Form>
          
        </div>
-     </>
    );
  }
