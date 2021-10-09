@@ -14,6 +14,7 @@ import Header from "./Header";
 import "./App.css";
 import HomePage from "./HomePage";
 import ChallengerWelcome from "./ChallengerWelcome";
+import ElectionReminder from "./ElectionReminder";
 
 function App() {
   return (
@@ -35,6 +36,7 @@ function App() {
                   component={ChallengerWelcome}
                 />
                 <Route path="/login" component={Login} />
+                <Route path="/electionreminder" component={ElectionReminder} />
                 <PrivateRoute path="/challenge" component={ChallengePage} />
                 <PrivateRoute path="/logout" component={Logout} />
               </Switch>
