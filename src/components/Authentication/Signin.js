@@ -31,7 +31,7 @@ const buttonRef = useRef();
  
    useEffect(() => {
      if (currentUser) {
-       history.push("/challenge");
+       history.push("/progress");
        return;
      }
      if (!auth.isSignInWithEmailLink(auth.getAuth(), window.location.href)) {
@@ -40,7 +40,7 @@ const buttonRef = useRef();
        setMessage("Log in and continue your journey to #StopAsianHate at the ballot box.");
        buttonRef.current.onclick = async function () {
          const email = emailRef.current.value;
-         const emailLogin = async email => {
+         const login = async email => {
            try {
              await auth.signInWithEmailAndPassword(auth.getAuth(), email, dummyPassword);
              window.localStorage.setItem(localStorageEmailKey, email);
@@ -55,8 +55,7 @@ const buttonRef = useRef();
            setMessage("Missing email");
          }
          else {
-           emailLogin(email);
-           setMessage("Check your email for your login link!");
+           login(email);
          }
        };
      } else {
@@ -65,6 +64,7 @@ const buttonRef = useRef();
          try {
            await auth.signInWithEmailLink(auth.getAuth(), email, window.location.href);
          } catch (e) {
+           console.dir(e);
            setError(errorMessage(e));
          }
        };
