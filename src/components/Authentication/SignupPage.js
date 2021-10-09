@@ -52,12 +52,10 @@ export default function Login() {
   return (
     <>
       <div className="p-3 signup">
-        {message && <Form.Label>{message}</Form.Label>}
-        {error && <p className="error-col">{error}</p>}
+        
         <br />
         <Form className="d-grid signin-form">
            <p className="form-header">8 <span className="by">by</span> 8</p>
-           <img src="" alt="placeholder" className="form-image"/>
            {error && <p className="error-col">{error}</p>}
            {emailVisible && (
              <div>
