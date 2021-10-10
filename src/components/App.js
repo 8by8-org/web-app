@@ -6,7 +6,6 @@ import {
   Switch,
 } from "react-router-dom";
 import { AuthProvider } from "../contexts/AuthContext";
-import ChallengePage from "./ChallengePage";
 import Login from "./LoginPage";
 import Logout from "./Logout";
 import PrivateRoute from "./PrivateRoute";
@@ -36,7 +35,6 @@ function App() {
                   component={ChallengerWelcome}
                 />
                 <Route path="/login" component={Login} />
-                <PrivateRoute path="/challenge" component={ChallengePage} />
                 <PrivateRoute path="/logout" component={Logout} />
                 <PrivateRoute path="/progress" component={Progress} />
               </Switch>

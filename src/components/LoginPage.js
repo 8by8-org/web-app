@@ -31,7 +31,7 @@ export default function Login() {
 
   useEffect(() => {
     if (currentUser) {
-      history.push("/challenge");
+      history.push("/progress");
       return;
     }
     if (!auth.isSignInWithEmailLink(window.location.href)) {

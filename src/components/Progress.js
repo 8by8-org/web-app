@@ -8,11 +8,11 @@ export default function Progress() {
     // Would container list of badges that the challenger has accrued so far
     badges: [
       {
-        avatarString: "8BY8-face-icons-3.png",
+        avatarString: "Boy-1.png",
         name: "placeholder",
       },
       {
-        avatarString: "Boy1-3.png",
+        avatarString: "Girl-2.png",
         name: "placeholder",
       },
     ],
