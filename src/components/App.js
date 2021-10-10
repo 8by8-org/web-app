@@ -6,7 +6,7 @@ import {
   Switch,
 } from "react-router-dom";
 import { AuthProvider } from "../contexts/AuthContext";
-import Login from "./LoginPage";
+import Signin from './Authentication/Signin';
 import Logout from "./Logout";
 import PrivateRoute from "./PrivateRoute";
 import Header from "./Header";
@@ -34,7 +34,7 @@ function App() {
                   path="/challengerwelcome"
                   component={ChallengerWelcome}
                 />
-                <Route path="/login" component={Login} />
+                <Route path="/signin" component={Signin} />
                 <PrivateRoute path="/logout" component={Logout} />
                 <PrivateRoute path="/progress" component={Progress} />
               </Switch>
