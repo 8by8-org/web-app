@@ -12,7 +12,7 @@ export default function Login() {
   const { currentUser } = useAuth();
   const history = useHistory();
   const [error, setError] = useState(null);
-  const [message, setMessage] = useState(null);
+  const [setMessage] = useState(null);
   const [emailVisible] = useState(true);
   const [buttonMessage, setButtonMessage] = useState(" "); // leave blank to hide button
 
