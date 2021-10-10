@@ -7,6 +7,7 @@ import {
 } from "react-router-dom";
 import { AuthProvider } from "../contexts/AuthContext";
 import Signin from './Authentication/Signin';
+import Signup from './Authentication/SignupPage';
 import Signout from "./Authentication/Signout";
 import PrivateRoute from "./Helpers/PrivateRoute";
 import Header from "./Header/Header";
@@ -35,6 +36,7 @@ function App() {
                   component={ChallengerWelcome}
                 />
                 <Route path="/signin" component={Signin} />
+                <Route path="/signup" component={Signup} />
                 <PrivateRoute path="/signout" component={Signout} />
                 <PrivateRoute path="/progress" component={Progress} />
               </Switch>
