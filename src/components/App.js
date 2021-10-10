@@ -7,13 +7,13 @@ import {
 } from "react-router-dom";
 import { AuthProvider } from "../contexts/AuthContext";
 import Signin from './Authentication/Signin';
-import Logout from "./Logout";
-import PrivateRoute from "./PrivateRoute";
-import Header from "./Header";
+import Signout from "./Authentication/Signout";
+import PrivateRoute from "./Helpers/PrivateRoute";
+import Header from "./Header/Header";
 import "./App.css";
-import HomePage from "./HomePage";
+import HomePage from "./HomePage/HomePage";
 import Progress from "./Progress";
-import ChallengerWelcome from "./ChallengerWelcome";
+import ChallengerWelcome from "./ChallengerWelcome/ChallengerWelcome";
 
 function App() {
   return (
@@ -35,7 +35,7 @@ function App() {
                   component={ChallengerWelcome}
                 />
                 <Route path="/signin" component={Signin} />
-                <PrivateRoute path="/logout" component={Logout} />
+                <PrivateRoute path="/signout" component={Signout} />
                 <PrivateRoute path="/progress" component={Progress} />
               </Switch>
             </Router>

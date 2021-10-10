@@ -3,9 +3,8 @@
 
 .signin, .signup {
     font-family: "Lato";
-    background-color: $white;
     color: $black;
-    min-height: 100%;
+    min-height: 100vh;
     width: 100%;
     display: flex;
     align-items: flex-start;
@@ -34,7 +33,7 @@
       }
 
     .signin-form {
-        min-height: 90%;
+        border: 1em solid white;
         padding: 1em;
         position: relative;
         bottom: 0px;
