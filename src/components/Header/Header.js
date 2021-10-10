@@ -129,7 +129,7 @@ function Header() {
               <Nav.Link href="/">Settings</Nav.Link>
               <Nav.Link href="/">Privacy Policy</Nav.Link>
               {currentUser ? (
-                <Nav.Link href="/logout">Logout</Nav.Link>
+                <Nav.Link href="/signout">Sign out</Nav.Link>
               ) : (
                 <Nav.Link href="/signin">Sign In</Nav.Link>
               )}
