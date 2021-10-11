@@ -6,13 +6,13 @@ import {
   Switch,
 } from "react-router-dom";
 import { AuthProvider } from "../contexts/AuthContext";
-import ChallengePage from "./ChallengePage";
 import Login from "./LoginPage";
 import Logout from "./Logout";
 import PrivateRoute from "./PrivateRoute";
 import Header from "./Header";
 import "./App.css";
 import HomePage from "./HomePage";
+import Progress from "./Progress";
 import ChallengerWelcome from "./ChallengerWelcome";
 import ElectionReminder from "./ElectionReminder";
 
@@ -39,6 +39,7 @@ function App() {
                 <Route path="/electionreminder" component={ElectionReminder} />
                 <PrivateRoute path="/challenge" component={ChallengePage} />
                 <PrivateRoute path="/logout" component={Logout} />
+                <PrivateRoute path="/progress" component={Progress} />
               </Switch>
             </Router>
           </div>
