@@ -37,7 +37,6 @@ function App() {
                 />
                 <Route path="/login" component={Login} />
                 <Route path="/electionreminder" component={ElectionReminder} />
-                <PrivateRoute path="/challenge" component={ChallengePage} />
                 <PrivateRoute path="/logout" component={Logout} />
                 <PrivateRoute path="/progress" component={Progress} />
               </Switch>
