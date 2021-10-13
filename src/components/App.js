@@ -37,8 +37,8 @@ function App() {
                   path="/challengerwelcome"
                   component={ChallengerWelcome}
                 />
-                <Route path="/signup> component={SignupPage} />
-                <Route path="/signin> component={Signin} />
+                <Route path="/signup>" component={SignupPage} />
+                <Route path="/signin" component={Signin} />
                 <Route path="/login" component={Login} />
                 <Route path="/electionreminder" component={ElectionReminder} />
                 <PrivateRoute path="/logout" component={Logout} />
