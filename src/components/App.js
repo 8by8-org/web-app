@@ -6,15 +6,16 @@ import {
   Switch,
 } from "react-router-dom";
 import { AuthProvider } from "../contexts/AuthContext";
-import Signin from './Authentication/Signin';
-import Signup from './Authentication/SignupPage';
+import Signin from "./Authentication/SigninPage";
 import Signout from "./Authentication/Signout";
+import SignupPage from './Authentication/SignupPage';
 import PrivateRoute from "./Helpers/PrivateRoute";
 import Header from "./Header/Header";
 import "./App.css";
 import HomePage from "./HomePage/HomePage";
 import Progress from "./Progress";
 import ChallengerWelcome from "./ChallengerWelcome/ChallengerWelcome";
+import ElectionReminder from "./ElectionReminder";
 
 function App() {
   return (
@@ -36,8 +37,9 @@ function App() {
                   component={ChallengerWelcome}
                 />
                 <Route path="/signin" component={Signin} />
-                <Route path="/signup" component={Signup} />
-                <PrivateRoute path="/signout" component={Signout} />
+                <Route path="/signup" component={SignupPage} />
+                <Route path="/electionreminder" component={ElectionReminder} />
+                <PrivateRoute path="/Signout" component={Signout} />
                 <PrivateRoute path="/progress" component={Progress} />
               </Switch>
             </Router>
