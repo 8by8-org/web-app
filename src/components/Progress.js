@@ -32,7 +32,7 @@ export default function Progress() {
   // stores days remaining
   // could not figure out how to do this without temp constant
   const temp = processDays(data["challengeEndTimestamp"]);
-  const [dayCounter] = useState(temp);
+  const [dayCounter, changeDayCounter] = useState(temp);
 
   // Takes array from data object and fills it to length 8
   // may be redundant depending on database structure
@@ -44,7 +44,7 @@ export default function Progress() {
   };
 
   // saves badges to state
-  const [progressArr] = useState([...padArray(data["badges"])]);
+  const [progressArr, updateProgress] = useState([...padArray(data["badges"])]);
 
   // Processes emoji send to selected user
   const sendEmoji = () => {
