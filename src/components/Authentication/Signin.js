@@ -22,7 +22,7 @@ export default function Login() {
 const { currentUser } = useAuth();
 const history = useHistory();
 const [error, setError] = useState(null);
-const [setMessage] = useState(null);
+const [message, setMessage] = useState(null);
 const [emailVisible, setEmailVisible] = useState(true);
 const [buttonMessage, setButtonMessage] = useState(" "); // leave blank to hide button
 
@@ -86,6 +86,7 @@ const buttonRef = useRef();
          <Form className="d-grid signin-form">
            <p className="form-header">8 <span className="by">by</span> 8</p>
            {error && <p className="error-col">{error}</p>}
+           {message && <p> {message} </p>}
            {emailVisible && (
              <div>
                <Form.Control
