@@ -36,7 +36,7 @@ function App() {
                   path="/challengerwelcome"
                   component={ChallengerWelcome}
                 />
-                <Route path="/signup>" component={SignupPage} />
+                <Route path="/signup" component={SignupPage} />
                 <Route path="/signin" component={Signin} />
                 <Route path="/electionreminder" component={ElectionReminder} />
                 <PrivateRoute path="/progress" component={Progress} />
