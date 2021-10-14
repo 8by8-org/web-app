@@ -14,7 +14,6 @@ import Header from "./Header/Header";
 import "./App.css";
 import HomePage from "./HomePage/HomePage";
 import Progress from "./Progress";
-import ChallengerWelcome from "./ChallengerWelcome"; /* Delete this line */
 import ChallengerWelcome from "./ChallengerWelcome/ChallengerWelcome";
 import ElectionReminder from "./ElectionReminder";
 
@@ -39,9 +38,7 @@ function App() {
                 />
                 <Route path="/signup>" component={SignupPage} />
                 <Route path="/signin" component={Signin} />
-                <Route path="/login" component={Login} /> {/* Delete this line */}
                 <Route path="/electionreminder" component={ElectionReminder} />
-                <PrivateRoute path="/logout" component={Logout} /> {/* Delete this line */}
                 <PrivateRoute path="/progress" component={Progress} />
                 <PrivateRoute path="/signout" component={Signout} />
               </Switch>
