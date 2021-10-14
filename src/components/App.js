@@ -6,7 +6,7 @@ import {
   Switch,
 } from "react-router-dom";
 import { AuthProvider } from "../contexts/AuthContext";
-import Signin from "./Authentication/SigninPage";
+import Signin from "./Authentication/Signin";
 import Signout from "./Authentication/Signout";
 import SignupPage from './Authentication/SignupPage';
 import PrivateRoute from "./Helpers/PrivateRoute";
