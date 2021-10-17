@@ -1,20 +1,8 @@
 @import "Variables";
 @import "Fonts";
 
-// buttons
-@mixin button($color: $yellow) {
-  padding: 9px;
-  width: 100%;
-  background: $color;
-  @if $color != $yellow {
-    color: white;
-  }
-  border: none;
-  text-align: center;
-}
-
 // greenish-yellow gradient button
-@mixin buttons {
+@mixin button {
   height: 64px;
   width: 100%;
   font-family: $bebas-neue;
@@ -38,16 +26,15 @@
 }
 
 //headings
-@mixin heading-text($color: $black) {
+@mixin heading-text($color: $black, $fontSize: 48px) {
   color: $color;
   font-family: $bebas-neue;
-  font-size: 48px;
+  font-size: $fontSize;
   line-height: 58px;
-  text-align: left;
 }
 
 //blue text underline
 @mixin text-underline {
-  text-decoration: underline #03dcc4 10px;
+  text-decoration: underline $blue 10px;
   text-underline-offset: -5px;
 }

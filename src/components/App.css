@@ -12,5 +12,6 @@
   top: 57px;
 }
 #app-wrapper {
+  width: 100vw;
   max-width: 500px;
 }
