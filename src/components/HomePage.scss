@@ -217,6 +217,9 @@
       color: $blue;
       text-decoration: underline;
       text-underline-offset: 2px;
+      :hover {
+        cursor: pointer;
+      }
     }
   }
 }
