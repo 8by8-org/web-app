@@ -15,6 +15,7 @@ import HomePage from "./HomePage";
 import Progress from "./Progress";
 import ChallengerWelcome from "./ChallengerWelcome";
 import ElectionReminder from "./ElectionReminder";
+import PlayerWelcome from "./PlayerWelcome";
 
 function App() {
   return (
@@ -35,6 +36,7 @@ function App() {
                   path="/challengerwelcome"
                   component={ChallengerWelcome}
                 />
+                <Route path="/playerwelcome" component={PlayerWelcome} />
                 <Route path="/login" component={Login} />
                 <Route path="/electionreminder" component={ElectionReminder} />
                 <PrivateRoute path="/logout" component={Logout} />
