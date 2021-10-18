@@ -14,6 +14,9 @@
       font-size: 18px;
       margin: 0 15px;
     }
+    :hover {
+      cursor: pointer;
+    }
   }
   p {
     font-family: $lato;
