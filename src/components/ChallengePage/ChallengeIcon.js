@@ -1,4 +1,4 @@
-import React from 'react';
+
 import Icon1_0 from './../../assets/images/challenge/icon_1_0.svg';
 import Icon2_0 from './../../assets/images/challenge/icon_2_0.svg';
 import Icon3_0 from './../../assets/images/challenge/icon_3_0.svg';

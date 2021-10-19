@@ -1,4 +1,3 @@
-import React, {useState} from 'react'
 import { useAuth } from './../../contexts/AuthContext';
 import ChallengePagePopup from './ChallengePagePopup';
 import ChallengeIcon from "./ChallengeIcon";

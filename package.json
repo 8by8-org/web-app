@@ -46,5 +46,19 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  }
+  },
+  "description": "The \"me\" in all of these documentation files is referring to \"Simon Cheng.\"",
+  "main": "index.js",
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/arniber21/web-app.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/arniber21/web-app/issues"
+  },
+  "homepage": "https://github.com/arniber21/web-app#readme"
 }

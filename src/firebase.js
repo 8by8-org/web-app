@@ -11,12 +11,4 @@ const app = firebase.initializeApp({
 
 
 export const auth = authObject;
- /* export const { 
-    createUserWithEmailAndPassword, 
-    signInWithEmailAndPassword, 
-    signInWithEmailLink, 
-    isSignInWithEmailLink, 
-    sendSignInLinkToEmail 
-} = authObject; */
-
 export default app;

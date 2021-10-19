@@ -30,6 +30,7 @@ const emailRef = useRef();
 const buttonRef = useRef();
  
    useEffect(() => {
+     let isMounted = true;
      if (currentUser) {
        history.push("/progress");
        return;
