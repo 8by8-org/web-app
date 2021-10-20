@@ -1,0 +1,68 @@
+@import url("https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Montserrat&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap');
+
+$lighter-yellow: #fff04e;
+
+.take-action {
+    font-size: 3em;
+}
+
+.black-text {
+    color: black;
+    text-align: center;
+    align-self: center;
+    padding: 0px 10px 10px 10px;
+}
+
+.tiny-text {
+    padding-top: 10px;
+    font-size: 0.8em;
+}
+
+.challenge-name {
+    font-size: 1.5em;
+    margin-top: -20px;
+}
+
+.avatar-button-text {
+    font-size: 0.65em;
+    color: black;
+}
+
+.gray-button-text {
+    font-size: 2em;
+}
+
+.link-text {
+    margin-top:-20px;
+}
+
+.avatar-image {
+    background: $lighter-yellow;
+    justify-content: center;
+    align-items: center;
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    vertical-align: middle;
+    padding: 15px;
+    margin: 0 auto;
+}
+
+.avatar-button{
+    background:$lighter-yellow;
+    border: 3px solid black;
+    text-align: center; 
+    margin: 5px;
+    margin-top: -10px;
+    padding-left: 5px;
+    padding-right: 5px;
+}
+
+.gray-button{
+    width: 100%;
+    background: rgb(179, 179, 179);
+    text-align: center;
+    padding: 9px;
+    padding-top: 20px;
+}

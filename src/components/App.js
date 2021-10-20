@@ -14,6 +14,7 @@ import Header from "./Header";
 import "./App.css";
 import HomePage from "./HomePage";
 import Progress from "./Progress";
+import ActionPage from "./ActionPage";
 
 function App() {
   return (
@@ -29,6 +30,7 @@ function App() {
                 </Route>
                 <Route path="/homepage" component={HomePage} />
                 <Route path="/login" component={Login} />
+                <Route path="/action" component={ActionPage} />
                 <PrivateRoute path="/challenge" component={ChallengePage} />
                 <PrivateRoute path="/progress" component={Progress} />
                 <PrivateRoute path="/logout" component={Logout} />

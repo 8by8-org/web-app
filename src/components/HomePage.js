@@ -26,7 +26,7 @@ export default function HomePage() {
                 TO REGISTER <br></br>
                 TO VOTE IN <u class="underline">8 DAYS</u></h1>
               <div class="padded">
-                <button class="yellow-button" onClick={() => history.push("/challengerwelcome")}><b class="lato">Take the Challenge</b></button>
+                <button class="yellow-button" onClick={() => history.push("/challengewelcome")}><b class="lato">Take the Challenge</b></button>
                 <button class="bordered-button"><Link to="info" smooth={true}><b class="lato">See More</b></Link></button>
               </div>
         </div>
