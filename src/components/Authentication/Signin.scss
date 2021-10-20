@@ -9,6 +9,9 @@
     display: flex;
     align-items: flex-start;
 
+    .signup-header {
+        font-size: 2em;
+    }
     button {
         @include button($yellow);
         border-radius: 0px;
