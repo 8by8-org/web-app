@@ -51,14 +51,18 @@ export default function Login() {
 
   return (
     <>
-      <div className="p-3 signup">
-        
-        <br />
-        <Form className="d-grid signin-form">
-           <p className="form-header">8 <span className="by">by</span> 8</p>
+      <div className="signin p-3">
+         <Form className="d-grid signin-form">
+           <p className="signup-text"><span class="signup-header">Sign up</span><br />to start your 8by8 journey</p>
            {error && <p className="error-col">{error}</p>}
+           {message && <p> {message} </p>}
            {emailVisible && (
              <div>
+               <Form.Control 
+                className="form-control"
+                type="text"
+                placeholder="Name: "
+                ></Form.Control>
                <Form.Control
                  className="form-control"
                  type="email"
@@ -73,16 +77,15 @@ export default function Login() {
              </Button>
            )}
            {buttonMessage && (
-             <p>
-             Already Have an account? <> </>
+             <p class="signin-link">
+             Have an account? <> </>
             <a href="/signin" style={{style: 'inline'}}>
-              Sign in
+              Sign In
             </a></p>
            )}
            
          </Form>
-        
-      </div>
+        </div>
     </>
   );
 }

@@ -38,7 +38,6 @@ const buttonRef = useRef();
      if (!auth.isSignInWithEmailLink(auth.getAuth(), window.location.href)) {
        // login step 1
        setButtonMessage("Sign In");
-       setMessage("Log in and continue your journey to #StopAsianHate at the ballot box.");
        buttonRef.current.onclick = async function () {
          const email = emailRef.current.value;
          const login = async email => {
@@ -85,11 +84,16 @@ const buttonRef = useRef();
    return (
        <div className="signin p-3">
          <Form className="d-grid signin-form">
-           <p className="form-header">8 <span className="by">by</span> 8</p>
+           <p className="signup-text"><span class="signup-header">Sign in</span><br />to continue your 8by8 journey</p>
            {error && <p className="error-col">{error}</p>}
            {message && <p> {message} </p>}
            {emailVisible && (
              <div>
+               <Form.Control 
+                className="form-control"
+                type="text"
+                placeholder="Name: "
+                ></Form.Control>
                <Form.Control
                  className="form-control"
                  type="email"
@@ -104,7 +108,7 @@ const buttonRef = useRef();
              </Button>
            )}
            {buttonMessage && (
-             <p>
+             <p class="signup-link">
              Dont have an account? <> </>
             <a href="/signup" style={{style: 'inline'}}>
               Sign Up
