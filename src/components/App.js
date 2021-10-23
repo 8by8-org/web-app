@@ -15,6 +15,7 @@ import HomePage from "./HomePage";
 import Progress from "./Progress";
 import ChallengerWelcome from "./ChallengerWelcome";
 import ElectionReminder from "./ElectionReminder";
+import Footer from "./Footer";
 
 function App() {
   return (
@@ -41,6 +42,7 @@ function App() {
                 <PrivateRoute path="/progress" component={Progress} />
               </Switch>
             </Router>
+            <Footer />
           </div>
         </div>
       </AuthProvider>

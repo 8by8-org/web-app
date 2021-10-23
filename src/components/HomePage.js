@@ -1,38 +1,137 @@
 import React from "react";
 import { useHistory } from "react-router-dom";
-import HomePageInfo from "./HomePageInfo";
-import "react-bootstrap";
-import logo from "../assets/images/white_logo.png"
-// import "./HomePageInfo.scss";
+import Logo from "../assets/logos/white-logo.svg";
+import Curve1 from "../assets/images/HomePage/Curve1.svg";
+import SpeechBubble1 from "../assets/images/HomePage/SpeechBubble1.png";
+import Sign from "../assets/images/HomePage/Sign.png";
+import Curve2 from "../assets/images/HomePage/Curve2.svg";
+import SpeechBubble2 from "../assets/images/HomePage/SpeechBubble2.png";
+import Mic from "../assets/images/HomePage/Mic.png";
+import SpeechBubble3 from "../assets/images/HomePage/SpeechBubble3.png";
+import Curve3 from "../assets/images/HomePage/Curve3.svg";
 import "./HomePage.scss";
-import Background from "../assets/images/MaskGroup.png";
-import {Link} from 'react-scroll'
 
 export default function HomePage() {
-    const homePageDivStyle = {
-        padding: "30px 40px 40px",
-        display: "flex",
-        flexDirection: "column",
-        justifyContent: "center",
-        background: `url(${Background})`
-      };
-
-    const history = useHistory();
-    return (
-      <div>
-          <div style={homePageDivStyle}>
-            <img class="center padded" src={logo} alt="logo"></img>
-              <h1 class="bebas-neue padded white-text">GET <u class="underline">8 FRIENDS</u> <br></br>
-                TO RESISTER <br></br>
-                TO VOTE IN <u class="underline">8 DAYS</u></h1>
-              <div class="padded">
-                <button class="yellow-button" onClick={() => history.push("/challengerwelcome")}><b class="lato">Take the Challenge</b></button>
-                <button class="bordered-button"><Link to="info" smooth={true}><b class="lato">See More</b></Link></button>
-              </div>
-        </div>
-        <div id="info">
-          <HomePageInfo/>
+  const history = useHistory();
+  return (
+    <>
+      <div className="content-1">
+        <div className="description">
+          <img className="logo" src={Logo} alt="8by8 Logo" />
+          <div className="text">
+            GET <u class="underline">8 AAPI FRIENDS</u>
+            <br />
+            TO RESISTER
+            <br />
+            TO VOTE IN <u class="underline">8 DAYS</u>
+          </div>
+          <button
+            className="challenge-button"
+            onClick={() => history.push("/challengerwelcome")}
+          >
+            <span>Take the Challenge</span>
+          </button>
         </div>
       </div>
-    );
-  }
+
+      <div className="curve-div">
+        <img className="curve curve-1" src={Curve1} />
+      </div>
+
+      <div className="content-2">
+        <img className="speech-bubble" src={SpeechBubble1} alt="why 8by8?" />
+        <img className="sign" src={Sign} alt="sign" />
+      </div>
+
+      <div className="content-3">
+        <p>
+          In 2020, we saw an unprecedented{" "}
+          <b>
+            150% spike in anti-AAPI (Asian American Pacific Islander) hate
+            crimes
+          </b>
+          , a trend that is already continuing into 2021. This is both a
+          national and a local problem.
+        </p>
+      </div>
+
+      <div className="curve-div">
+        <img className="curve" src={Curve2} />
+      </div>
+
+      <div className="content-4">
+        <p>
+          <span className="bold-shadow">150%</span> spike in anti-Asian and
+          anti-AAPI hate crimes in 2020
+        </p>
+      </div>
+
+      <div className="content-5">
+        <img className="speech-bubble" src={SpeechBubble2} alt="solution?" />
+        <div className="bold-shadow">
+          We need
+          <br /> more aapi
+          <br /> voters
+        </div>
+        <img className="mic" src={Mic} alt="mic" />
+      </div>
+
+      <div className="content-6">
+        <div className="text">
+          the path to fixing this problem starts with{" "}
+          <u class="underline">closing the representation gap</u> In
+          Asian-American communities.
+        </div>
+        <p className="stat">
+          Asian American voter turnout rate has remained Below
+        </p>
+        <div className="stat-1">
+          <div className="bold-shadow">60%</div>
+        </div>
+        <p className="stat">Asian-Americans make up</p>
+        <div className="stat-2">
+          <div className="bold-shadow">7%</div>
+        </div>
+        <p className="bottom-stat">of the population </p>
+        <p className="stat">but only</p>
+        <div className="stat-3">
+          <div className="bold-shadow">3%</div>
+        </div>
+        <p className="bottom-stat">of Congress is Asian or AAPI </p>
+      </div>
+
+      <div className="curve-div">
+        <img className="curve" src={Curve3} />
+      </div>
+
+      <div className="content-7">
+        <img
+          className="speech-bubble"
+          src={SpeechBubble3}
+          alt="we need your help!"
+        />
+        <div className="text">
+          we're asking everyone to join us in{" "}
+          <u class="underline">taking the #8by8challenge</u> and registering 8
+          of their friends to vote in 8 days.
+        </div>
+        <button
+          className="challenge-button"
+          onClick={() => history.push("/challengerwelcome")}
+        >
+          <span>Take the Challenge</span>
+        </button>
+        <div className="description">
+          The 8by8 mission aims to build civic participation and bring awareness
+          to the struggles of AAPI citizens, while encouraging community
+          involvement and investment. Our approach involves working with
+          community, business, and tech leaders to create voter registration
+          solutions that work.
+          <div className="link" onClick={() => history.push("/temp")}>
+            Learn more about 8by8
+          </div>
+        </div>
+      </div>
+    </>
+  );
+}
