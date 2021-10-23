@@ -1,11 +1,16 @@
-import React from 'react'
-import { useHistory } from 'react-router'
 import { Button, Row } from 'react-bootstrap'
+import { useHistory } from 'react-router-dom'
 import './PlayerWelcome.css'
 import { Container } from 'react-bootstrap';
+import { useEffect } from 'react';
 
 export default function PlayerWelcome() {
     const history = useHistory(); 
+
+    // useEffect(() => {
+    //     localStorage.setItem('player', true)
+    // }, [])
+
     return (
         <div>
             <Container fluid className="py-4 px-5">
@@ -19,6 +24,6 @@ export default function PlayerWelcome() {
                     <Button id="button-style" className="py-2" onClick={() => {history.push("/actions")}}>Let's Start</Button>
                 </Row>
             </Container>
-        </div>
+            </div>
     )
 }

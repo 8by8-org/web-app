@@ -29,11 +29,29 @@ export default function Login() {
   const emailRef = useRef();
   const buttonRef = useRef();
 
+  const playerStatus = localStorage.getItem('player')
+
   useEffect(() => {
-    if (currentUser) {
-      history.push("/challenge");
+    //player is redirected to page based on which action they wanted to take
+    if(currentUser && playerStatus==='voter') {
+      history.push("/voterreg");
       return;
-    }
+   }
+
+   if(currentUser && playerStatus==='reminder') {
+    history.push("/"); //will redirect to election reminder page
+    return;
+   }
+
+   if(currentUser && playerStatus==='challenger') {
+    history.push("/challengewelcome");
+    return;
+   }
+
+   if(currentUser && !playerStatus) {
+     history.push("/challengewelcome");
+     return;
+   }
     
     if (!auth.isSignInWithEmailLink(window.location.href)) {
       // login step 1

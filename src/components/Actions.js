@@ -22,13 +22,13 @@ export default function Actions() {
                     <p>(Get challenger info from url)</p>
                 </Row>
                 <Row className="py-2">
-                    <Button className="py-2" id="button-style" onClick={() => {history.push('/voterreg')}}>Register to vote</Button>
+                    <Button className="py-2" id="button-style" onClick={() => {history.push('/voterreg'); localStorage.setItem('player', 'voter')}}>Register to vote</Button>
                 </Row>
                 <Row className="py-2">
-                    <Button className="py-2" id="button-style" onClick={() => history.push('/reminders')}>Get election reminders</Button>
+                    <Button className="py-2" id="button-style" onClick={() => {localStorage.setItem('player', 'reminder')}}>Get election reminders</Button>
                 </Row>
                 <Row className="py-2">
-                    <Button className="py-2" id="button-style" onClick={() => history.push('/challengewelcome')}>Take the challenge yourself</Button>
+                    <Button className="py-2" id="button-style" onClick={() => {history.push('/challenge')}}>Take the challenge yourself</Button>
                 </Row>
             </Container>
         </div>
