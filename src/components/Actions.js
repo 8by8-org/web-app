@@ -28,7 +28,7 @@ export default function Actions() {
                     <Button className="py-2" id="button-style" onClick={() => {localStorage.setItem('player', 'reminder')}}>Get election reminders</Button>
                 </Row>
                 <Row className="py-2">
-                    <Button className="py-2" id="button-style" onClick={() => {history.push('/challenge')}}>Take the challenge yourself</Button>
+                    <Button className="py-2" id="button-style" onClick={() => {history.push('/challengerwelcome')}}>Take the challenge yourself</Button>
                 </Row>
             </Container>
         </div>

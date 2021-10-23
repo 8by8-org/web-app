@@ -1,15 +1,8 @@
-import { Button, Row } from 'react-bootstrap'
+import { Button, Row, Container } from 'react-bootstrap'
 import { useHistory } from 'react-router-dom'
-import './PlayerWelcome.css'
-import { Container } from 'react-bootstrap';
-import { useEffect } from 'react';
 
 export default function PlayerWelcome() {
     const history = useHistory(); 
-
-    // useEffect(() => {
-    //     localStorage.setItem('player', true)
-    // }, [])
 
     return (
         <div>

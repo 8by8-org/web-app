@@ -9,7 +9,7 @@ export default function VoterRegistration() {
 
     const handleClick = () => {
         currentUser ? (
-            window.open(window.open('https://register.rockthevote.com/registrants/new?partner=39079', '_blank'))
+            window.open('https://register.rockthevote.com/registrants/new?partner=39079', '_blank')
         ) : (
             history.push('/login')
         )

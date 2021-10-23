@@ -34,22 +34,19 @@ export default function Login() {
   useEffect(() => {
     //player is redirected to page based on which action they wanted to take
     if(currentUser && playerStatus==='voter') {
+      localStorage.removeItem('player');
       history.push("/voterreg");
       return;
    }
 
    if(currentUser && playerStatus==='reminder') {
+    localStorage.removeItem('player');
     history.push("/"); //will redirect to election reminder page
     return;
    }
 
-   if(currentUser && playerStatus==='challenger') {
-    history.push("/challengewelcome");
-    return;
-   }
-
    if(currentUser && !playerStatus) {
-     history.push("/challengewelcome");
+     history.push("/challengerwelcome");
      return;
    }
     
