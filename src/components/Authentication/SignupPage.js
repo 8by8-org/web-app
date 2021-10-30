@@ -104,6 +104,7 @@ export default function Login() {
                       <img className="avatar-img" src={process.env.PUBLIC_URL + "/avatars/avatar2.png"} alt="" />
                   </div>
               </label>
+              <br />
               <input type="radio" id='2' name="avatar" value='2' ref={avatarRef} />
               <label htmlFor='2'>
                   <div className='avatar'>
