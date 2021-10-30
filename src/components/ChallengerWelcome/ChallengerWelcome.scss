@@ -1,16 +1,16 @@
-@import "../Styles/Components.scss";
+@import "./../../Styles/Components.scss";
 
 .challenger-welcome {
   background-color: $white;
   color: $black;
 
   button {
-    @include button;
+    @include button($black);
     margin: 10px 0;
   }
 
   .top {
-    background-image: url("../assets/images/MaskGroup.png");
+    background-image: url("./../../assets/images/MaskGroup.png");
     display: flex;
     justify-content: center;
     align-items: center;
