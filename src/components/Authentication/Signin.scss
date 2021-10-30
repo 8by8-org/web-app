@@ -79,4 +79,40 @@
         border-right: none;
         border-bottom: 3px black solid;
     }
+
+    input[type='radio'] {
+        display: none;
+    } 
+
+    input[type="radio"]:checked+label {
+
+        img{
+            opacity: 1;
+        }
+    }
+    .avatar { 
+        display: inline;
+        max-height: 100%;
+        max-width: 100%; 
+    }
+
+    .avatar-img {
+        opacity: 0.5;
+        width: 30vh;
+        height: 30vh;
+        @media (max-width: 500px) {
+            width: 37vw;
+            height: 37vw;
+        }
+    }
+
+    
+    
+
+    .avatar-img:hover {
+        opacity: 1;
+    }
+    .selected-img {
+        opacity: 1;
+    }
 }
