@@ -1,167 +1,137 @@
-import React, { useState } from "react";
-import { Nav, Navbar } from "react-bootstrap";
-import { useAuth } from "./../../contexts/AuthContext";
-import { IconContext } from "react-icons";
-import * as FaIcons from "react-icons/fa";
-import * as GiIcons from "react-icons/gi";
-import * as IoIcons from "react-icons/io";
-import * as MdIcons from "react-icons/md";
-import logo from "./../../assets/images/logos/logo.svg";
-import sidebarLogo from "./../../assets/images/logos/black-logo.svg";
-import "./Header.scss";
+import React from "react";
+import { useHistory } from "react-router-dom";
+import Logo from "../assets/logos/white-logo.svg";
+import Curve1 from "../assets/images/HomePage/Curve1.svg";
+import SpeechBubble1 from "../assets/images/HomePage/SpeechBubble1.png";
+import Sign from "../assets/images/HomePage/Sign.png";
+import Curve2 from "../assets/images/HomePage/Curve2.svg";
+import SpeechBubble2 from "../assets/images/HomePage/SpeechBubble2.png";
+import Mic from "../assets/images/HomePage/Mic.png";
+import SpeechBubble3 from "../assets/images/HomePage/SpeechBubble3.png";
+import Curve3 from "../assets/images/HomePage/Curve3.svg";
+import "./HomePage.scss";
 
-function Header() {
-  const [sidebar, setSidebar] = useState(false);
-  const showSidebar = () => {
-    setSidebar(!sidebar);
-    setNotif(false);
-  };
-
-  const [notif, setNotif] = useState(false);
-  const showNotif = () => {
-    setNotif(!notif);
-    setSidebar(false);
-  };
-
-  const { currentUser } = useAuth();
-  const greeting = "Hi There!";
-
-  // all sidebar links lead to path: /
-  const SidebarData = [
-    {
-      title: "Take the Challenge",
-      path: "/",
-      icon: <GiIcons.GiJeweledChalice />,
-    },
-    {
-      title: "Take Action",
-      path: "/",
-      icon: <GiIcons.GiJeweledChalice />,
-    },
-    {
-      title: "Notifications",
-      path: "/",
-      icon: <GiIcons.GiJeweledChalice />,
-    },
-    {
-      title: "Share",
-      path: "/",
-      icon: <GiIcons.GiJeweledChalice />,
-    },
-    {
-      title: "Why 8by8?",
-      path: "/",
-      icon: <GiIcons.GiJeweledChalice />,
-    },
-    {
-      title: "FAQS",
-      path: "/",
-      icon: <GiIcons.GiJeweledChalice />,
-    },
-  ];
-
-  // static notification data for testing
-  const NotifData = [
-    {
-      icon: <IoIcons.IoIosPerson />,
-      text: "Olivia sent you a 🎊 for setting election reminders",
-      date: "Just now",
-      read: "false",
-    },
-    {
-      icon: <IoIcons.IoIosPerson />,
-      text: "Elliot took your challenge invite",
-      date: "Just now",
-      read: "false",
-    },
-    {
-      icon: <IoIcons.IoIosPerson />,
-      text: "Fin took your challenge invite",
-      date: "Aug 9",
-      read: "true",
-    },
-    {
-      icon: <IoIcons.IoIosPerson />,
-      text: "Fin sent you a 👏 for registering to vote",
-      date: "Aug 9",
-      read: "true",
-    },
-  ];
-
+export default function HomePage() {
+  const history = useHistory();
   return (
     <>
-      <IconContext.Provider value={{ color: "black" }}>
-        <div className="navbar">
-          <Navbar.Brand href="/">
-            <img src={logo} alt="8by8 logo" id="brand-logo" />
-          </Navbar.Brand>
-          <div id="icons-tray">
-            <Nav.Link to="#" id="sidebar-icon">
-              <MdIcons.MdNotificationsNone onClick={showNotif} />
-            </Nav.Link>
-            <Nav.Link to="#" id="notif-icon">
-              <FaIcons.FaBars onClick={showSidebar} />
-            </Nav.Link>
+      <div className="content-1">
+        <div className="description">
+          <img className="logo" src={Logo} alt="8by8 Logo" />
+          <div className="text">
+            GET <u class="underline">8 AAPI FRIENDS</u>
+            <br />
+            TO RESISTER
+            <br />
+            TO VOTE IN <u class="underline">8 DAYS</u>
+          </div>
+          <button
+            className="challenge-button"
+            onClick={() => history.push("/challengerwelcome")}
+          >
+            <span>Take the Challenge</span>
+          </button>
+        </div>
+      </div>
+
+      <div className="curve-div">
+        <img className="curve curve-1" src={Curve1} />
+      </div>
+
+      <div className="content-2">
+        <img className="speech-bubble" src={SpeechBubble1} alt="why 8by8?" />
+        <img className="sign" src={Sign} alt="sign" />
+      </div>
+
+      <div className="content-3">
+        <p>
+          In 2020, we saw an unprecedented{" "}
+          <b>
+            150% spike in anti-AAPI (Asian American Pacific Islander) hate
+            crimes
+          </b>
+          , a trend that is already continuing into 2021. This is both a
+          national and a local problem.
+        </p>
+      </div>
+
+      <div className="curve-div">
+        <img className="curve" src={Curve2} />
+      </div>
+
+      <div className="content-4">
+        <p>
+          <span className="bold-shadow">150%</span> spike in anti-Asian and
+          anti-AAPI hate crimes in 2020
+        </p>
+      </div>
+
+      <div className="content-5">
+        <img className="speech-bubble" src={SpeechBubble2} alt="solution?" />
+        <div className="bold-shadow">
+          We need
+          <br /> more aapi
+          <br /> voters
+        </div>
+        <img className="mic" src={Mic} alt="mic" />
+      </div>
+
+      <div className="content-6">
+        <div className="text">
+          the path to fixing this problem starts with{" "}
+          <u class="underline">closing the representation gap</u> In
+          Asian-American communities.
+        </div>
+        <p className="stat">
+          Asian American voter turnout rate has remained Below
+        </p>
+        <div className="stat-1">
+          <div className="bold-shadow">60%</div>
+        </div>
+        <p className="stat">Asian-Americans make up</p>
+        <div className="stat-2">
+          <div className="bold-shadow">7%</div>
+        </div>
+        <p className="bottom-stat">of the population </p>
+        <p className="stat">but only</p>
+        <div className="stat-3">
+          <div className="bold-shadow">3%</div>
+        </div>
+        <p className="bottom-stat">of Congress is Asian or AAPI </p>
+      </div>
+
+      <div className="curve-div">
+        <img className="curve" src={Curve3} />
+      </div>
+
+      <div className="content-7">
+        <img
+          className="speech-bubble"
+          src={SpeechBubble3}
+          alt="we need your help!"
+        />
+        <div className="text">
+          we're asking everyone to join us in{" "}
+          <u class="underline">taking the #8by8challenge</u> and registering 8
+          of their friends to vote in 8 days.
+        </div>
+        <button
+          className="challenge-button"
+          onClick={() => history.push("/challengerwelcome")}
+        >
+          <span>Take the Challenge</span>
+        </button>
+        <div className="description">
+          The 8by8 mission aims to build civic participation and bring awareness
+          to the struggles of AAPI citizens, while encouraging community
+          involvement and investment. Our approach involves working with
+          community, business, and tech leaders to create voter registration
+          solutions that work.
+          <div className="link" onClick={() => history.push("/temp")}>
+            Learn more about 8by8
           </div>
         </div>
-
-        {/* Sidebar */}
-        <nav className={sidebar ? "nav-menu active" : "nav-menu"}>
-          <ul className="menu-items" onClick={showSidebar}>
-            <li className="menu-header">
-              <Nav.Link to="#">
-                <IoIcons.IoIosArrowForward />
-              </Nav.Link>
-              <img src={sidebarLogo} alt="8by8 logo" />
-            </li>
-            <p className="menu-greeting">{greeting}</p>
-            {SidebarData.map((item, index) => {
-              return (
-                <li key={index} className="nav-text">
-                  <Nav.Link href={item.path}>
-                    {item.icon}
-                    <p>{item.title}</p>
-                  </Nav.Link>
-                </li>
-              );
-            })}
-            <div className="menu-settings">
-              <Nav.Link href="/">Settings</Nav.Link>
-              <Nav.Link href="/">Privacy Policy</Nav.Link>
-              {currentUser ? (
-                <Nav.Link href="/signout">Sign out</Nav.Link>
-              ) : (
-                <Nav.Link href="/signin">Sign In</Nav.Link>
-              )}
-            </div>
-          </ul>
-        </nav>
-
-        {/* Notifications */}
-        <div className="notif-wrapper">
-          <nav className={notif ? "notif-menu active" : "notif-menu"}>
-            <ul className="notif-items" onClick={showNotif}>
-              <li className="notif-toggle">
-                <Nav.Link to="#" id="close-icon">
-                  <MdIcons.MdClose />
-                </Nav.Link>
-                <span className="notif-title">Notifications</span>
-              </li>
-              {NotifData.map((item, index) => {
-                return (
-                  <li key={index} className={"notif-container " + item.read}>
-                    <span className="notif-icon">{item.icon}</span>
-                    <span className="notif-text">{item.text}</span>
-                    <span className="notif-date">{item.date}</span>
-                  </li>
-                );
-              })}
-            </ul>
-          </nav>
-        </div>
-      </IconContext.Provider>
+      </div>
     </>
   );
 }
-
-export default Header;
