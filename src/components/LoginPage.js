@@ -12,9 +12,9 @@ import { useAuth } from "../contexts/AuthContext";
 import { auth } from "../firebase";
 import errorMessage from "../errorMessage";
 import { useHistory } from "react-router-dom";
-import LandingPageInfo from "./LandingPageInfo";
+// import LandingPageInfo from "./LandingPageInfo";
 import { Button, Form } from "react-bootstrap";
-import "./LoginPage.css";
+// import "./LoginPage.css";
 
 const localStorageEmailKey = "verifyUserEmail";
 
@@ -97,7 +97,7 @@ export default function Login() {
 
   return (
     <>
-      <LandingPageInfo />
+      { /* <LandingPageInfo />*/ }
       <div className="content d-grid justify-content-center montserrat p-3">
         <Form className="d-grid">
           <p>

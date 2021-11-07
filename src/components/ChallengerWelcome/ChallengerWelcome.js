@@ -1,8 +1,7 @@
 import React from "react";
 import { useHistory } from "react-router-dom";
 import "./ChallengerWelcome.scss";
-import logo from "./../../assets/images/logos/white-logo.svg";
-import logo from "../assets/logos/white-logo.svg";
+import logo from "./../../assets/logos/white-logo.svg";
 
 function ChallengerWelcome() {
   const history = useHistory();

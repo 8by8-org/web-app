@@ -1,6 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap');
-@import "./../../Styles/Components.scss";
+@import "./../../styles/Components.scss";
 
 .signin, .signup {
     font-family: "Lato";
@@ -25,7 +25,7 @@
         text-transform: uppercase;
     }
     button {
-        @include button($yellow);
+        @include button();
         font-family: 'Bebas Neue';
         font-size: 2rem;
         background: rgb(1,218,189);
