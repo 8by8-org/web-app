@@ -16,6 +16,10 @@ import HomePage from "./HomePage/HomePage";
 import Progress from "./Progress";
 import ChallengerWelcome from "./ChallengerWelcome/ChallengerWelcome";
 import ElectionReminder from "./ElectionReminder";
+import Footer from "./Footer";
+import PlayerWelcome from "./PlayerWelcome";
+import Actions from "./Actions";
+import VoterRegistration from "./VoterRegistration";
 
 function App() {
   return (
@@ -43,6 +47,7 @@ function App() {
                 <PrivateRoute path="/signout" component={Signout} />
               </Switch>
             </Router>
+            <Footer />
           </div>
         </div>
       </AuthProvider>
