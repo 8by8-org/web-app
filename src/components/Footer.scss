@@ -1,0 +1,29 @@
+@import "../Styles/Variables.scss";
+@import "../Styles/Fonts.scss";
+
+.footer {
+  background-color: $black;
+  color: $white;
+  padding: 30px;
+  .icons {
+    padding: 22px 0;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    svg {
+      font-size: 18px;
+      margin: 0 15px;
+    }
+    :hover {
+      cursor: pointer;
+    }
+  }
+  p {
+    font-family: $lato;
+    font-size: 14px;
+    line-height: 17px;
+    letter-spacing: 0.02em;
+    text-align: center;
+    margin: 5px;
+  }
+}

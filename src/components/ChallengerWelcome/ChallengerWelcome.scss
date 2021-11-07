@@ -5,7 +5,7 @@
   color: $black;
 
   button {
-    @include button($black);
+    @include button;
     margin: 10px 0;
   }
 

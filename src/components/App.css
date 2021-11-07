@@ -2,8 +2,11 @@
   position: fixed;
   z-index: 1;
 }
+#root {
+  background-color: white;
+  color: black;
+}
 #app-outer-wrapper {
-  background-color: #142a38;
   display: flex;
   justify-content: center;
   width: 100%;
@@ -13,5 +16,6 @@
   top: 57px;
 }
 #app-wrapper {
+  width: 100vw;
   max-width: 500px;
 }
