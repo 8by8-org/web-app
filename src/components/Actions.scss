@@ -1,0 +1,114 @@
+@import "../styles/Components.scss";
+@import "../styles/Fonts.scss";
+@import "../styles/Variables.scss";
+
+.action-page > * {
+    color: $black;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.take-action {
+    font-size: 2.3em;
+    letter-spacing: .03em;
+    padding: 0 !important;
+    margin-top: 33px;
+}
+
+.sub-title {
+    font-size: 1em;
+    margin-top: 8px;
+    width: 315px;
+    margin: auto;
+}
+
+.challenge-name {
+    font-size: 1.15em;
+    margin-bottom: 0;
+    margin-top: 4px;
+    font-weight: 700;
+    letter-spacing: .02em;
+}
+
+.gray-button-text {
+    font-size: 2em;
+}
+
+.actions.avatar-image {
+    background: $lighter-yellow;
+    justify-content: center;
+    align-items: center;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    vertical-align: middle;
+    margin: auto;
+    margin-top: 27px;
+}
+
+.buttons-container {
+    margin-top: 8px;
+}
+
+.avatar-button{
+    background:$lighter-yellow;
+    width: 60px;
+    height: 20px;
+    text-align: center; 
+    margin: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    > * {
+        margin: 0;
+        padding: 1px;
+        font-size: .5em;
+        color: $black;
+        font-weight: 500;
+        letter-spacing: .02em;
+    }
+}
+
+.cta-pre-text {
+    margin-top: 40px;
+    width: 259px;
+    align-self: center;
+}
+
+
+.gray-button{
+    width: 315px;
+    height: 48px;
+    background: rgb(179, 179, 179);
+    text-align: center;
+    border: none;
+    padding: 0;
+    margin: 0;
+    > * {
+        font-size: 1.1em;
+        font-weight: 800;
+        margin: 0;
+        padding: 0;
+        letter-spacing: .02em;
+    }
+
+    &.second {
+        margin-top: 23px;
+    }
+}
+
+.tiny-text {
+    font-size: 0.8em;
+    margin-top: 9px;
+}
+
+.user-question {
+    margin-top: 68px;
+    margin-bottom: 0;
+}
+
+.restart {
+    margin: 0;
+    margin-bottom: 23px;
+}
