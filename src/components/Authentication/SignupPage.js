@@ -37,12 +37,6 @@ export default function Login() {
         const addAvatarToDB = async () => {
           let user = auth.getAuth().currentUser;
           console.log(user.uid); 
-          /*await db.collection("users").doc(user.uid).set({
-            avatar: Number
-          })
-          await db.collection("users").doc(user.uid).update({
-            "avatar" : avatar
-          }) */
           let userRef = doc(db, "users", user.uid);
           await updateDoc(userRef, {
             avatar
@@ -92,7 +86,6 @@ export default function Login() {
                ></Form.Control>
                <p className="signup-text signup-header">Which One's you? </p>
               <input type="radio" id='0' name="avatar" value='0' ref={avatarRef} />
-              <span class="helper"></span>
               <label htmlFor='0'>
                     <div className='avatar'>
                         <img className="avatar-img" src={process.env.PUBLIC_URL + "/avatars/avatar1.png"} alt="" />
