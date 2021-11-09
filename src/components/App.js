@@ -22,7 +22,6 @@ import VoterRegistration from "./VoterRegistration";
 
 function App() {
   
-  
   return (
     <>
       <AuthProvider>

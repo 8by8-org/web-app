@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
-import { useHistory, useParams, matchPath } from 'react-router';
+import { useHistory, useParams } from 'react-router';
 import { useAuth } from "../contexts/AuthContext";
 import { db } from "../firebase";
 import Avatar from "../assets/avatars/Girl-2.png";
 import './Actions.scss';
 
-export default function Actions(props) {
+export default function Actions() {
     const actionDivStyle = {
         padding: "0px 10px 10px",
         display: "flex",
@@ -59,9 +59,6 @@ export default function Actions(props) {
 
         history.push('/challengerwelcome')
     };
-
-
-
 
     return (
         <div>
