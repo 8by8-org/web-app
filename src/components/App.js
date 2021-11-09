@@ -14,8 +14,6 @@ import Header from "./Header/Header";
 import "./App.css";
 import HomePage from "./HomePage/HomePage";
 import "./App.css";
-import Login from "./LoginPage";
-// import Logout from "./Logout";
 import Progress from "./Progress";
 import ChallengerWelcome from "./ChallengerWelcome/ChallengerWelcome";
 import ElectionReminder from "./ElectionReminder";
