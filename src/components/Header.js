@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Nav, Navbar } from "react-bootstrap";
 import { useAuth } from "../contexts/AuthContext";
 import { IconContext } from "react-icons";
@@ -9,6 +9,7 @@ import * as MdIcons from "react-icons/md";
 import logo from "../assets/logos/logo.svg";
 import sidebarLogo from "../assets/logos/black-logo.svg";
 import "./Header.scss";
+import { db } from "../firebase";
 
 function Header() {
   const [sidebar, setSidebar] = useState(false);
@@ -27,40 +28,52 @@ function Header() {
   const greeting = "Hi There!";
 
   // all sidebar links lead to path: /
-  const SidebarData = [
-    {
+
+  const SidebarData = {
+    "Take the Challenge": {
       title: "Take the Challenge",
       path: "/",
       icon: <GiIcons.GiJeweledChalice />,
+      show: true
     },
-    {
+    "My Challenge": {
+      title: "My Challenge",
+      path: `/progress/${currentUser?.uid}`,
+      icon: <GiIcons.GiJeweledChalice />,
+      show: false
+    },
+    "Take Action": {
       title: "Take Action",
       path: "/",
       icon: <GiIcons.GiJeweledChalice />,
+      show: true
     },
-    {
+    "Notifications": {
       title: "Notifications",
       path: "/",
       icon: <GiIcons.GiJeweledChalice />,
+      show: true
     },
-    {
+    "Share": {
       title: "Share",
       path: "/",
       icon: <GiIcons.GiJeweledChalice />,
+      show: true
     },
-    {
+    "Why 8by8?": {
       title: "Why 8by8?",
       path: "/",
       icon: <GiIcons.GiJeweledChalice />,
+      show: true
     },
-    {
+    "FAQS": {
       title: "FAQS",
       path: "/",
       icon: <GiIcons.GiJeweledChalice />,
+      show: true
     },
-  ];
+  };
 
-  // static notification data for testing
   const NotifData = [
     {
       icon: <IoIcons.IoIosPerson />,
@@ -88,6 +101,44 @@ function Header() {
     },
   ];
 
+  const [sideBarDynamic, setSideBarDynamic] = useState(SidebarData);
+  
+  // sets challange started status for sideBar buttons
+  useEffect(() => {
+    if (currentUser?.uid){
+      db.collection("users").doc(currentUser?.uid).collection("challenge").doc("challenge")
+        .get()
+        .then(doc => {
+          if (doc.exists) {
+            setSideBarDynamic({
+              ...sideBarDynamic,
+              "Take the Challenge": {
+                ...sideBarDynamic["Take the Challenge"],
+                "show": false
+              },
+              "My Challenge": {
+                ...sideBarDynamic["My Challenge"],
+                "challengeStarted": true,
+              }
+            })
+          }
+          else {
+            setSideBarDynamic({
+              ...sideBarDynamic,
+              "Take the Challenge": {
+                ...sideBarDynamic["Take the Challenge"],
+                "show": false
+              },
+              "My Challenge": {
+                ...sideBarDynamic["My Challenge"],
+                "challengeStarted": false,
+              }
+            })
+          }
+        });
+    }
+  }, [currentUser?.uid])
+  
   return (
     <>
       <IconContext.Provider value={{ color: "black" }}>
@@ -115,15 +166,17 @@ function Header() {
               <img src={sidebarLogo} alt="8by8 logo" />
             </li>
             <p className="menu-greeting">{greeting}</p>
-            {SidebarData.map((item, index) => {
-              return (
-                <li key={index} className="nav-text">
-                  <Nav.Link href={item.path}>
-                    {item.icon}
-                    <p>{item.title}</p>
-                  </Nav.Link>
-                </li>
-              );
+            {Object.values(sideBarDynamic).map((item, index) => {
+              if(item.show){
+                return (
+                  <li key={index} className="nav-text">
+                    <Nav.Link href={item.path}>
+                      {item.icon}
+                      <p>{item.title}</p>
+                    </Nav.Link>
+                  </li>
+                )
+              };
             })}
             <div className="menu-settings">
               <Nav.Link href="/">Settings</Nav.Link>

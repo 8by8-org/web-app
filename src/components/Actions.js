@@ -14,10 +14,10 @@ export default function Actions(props) {
     };
 
     const { id: challengerId } = useParams(); // from url parameter
-    const { currentUser: { uid: playerId } } = useAuth();
+    const { currentUser: { uid: currentUserId } } = useAuth();
     const [challengerName, setChallengerName] = useState(null);
     const [challengeStarted, setChallengeStarted] = useState(null);
-
+    
     // fetches name from database with challengerId
     db.collection("users").doc(challengerId)
         .get()
@@ -29,7 +29,6 @@ export default function Actions(props) {
         });
 
     // check and set if user has started challenge
-
     db.collection("users").doc(challengerId).collection("challenge").doc("challenge")
         .get()
         .then(doc => {
@@ -37,7 +36,7 @@ export default function Actions(props) {
                 const badges = doc.data().badges
 
                 badges.forEach(badge => {
-                    if (badge === playerId || doc.id === playerId) {
+                    if (doc.id === currentUserId) {
                         setChallengeStarted(true)
                     } else {
                         setChallengeStarted(false)
