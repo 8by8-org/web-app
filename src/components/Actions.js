@@ -14,16 +14,35 @@ export default function Actions(props) {
     };
 
     const { id: challengerId } = useParams(); // from url parameter
-    const [challengerName, setChallengerName] = useState(null);
     const { currentUser: { uid: playerId } } = useAuth();
-    
+    const [challengerName, setChallengerName] = useState(null);
+    const [challengeStarted, setChallengeStarted] = useState(null);
+
     // fetches name from database with challengerId
     db.collection("users").doc(challengerId)
         .get()
         .then((doc) => {
             const name = doc.data().name
-            if(name){
+            if (name) {
                 setChallengerName(name)
+            }
+        });
+
+    // check and set if user has started challenge
+
+    db.collection("users").doc(challengerId).collection("challenge").doc("challenge")
+        .get()
+        .then(doc => {
+            if (doc.exists) {
+                const badges = doc.data().badges
+
+                badges.forEach(badge => {
+                    if (badge === playerId || doc.id === playerId) {
+                        setChallengeStarted(true)
+                    } else {
+                        setChallengeStarted(false)
+                    }
+                })
             }
         });
 
@@ -42,7 +61,8 @@ export default function Actions(props) {
         history.push('/challengerwelcome')
     };
 
-    
+
+
 
     return (
         <div>
@@ -78,12 +98,21 @@ export default function Actions(props) {
                     <button className="gray-button">
                         <p className="lato gray-button-text">Get election reminders</p>
                     </button>
-                    <button className="gray-button" onClick={startChallenge}>
-                        <p className="lato gray-button-text">Take the challenge yourself</p>
-                    </button>
-                    <button className="gray-button" onClick={() => history.push('/progress')}>
-                        <p className="lato gray-button-text">See your challenge</p>
-                    </button>
+
+                    {
+
+                        !challengeStarted &&
+                        <button className="gray-button" onClick={startChallenge}>
+                            <p className="lato gray-button-text">Take the challenge yourself</p>
+                        </button>
+                    }
+
+                    {
+                        challengeStarted &&
+                        <button className="gray-button" onClick={() => history.push('/progress')}>
+                            <p className="lato gray-button-text">See your challenge</p>
+                        </button>
+                    }
                 </div>
 
                 <p className="lato tiny-text user-question">Looking for something else?</p>
