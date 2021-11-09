@@ -1,5 +1,4 @@
 import React from 'react';
-import { Row, Button, Container } from 'react-bootstrap';
 import { useHistory } from 'react-router';
 import { useAuth } from "../contexts/AuthContext";
 import { db } from "../firebase";
@@ -17,7 +16,7 @@ export default function Actions() {
 
     const { currentUser: { uid: challengerId, name } } = useAuth();
     const history = useHistory();
-    
+
     // creates challenge data structure
     const startChallenge = () => {
         const now = new Date;
