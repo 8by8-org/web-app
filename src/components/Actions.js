@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useHistory, useParams } from 'react-router';
 import { useAuth } from "../contexts/AuthContext";
 import { db } from "../firebase";
@@ -17,7 +17,7 @@ export default function Actions() {
     const { currentUser: { uid: currentUserId } } = useAuth();
     const [challengerName, setChallengerName] = useState(null);
     const [challengeStarted, setChallengeStarted] = useState(null);
-    
+
     // fetches name from database with challengerId
     db.collection("users").doc(challengerId)
         .get()
@@ -29,21 +29,18 @@ export default function Actions() {
         });
 
     // check and set if user has started challenge
-    db.collection("users").doc(challengerId).collection("challenge").doc("challenge")
-        .get()
-        .then(doc => {
-            if (doc.exists) {
-                const badges = doc.data().badges
+    useEffect(() => {
+        db.collection("users").doc(challengerId).collection("challenge").doc("challenge")
+            .get()
+            .then(doc => {
+                if (doc.exists) {
+                    setChallengeStarted(true)
+                } else {
+                    setChallengeStarted(false)
+                }
+            });
+    }, [challengerId])
 
-                badges.forEach(badge => {
-                    if (doc.id === currentUserId) {
-                        setChallengeStarted(true)
-                    } else {
-                        setChallengeStarted(false)
-                    }
-                })
-            }
-        });
 
     const history = useHistory();
 
@@ -96,7 +93,6 @@ export default function Actions() {
                     </button>
 
                     {
-
                         !challengeStarted &&
                         <button className="gray-button" onClick={startChallenge}>
                             <p className="lato gray-button-text">Take the challenge yourself</p>

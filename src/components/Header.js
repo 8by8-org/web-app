@@ -44,7 +44,7 @@ function Header() {
     },
     "Take Action": {
       title: "Take Action",
-      path: "/",
+      path: `/actions/${currentUser?.uid}`,
       icon: <GiIcons.GiJeweledChalice />,
       show: true
     },
