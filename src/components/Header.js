@@ -25,7 +25,7 @@ function Header() {
   };
 
   const { currentUser } = useAuth();
-  const greeting = "Hi There!";
+  const greeting = `Hi ${currentUser.name ? currentUser.name : "There"}!`;
 
   // all sidebar links lead to path: /
 
