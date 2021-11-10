@@ -14,20 +14,22 @@ export default function Actions() {
     };
 
     const { id: challengerId } = useParams(); // from url parameter
-    const { currentUser: { uid: currentUserId } } = useAuth();
     const [challengerName, setChallengerName] = useState(null);
     const [challengeStarted, setChallengeStarted] = useState(null);
+    const [loading, setLoading] = useState(true);
 
     // fetches name from database with challengerId
-    db.collection("users").doc(challengerId)
-        .get()
-        .then((doc) => {
-            const name = doc.data().name
-            if (name) {
-                setChallengerName(name)
-            }
-        });
-
+    useEffect(()=> {
+        db.collection("users").doc(challengerId)
+            .get()
+            .then((doc) => {
+                const name = doc.data().name
+                if (name) {
+                    setChallengerName(name)
+                }
+            });
+    }, [challengerId])
+    
     // check and set if user has started challenge
     useEffect(() => {
         db.collection("users").doc(challengerId).collection("challenge").doc("challenge")
@@ -35,8 +37,10 @@ export default function Actions() {
             .then(doc => {
                 if (doc.exists) {
                     setChallengeStarted(true)
+                    setLoading(false)
                 } else {
                     setChallengeStarted(false)
+                    setLoading(false)
                 }
             });
     }, [challengerId])
@@ -93,14 +97,14 @@ export default function Actions() {
                     </button>
 
                     {
-                        !challengeStarted &&
+                        !challengeStarted && !loading &&
                         <button className="gray-button" onClick={startChallenge}>
                             <p className="lato gray-button-text">Take the challenge yourself</p>
                         </button>
                     }
 
                     {
-                        challengeStarted &&
+                        challengeStarted && !loading &&
                         <button className="gray-button" onClick={() => history.push('/progress')}>
                             <p className="lato gray-button-text">See your challenge</p>
                         </button>
