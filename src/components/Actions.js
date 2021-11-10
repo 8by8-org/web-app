@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import { useHistory, useParams } from 'react-router';
-import { useAuth } from "../contexts/AuthContext";
 import { db } from "../firebase";
 import Avatar from "../assets/avatars/Girl-2.png";
 import './Actions.scss';
