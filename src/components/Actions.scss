@@ -91,15 +91,17 @@
         padding: 0;
         letter-spacing: .02em;
     }
-
-    &.second {
-        margin-top: 23px;
-    }
 }
 
 .tiny-text {
     font-size: 0.8em;
     margin-top: 9px;
+}
+
+.action-buttons-container {
+    display: flex;
+    flex-direction: column;
+    gap: 23px;
 }
 
 .user-question {

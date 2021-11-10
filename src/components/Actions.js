@@ -1,5 +1,5 @@
-import React from 'react';
-import { useHistory } from 'react-router';
+import React, { useState } from 'react';
+import { useHistory, useParams, matchPath } from 'react-router';
 import { useAuth } from "../contexts/AuthContext";
 import { db } from "../firebase";
 import Avatar from "../assets/avatars/Girl-2.png";
@@ -13,8 +13,20 @@ export default function Actions() {
         justifyContent: "center",
     };
 
+    const { id: challengerId } = useParams(); // from url parameter
+    const [challengerName, setChallengerName] = useState(null);
+    const { currentUser: { uid: playerId } } = useAuth();
 
-    const { currentUser: { uid: challengerId, name } } = useAuth();
+    // fetches name from database with challengerId
+    db.collection("users").doc(challengerId)
+        .get()
+        .then((doc) => {
+            const name = doc.data().name
+            if (name) {
+                setChallengerName(name)
+            }
+        });
+
     const history = useHistory();
 
     // creates challenge data structure
@@ -26,7 +38,7 @@ export default function Actions() {
                 badges: [],
                 challengeEnd: challengeEndStamp
             });
-        
+
         history.push('/challengerwelcome')
     };
 
@@ -37,16 +49,16 @@ export default function Actions() {
                 <p className="lato sub-title">Thanks for registering to vote! Henry will get one badge
                     because of your action. Well done!
                 </p>
-                
+
                 {/* avatar */}
                 <img className="actions avatar-image" src={Avatar} alt="Avatar" />
 
                 <p className="lato tiny-text">You're taking action for:</p>
-                
+
                 {/* player name */}
-                <h2 className="lato challenge-name">{name ? name : "Player"}'s Challenge</h2>
-               
-               
+                <h2 className="lato challenge-name">{challengerName ? challengerName : "Player"}'s Challenge</h2>
+
+
                 {/* yellow buttons */}
                 <div className="d-flex justify-content-center buttons-container">
                     <button className="avatar-button">
@@ -58,13 +70,13 @@ export default function Actions() {
                 </div>
                 <p className="lato cta-pre-text">You can still help the AAPI community by
                     taking another action!</p>
-                
-                {/* grey buttons */}
-                <div>
+
+                {/* action buttons */}
+                <div className="action-buttons-container">
                     <button className="gray-button">
                         <p className="lato gray-button-text">Get election reminders</p>
                     </button>
-                    <button className="gray-button second" onClick={startChallenge}>
+                    <button className="gray-button" onClick={startChallenge}>
                         <p className="lato gray-button-text">Take the challenge yourself</p>
                     </button>
                 </div>

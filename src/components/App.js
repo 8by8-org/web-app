@@ -44,7 +44,7 @@ function App() {
                 <PrivateRoute path="/logout" component={Logout} />
                 <PrivateRoute path="/progress" component={Progress} />
                 <Route path="/playerwelcome" component={PlayerWelcome} />
-                <Route path="/actions" component={Actions} />
+                <Route path="/actions/:id" component={Actions} />
                 <PrivateRoute path="/voterreg" component={VoterRegistration} />
               </Switch>
             </Router>
