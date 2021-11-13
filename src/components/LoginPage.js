@@ -45,7 +45,7 @@ export default function Login() {
 
     if (currentUser && playerStatus === "reminder") {
       localStorage.removeItem("player");
-      history.push("/"); //will redirect to election reminder page
+      history.push("/electionreminder");
       return;
     }
 

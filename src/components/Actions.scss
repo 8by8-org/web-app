@@ -1,0 +1,94 @@
+@import "../Styles/Components.scss";
+
+@mixin blob-background(
+  $background: url(../assets/images/Actions/TealCurve.svg)
+) {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 150px;
+  width: 300px;
+  background-repeat: no-repeat;
+  background-position: center;
+  text-align: center;
+  font-family: $bebas-neue;
+  line-height: 77px;
+  letter-spacing: 0.03em;
+  background-image: $background;
+}
+
+.main-content {
+  background-color: $white;
+  color: $black;
+
+  .primary-button {
+    @include button;
+    outline: 4px solid white;
+  }
+
+  .secondary-button {
+    @include secondary-button;
+  }
+
+  .top {
+    display: flex;
+    padding: 50px;
+    position: relative;
+  }
+
+  .action-status {
+    width: 55%;
+  }
+
+  .avatar-container {
+    @include blob-background;
+    width: 100%;
+    height: auto;
+    #challenger-avatar {
+      width: 100%;
+    }
+    #challenger-name {
+      font-size: 30px;
+    }
+  }
+
+  .heading {
+    @include heading-text($black, 36px);
+    margin: 0px 0px 0px 0px;
+    letter-spacing: 0.03em;
+    .underline {
+      @include text-underline;
+    }
+  }
+
+  .subheading {
+    @include heading-text($black, 24px);
+    margin: 30px 0px 15px 30px;
+    line-height: 29px;
+    letter-spacing: 0.03em;
+  }
+
+  .text {
+    font-family: $lato;
+    font-size: 18px;
+    line-height: 22px;
+    letter-spacing: 0.02em;
+    margin: 0;
+  }
+
+  .image {
+    display: block;
+    margin: auto;
+  }
+
+  .action-items {
+    background: $black;
+    padding: 35px;
+  }
+
+  .curve {
+    background-color: $black;
+    width: 100%;
+  }
+}
