@@ -7,6 +7,8 @@ import { useHistory } from "react-router-dom";
 import { dummyPassword } from './constants';
 import { Button, Form } from "react-bootstrap";
 import "./Signin.scss";
+import Recaptcha from './Recaptcha'
+import ReCAPTCHA from 'react-google-recaptcha'
 const workingUrl = 'localhost:3000';
 const db = getFirestore();
 export default function Login() {
@@ -36,7 +38,7 @@ export default function Login() {
         await console.log(avatar);
         const addAvatarToDB = async () => {
           let user = auth.getAuth().currentUser;
-          console.log(user.uid); 
+          console.log(user.uid);
           let userRef = doc(db, "users", user.uid);
           await updateDoc(userRef, {
             avatar
@@ -45,9 +47,9 @@ export default function Login() {
         const createUser = async (email) => {
             try {
               // CryptoRandomString generates a random hash for the password (because it has no use right now)
-              await auth.createUserWithEmailAndPassword(auth.getAuth(), email, dummyPassword); 
+              await auth.createUserWithEmailAndPassword(auth.getAuth(), email, dummyPassword);
               await addAvatarToDB();
-              
+
             } catch (e) {
               console.log(e);
               setError(errorMessage(e));
@@ -60,7 +62,7 @@ export default function Login() {
             window.location.href = `${workingUrl}/login`
         }
       };
-    } 
+    }
     // eslint-disable-next-line
   }, [currentUser]);
 
@@ -73,7 +75,7 @@ export default function Login() {
            {message && <p> {message} </p>}
            {emailVisible && (
              <div>
-               <Form.Control 
+               <Form.Control
                 className="form-control"
                 type="text"
                 placeholder="Name: "
@@ -110,7 +112,9 @@ export default function Login() {
                       <img className="avatar-img" src={process.env.PUBLIC_URL + "/avatars/avatar4.png"} alt="" />
                   </div>
               </label>
-              
+
+              <Recaptcha />
+
            </div>
            )}
            {buttonMessage && (
@@ -125,8 +129,11 @@ export default function Login() {
               Sign In
             </a></p>
            )}
-           
+
          </Form>
+
+
+
         </div>
     </>
   );
