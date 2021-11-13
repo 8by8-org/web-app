@@ -32,7 +32,7 @@ export default function PlayerWelcome() {
                     <button onClick={() => {history.push("/actions")}}>Get Started</button>
                 </div>
                 <div align="center">
-                    <p className="small-text">Already have an account? Sign In</p>
+                    <p className="small-text">Already have an account? <a href="/signin">Sign In</a></p>
                 </div>
                 <div>
                     <h3 className="heading"><u className="underline">Here's how it works</u></h3>
@@ -67,7 +67,7 @@ export default function PlayerWelcome() {
                         <img src={Vote} alt="8by8 Logo" />
                 </div>
                 <button onClick={() => {history.push("/actions")}}>Get Started</button>
-                    <p className="small-text" align="center">Already have an account? Sign In</p>
+                <p align="center" className="small-text">Already have an account? <a href="/signin">Sign In</a></p>
             </div>
             </div>
     )

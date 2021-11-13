@@ -13,7 +13,7 @@ export default function VoterRegistration() {
         currentUser ? (
             window.open('https://register.rockthevote.com/registrants/new?partner=39079', '_blank')
         ) : (
-            history.push('/login')
+            history.push('/signup')
         )
     }
 
