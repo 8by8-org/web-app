@@ -14,13 +14,13 @@ import Header from "./Header/Header";
 import "./App.css";
 import HomePage from "./HomePage/HomePage";
 import "./App.css";
-import Progress from "./Progress";
+import Progress from "./Progress/Progress";
 import ChallengerWelcome from "./ChallengerWelcome/ChallengerWelcome";
-import ElectionReminder from "./ElectionReminder";
-import Footer from "./Footer";
-import PlayerWelcome from "./PlayerWelcome";
-import Actions from "./Actions";
-import VoterRegistration from "./VoterRegistration";
+import ElectionReminder from "./ElectionReminder/ElectionReminder";
+import Footer from "./Footer/Footer";
+import PlayerWelcome from "./PlayerWelcome/PlayerWelcome";
+import Actions from "./Actions/Actions";
+import VoterRegistration from "./VoterRegistration/VoterRegistration";
 
 function App() {
   return (
