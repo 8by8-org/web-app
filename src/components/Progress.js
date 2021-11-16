@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Button } from "react-bootstrap";
-import "./Progress.css";
+import "./Progress.scss";
 
 export default function Progress() {
   const data = {
