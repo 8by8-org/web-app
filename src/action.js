@@ -1,4 +1,4 @@
-import { doc, getDoc, getFirestore } from "firebase/firestore";
+import { doc, getDoc } from "firebase/firestore";
 import { db } from "firebase";
 
 // will be handled in another task
@@ -10,8 +10,6 @@ const sendEmail = (email_ctx) => {};
  * Include the correct logic to update firestore after each action
  */
 const completeAction = async (action_ctx) => {
-  // will need to change this - was unsure of how to access db otherwise
-
   const { actionString, playerId, challengerId } = action_ctx;
 
   // get reference to challenger's doc
