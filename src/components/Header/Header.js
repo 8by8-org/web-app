@@ -1,13 +1,13 @@
 import React, { useState } from "react";
 import { Nav, Navbar } from "react-bootstrap";
-import { useAuth } from "../contexts/AuthContext";
+import { useAuth } from "./../../contexts/AuthContext";
 import { IconContext } from "react-icons";
 import * as FaIcons from "react-icons/fa";
 import * as GiIcons from "react-icons/gi";
 import * as IoIcons from "react-icons/io";
 import * as MdIcons from "react-icons/md";
-import logo from "../assets/images/logos/logo.svg";
-import sidebarLogo from "../assets/images/logos/black-logo.svg";
+import logo from "./../../assets/logos/logo.svg";
+import sidebarLogo from "./../../assets/logos/black-logo.svg";
 import "./Header.scss";
 
 function Header() {
@@ -129,9 +129,9 @@ function Header() {
               <Nav.Link href="/">Settings</Nav.Link>
               <Nav.Link href="/">Privacy Policy</Nav.Link>
               {currentUser ? (
-                <Nav.Link href="/logout">Logout</Nav.Link>
+                <Nav.Link href="/signout">Sign out</Nav.Link>
               ) : (
-                <Nav.Link href="/login">Login</Nav.Link>
+                <Nav.Link href="/signin">Sign In</Nav.Link>
               )}
             </div>
           </ul>
