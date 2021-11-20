@@ -20,9 +20,27 @@ export default function Login() {
   const emailRef = useRef();
   const buttonRef = useRef();
   const avatarRef = useRef();
+  const playerStatus = localStorage.getItem("player");
 
   useEffect(() => {
     if (currentUser) {
+      history.push("/progress");
+      return;
+    }
+
+    if (currentUser && playerStatus === "voter") {
+      localStorage.removeItem("player");
+      history.push("/voterreg");
+      return;
+    }
+
+    if (currentUser && playerStatus === "reminder") {
+      localStorage.removeItem("player");
+      history.push("/electionreminder");
+      return;
+    }
+
+    if (currentUser && !playerStatus) {
       history.push("/progress");
       return;
     }
@@ -115,9 +133,9 @@ export default function Login() {
            </div>
            )}
            {buttonMessage && (
-             <Button className="button" ref={buttonRef}>
+             <button className="button" ref={buttonRef}>
                {buttonMessage}
-             </Button>
+             </button>
            )}
            {buttonMessage && (
              <p class="signin-link">

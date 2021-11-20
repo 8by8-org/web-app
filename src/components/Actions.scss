@@ -31,7 +31,7 @@
     @include secondary-button;
   }
 
-  .top {
+  .avatar-and-status {
     display: flex;
     padding: 50px;
     position: relative;
@@ -90,5 +90,10 @@
   .curve {
     background-color: $black;
     width: 100%;
+  }
+
+  .top {
+    display: none;
+    visibility: hidden;
   }
 }
