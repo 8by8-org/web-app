@@ -1,9 +1,11 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
-import { useAuth } from "../contexts/AuthContext";
+import { useAuth } from "../../contexts/AuthContext";
 import "./ElectionReminder.scss";
 
 export default function ElectionReminder() {
+  const [showContinueButton, setShowContinueButton] = useState(false);
+
   //get the information for the challenger who referred the player
   const location = useLocation();
   /*get the referring challenger's id from the query params. This logic should really be called only when a player initially lands on the web page,
@@ -49,10 +51,19 @@ export default function ElectionReminder() {
     //callback function that the observer will invoke upon observed mutations
     const mutationCallback = (mutationsList, observer) => {
       //empty variables to hold input elements
-      let firstNameInput,
+      let title,
+        legend,
+        titleUnderlined,
+        titleNotUnderlined,
+        prefix,
+        fnameLabel,
+        firstNameInput,
         lastNameInput,
+        lnameLabel,
+        addressLabel,
         addressLine1Input,
         zipCodeInput,
+        emailLabel,
         emailAddressInput,
         submitBtn,
         thankYouDiv;
@@ -60,6 +71,50 @@ export default function ElectionReminder() {
       //when changes to the DOM occur, loop through them and check if the appropriate inputs have been created
       for (const mutation of mutationsList) {
         if (mutation.type === "childList") {
+          //elements to update text content
+          legend = document.getElementsByClassName("at-legend")[0];
+          fnameLabel = document.getElementById(
+            "NVSignupForm61312-ContactInformation-FirstName"
+          );
+          lnameLabel = document.getElementById(
+            "NVSignupForm61312-ContactInformation-LastName"
+          );
+          addressLabel = document.getElementById(
+            "NVSignupForm61312-ContactInformation-AddressLine1"
+          );
+          emailLabel = document.getElementById(
+            "NVSignupForm61312-ContactInformation-EmailAddress"
+          );
+          if (legend)
+            legend.textContent =
+              "Get localized reminders about upcoming election dates and deadlines so you never miss an election.";
+
+          if (fnameLabel) {
+            if (fnameLabel.childNodes.length)
+              fnameLabel.childNodes[0].textContent = "First Name*";
+          }
+          if (lnameLabel) {
+            if (lnameLabel.childNodes.length)
+              lnameLabel.childNodes[0].textContent = "Last Name*";
+          }
+          if (addressLabel) {
+            if (addressLabel.childNodes.length)
+              addressLabel.childNodes[0].textContent = "Street Address*";
+          }
+          if (emailLabel) {
+            if (emailLabel.childNodes.length)
+              emailLabel.childNodes[0].textContent = "Email*";
+          }
+
+          //elements to hide
+          prefix = document.getElementById(
+            "NVSignupForm61312-ContactInformation-Prefix"
+          );
+          if (prefix) prefix.remove();
+          title = document.getElementsByClassName("at-title")[0];
+          if (title) title.remove();
+
+          //inputs
           firstNameInput = document.getElementsByName("FirstName")[0];
           lastNameInput = document.getElementsByName("LastName")[0];
           addressLine1Input = document.getElementsByName("AddressLine1")[0];
@@ -77,7 +132,6 @@ export default function ElectionReminder() {
             emailAddressInput &&
             submitBtn
           ) {
-            //a back button and recaptcha could be added to the DOM here
             //attach the onsubmit function to the submit button
             submitBtn.onclick = () =>
               onSubmit(
@@ -93,8 +147,18 @@ export default function ElectionReminder() {
           if (thankYouDiv) {
             const fbShareBtn = document.getElementById("fbShareBtn");
             const twShareBtn = document.getElementById("twShareBtn");
+            const contributionsDiv =
+              document.getElementsByClassName("contributions")[0];
             if (fbShareBtn) fbShareBtn.remove(); //for now remove these share buttons as they do not share the 8by8 challenge link
             if (twShareBtn) twShareBtn.remove();
+            //if the contributions div exists and its childNodes exist, the first should be an h1. capitalize the text
+            if (contributionsDiv) {
+              if (contributionsDiv.childNodes.length) {
+                contributionsDiv.childNodes[0].textContent =
+                  "THANK YOU FOR JOINING US";
+              }
+            }
+            if (!showContinueButton) setShowContinueButton(true);
           }
         }
       }
@@ -120,13 +184,23 @@ export default function ElectionReminder() {
 
   //if the player has already set up an election reminder, this should instead return a message indicating that this action is already complete
   return (
-    <div
-      class="ngp-form"
-      data-form-url="https://actions.everyaction.com/v1/Forms/7VylZ7q7eEGLlwKVNb-MqQ2"
-      data-fastaction-endpoint="https://fastaction.ngpvan.com"
-      data-inline-errors="true"
-      data-fastaction-nologin="true"
-      data-databag="everybody"
-    ></div>
+    <div className="electionReminderContainer">
+      <header className="title">
+        <span className="underline">GET ELEC</span>TION ALERTS
+      </header>
+      <div
+        className="ngp-form"
+        data-form-url="https://actions.everyaction.com/v1/Forms/7VylZ7q7eEGLlwKVNb-MqQ2"
+        data-fastaction-endpoint="https://fastaction.ngpvan.com"
+        data-inline-errors="true"
+        data-fastaction-nologin="true"
+        data-databag="everybody"
+      ></div>
+      {
+        showContinueButton && (
+          <button id="continue">CONTINUE</button>
+        ) /*this button will redirect the user to a separate page*/
+      }
+    </div>
   );
 }

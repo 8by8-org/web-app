@@ -16,7 +16,7 @@ import HomePage from "./HomePage/HomePage";
 import "./App.css";
 import Progress from "./Progress";
 import ChallengerWelcome from "./ChallengerWelcome/ChallengerWelcome";
-import ElectionReminder from "./ElectionReminder";
+import ElectionReminder from "./ElectionReminders/ElectionReminder";
 import Footer from "./Footer";
 import PlayerWelcome from "./PlayerWelcome";
 import Actions from "./Actions";
