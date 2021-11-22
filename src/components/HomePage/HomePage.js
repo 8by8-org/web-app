@@ -1,14 +1,21 @@
 import React from "react";
 import { useHistory } from "react-router-dom";
-import Logo from "../assets/logos/white-logo.svg";
-import Curve1 from "../assets/images/HomePage/Curve1.svg";
-import SpeechBubble1 from "../assets/images/HomePage/SpeechBubble1.png";
-import Sign from "../assets/images/HomePage/Sign.png";
-import Curve2 from "../assets/images/HomePage/Curve2.svg";
-import SpeechBubble2 from "../assets/images/HomePage/SpeechBubble2.png";
-import Mic from "../assets/images/HomePage/Mic.png";
-import SpeechBubble3 from "../assets/images/HomePage/SpeechBubble3.png";
-import Curve3 from "../assets/images/HomePage/Curve3.svg";
+import HomePageInfo from "./HomePageInfo";
+import "react-bootstrap";
+import logo from "./../../assets/images/white_logo.png"
+// import "./HomePageInfo.scss";
+import "./HomePage.scss";
+import Background from "./../../assets/images/MaskGroup.png";
+import {Link} from 'react-scroll'
+import Logo from "./../../assets/logos/white-logo.svg";
+import Curve1 from "./../../assets/images/HomePage/Curve1.svg";
+import SpeechBubble1 from "./../../assets/images/HomePage/SpeechBubble1.png";
+import Sign from "./../../assets/images/HomePage/Sign.png";
+import Curve2 from "./../../assets/images/HomePage/Curve2.svg";
+import SpeechBubble2 from "./../../assets/images/HomePage/SpeechBubble2.png";
+import Mic from "./../../assets/images/HomePage/Mic.png";
+import SpeechBubble3 from "./../../assets/images/HomePage/SpeechBubble3.png";
+import Curve3 from "./../../assets/images/HomePage/Curve3.svg";
 import "./HomePage.scss";
 
 export default function HomePage() {

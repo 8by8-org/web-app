@@ -39,6 +39,7 @@
 .badge-row {
   display: flex;
   width: 295px;
+  height: auto;
   justify-content: space-between;
 }
 
