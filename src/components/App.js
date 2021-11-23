@@ -6,14 +6,16 @@ import {
   Switch,
 } from "react-router-dom";
 import { AuthProvider } from "../contexts/AuthContext";
+import Signin from "./Authentication/Signin";
+import Signout from "./Authentication/Signout";
+import SignupPage from './Authentication/SignupPage';
+import PrivateRoute from "./Helpers/PrivateRoute";
+import Header from "./Header/Header";
 import "./App.css";
-import Login from "./LoginPage";
-import Logout from "./Logout";
-import PrivateRoute from "./PrivateRoute";
-import Header from "./Header";
-import HomePage from "./HomePage";
+import HomePage from "./HomePage/HomePage";
+import "./App.css";
 import Progress from "./Progress";
-import ChallengerWelcome from "./ChallengerWelcome";
+import ChallengerWelcome from "./ChallengerWelcome/ChallengerWelcome";
 import ElectionReminder from "./ElectionReminder";
 import Footer from "./Footer";
 import PlayerWelcome from "./PlayerWelcome";
@@ -40,10 +42,11 @@ function App() {
                   path="/challengerwelcome"
                   component={ChallengerWelcome}
                 />
-                <Route path="/login" component={Login} />
+                <Route path="/signup" component={SignupPage} />
+                <Route path="/signin" component={Signin} />
                 <Route path="/electionreminder" component={ElectionReminder} />
-                <PrivateRoute path="/logout" component={Logout} />
                 <PrivateRoute path="/progress" component={Progress} />
+                <PrivateRoute path="/signout" component={Signout} />
                 <Route path="/playerwelcome" component={PlayerWelcome} />
                 <Route exact path="/actions/:id" component={Actions} />
                 <PrivateRoute path="/voterreg" component={VoterRegistration} />

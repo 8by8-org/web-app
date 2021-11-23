@@ -1,7 +1,7 @@
 import React from "react";
 import Background from "../assets/images/MaskGroup.png";
 import "react-bootstrap";
-import "./HomePageInfo.scss";
+import "./../HomePage/HomePageInfo.scss";
 
 export default function LandingPageInfo() {
   const bodyStyle = {

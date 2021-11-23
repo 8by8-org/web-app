@@ -1,5 +1,5 @@
 import React from "react";
-import HomePageImage from "../assets/images/homepage.png";
+import HomePageImage from "./../../assets/images/homepage.png";
 import "react-bootstrap";
 import "./HomePageInfo.scss"
 
