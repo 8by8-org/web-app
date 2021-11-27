@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { Nav, Navbar } from "react-bootstrap";
-import { useAuth } from "../contexts/AuthContext";
+import { useAuth } from "./../../contexts/AuthContext";
 import { IconContext } from "react-icons";
 import * as FaIcons from "react-icons/fa";
 import * as GiIcons from "react-icons/gi";
 import * as IoIcons from "react-icons/io";
 import * as MdIcons from "react-icons/md";
-import logo from "../assets/logos/logo.svg";
-import sidebarLogo from "../assets/logos/black-logo.svg";
+import logo from "./../../assets/logos/logo.svg";
+import sidebarLogo from "./../../assets/logos/black-logo.svg";
 import "./Header.scss";
 import { db } from "../firebase";
 import { getDoc, doc } from "firebase/firestore";
@@ -26,7 +26,7 @@ function Header() {
   };
 
   const { currentUser } = useAuth();
-  const greeting = `Hi ${currentUser?.name ? currentUser?.name : "There"}!`;
+  const greeting = `Hi ${(currentUser && currentUser.name) ? currentUser.name : "There"}!`;
 
   // all sidebar links lead to path: /
 
@@ -184,9 +184,9 @@ function Header() {
               <Nav.Link href="/">Settings</Nav.Link>
               <Nav.Link href="/">Privacy Policy</Nav.Link>
               {currentUser ? (
-                <Nav.Link href="/logout">Logout</Nav.Link>
+                <Nav.Link href="/signout">Sign out</Nav.Link>
               ) : (
-                <Nav.Link href="/login">{currentUser?.uid ? "Login" : "Signup"}</Nav.Link>
+                <Nav.Link href="/signin">Sign in</Nav.Link>
               )}
             </div>
           </ul>
