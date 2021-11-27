@@ -9,7 +9,7 @@ import * as MdIcons from "react-icons/md";
 import logo from "./../../assets/logos/logo.svg";
 import sidebarLogo from "./../../assets/logos/black-logo.svg";
 import "./Header.scss";
-import { db } from "../firebase";
+import { db } from "../../firebase";
 import { getDoc, doc } from "firebase/firestore";
 
 function Header() {
