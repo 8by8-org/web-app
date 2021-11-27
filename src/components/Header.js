@@ -10,6 +10,7 @@ import logo from "../assets/logos/logo.svg";
 import sidebarLogo from "../assets/logos/black-logo.svg";
 import "./Header.scss";
 import { db } from "../firebase";
+import { getDoc, doc } from "firebase/firestore";
 
 function Header() {
   const [sidebar, setSidebar] = useState(false);
@@ -25,7 +26,7 @@ function Header() {
   };
 
   const { currentUser } = useAuth();
-  const greeting = `Hi ${currentUser.name ? currentUser.name : "There"}!`;
+  const greeting = `Hi ${currentUser?.name ? currentUser?.name : "There"}!`;
 
   // all sidebar links lead to path: /
 
@@ -34,43 +35,45 @@ function Header() {
       title: "Take the Challenge",
       path: "/",
       icon: <GiIcons.GiJeweledChalice />,
-      show: true
+      show: true,
     },
     "My Challenge": {
       title: "My Challenge",
       path: `/progress/${currentUser?.uid}`,
       icon: <GiIcons.GiJeweledChalice />,
-      show: false
+      show: false,
     },
     "Take Action": {
       title: "Take Action",
-      path: `/actions/${currentUser?.uid}`,
+      path: currentUser?.uid
+        ? `/actions/${currentUser?.uid}`
+        : "/challengerwelcome",
       icon: <GiIcons.GiJeweledChalice />,
-      show: true
+      show: true,
     },
-    "Notifications": {
+    Notifications: {
       title: "Notifications",
       path: "/",
       icon: <GiIcons.GiJeweledChalice />,
-      show: true
+      show: currentUser?.uid ? true : false,
     },
-    "Share": {
+    Share: {
       title: "Share",
       path: "/",
       icon: <GiIcons.GiJeweledChalice />,
-      show: true
+      show: true,
     },
     "Why 8by8?": {
       title: "Why 8by8?",
       path: "/",
       icon: <GiIcons.GiJeweledChalice />,
-      show: true
+      show: true,
     },
-    "FAQS": {
+    FAQS: {
       title: "FAQS",
       path: "/",
       icon: <GiIcons.GiJeweledChalice />,
-      show: true
+      show: true,
     },
   };
 
@@ -102,43 +105,42 @@ function Header() {
   ];
 
   const [sideBarDynamic, setSideBarDynamic] = useState(SidebarData);
-  
+
   // sets challange started status for sideBar buttons
   useEffect(() => {
-    if (currentUser?.uid){
-      db.collection("users").doc(currentUser?.uid).collection("challenge").doc("challenge")
-        .get()
-        .then(doc => {
-          if (doc.exists) {
+    if (currentUser?.uid) {
+      getDoc(doc(db, "users", currentUser?.uid, "challenge", "challenge")).then(
+        (docSnap) => {
+          if (docSnap.exists()) {
             setSideBarDynamic({
               ...sideBarDynamic,
               "Take the Challenge": {
                 ...sideBarDynamic["Take the Challenge"],
-                "show": false
+                show: false,
               },
               "My Challenge": {
                 ...sideBarDynamic["My Challenge"],
-                "challengeStarted": true,
-              }
-            })
-          }
-          else {
+                challengeStarted: true,
+              },
+            });
+          } else {
             setSideBarDynamic({
               ...sideBarDynamic,
               "Take the Challenge": {
                 ...sideBarDynamic["Take the Challenge"],
-                "show": false
+                show: false,
               },
               "My Challenge": {
                 ...sideBarDynamic["My Challenge"],
-                "challengeStarted": false,
-              }
-            })
+                challengeStarted: false,
+              },
+            });
           }
-        });
+        }
+      );
     }
-  }, [currentUser?.uid])
-  
+  }, [currentUser?.uid]);
+
   return (
     <>
       <IconContext.Provider value={{ color: "black" }}>
@@ -167,7 +169,7 @@ function Header() {
             </li>
             <p className="menu-greeting">{greeting}</p>
             {Object.values(sideBarDynamic).map((item, index) => {
-              if(item.show){
+              if (item.show) {
                 return (
                   <li key={index} className="nav-text">
                     <Nav.Link href={item.path}>
@@ -175,8 +177,8 @@ function Header() {
                       <p>{item.title}</p>
                     </Nav.Link>
                   </li>
-                )
-              };
+                );
+              }
             })}
             <div className="menu-settings">
               <Nav.Link href="/">Settings</Nav.Link>
@@ -184,7 +186,7 @@ function Header() {
               {currentUser ? (
                 <Nav.Link href="/logout">Logout</Nav.Link>
               ) : (
-                <Nav.Link href="/login">Login</Nav.Link>
+                <Nav.Link href="/login">{currentUser?.uid ? "Login" : "Signup"}</Nav.Link>
               )}
             </div>
           </ul>
