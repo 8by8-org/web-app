@@ -53,6 +53,11 @@
     }
   }
 
+  #action-no-challenger {
+    @include heading-text($black, 36px);
+    padding: 30px;
+  }
+
   .heading {
     @include heading-text($black, 36px);
     margin: 0px 0px 0px 0px;
@@ -90,10 +95,5 @@
   .curve {
     background-color: $black;
     width: 100%;
-  }
-
-  .top {
-    display: none;
-    visibility: hidden;
   }
 }
