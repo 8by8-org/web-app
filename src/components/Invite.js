@@ -4,17 +4,20 @@ import "./Invite.scss";
 import * as MdIcons from "react-icons/md";
 import {
   FacebookShareButton,
-  FacebookIcon,
   TwitterShareButton,
-  TwitterIcon,
   FacebookMessengerShareButton,
-  FacebookMessengerIcon,
   WhatsappShareButton,
-  WhatsappIcon,
   EmailShareButton,
-  EmailIcon,
 } from "react-share";
-import CalandarSvg from "../assets/images/Invite/Calandar.svg";
+import CalendarSvg from "../assets/images/Invite/Calendar.svg";
+import FacebookSvg from "../assets/images/Invite/Facebook.svg";
+import TwitterSvg from "../assets/images/Invite/Twitter.svg";
+import InstagramSvg from "../assets/images/Invite/Instagram.svg";
+import FacebookMessengerSvg from "../assets/images/Invite/FacebookMessenger.svg";
+import DiscordSvg from "../assets/images/Invite/Discord.svg";
+import WhatsAppSvg from "../assets/images/Invite/WhatsApp.svg";
+import EmailSvg from "../assets/images/Invite/Email.svg";
+import TextSvg from "../assets/images/Invite/Text.svg";
 
 function Invite({ toggleInvite }) {
   const [show, setShow] = useState(false);
@@ -24,7 +27,10 @@ function Invite({ toggleInvite }) {
 
   function changeShow() {
     setShow(!show);
-    console.log("child got it!");
+  }
+
+  function copyToClipboard() {
+    navigator.clipboard.writeText(shareUrl);
   }
 
   // shareUrl is currently a temporary placeholder for UID link
@@ -47,45 +53,50 @@ function Invite({ toggleInvite }) {
         </li>
 
         <div className="info">
-          <img src={CalandarSvg} />
+          <img src={CalendarSvg} width="225px" />
           <p>
             Invite friends to support your challenge by registering to vote, get
             election reminders or take the 8by8 challenge themselves.
           </p>
         </div>
 
-        <div className="social-media">
+        <div className="section social-media">
           <p className="sub-heading">Copy yout unique link</p>
-
           <FacebookShareButton url={shareUrl} quote={quote} hashtag={hashtag}>
-            <FacebookIcon />
+            <img className="invite-icon" src={FacebookSvg} />
+            <p className="invite-icon-label">Facebook</p>
           </FacebookShareButton>
 
           <TwitterShareButton url={shareUrl} title={quote}>
-            <TwitterIcon />
+            <img className="invite-icon" src={TwitterSvg} />
+            <p className="invite-icon-label">Twitter</p>
           </TwitterShareButton>
         </div>
 
-        <div className="messaging">
+        <div className="section messaging">
           <p className="sub-heading">Copy yout unique link</p>
-
           <FacebookMessengerShareButton url={shareUrl} appId={appId}>
-            <FacebookMessengerIcon />
+            <img className="invite-icon" src={FacebookMessengerSvg} />
+            <p className="invite-icon-label">Messenger</p>
           </FacebookMessengerShareButton>
 
           <WhatsappShareButton url={shareUrl} title={quote}>
-            <WhatsappIcon />
+            <img className="invite-icon" src={WhatsAppSvg} />
+            <p className="invite-icon-label">WhatsApp</p>
           </WhatsappShareButton>
 
           <EmailShareButton url={shareUrl} subject={quote} body={body}>
-            <EmailIcon />
+            <img className="invite-icon" src={EmailSvg} />
+            <p className="invite-icon-label">Email</p>
           </EmailShareButton>
         </div>
 
-        <div className="copy-link">
-          <p className="sub-heading">Copy yout unique link</p>
-          <p>www.link.com</p>
-          <button>COPY</button>
+        <div className="section copy-link">
+          <p className="sub-heading">Copy your unique link</p>
+          <div className="link-container">
+            <p>{shareUrl}</p>
+            <button onClick={copyToClipboard}>COPY</button>
+          </div>
         </div>
       </nav>
     </div>
