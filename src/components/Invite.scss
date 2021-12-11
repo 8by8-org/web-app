@@ -1,0 +1,37 @@
+@import "../Styles/Fonts.scss";
+
+.invite-wrapper {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  overflow-y: auto;
+}
+
+.invite-menu {
+  height: 80vh;
+  width: 100%;
+  max-width: 500px;
+  position: fixed;
+  bottom: -80vh;
+  transition: 400ms;
+  background-color: lightcoral;
+  color: black;
+  width: 100%;
+}
+
+.invite-menu.active {
+  bottom: 0;
+  transition: 400ms;
+}
+
+.invite-toggle {
+  width: 100%;
+  height: 60px;
+  display: flex;
+}
+
+.invite-title {
+  font-family: $bebas-neue;
+  margin: auto;
+  font-size: 36px;
+}
