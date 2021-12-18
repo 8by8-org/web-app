@@ -48,7 +48,7 @@ function App() {
                 <PrivateRoute path="/signout" component={Signout} />
                 <Route path="/playerwelcome" component={PlayerWelcome} />
                 <Route path="/actions" component={Actions} />
-                <PrivateRoute path="/voterreg" component={VoterRegistration} />
+                <Route path="/voterreg" component={VoterRegistration} />
               </Switch>
             </Router>
             <Footer />
