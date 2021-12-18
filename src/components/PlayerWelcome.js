@@ -1,4 +1,5 @@
 import { useHistory } from 'react-router-dom'
+import { Button } from "react-bootstrap";
 import SignUp1 from "../assets/images/PlayerWelcome/SignUp1.png"
 import SignUp2 from "../assets/images/PlayerWelcome/SignUp2.png"
 import Vote from "../assets/images/PlayerWelcome/Vote1.png"
@@ -29,7 +30,7 @@ export default function PlayerWelcome() {
                     </p>
                 </div>
                 <div>
-                    <button onClick={() => {history.push("/actions")}}>Get Started</button>
+                    <Button onClick={() => {history.push("/actions")}}>Get Started</Button>
                 </div>
                 <div align="center">
                     <p className="small-text">Already have an account? <a href="/signin">Sign In</a></p>
@@ -66,7 +67,7 @@ export default function PlayerWelcome() {
                 <div className="image">
                         <img src={Vote} alt="8by8 Logo" />
                 </div>
-                <button onClick={() => {history.push("/actions")}}>Get Started</button>
+                <Button onClick={() => {history.push("/actions")}}>Get Started</Button>
                 <p align="center" className="small-text">Already have an account? <a href="/signin">Sign In</a></p>
             </div>
             </div>

@@ -1,4 +1,5 @@
 import { React } from 'react'
+import { Button } from "react-bootstrap";
 import { Accordion, Card } from 'react-bootstrap'
 import { useAuth } from "../contexts/AuthContext";
 import { useHistory } from 'react-router';
@@ -46,7 +47,7 @@ export default function VoterRegistration() {
                 </Accordion>
 
                 <div>
-                    <button className="button-style" onClick={handleClick}>Continue to Rock the Vote</button>
+                    <Button className="button-style" onClick={handleClick}>Continue to Rock the Vote</Button>
                 </div>
 
                 <p align="center" className="small-text">Not eligible? <a href="/actions">Other actions to help</a></p>

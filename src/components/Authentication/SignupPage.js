@@ -133,9 +133,9 @@ export default function Login() {
            </div>
            )}
            {buttonMessage && (
-             <button className="button" ref={buttonRef}>
+             <Button className="button" ref={buttonRef}>
                {buttonMessage}
-             </button>
+             </Button>
            )}
            {buttonMessage && (
              <p class="signin-link">
