@@ -1,12 +1,8 @@
 import React from "react";
+import { Button } from "react-bootstrap";
 import { useHistory } from "react-router-dom";
-import HomePageInfo from "./HomePageInfo";
 import "react-bootstrap";
-import logo from "./../../assets/images/white_logo.png"
-// import "./HomePageInfo.scss";
 import "./HomePage.scss";
-import Background from "./../../assets/images/MaskGroup.png";
-import {Link} from 'react-scroll'
 import Logo from "./../../assets/logos/white-logo.svg";
 import Curve1 from "./../../assets/images/HomePage/Curve1.svg";
 import SpeechBubble1 from "./../../assets/images/HomePage/SpeechBubble1.png";
@@ -122,12 +118,12 @@ export default function HomePage() {
           <u class="underline">taking the #8by8challenge</u> and registering 8
           of their friends to vote in 8 days.
         </div>
-        <button
+        <Button
           className="challenge-button"
           onClick={() => history.push("/challengerwelcome")}
         >
           <span>Take the Challenge</span>
-        </button>
+        </Button>
         <div className="description">
           The 8by8 mission aims to build civic participation and bring awareness
           to the struggles of AAPI citizens, while encouraging community

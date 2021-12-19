@@ -12,7 +12,7 @@ import { useAuth } from "../../contexts/AuthContext";
 import { auth } from "../../firebase";
 import errorMessage from "./../../errorMessage";
 import { useHistory } from "react-router-dom";
-import { Form } from "react-bootstrap";
+import { Button, Form } from "react-bootstrap";
 import "./Signin.scss";
 import { dummyPassword } from "./constants";
 
@@ -103,9 +103,9 @@ const buttonRef = useRef();
            </div>
            )}
            {buttonMessage && (
-             <button className="button" ref={buttonRef}>
+             <Button className="button" ref={buttonRef}>
                {buttonMessage}
-             </button>
+             </Button>
            )}
            {buttonMessage && (
              <p class="signup-link">

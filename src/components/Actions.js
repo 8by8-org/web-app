@@ -1,4 +1,5 @@
 import React from 'react'
+import { Button } from "react-bootstrap";
 import { useHistory } from 'react-router'
 import {ReactComponent as Avatar} from '../assets/avatars/Boy1.svg'
 import WhiteCurve from '../assets/images/Actions/Union.svg'
@@ -29,13 +30,13 @@ export default function Actions() {
             </div>
             <div className="action-items">
                 <div className="py-2">
-                    <button className="primary-button" onClick={() => {history.push('/voterreg'); localStorage.setItem('player', 'voter')}}>Register to vote</button>
+                    <Button className="primary-button" onClick={() => {history.push('/voterreg'); localStorage.setItem('player', 'voter')}}>Register to vote</Button>
                 </div>
                 <div className="py-2">
-                    <button className="secondary-button" onClick={() => {history.push('/election-reminders'); localStorage.setItem('player', 'reminder')}}>Get election reminders</button>
+                    <Button className="secondary-button" onClick={() => {history.push('/election-reminders'); localStorage.setItem('player', 'reminder')}}>Get election reminders</Button>
                 </div>
                 <div className="py-2">
-                    <button className="secondary-button" onClick={() => {history.push('/challengerwelcome')}}>Take the challenge</button>
+                    <Button className="secondary-button" onClick={() => {history.push('/challengerwelcome')}}>Take the challenge</Button>
                 </div>
             </div>
         </div>
