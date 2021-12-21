@@ -13,7 +13,7 @@ export default function ElectionReminder() {
 
   //get the information for the user
   const { currentUser } = useAuth();
-
+  
   const onSubmit = (
     firstNameInput,
     lastNameInput,

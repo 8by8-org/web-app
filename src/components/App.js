@@ -44,7 +44,7 @@ function App() {
                 <Route path="/signup" component={SignupPage} />
                 <Route path="/signin" component={Signin} />
                 <PrivateRoute path="/election-reminders" component={ElectionReminder} />
-                <PrivateRoute path="/progress" component={Progress} />
+                <Route path="/progress" component={Progress} />
                 <PrivateRoute path="/signout" component={Signout} />
                 <Route path="/playerwelcome" component={PlayerWelcome} />
                 <Route path="/actions" component={Actions} />
