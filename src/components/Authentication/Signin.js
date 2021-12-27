@@ -25,6 +25,7 @@ const [error, setError] = useState(null);
 const [message, setMessage] = useState(null);
 const [emailVisible, setEmailVisible] = useState(true);
 const [buttonMessage, setButtonMessage] = useState(" "); // leave blank to hide button
+const currPage = document.referrer.split("/")[3];
 
 const emailRef = useRef();
 const buttonRef = useRef();
@@ -32,7 +33,8 @@ const buttonRef = useRef();
    useEffect(() => {
      let isMounted = true;
      if (currentUser) {
-       history.push("/progress");
+      //history.push("/progress");
+      history.push(currPage);
        return;
      }
      if (!auth.isSignInWithEmailLink(auth.getAuth(), window.location.href)) {
