@@ -1,7 +1,8 @@
 import React from "react";
 import { useHistory } from "react-router-dom";
+import { Button } from "react-bootstrap";
 import "./ChallengerWelcome.scss";
-import logo from "../assets/logos/white-logo.svg";
+import logo from "./../../assets/logos/white-logo.svg";
 
 function ChallengerWelcome() {
   const history = useHistory();
@@ -22,7 +23,7 @@ function ChallengerWelcome() {
         <button onClick={() => history.push("/signup")}>Sign up</button>
         <div className="login">
           Already have an account?{" "}
-          <span className="link" onClick={() => history.push("/login")}>
+          <span className="link" onClick={() => history.push("/signin")}>
             Sign in
           </span>
         </div>
@@ -33,7 +34,7 @@ function ChallengerWelcome() {
           <ol>3. Wait for them to take action</ol>
           <ol>4. Complete Challenge</ol>
         </ul>
-        <button onClick={() => history.push("/signup")}>Sign up</button>
+        <Button onClick={() => history.push("/signup")}>Sign up</Button>
       </div>
     </div>
   );
