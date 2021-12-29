@@ -1,14 +1,17 @@
 import React from "react";
+import { Button } from "react-bootstrap";
 import { useHistory } from "react-router-dom";
-import Logo from "../assets/logos/white-logo.svg";
-import Curve1 from "../assets/images/HomePage/Curve1.svg";
-import SpeechBubble1 from "../assets/images/HomePage/SpeechBubble1.png";
-import Sign from "../assets/images/HomePage/Sign.png";
-import Curve2 from "../assets/images/HomePage/Curve2.svg";
-import SpeechBubble2 from "../assets/images/HomePage/SpeechBubble2.png";
-import Mic from "../assets/images/HomePage/Mic.png";
-import SpeechBubble3 from "../assets/images/HomePage/SpeechBubble3.png";
-import Curve3 from "../assets/images/HomePage/Curve3.svg";
+import "react-bootstrap";
+import "./HomePage.scss";
+import Logo from "./../../assets/logos/white-logo.svg";
+import Curve1 from "./../../assets/images/HomePage/Curve1.svg";
+import SpeechBubble1 from "./../../assets/images/HomePage/SpeechBubble1.png";
+import Sign from "./../../assets/images/HomePage/Sign.png";
+import Curve2 from "./../../assets/images/HomePage/Curve2.svg";
+import SpeechBubble2 from "./../../assets/images/HomePage/SpeechBubble2.png";
+import Mic from "./../../assets/images/HomePage/Mic.png";
+import SpeechBubble3 from "./../../assets/images/HomePage/SpeechBubble3.png";
+import Curve3 from "./../../assets/images/HomePage/Curve3.svg";
 import "./HomePage.scss";
 
 export default function HomePage() {
@@ -115,12 +118,12 @@ export default function HomePage() {
           <u class="underline">taking the #8by8challenge</u> and registering 8
           of their friends to vote in 8 days.
         </div>
-        <button
+        <Button
           className="challenge-button"
           onClick={() => history.push("/challengerwelcome")}
         >
           <span>Take the Challenge</span>
-        </button>
+        </Button>
         <div className="description">
           The 8by8 mission aims to build civic participation and bring awareness
           to the struggles of AAPI citizens, while encouraging community
