@@ -108,42 +108,48 @@ function Header() {
 
   // sets challange started status for sideBar buttons
   useEffect(() => {
+    console.log("userid " + currentUser?.uid)
     if (currentUser?.uid) {
       getDoc(doc(db, "users", currentUser?.uid, "challenge", "challenge")).then(
         (docSnap) => {
           if (docSnap.exists()) {
-            setSideBarDynamic({
-              ...sideBarDynamic,
-              "Take the Challenge": {
-                ...sideBarDynamic["Take the Challenge"],
-                show: false,
-              },
-              "My Challenge": {
-                ...sideBarDynamic["My Challenge"],
-                challengeStarted: true,
-              },
+            setSideBarDynamic(prev => {
+              return {
+                ...prev,
+                "Take the Challenge": {
+                  ...prev["Take the Challenge"],
+                  show: false,
+                },
+                "My Challenge": {
+                  ...prev["My Challenge"],
+                  challengeStarted: true,
+                },
+              } 
             });
           } else {
-            setSideBarDynamic({
-              ...sideBarDynamic,
+            setSideBarDynamic(prev => {
+              return {
+              ...prev,
               "Take the Challenge": {
-                ...sideBarDynamic["Take the Challenge"],
-                show: false,
-              },
+              ...prev["Take the Challenge"],
+              show: false,
+            },
               "My Challenge": {
-                ...sideBarDynamic["My Challenge"],
-                challengeStarted: false,
-              },
+              ...prev["My Challenge"],
+              challengeStarted: false,
+            },
+            }
             });
           }
         }
       );
     }
-  }, [currentUser?.uid]);
+  }, [currentUser?.uid, currentUser,]);
 
   return (
     <>
       <IconContext.Provider value={{ color: "black" }}>
+
         <div className="navbar">
           <Navbar.Brand href="/">
             <img src={logo} alt="8by8 logo" id="brand-logo" />
