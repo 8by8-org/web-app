@@ -20,12 +20,31 @@ export default function Login() {
   const emailRef = useRef();
   const buttonRef = useRef();
   const avatarRef = useRef();
+  const playerStatus = localStorage.getItem("player");
 
   useEffect(() => {
     if (currentUser) {
       history.push("/progress");
       return;
     }
+
+    if (currentUser && playerStatus === "voter") {
+      localStorage.removeItem("player");
+      history.push("/voterreg");
+      return;
+    }
+
+    if (currentUser && playerStatus === "reminder") {
+      localStorage.removeItem("player");
+      history.push("/electionreminder");
+      return;
+    }
+
+    if (currentUser && !playerStatus) {
+      history.push("/progress");
+      return;
+    }
+
     if (!auth.isSignInWithEmailLink(auth.getAuth(), window.location.href)) {
       // login step 1
       setButtonMessage("Sign Up");
