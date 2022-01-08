@@ -48,6 +48,7 @@ function App() {
                 <PrivateRoute path="/signout" component={Signout} />
                 <Route path="/playerwelcome" component={PlayerWelcome} />
                 <Route path="/actions/:id" component={Actions} />
+                <Redirect from='/actions/' to='/' exact />
                 <PrivateRoute path="/voterreg" component={VoterRegistration} />
               </Switch>
             </Router>
