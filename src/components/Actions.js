@@ -1,12 +1,9 @@
 import React, { useEffect, useState } from "react";
-import { useHistory, useParams, matchPath } from "react-router";
-import { Row, Button, Container } from 'react-bootstrap'
-import { useAuth } from "../contexts/AuthContext";
+import { useHistory, useParams } from "react-router";
 import { db } from "../firebase";
 import { getDoc, setDoc, doc } from "firebase/firestore";
 import Avatar from "../assets/avatars/Girl-2.png";
 import "./Actions.scss";
-import { GiConsoleController } from "react-icons/gi";
 
 export default function Actions() {
     const actionDivStyle = {
@@ -18,13 +15,11 @@ export default function Actions() {
 
     const { id: challengerId } = useParams(); // from url parameter
     const [challengerName, setChallengerName] = useState(null);
-    const {
-        currentUser: { uid: playerId },
-    } = useAuth();
 
     useEffect(() => {
         getDoc(doc(db, "users", challengerId)).then((docSnap) => {
             if (docSnap.exists()) {
+                console.log("firebase data " + docSnap.data())
                 setChallengerName(docSnap.data().name);
             } else {
                 console.log("No such document!");
