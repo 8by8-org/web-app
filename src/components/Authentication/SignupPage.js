@@ -21,6 +21,7 @@ export default function Login() {
   const buttonRef = useRef();
   const avatarRef = useRef();
   const playerStatus = localStorage.getItem("player");
+  const code = localStorage.getItem("code")
 
   useEffect(() => {
     if (currentUser) {
@@ -30,13 +31,13 @@ export default function Login() {
 
     if (currentUser && playerStatus === "voter") {
       localStorage.removeItem("player");
-      history.push("/voterreg");
+      history.push(`/voterreg?code=${code}`);
       return;
     }
 
     if (currentUser && playerStatus === "reminder") {
       localStorage.removeItem("player");
-      history.push("/electionreminder");
+      history.push(`/election-reminders?code=${code}`);
       return;
     }
 
@@ -55,7 +56,6 @@ export default function Login() {
         await console.log(avatar);
         const addAvatarToDB = async () => {
           let user = auth.getAuth().currentUser;
-          console.log(user.uid); 
           let userRef = doc(db, "users", user.uid);
           await updateDoc(userRef, {
             avatar
@@ -66,7 +66,6 @@ export default function Login() {
               // CryptoRandomString generates a random hash for the password (because it has no use right now)
               await auth.createUserWithEmailAndPassword(auth.getAuth(), email, dummyPassword); 
               await addAvatarToDB();
-              
             } catch (e) {
               console.log(e);
               setError(errorMessage(e));

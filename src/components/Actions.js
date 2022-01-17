@@ -13,7 +13,7 @@ export default function Actions() {
 
     const url = new URL(window.location.href)
     const code = url.searchParams.get("code")
-
+    
     async function getDoc() {
         const db = getFirestore();
         const q = query(collection(db, "users"), where("inviteCode", "==", code))
@@ -27,6 +27,7 @@ export default function Actions() {
     
     useEffect(() => {
         getDoc()
+        console.log(localStorage.getItem('code'))
       }, [loading]);
 
     return (
@@ -41,7 +42,7 @@ export default function Actions() {
                             </div>
                             <div className="avatar-container">
                                 <Avatar id="challenger-avatar"/> {/**Avatar will change based on challenger*/}
-                                <p id="challenger-name">{challengerInfo.inviteCode}</p> {/**Get challenger name from url */}
+                                <p id="challenger-name">{challengerInfo.inviteCode}</p>
                             </div>
                         </div>
                         <img src={WhiteCurve} className="curve"/> 
@@ -51,10 +52,10 @@ export default function Actions() {
             </div>
             <div className="action-items">
                 <div className="py-2">
-                    <Button className="primary-button" onClick={() => {history.push('/voterreg'); localStorage.setItem('player', 'voter')}}>Register to vote</Button>
+                    <Button className="primary-button" onClick={() => {history.push(`/voterreg?code=${code}`); localStorage.setItem('player', 'voter')}}>Register to vote</Button>
                 </div>
                 <div className="py-2">
-                    <Button className="secondary-button" onClick={() => {history.push('/election-reminders'); localStorage.setItem('player', 'reminder')}}>Get election reminders</Button>
+                    <Button className="secondary-button" onClick={() => {history.push(`/election-reminders?code=${code}`); localStorage.setItem('player', 'reminder')}}>Get election reminders</Button>
                 </div>
                 <div className="py-2">
                     <Button className="secondary-button" onClick={() => {history.push('/challengerwelcome')}}>Take the challenge</Button>

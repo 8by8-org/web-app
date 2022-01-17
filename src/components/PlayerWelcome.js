@@ -30,13 +30,13 @@ export default function PlayerWelcome() {
     
     useEffect(() => {
         getDoc()
+        localStorage.setItem("code", code)
       }, [loading]);
 
     
     return (
         loading === false ? 
         <div className="player-welcome">
-            {console.log(challengerInfo)}
             <div className="top" align="center">
                 <img src={Top}/>
             </div>

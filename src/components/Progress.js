@@ -1,8 +1,11 @@
 import React, { useState, useEffect } from "react";
+import { getFirestore, getDoc, doc} from 'firebase/firestore'
+import { useAuth } from "../contexts/AuthContext";
 import { Button } from "react-bootstrap";
 import "./Progress.css";
 
 export default function Progress() {
+  const { currentUser } = useAuth();
   const data = {
     challengeEndTimestamp: new Date().setFullYear(2021, 9, 3),
     // Would container list of badges that the challenger has accrued so far
@@ -17,6 +20,19 @@ export default function Progress() {
       },
     ],
   };
+
+  async function generateUrl() {
+    async function getUserInfo() {
+      const db = getFirestore();
+      const userDoc = doc(db, "users", currentUser.uid)
+      const user = await getDoc(userDoc);
+      return user._document.data.value.mapValue.fields.inviteCode.stringValue;
+    }
+     
+     //generate url based on current user's invitecode
+     const code = await getUserInfo()
+     console.log(`${window.location.origin}/playerwelcome?code=${code}`)
+  }
 
   // Calculates days remaining in challenge
   const processDays = (date) => {
@@ -149,7 +165,7 @@ export default function Progress() {
       <div className="badge-row" id="second-row">
         {progressArr.slice(4).map(generateBadges(5))}
       </div>
-      <button className="black spacing" id="invite">
+      <button className="black spacing" id="invite" onClick={generateUrl}>
         Invite friends
       </button>
       <p className="black spacing" id="register-message">
