@@ -203,6 +203,12 @@ export default function Login() {
 							</label>
 						</div>
 					)}
+					<br />
+					<p class="tos-text">
+						By clicking on Continue, I agree to the &#160; 
+						<a href="#" class="link inline">Terms of Service </a> and the &#160;<a href="#" class="link inline">Privacy Policy</a>
+					</p>
+					<br />
 					{buttonMessage && (
 						<Button className="button" ref={buttonRef}>
 							{buttonMessage}

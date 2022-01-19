@@ -108,4 +108,13 @@
   .selected-img {
     opacity: 1;
   }
+  .inline {
+    display:inline;
+  }
+  .tos-text {
+    text-align: center;
+  }
+  .tos-text .link {
+    text-decoration: grey underline 3px;
+  }
 }
