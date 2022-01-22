@@ -9,8 +9,8 @@ import { Button, Form } from "react-bootstrap";
 import "./Signin.scss";
 const workingUrl = "localhost:3000";
 const db = getFirestore();
-export default function Login() {
-	const { currentUser } = useAuth();
+export default function SignupPage() {
+	const currentUser = useAuth() ? useAuth().currentUser : false;
 	const history = useHistory();
 	const [error, setError] = useState(null);
 	const [message, setMessage] = useState(null);
@@ -48,14 +48,13 @@ export default function Login() {
 
 		if (!auth.isSignInWithEmailLink(auth.getAuth(), window.location.href)) {
 			// login step 1
-			setButtonMessage("Sign Up");
+			setButtonMessage("Continue");
 			buttonRef.current.onclick = async function () {
 				const email = emailRef.current.value;
 				const confirmedEmail = confirmEmailRef.current.value;
 				const avatar = avatarRef.current.id;
 				const addAvatarToDB = async () => {
 					let user = auth.getAuth().currentUser;
-					console.log(user.uid);
 					let userRef = doc(db, "users", user.uid);
 					await updateDoc(userRef, {
 						avatar,
@@ -72,7 +71,6 @@ export default function Login() {
 						await addAvatarToDB();
 					} 
 					catch (e) {
-						console.log(e);
 						setError(errorMessage(e));
 					}
 				};
@@ -84,6 +82,7 @@ export default function Login() {
 				}
 				else {
 					createUser(email);
+					setMessage("Success");
 					window.location.href = `${workingUrl}/login`;
 				}
 			};
@@ -100,23 +99,23 @@ export default function Login() {
 						<br />
 						to start your 8by8 journey
 					</p>
-					{error && <p className="error-col">{error}</p>}
+					{error && <p className="error-col" data-testid="error"> {error}</p>}
 					{message && <p> {message} </p>}
 					{emailVisible && (
 						<div>
 							<Form.Control
-								className="form-control"
+								className="form-control name-field"
 								type="text"
 								placeholder="Name: "
 							></Form.Control>
 							<Form.Control
-								className="form-control"
+								className="form-control email-field"
 								type="email"
 								placeholder="Email:"
 								ref={emailRef}
 							></Form.Control>
 							<Form.Control
-								className="form-control"
+								className="form-control confirm-field"
 								type="email"
 								placeholder="Confirm Email:"
 								ref={confirmEmailRef}
@@ -190,7 +189,7 @@ export default function Login() {
 								ref={avatarRef}
 							/>
 							<label htmlFor="3">
-								<div className="avatar">
+								<div className="avatar" data-testid="avatar">
 									<img
 										className="avatar-img"
 										src={
@@ -210,7 +209,7 @@ export default function Login() {
 					</p>
 					<br />
 					{buttonMessage && (
-						<Button className="button" ref={buttonRef}>
+						<Button className="button" data-testid="continue-button" ref={buttonRef}>
 							{buttonMessage}
 						</Button>
 					)}
