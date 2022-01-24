@@ -94,7 +94,7 @@
   .avatar-img {
     display: inline;
     opacity: 0.5;
-    width: 25vh;
+    width: 20vh;
     height: auto;
     @media (max-width: 500px) {
       width: 37vw;
@@ -108,4 +108,16 @@
   .selected-img {
     opacity: 1;
   }
+}
+
+.avatar-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.recaptcha {
+  display: flex;
+  justify-content: center;
+  margin: 20px 0;
 }
