@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from "react";
-import { useHistory, useParams, matchPath } from "react-router";
-import { useAuth } from "../contexts/AuthContext";
+import { useHistory, useParams } from "react-router";
 import { db } from "../firebase";
-import { getDoc, setDoc, doc } from "firebase/firestore";
+import { setDoc, doc } from "firebase/firestore";
 import Avatar from "../assets/avatars/Girl-2.png";
 import "./Actions.scss";
 
@@ -14,23 +13,16 @@ export default function Actions() {
         justifyContent: "center",
     };
 
-    const { id: challengerId } = useParams(); // from url parameter
+    const { id: challengerId } = useParams();
     const [challengerName, setChallengerName] = useState(null);
-    const {
-        currentUser: { uid: playerId },
-    } = useAuth();
 
     useEffect(() => {
-        getDoc(doc(db, "users", challengerId)).then((docSnap) => {
-            if (docSnap.exists()) {
-                setChallengerName(docSnap.data().name);
-            } else {
-                console.log("No such document!");
-            }
-        });
-    }, [challengerId]);
+        if (challengerId) {
 
-    //   users()
+            //  get challenger info from localstorage
+
+        };
+    }, [challengerId]);
 
     const history = useHistory();
 
@@ -45,12 +37,21 @@ export default function Actions() {
         history.push("/challengerwelcome");
     };
 
+    const handleVoterReg = () => {
+        localStorage.setItem('player', 'voter');
+        history.push('/voterreg');
+    };
+
+    const handleElectionReminder = () => {
+        localStorage.setItem('player', 'reminder');
+    };
+
     return (
         <div>
             <div style={actionDivStyle} className="action-page">
                 <h1 className="bebas-neue take-action">TAKE ACTION</h1>
                 <p className="lato sub-title">
-                    Thanks for registering to vote! Henry will get one badge because of
+                    Thanks for registering to vote! {challengerName ? challengerName : "The challenger"} will get one badge because of
                     your action. Well done!
                 </p>
 
@@ -59,7 +60,7 @@ export default function Actions() {
 
                 <p className="lato tiny-text">You're taking action for:</p>
 
-                {/* player name */}
+                {/* challenger's name or*/}
                 <h2 className="lato challenge-name">
                     {challengerName ? challengerName : "Player"}'s Challenge
                 </h2>
@@ -78,8 +79,9 @@ export default function Actions() {
                 </p>
 
                 {/* action buttons */}
+
                 <div className="action-buttons-container">
-                    <button className="gray-button">
+                    <button className="gray-button" onClick={handleElectionReminder}>
                         <p className="lato gray-button-text">Get election reminders</p>
                     </button>
                     <button className="gray-button" onClick={startChallenge}>
@@ -90,11 +92,20 @@ export default function Actions() {
                 <p className="lato tiny-text user-question">
                     Looking for something else?
                 </p>
-                <p className="lato tiny-text link-text restart">
-                    <a className="lato" href="http://www.google.com">
-                        Restart voter registration
-                    </a>
-                </p>
+                {
+                    challengerId ?
+                        <p className="lato tiny-text link-text restart">
+                            <a className="lato" onClick={handleVoterReg}>
+                                See your challenge
+                            </a>
+                        </p>
+                        :
+                        <p className="lato tiny-text link-text restart">
+                            <a className="lato" onClick={handleVoterReg}>
+                                Restart voter registration
+                            </a>
+                        </p>
+                }
             </div>
         </div>
     );
