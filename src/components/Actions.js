@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useHistory, useParams } from "react-router";
 import { db } from "../firebase";
-import { getDoc, setDoc, doc } from "firebase/firestore";
+import { setDoc, doc } from "firebase/firestore";
 import Avatar from "../assets/avatars/Girl-2.png";
 import "./Actions.scss";
 
@@ -13,21 +13,16 @@ export default function Actions() {
         justifyContent: "center",
     };
 
-    const { id: challengerId } = useParams(); // from url parameter
+    const { id: challengerId } = useParams(); 
     const [challengerName, setChallengerName] = useState(null);
 
     useEffect(() => {
-        getDoc(doc(db, "users", challengerId)).then((docSnap) => {
-            if (docSnap.exists()) {
-                console.log("firebase data " + docSnap.data())
-                setChallengerName(docSnap.data().name);
-            } else {
-                console.log("No such document!");
-            }
-        });
-    }, [challengerId]);
+        if (challengerId) {  
+           
+            //  get challenger info from localstorage
 
-    //   users()
+        };
+    }, [challengerId]);
 
     const history = useHistory();
 
@@ -56,7 +51,7 @@ export default function Actions() {
             <div style={actionDivStyle} className="action-page">
                 <h1 className="bebas-neue take-action">TAKE ACTION</h1>
                 <p className="lato sub-title">
-                    Thanks for registering to vote! Henry will get one badge because of
+                    Thanks for registering to vote! {challengerName ? challengerName : "The challenger"} will get one badge because of
                     your action. Well done!
                 </p>
 
@@ -65,9 +60,9 @@ export default function Actions() {
 
                 <p className="lato tiny-text">You're taking action for:</p>
 
-                {/* player name */}
+                {/* challenger's name or*/}
                 <h2 className="lato challenge-name">
-                    {challengerName ? challengerName : "Player"}'s Challenge
+                    {challengerName ? challengerName : "Player"}'s Challenge 
                 </h2>
 
                 {/* yellow buttons */}
