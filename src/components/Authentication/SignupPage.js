@@ -83,7 +83,7 @@ export default function SignupPage() {
 				else {
 					createUser(email);
 					setMessage("Success");
-					window.location.href = `${workingUrl}/login`;
+					window.location.href = (`${workingUrl}/login`);
 				}
 			};
 		}

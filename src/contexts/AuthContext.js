@@ -1,12 +1,12 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { ModalTitle } from 'react-bootstrap';
-import { auth } from '../firebase'
-
-const AuthContext = React.createContext();
+import { auth } from '../firebase';
 
 export function useAuth() {
     return useContext(AuthContext);
 }
+
+export const AuthContext = React.createContext();;
 
 export function AuthProvider({ children }) {
     const [currentUser, setCurrentUser] = useState(null);
@@ -29,5 +29,3 @@ export function AuthProvider({ children }) {
         </AuthContext.Provider>
     )
 }
-
-module.exports = { AuthContext, useAuth, AuthProvider };
