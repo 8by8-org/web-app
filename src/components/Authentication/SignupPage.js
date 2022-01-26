@@ -98,7 +98,7 @@ export default function SignupPage() {
 			<div className="signin p-3">
 				<Form className="d-grid signin-form">
 					<p className="signup-text">
-						<span class="signup-header">Sign up</span>
+						<span className="signup-header">Sign up</span>
 						<br />
 						to start your 8by8 journey
 					</p>
@@ -206,9 +206,9 @@ export default function SignupPage() {
 						</div>
 					)}
 					<br />
-					<p class="tos-text">
+					<p className="tos-text">
 						By clicking on Continue, I agree to the &#160; 
-						<a href="#" class="link inline">Terms of Service </a> and the &#160;<a href="#" class="link inline">Privacy Policy</a>
+						<a href="#" className="link inline">Terms of Service </a> and the &#160;<a href="#" className="link inline">Privacy Policy</a>
 					</p>
 					<br />
 					{buttonMessage && (
@@ -217,7 +217,7 @@ export default function SignupPage() {
 						</Button>
 					)}
 					{buttonMessage && (
-						<p class="signin-link">
+						<p className="signin-link">
 							Have an account? <> </>
 							<a href="/signin" style={{ style: "inline" }}>
 								Sign In

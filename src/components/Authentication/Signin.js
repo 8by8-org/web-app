@@ -84,7 +84,7 @@ const buttonRef = useRef();
    return (
        <div className="signin p-3">
          <Form className="d-grid signin-form">
-           <p className="signup-text"><span class="signup-header">Sign in</span><br />to continue your 8by8 journey</p>
+           <p className="signup-text"><span className="signup-header">Sign in</span><br />to continue your 8by8 journey</p>
            {error && <p className="error-col">{error}</p>}
            {message && <p> {message} </p>}
            {emailVisible && (
@@ -108,7 +108,7 @@ const buttonRef = useRef();
              </Button>
            )}
            {buttonMessage && (
-             <p class="signup-link">
+             <p className="signup-link">
              Dont have an account? <> </>
             <a href="/signup" style={{style: 'inline'}}>
               Sign Up
