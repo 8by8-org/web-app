@@ -3,7 +3,7 @@ import { cleanup, fireEvent, render, screen, waitForElementToBeRemoved } from "@
 const randomEmail = require('random-email')
 import '@testing-library/jest-dom';
 import SignupPage from "./SignupPage";
-import { useAuth } from "./../../contexts/AuthContext";
+import { useAuth, AuthContext } from "./../../contexts/AuthContext";
 
 // Note: running cleanup afterEach is done automatically for you in @testing-library/react@9.0.0 or higher
 // unmount and cleanup DOM after the test is finished.
@@ -17,7 +17,9 @@ afterEach(cleanup);
 test("User can Sign Up successfully", async () => {
 	// Load the page
 	render(
-		<SignupPage />
+		<AuthContext.Provider value={false}>
+			<SignupPage />
+		</AuthContext.Provider>
 	);
 
 	// The email for the test signup
@@ -36,7 +38,11 @@ test("User can Sign Up successfully", async () => {
 
 test("Non-matching emails throws an error", () => {
 	// Load the page
-	render(<SignupPage />);
+	render(
+		<AuthContext.Provider value={false}>
+			<SignupPage />
+		</AuthContext.Provider>
+	);
 
 	// Fillout the form
 	fireEvent.change(screen.getByPlaceholderText("Name:", { exact: false }), {target: {value: 'tester mctester'}});

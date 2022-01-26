@@ -10,9 +10,6 @@ import "./Signin.scss";
 const workingUrl = "localhost:3000";
 const db = getFirestore();
 export default function SignupPage() {
-	// TEMPORARY BUG: SET THE FOLLOWING LINE TO:
-	// const currentUser = useAuth() ? useAuth().current : false; 
-	// When testing the page (very bad bug that should be fixed soon)
 	const { currentUser } = useAuth();
 	const history = useHistory();
 	const [error, setError] = useState(null);
