@@ -20,6 +20,7 @@ export default function Login() {
   const [emailVisible] = useState(true);
   const [buttonMessage, setButtonMessage] = useState(" "); // leave blank to hide button
   const [reCaptchaPassed, setReCaptchaPassed] = useState(false);
+  const [preselect, setPreselect] = useState(true);
 
   const emailRef = useRef();
   const buttonRef = useRef();
@@ -117,6 +118,7 @@ export default function Login() {
               <p className="signup-text signup-header">Which One's you? </p>
               <div className="avatar-container">
                 <input
+                  checked={preselect}
                   type="radio"
                   id="0"
                   name="avatar"
@@ -133,6 +135,7 @@ export default function Login() {
                   </div>
                 </label>
                 <input
+                  onClick={() => setPreselect(null)}
                   type="radio"
                   id="1"
                   name="avatar"
@@ -150,6 +153,7 @@ export default function Login() {
                 </label>
                 <br />
                 <input
+                  onClick={() => setPreselect(null)}
                   type="radio"
                   id="2"
                   name="avatar"
@@ -166,6 +170,7 @@ export default function Login() {
                   </div>
                 </label>
                 <input
+                  onClick={() => setPreselect(null)}
                   type="radio"
                   id="3"
                   name="avatar"
