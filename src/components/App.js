@@ -22,7 +22,7 @@ import PlayerWelcome from "./PlayerWelcome";
 import Actions from "./Actions";
 import VoterRegistration from "./VoterRegistration";
 
-function App() {
+export default function App() {
   return (
     <>
       <AuthProvider>
@@ -58,5 +58,3 @@ function App() {
     </>
   );
 }
-
-export default App;
