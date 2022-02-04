@@ -110,7 +110,7 @@
 #progress-container {
   background-color: white;
   width: 375px;
-  height: 100%;
+  height: auto;
 }
 
 #navbar {
@@ -175,7 +175,7 @@
   margin: 48px 0px 0px 40px;
 }
 
-#invite {
+#inviteToggleBtn {
   width: 279px;
   height: 53.91px;
   margin: 40px 48px 0px 48px;

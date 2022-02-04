@@ -1,11 +1,9 @@
 import React, { useState, useEffect } from "react";
-import { getFirestore, getDoc, doc} from 'firebase/firestore'
-import { useAuth } from "../contexts/AuthContext";
 import { Button } from "react-bootstrap";
 import "./Progress.css";
+import Invite from "./Invite.js";
 
 export default function Progress() {
-  const { currentUser } = useAuth();
   const data = {
     challengeEndTimestamp: new Date().setFullYear(2021, 9, 3),
     // Would container list of badges that the challenger has accrued so far
@@ -20,19 +18,6 @@ export default function Progress() {
       },
     ],
   };
-
-  async function generateUrl() {
-    async function getUserInfo() {
-      const db = getFirestore();
-      const userDoc = doc(db, "users", currentUser.uid)
-      const user = await getDoc(userDoc);
-      return user._document.data.value.mapValue.fields.inviteCode.stringValue;
-    }
-     
-     //generate url based on current user's invitecode
-     const code = await getUserInfo()
-     console.log(`${window.location.origin}/playerwelcome?code=${code}`)
-  }
 
   // Calculates days remaining in challenge
   const processDays = (date) => {
@@ -85,6 +70,8 @@ export default function Progress() {
       winFunction();
     }
   }, [dayCounter, progressArr]);
+
+  const toggleInvite = React.useRef();
 
   // Passed as callback function to create badge elements based on server call
   // startNumber is used to number the badges
@@ -140,38 +127,45 @@ export default function Progress() {
   };
 
   return (
-    <div id="progress-container">
-      <p className="bebas-neue black spacing" id="challenge-badge-header">
-        YOUR CHALLENGE BADGES
-      </p>
-      <div id="day-counter-container">
-        <div className="day-box yellow-background" id="yellow-day-box"></div>
-        <div className="day-box black-background">
-          <p className="bebas-neue white" id="day-number">
-            {dayCounter}
-          </p>
-          <p className="lato white spacing" id="days-left">
-            days left
-          </p>
+    <>
+      <div id="progress-container">
+        <p className="bebas-neue black spacing" id="challenge-badge-header">
+          YOUR CHALLENGE BADGES
+        </p>
+        <div id="day-counter-container">
+          <div className="day-box yellow-background" id="yellow-day-box"></div>
+          <div className="day-box black-background">
+            <p className="bebas-neue white" id="day-number">
+              {dayCounter}
+            </p>
+            <p className="lato white spacing" id="days-left">
+              days left
+            </p>
+          </div>
         </div>
+        <p className="black" id="thanks-message">
+          Thanks for taking the challenge! Invite friends to join your challenge
+          to earn badges.
+        </p>
+        <div className="badge-row" id="first-row">
+          {progressArr.slice(0, 4).map(generateBadges(1))}
+        </div>
+        <div className="badge-row" id="second-row">
+          {progressArr.slice(4).map(generateBadges(5))}
+        </div>
+        <button
+          className="black spacing"
+          id="inviteToggleBtn"
+          onClick={() => toggleInvite.current()}
+        >
+          Invite friends
+        </button>
+        <p className="black spacing" id="register-message">
+          Not registered to vote yet? <a href="../voterreg">Register now</a> and
+          earn your first badge!
+        </p>
       </div>
-      <p className="black" id="thanks-message">
-        Thanks for taking the challenge! Invite friends to join your challenge
-        to earn badges.
-      </p>
-      <div className="badge-row" id="first-row">
-        {progressArr.slice(0, 4).map(generateBadges(1))}
-      </div>
-      <div className="badge-row" id="second-row">
-        {progressArr.slice(4).map(generateBadges(5))}
-      </div>
-      <button className="black spacing" id="invite" onClick={generateUrl}>
-        Invite friends
-      </button>
-      <p className="black spacing" id="register-message">
-        Not registered to vote yet? <a href="../voterreg">Register now</a> and
-        earn your first badge!
-      </p>
-    </div>
+      <Invite toggleInvite={toggleInvite}/>
+    </>
   );
 }
