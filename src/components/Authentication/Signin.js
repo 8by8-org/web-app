@@ -14,7 +14,7 @@ import errorMessage from "./../../errorMessage";
 import { useHistory } from "react-router-dom";
 import { Button, Form } from "react-bootstrap";
 import "./Signin.scss";
-import { dummyPassword } from "./constants";
+import { dummyPassword } from "../../constants";
 
 const localStorageEmailKey = "verifyUserEmail";
 

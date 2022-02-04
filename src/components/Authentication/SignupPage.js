@@ -4,7 +4,7 @@ import { auth } from "./../../firebase";
 import { getFirestore, doc, updateDoc } from "firebase/firestore";
 import errorMessage from "./../../errorMessage";
 import { useHistory } from "react-router-dom";
-import { dummyPassword } from "./constants";
+import { dummyPassword } from "../../constants";
 import { Button, Form } from "react-bootstrap";
 import "./Signin.scss";
 const workingUrl = "localhost:3000";
@@ -205,7 +205,7 @@ export default function SignupPage() {
 					<br />
 					<p className="tos-text">
 						By clicking on Continue, I agree to the &#160; 
-						<a href="#" className="link inline">Terms of Service </a> and the &#160;<a href="#" className="link inline">Privacy Policy</a>
+						<a onClick = {() => history.push("/termsofservice")} className="link inline">Terms of Service </a> and the &#160;<a href="#" className="link inline">Privacy Policy</a>
 					</p>
 					<br />
 					{buttonMessage && (
