@@ -21,6 +21,7 @@ import Footer from "./Footer";
 import PlayerWelcome from "./PlayerWelcome";
 import Actions from "./Actions";
 import VoterRegistration from "./VoterRegistration";
+import VoterRegistrationForm from "./VoterRegistration/VoterRegistrationForm";
 
 function App() {
   return (
@@ -43,12 +44,15 @@ function App() {
                 />
                 <Route path="/signup" component={SignupPage} />
                 <Route path="/signin" component={Signin} />
-                <PrivateRoute path="/election-reminders" component={ElectionReminder} />
+                <PrivateRoute
+                  path="/election-reminders"
+                  component={ElectionReminder}
+                />
                 <PrivateRoute path="/progress" component={Progress} />
                 <PrivateRoute path="/signout" component={Signout} />
                 <Route path="/playerwelcome" component={PlayerWelcome} />
                 <Route path="/actions" component={Actions} />
-                <Route path="/voterreg" component={VoterRegistration} />
+                <Route path="/voterreg" component={VoterRegistrationForm} />
               </Switch>
             </Router>
             <Footer />

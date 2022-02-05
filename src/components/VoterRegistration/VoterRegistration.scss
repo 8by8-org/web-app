@@ -1,0 +1,82 @@
+@import "./../../styles/Components.scss";
+@import "./../../styles/Fonts.scss";
+@import "./../../styles/Variables.scss";
+
+.container {
+  width: 375px;
+  margin-left: 60px;
+  padding-bottom: 20px;
+  display: flex;
+  flex-direction: column;
+}
+
+.register-form-title {
+  @include heading-text;
+  text-align: left !important;
+  float: left !important;
+}
+
+.register-form-title-small {
+  @include subheading-text;
+  text-align: left;
+  float: left;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.underline {
+  @include text-underline;
+}
+
+.register-label {
+  font-weight: bold;
+}
+
+.register-input {
+  border-top: none;
+  border-right: none;
+  border-left: none;
+  border-width: 3px;
+  border-color: black;
+  border-radius: 0px;
+}
+
+.register-checkbox {
+  border-radius: 0;
+  border: 2px solid black;
+  margin-right: 4px;
+}
+
+.reminders-completed {
+  font-family: "Lato", sans-serif;
+  color: black;
+  margin-left: 20px;
+}
+
+.reminders-completed h3 {
+  font-weight: bold;
+  font-size: 18px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.next-btn {
+  @include button;
+  margin-top: 40px;
+  margin-bottom: 40px;
+}
+
+.contributions h1 {
+  width: 100%;
+  margin-left: 10px;
+  margin-top: 40px;
+  font-family: $bebas-neue !important;
+  font-size: 24px !important;
+  text-align: left !important;
+}
+
+.contributions p {
+  width: 100%;
+  margin-top: 40px;
+  margin-left: 10px;
+}
