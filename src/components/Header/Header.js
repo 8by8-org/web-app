@@ -6,8 +6,8 @@ import * as FaIcons from "react-icons/fa";
 import * as GiIcons from "react-icons/gi";
 import * as IoIcons from "react-icons/io";
 import * as MdIcons from "react-icons/md";
-import logo from "./../../assets/logos/logo.svg";
-import sidebarLogo from "./../../assets/logos/black-logo.svg";
+import logo from "./../../assets/logos/white-logo.svg";
+import sidebarLogo from "./../../assets/logos/white-logo.svg";
 import "./Header.scss";
 
 function Header() {
@@ -90,7 +90,7 @@ function Header() {
 
   return (
     <>
-      <IconContext.Provider value={{ color: "black" }}>
+      <IconContext.Provider value={{ color: "white" }}>
         <div className="navbar">
           <Navbar.Brand href="/">
             <img src={logo} alt="8by8 logo" id="brand-logo" />

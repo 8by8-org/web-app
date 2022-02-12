@@ -45,7 +45,6 @@
       }
     }
   }
-
   .signin-form {
     border: 1em solid white;
     padding: 1em;
@@ -94,6 +93,17 @@
   .avatar-img {
     display: inline;
     opacity: 0.5;
+    width: 25vh;
+    height: auto;
+    @media (max-width: 500px) {
+      width: 37vw;
+      height: 37vw;
+    }
+  }
+
+  .avatar-img {
+    display: inline;
+    opacity: 0.5;
     width: 20vh;
     height: auto;
     @media (max-width: 500px) {
@@ -107,6 +117,15 @@
   }
   .selected-img {
     opacity: 1;
+  }
+  .inline {
+    display: inline;
+  }
+  .tos-text {
+    text-align: center;
+  }
+  .tos-text .link {
+    text-decoration: grey underline 3px;
   }
 }
 

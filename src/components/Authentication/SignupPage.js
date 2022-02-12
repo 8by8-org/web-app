@@ -4,15 +4,13 @@ import { auth } from "./../../firebase";
 import { getFirestore, doc, updateDoc } from "firebase/firestore";
 import errorMessage from "./../../errorMessage";
 import { useHistory } from "react-router-dom";
-import { dummyPassword } from "./constants";
+import { dummyPassword } from "../../constants";
 import { Button, Form } from "react-bootstrap";
 import ReCAPTCHA from "react-google-recaptcha";
 import "./Signin.scss";
-
 const workingUrl = "localhost:3000";
 const db = getFirestore();
-
-export default function Login() {
+export default function SignupPage() {
   const { currentUser } = useAuth();
   const history = useHistory();
   const [error, setError] = useState(null);
@@ -23,6 +21,7 @@ export default function Login() {
   const [preselect, setPreselect] = useState(true);
 
   const emailRef = useRef();
+  const confirmEmailRef = useRef();
   const buttonRef = useRef();
   const avatarRef = useRef();
   const playerStatus = localStorage.getItem("player");
@@ -52,15 +51,13 @@ export default function Login() {
 
     if (!auth.isSignInWithEmailLink(auth.getAuth(), window.location.href)) {
       // login step 1
-      setButtonMessage("Sign Up");
+      setButtonMessage("Continue");
       buttonRef.current.onclick = async function () {
         const email = emailRef.current.value;
+        const confirmedEmail = confirmEmailRef.current.value;
         const avatar = avatarRef.current.id;
-        console.dir(avatarRef);
-        await console.log(avatar);
         const addAvatarToDB = async () => {
           let user = auth.getAuth().currentUser;
-          console.log(user.uid);
           let userRef = doc(db, "users", user.uid);
           await updateDoc(userRef, {
             avatar,
@@ -76,14 +73,16 @@ export default function Login() {
             );
             await addAvatarToDB();
           } catch (e) {
-            console.log(e);
             setError(errorMessage(e));
           }
         };
         if (!email) {
-          setMessage("Missing email");
+          setError("Please enter an email address");
+        } else if (confirmedEmail !== email) {
+          setError("Emails do not match");
         } else {
           createUser(email);
+          setMessage("Success");
           window.location.href = `${workingUrl}/login`;
         }
       };
@@ -105,15 +104,21 @@ export default function Login() {
           {emailVisible && (
             <div>
               <Form.Control
-                className="form-control"
+                className="form-control name-field"
                 type="text"
                 placeholder="Name: "
               ></Form.Control>
               <Form.Control
-                className="form-control"
+                className="form-control email-field"
                 type="email"
                 placeholder="Email:"
                 ref={emailRef}
+              ></Form.Control>
+              <Form.Control
+                className="form-control confirm-field"
+                type="email"
+                placeholder="Confirm Email:"
+                ref={confirmEmailRef}
               ></Form.Control>
               <p className="signup-text signup-header">Which One's you? </p>
               <div className="avatar-container">
@@ -203,7 +208,21 @@ export default function Login() {
               }}
             />
           </div>
-
+          <br />
+          <p className="tos-text">
+            By clicking on Continue, I agree to the &#160;
+            <a
+              onClick={() => history.push("/termsofservice")}
+              className="link inline"
+            >
+              Terms of Service{" "}
+            </a>{" "}
+            and the &#160;
+            <a href="#" className="link inline">
+              Privacy Policy
+            </a>
+          </p>
+          <br />
           {buttonMessage && (
             <Button
               className="button"

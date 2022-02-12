@@ -5,7 +5,7 @@ import "./HomePageInfo.scss"
 
 export default function HomePageInfo() {
     return <div>
-        <div class="white-background">
+        <div className="white-background">
             <h2 className="bebas-neue black-text">WHY 8BY8?</h2>
             <p className="lato black-text">In 2020, we saw an unprecedented <b>150%</b> spike in anti-Asian and anti-AAPI hate crimes, a trend that is already continuing into 2021. This is both a national and a local problem - in the Bay Area alone, there were over <b>700</b> such hate crimes during the pandemic - a rate of over <b>2 per day</b>. 
             <br></br><br></br>
@@ -13,7 +13,7 @@ export default function HomePageInfo() {
             <img src={HomePageImage} alt="rally"></img>
         </div>
 
-        <div class="white-background">
+        <div className="white-background">
             <h2 className="bebas-neue black-text">OUR SOLUTION</h2>
             <p className="lato black-text">We know that closing the voter registration gap has to be a <b>community effort</b>, so we're asking everyone to join us in taking the #8by8 challenge and <b>registering 8 of their friends, family, or coworkers to vote in 8 days</b>. 
             <br></br><br></br>
