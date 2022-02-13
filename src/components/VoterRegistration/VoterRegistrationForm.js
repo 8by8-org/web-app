@@ -1,5 +1,11 @@
 import React, { useState, useRef } from "react";
-import { Eligibility, YourName, HomeAddress, OtherInfo } from "./components";
+import {
+  Eligibility,
+  YourName,
+  HomeAddress,
+  OtherInfo,
+  FormCompleted,
+} from "./components";
 import { useAuth } from "../../contexts/AuthContext";
 import "./VoterRegistration.scss";
 
@@ -8,22 +14,22 @@ export default function VoterRegistrationForm(props) {
   const [page, setPage] = useState("eligibility");
   const formData = useRef({
     send_confirmation_reminder_emails: false,
-    date_of_birth: "",
-    id_number: "",
-    email_address: currentUser.email,
+    dob: "", //renamed from date_of_birth to match us votes api
+    idNumber: "", //renamed from id_number to match us votes api
+    email: currentUser.email, //renamed from email_address to match us votes api
     first_registration: false,
-    home_zip_code: "",
-    us_citizen: false,
+    zip: "", //renamed from home_zip_code to match us votes api
+    citizen: false, //renamed from us_citizen to match us votes api
     has_state_license: false,
-    is_eighteen_or_older: false,
+    eighteenPlus: false, //renamed from is_eighteen_or_older to match us votes api
     name_title: "", //Required. Must be one of “Mr.”, “Mrs.”, “Miss”, “Ms.”, “Sr.”, “Sra.”, “Srta.”
-    first_name: "",
+    name_first: "", //renamed from first_name to match us votes api
     middle_name: "",
-    last_name: "",
-    home_address: "",
+    name_last: "", //renamed from last_name to match us votes api
+    street: "", //renamed from home_address to match us votes api
     home_unit: "",
-    home_city: "",
-    home_state_id: "",
+    city: "", //renamed from home_city to match us votes api
+    state: "", //renamed from home_state_id to match us votes api
     has_mailing_address: false,
     mailing_address: "",
     mailing_unit: "",
@@ -42,7 +48,7 @@ export default function VoterRegistrationForm(props) {
     opt_in_email: false,
     opt_in_sms: false,
     opt_in_volunteer: false,
-    political_party: "",
+    party: "", //renamed from political_party to match us votes api
     race: "",
   });
 
@@ -66,7 +72,7 @@ export default function VoterRegistrationForm(props) {
           case "otherInfo":
             return <OtherInfo parentRef={formData} setParentState={setPage} />;
           case "formCompleted":
-            return <h1>Form Complete</h1>;
+            return <FormCompleted />;
         }
       })()}
     </form>

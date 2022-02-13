@@ -1,25 +1,31 @@
 import React, { useState } from "react";
+import axios from "axios";
+import BeatLoader from "react-spinners/BeatLoader";
 import "../../VoterRegistration.scss";
+
+const apiUrl = "https://usvotes-3ulcxuufea-uw.a.run.app/registertovote/";
 
 export const OtherInfo = ({ parentRef, setParentState }) => {
   const [showOtherPartyField, setShowOtherPartyField] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState("");
   const [formData, setFormData] = useState({
-    political_party: parentRef.current.political_party,
+    party: parentRef.current.party,
     race: parentRef.current.race,
-    id_number: parentRef.current.id_number,
+    idNumber: parentRef.current.idNumber,
   });
 
   return (
     <>
       <h2 className="register-form-title-small">OTHER DETAILS</h2>
-      <label htmlFor="political_party" className="register-label">
+      <label htmlFor="party" className="register-label">
         Political Party
       </label>
       <select
         className="register-input"
         required
-        name="political_party"
-        id="political_party"
+        name="party"
+        id="party"
         onChange={({ target }) => {
           const { value } = target;
           if (value === "other") {
@@ -28,9 +34,9 @@ export const OtherInfo = ({ parentRef, setParentState }) => {
             setShowOtherPartyField(false);
             parentRef.current = {
               ...parentRef.current,
-              political_party: value,
+              party: value,
             };
-            setFormData({ ...formData, political_party: value });
+            setFormData({ ...formData, party: value });
           }
         }}
       >
@@ -49,13 +55,13 @@ export const OtherInfo = ({ parentRef, setParentState }) => {
             required
             className="register-input"
             type="text"
-            value={formData.political_party}
+            value={formData.party}
             onChange={({ target }) => {
               parentRef.current = {
                 ...parentRef.current,
-                political_party: target.value,
+                party: target.value,
               };
-              setFormData({ ...formData, political_party: target.value });
+              setFormData({ ...formData, party: target.value });
             }}
           />
           <br />
@@ -89,17 +95,17 @@ export const OtherInfo = ({ parentRef, setParentState }) => {
         <option value="decline to state">Decline to State</option>
       </select>
       <br />
-      <label htmlFor="id_number" className="register-label">
+      <label htmlFor="idNumber" className="register-label">
         ID Number
       </label>
       <input
         className="register-input"
         type="text"
-        name="id_number"
-        id="id_number"
+        name="idNumber"
+        id="idNumber"
         onChange={({ target }) => {
-          parentRef.current = { ...parentRef.current, id_number: target.value };
-          setFormData({ ...formData, id_number: target.value });
+          parentRef.current = { ...parentRef.current, idNumber: target.value };
+          setFormData({ ...formData, idNumber: target.value });
         }}
       />
       <br />
@@ -110,11 +116,64 @@ export const OtherInfo = ({ parentRef, setParentState }) => {
       </small>
       <button
         className="next-btn"
+        disabled={isLoading}
         onClick={(event) => {
           event.preventDefault();
-          console.log(parentRef.current);
+          const {
+            state,
+            city,
+            street,
+            name_first,
+            name_last,
+            dob,
+            zip,
+            email,
+            citizen,
+            eighteenPlus,
+            party,
+            idNumber,
+          } = parentRef.current;
+          const ymd = dob.split("-");
+          const year = ymd[0];
+          const month = ymd[1];
+          const day = ymd[2];
+          const formattedDob = `${month}/${day}/${year}`;
+          const postBody = {
+            state,
+            city,
+            street,
+            name_first,
+            name_last,
+            dob: formattedDob,
+            zip,
+            email,
+            citizen: citizen ? "yes" : "no",
+            eighteenPlus: eighteenPlus ? "yes" : "no",
+            party,
+            idNumber,
+          };
+          console.log(postBody);
+          setIsLoading(true);
+          axios
+            .post(apiUrl, postBody)
+            .then((res) => {
+              setIsLoading(false);
+              setParentState("formCompleted");
+            })
+            .catch((e) => {
+              setIsLoading(false);
+              setError(e);
+            });
         }}
       >
+        {isLoading && (
+          <BeatLoader
+            color={"lightgray"}
+            loading={isLoading}
+            size={20}
+            style={{ marginTop: "4px", marginRight: "8px" }}
+          />
+        )}
         SUBMIT
       </button>
     </>

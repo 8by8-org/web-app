@@ -5,10 +5,10 @@ import "../../VoterRegistration.scss";
 export const Eligibility = ({ parentRef, setParentState }) => {
   const { currentUser } = useAuth();
   const [formData, setFormData] = useState({
-    home_zip_code: "",
-    date_of_birth: "",
-    us_citizen: false,
-    is_eighteen_or_older: false,
+    zip: "",
+    dob: "",
+    citizen: false,
+    eighteenPlus: false,
   });
 
   return (
@@ -21,34 +21,34 @@ export const Eligibility = ({ parentRef, setParentState }) => {
       <input
         className="register-input"
         type="date"
-        id="date_of_birth"
-        name="date_of_birth"
-        value={formData.date_of_birth}
+        id="dob"
+        name="dob"
+        value={formData.dob}
         onChange={(event) => {
           parentRef.current = {
             ...parentRef.current,
-            date_of_birth: event.target.value,
+            dob: event.target.value,
           };
-          setFormData({ ...formData, date_of_birth: event.target.value });
+          setFormData({ ...formData, dob: event.target.value });
         }}
         required
       />
       <br />
-      <label for="home_zip_code" className="register-label">
+      <label for="zip" className="register-label">
         Zip Code*
       </label>
       <input
         className="register-input"
         type="text"
-        id="home_zip_code"
-        name="home_zip_code"
-        value={formData.home_zip_code}
+        id="zip"
+        name="zip"
+        value={formData.zip}
         onChange={(event) => {
           parentRef.current = {
             ...parentRef.current,
-            home_zip_code: event.target.value,
+            zip: event.target.value,
           };
-          setFormData({ ...formData, home_zip_code: event.target.value });
+          setFormData({ ...formData, zip: event.target.value });
         }}
         required
       />
@@ -57,18 +57,18 @@ export const Eligibility = ({ parentRef, setParentState }) => {
         <input
           className="register-checkbox"
           type="checkbox"
-          id="us_citizen"
-          name="us_citizen"
+          id="citizen"
+          name="citizen"
           onChange={(event) => {
             parentRef.current = {
               ...parentRef.current,
-              us_citizen: event.target.checked,
+              citizen: event.target.checked,
             };
-            setFormData({ ...formData, us_citizen: event.target.checked });
+            setFormData({ ...formData, citizen: event.target.checked });
           }}
           required
         />
-        <label htmlFor="us_citizen" className="register-label">
+        <label htmlFor="citizen" className="register-label">
           I am a US Citizen*
         </label>
       </div>
@@ -76,21 +76,21 @@ export const Eligibility = ({ parentRef, setParentState }) => {
         <input
           className="register-checkbox"
           type="checkbox"
-          id="is_eighteen_or_older"
-          name="is_eighteen_or_older"
+          id="eighteenPlus"
+          name="eighteenPlus"
           onChange={(event) => {
             parentRef.current = {
               ...parentRef.current,
-              is_eighteen_or_older: event.target.checked,
+              eighteenPlus: event.target.checked,
             };
             setFormData({
               ...formData,
-              is_eighteen_or_older: event.target.checked,
+              eighteenPlus: event.target.checked,
             });
           }}
           required
         />
-        <label htmlFor="is_eighteen_or_older" className="register-label">
+        <label htmlFor="eighteenPlus" className="register-label">
           I will be 18 or older by the time of the next election.*
         </label>
       </div>
