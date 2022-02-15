@@ -1,5 +1,7 @@
+import React, { useState, useEffect } from "react";
 import { useHistory } from 'react-router-dom'
 import { Button } from "react-bootstrap";
+import { collection, getFirestore, query, where, getDocs} from 'firebase/firestore'
 import SignUp1 from "../assets/images/PlayerWelcome/SignUp1.png"
 import SignUp2 from "../assets/images/PlayerWelcome/SignUp2.png"
 import Vote from "../assets/images/PlayerWelcome/Vote1.png"
@@ -9,15 +11,38 @@ import './PlayerWelcome.scss'
 
 export default function PlayerWelcome() {
     const history = useHistory(); 
+    const [ loading, setLoading ] = useState(true);
+    const [ challengerInfo, setChallengerInfo ] = useState(null);
 
+    const url = new URL(window.location.href)
+    const code = url.searchParams.get("code")
+
+    async function getDoc() {
+        const db = getFirestore();
+        const q = query(collection(db, "users"), where("inviteCode", "==", code))
+    
+        const querySnapshot = await getDocs(q);
+        querySnapshot.forEach((doc) => {
+            setChallengerInfo(doc.data())
+        })
+        setLoading(false)
+    }
+    
+    useEffect(() => {
+        getDoc()
+        localStorage.setItem("code", code)
+      }, [loading]);
+
+    
     return (
+        loading === false ? 
         <div className="player-welcome">
             <div className="top" align="center">
                 <img src={Top}/>
             </div>
             <div className="main-content">
                 <div>
-                    <h2 className="heading"><u className="underline">Support</u> Yang's 8by8 Challenge!</h2>
+                    <h2 className="heading"><u className="underline">Support</u> {challengerInfo.inviteCode}'s 8by8 Challenge!</h2>
                     <div align="center">
                         <img src={Calendar} />
                     </div>
@@ -25,12 +50,12 @@ export default function PlayerWelcome() {
                 <div className="text">
                     <p>
                         <b>
-                            Help "challenger" win their <u>8BY8 Challenge</u> by registering to vote or taking other ctions to #stopasianhate!
+                            Help {challengerInfo.inviteCode} win their <u>8BY8 Challenge</u> by registering to vote or taking other actions to #stopasianhate!
                         </b>
                     </p>
                 </div>
                 <div>
-                    <Button onClick={() => {history.push("/actions")}}>Get Started</Button>
+                    <Button onClick={() => {history.push(`/actions?code=${code}`)}}>Get Started</Button>
                 </div>
                 <div align="center">
                     <p className="small-text">Already have an account? <a href="/signin">Sign In</a></p>
@@ -67,9 +92,10 @@ export default function PlayerWelcome() {
                 <div className="image">
                         <img src={Vote} alt="8by8 Logo" />
                 </div>
-                <Button onClick={() => {history.push("/actions")}}>Get Started</Button>
+                <Button onClick={() => {history.push(`/actions?code=${code}`)}}>Get Started</Button>
                 <p align="center" className="small-text">Already have an account? <a href="/signin">Sign In</a></p>
             </div>
             </div>
-    )
+            : <h1>loading</h1>
+    ) 
 }

@@ -25,6 +25,7 @@ export default function SignupPage() {
   const buttonRef = useRef();
   const avatarRef = useRef();
   const playerStatus = localStorage.getItem("player");
+  const code = localStorage.getItem("code")
 
   useEffect(() => {
     if (currentUser) {
@@ -34,13 +35,13 @@ export default function SignupPage() {
 
     if (currentUser && playerStatus === "voter") {
       localStorage.removeItem("player");
-      history.push("/voterreg");
+      history.push(`/voterreg?code=${code}`);
       return;
     }
 
     if (currentUser && playerStatus === "reminder") {
       localStorage.removeItem("player");
-      history.push("/electionreminder");
+      history.push(`/election-reminders?code=${code}`);
       return;
     }
 
@@ -64,17 +65,15 @@ export default function SignupPage() {
           });
         };
         const createUser = async (email) => {
-          try {
-            // CryptoRandomString generates a random hash for the password (because it has no use right now)
-            await auth.createUserWithEmailAndPassword(
-              auth.getAuth(),
-              email,
-              dummyPassword
-            );
-            await addAvatarToDB();
-          } catch (e) {
-            setError(errorMessage(e));
-          }
+            try {
+              // CryptoRandomString generates a random hash for the password (because it has no use right now)
+              await auth.createUserWithEmailAndPassword(auth.getAuth(), email, dummyPassword); 
+              await addAvatarToDB();
+            } catch (e) {
+              console.log(e);
+              setError(errorMessage(e));
+            }
+
         };
         if (!email) {
           setError("Please enter an email address");
