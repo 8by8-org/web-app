@@ -2,7 +2,6 @@ import { useAuth } from './../../contexts/AuthContext';
 import ChallengePagePopup from './ChallengePagePopup';
 import ChallengeIcon from "./ChallengeIcon";
 import URLEncoder from './../Helpers/URLEncode';
-import { useState } from 'react';
 import { Button, Col, Container, Row } from 'react-bootstrap';
 import './ChallengePage.css'
 
@@ -62,6 +61,7 @@ export default function ChallengePage() {
                     </Col>
                 </Row>
             </div>            
+            <ChallengePagePopup show={popupVisible} togglePopup={togglePopup}/> 
         </Container>
     )
 }
