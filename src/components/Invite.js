@@ -40,16 +40,7 @@ function Invite({ toggleInvite }) {
   }
 
   async function generateUrl() {
-    async function getUserInfo() {
-      const db = getFirestore();
-      const userDoc = doc(db, "users", currentUser.uid)
-      const user = await getDoc(userDoc);
-      return user._document.data.value.mapValue.fields.inviteCode.stringValue;
-    }
-     
-     //generate url based on current user's invitecode
-     const code = await getUserInfo()
-     setUrl(`${window.location.origin}/playerwelcome?code=${code}`)
+     setUrl(`${window.location.origin}/playerwelcome?code=${currentUser.uid}`)
   }
 
   // shareUrl is currently a temporary placeholder for UID link
