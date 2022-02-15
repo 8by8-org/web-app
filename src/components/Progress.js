@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { Button } from "react-bootstrap";
 import "./Progress.css";
 import Invite from "./Invite.js";
@@ -165,7 +165,7 @@ export default function Progress() {
           earn your first badge!
         </p>
       </div>
-      <Invite toggleInvite={toggleInvite}/>
+      <Invite toggleInvite={toggleInvite} />
     </>
   );
 }

@@ -1,6 +1,4 @@
 import React, { useState } from "react";
-import { getFirestore, getDoc, doc} from 'firebase/firestore'
-import { useAuth } from "../contexts/AuthContext";
 import { Nav } from "react-bootstrap";
 import "./Invite.scss";
 import * as MdIcons from "react-icons/md";
@@ -22,13 +20,9 @@ import EmailSvg from "../assets/images/Invite/Email.svg";
 import TextSvg from "../assets/images/Invite/Text.svg";
 
 function Invite({ toggleInvite }) {
-  const { currentUser } = useAuth();
-  const [ url, setUrl ] = useState(null);
-
   const [show, setShow] = useState(false);
   React.useEffect(() => {
     toggleInvite.current = changeShow;
-    generateUrl();
   }, []);
 
   function changeShow() {
@@ -39,21 +33,8 @@ function Invite({ toggleInvite }) {
     navigator.clipboard.writeText(shareUrl);
   }
 
-  async function generateUrl() {
-    async function getUserInfo() {
-      const db = getFirestore();
-      const userDoc = doc(db, "users", currentUser.uid)
-      const user = await getDoc(userDoc);
-      return user._document.data.value.mapValue.fields.inviteCode.stringValue;
-    }
-     
-     //generate url based on current user's invitecode
-     const code = await getUserInfo()
-     setUrl(`${window.location.origin}/playerwelcome?code=${code}`)
-  }
-
   // shareUrl is currently a temporary placeholder for UID link
-  const shareUrl = url;
+  const shareUrl = "www.8by8.us";
   const quote = "Help me in my 8by8 Challenge to #stopasianhate";
   const hashtag = "#stopasianhate";
   // facebook developer app id (for now its from a personal account for testing)
@@ -80,7 +61,7 @@ function Invite({ toggleInvite }) {
         </div>
 
         <div className="section social-media">
-          <p className="sub-heading">Copy your unique link</p>
+          <p className="sub-heading">Copy yout unique link</p>
           <FacebookShareButton url={shareUrl} quote={quote} hashtag={hashtag}>
             <img className="invite-icon" src={FacebookSvg} />
             <p className="invite-icon-label">Facebook</p>
@@ -93,7 +74,7 @@ function Invite({ toggleInvite }) {
         </div>
 
         <div className="section messaging">
-          <p className="sub-heading">Copy your unique link</p>
+          <p className="sub-heading">Copy yout unique link</p>
           <FacebookMessengerShareButton url={shareUrl} appId={appId}>
             <img className="invite-icon" src={FacebookMessengerSvg} />
             <p className="invite-icon-label">Messenger</p>
