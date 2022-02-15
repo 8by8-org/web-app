@@ -1,5 +1,5 @@
 .navbar {
-  background-color: white;
+  background-color: black;
   height: 57px;
   padding: 0px 30px 0px 40px;
   overflow: hidden;
@@ -36,11 +36,11 @@
 
 a.nav-link {
   padding: 0;
-  color: black;
+  color: white;
 }
 
 a.nav-link:hover {
-  color: black;
+  color: white;
 }
 
 a.navbar-brand {
@@ -49,8 +49,8 @@ a.navbar-brand {
 
 /* Sidebar */
 .nav-menu {
-  background-color: white;
-  color: black;
+  background-color: black;
+  color: white;
   max-width: 80vw;
   width: 380px;
   height: 100vh;
@@ -132,18 +132,20 @@ a.navbar-brand {
 .notif-wrapper {
   width: 100vw;
   display: flex;
+  /* align-items: center; */
   justify-content: center;
 }
 
 .notif-menu {
+  display: flex;
   height: 80vh;
   width: 100vw;
   max-width: 500px;
   position: fixed;
   bottom: -80vh;
   transition: 400ms;
-  background-color: white;
-  color: black;
+  background-color: black;
+  color: white;
   border-top: 2px solid black;
   width: 100vw;
 }

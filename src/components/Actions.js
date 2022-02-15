@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Button } from "react-bootstrap";
 import { useHistory } from 'react-router'
 import {ReactComponent as Avatar} from '../assets/avatars/Boy1.svg'
@@ -9,6 +9,7 @@ export default function Actions() {
     const history = useHistory();
     const [ loading, setLoading ] = useState(true);
     const [ challengerInfo, setChallengerInfo ] = useState(null);
+    const validChallenger = false;
     
     useEffect(() => {
         setChallengerInfo(JSON.parse(localStorage.getItem('challengerInfo')))
@@ -16,7 +17,6 @@ export default function Actions() {
       }, [loading]);
 
     return (
-        loading === false?
         <div className="main-content">
             <div className="top">
                 { challengerInfo ? (
@@ -27,7 +27,7 @@ export default function Actions() {
                             </div>
                             <div className="avatar-container">
                                 <Avatar id="challenger-avatar"/> {/**Avatar will change based on challenger*/}
-                                <p id="challenger-name">{challengerInfo.inviteCode}</p>
+                                <p id="challenger-name">Name</p> {/**Get challenger name from url */}
                             </div>
                         </div>
                         <img src={WhiteCurve} className="curve"/> 
@@ -47,6 +47,5 @@ export default function Actions() {
                 </div>
             </div>
         </div>
-        : <h1>loading</h1>
     )
 }

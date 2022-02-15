@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useHistory } from 'react-router-dom'
 import { Button } from "react-bootstrap";
 import { getFirestore, getDoc, doc } from 'firebase/firestore'
@@ -11,8 +11,8 @@ import './PlayerWelcome.scss'
 
 export default function PlayerWelcome() {
     const history = useHistory(); 
-    const [ loading, setLoading ] = useState(true);
-    const [ challengerInfo, setChallengerInfo ] = useState(null);
+    const [loading, setLoading] = useState(null);
+    const [challengerInfo, setChallengerInfo] = useState(null);
 
     const url = new URL(window.location.href)
     const code = url.searchParams.get("code")
@@ -21,7 +21,8 @@ export default function PlayerWelcome() {
         const db = getFirestore();
         const docRef = doc(db, "users", code)
         const query = await getDoc(docRef)
-
+        
+        localStorage.setItem("code", code)
         localStorage.setItem('challengerInfo', JSON.stringify(query.data()))
         setLoading(false)
     }
@@ -37,14 +38,14 @@ export default function PlayerWelcome() {
 
     
     return (
-        loading === false ? 
+        loading == false? 
         <div className="player-welcome">
             <div className="top" align="center">
                 <img src={Top}/>
             </div>
             <div className="main-content">
                 <div>
-                    <h2 className="heading"><u className="underline">Support</u> {code? `${challengerInfo.inviteCode}'s`: "the"} 8by8 Challenge!</h2>
+                    <h2 className="heading"><u className="underline">Support</u> {challengerInfo.inviteCode !== null? `${challengerInfo.inviteCode}'s`: "the"} 8by8 Challenge!</h2>
                     <div align="center">
                         <img src={Calendar} />
                     </div>
@@ -97,7 +98,6 @@ export default function PlayerWelcome() {
                 <Button onClick={() => {history.push('actions')}}>Get Started</Button>
                 <p align="center" className="small-text">Already have an account? <a href="/signin">Sign In</a></p>
             </div>
-            </div>
-            : <h1>loading</h1>
-    ) 
+        </div> : <h1>loading...</h1>
+    )
 }
