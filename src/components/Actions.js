@@ -9,7 +9,6 @@ export default function Actions() {
     const history = useHistory();
     const [ loading, setLoading ] = useState(true);
     const [ challengerInfo, setChallengerInfo ] = useState(null);
-    const validChallenger = false;
     
     useEffect(() => {
         setChallengerInfo(JSON.parse(localStorage.getItem('challengerInfo')))
@@ -37,10 +36,10 @@ export default function Actions() {
             </div>
             <div className="action-items">
                 <div className="py-2">
-                    <Button className="primary-button" onClick={() => {history.push('/voterreg'); localStorage.setItem('player', 'voter')}}>Register to vote</Button>
+                    <Button className="primary-button" onClick={() => {history.push('/voterreg'); localStorage.setItem('playerStatus', 'voter')}}>Register to vote</Button>
                 </div>
                 <div className="py-2">
-                    <Button className="secondary-button" onClick={() => {history.push('/election-reminders'); localStorage.setItem('player', 'reminder')}}>Get election reminders</Button>
+                    <Button className="secondary-button" onClick={() => {history.push('/election-reminders'); localStorage.setItem('playerStatus', 'reminder')}}>Get election reminders</Button>
                 </div>
                 <div className="py-2">
                     <Button className="secondary-button" onClick={() => {history.push('/challengerwelcome')}}>Take the challenge</Button>

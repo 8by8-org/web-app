@@ -18,13 +18,17 @@ export default function PlayerWelcome() {
     const code = url.searchParams.get("code")
 
     async function getChallengerInfo() {
-        const db = getFirestore();
-        const docRef = doc(db, "users", code)
-        const query = await getDoc(docRef)
-        
-        localStorage.setItem("code", code)
-        localStorage.setItem('challengerInfo', JSON.stringify(query.data()))
-        setLoading(false)
+        try {
+            const db = getFirestore();
+            const docRef = doc(db, "users", code)
+            const query = await getDoc(docRef)
+            
+            localStorage.setItem('challengerInfo', JSON.stringify(query.data()))
+            setLoading(false)
+        } catch {
+            localStorage.setItem("code", code) //if user is not logged in, the code will still be stored
+            setLoading(false)
+        }
     }
 
     useEffect(() => {
@@ -45,7 +49,7 @@ export default function PlayerWelcome() {
             </div>
             <div className="main-content">
                 <div>
-                    <h2 className="heading"><u className="underline">Support</u> {challengerInfo.inviteCode !== null? `${challengerInfo.inviteCode}'s`: "the"} 8by8 Challenge!</h2>
+                    <h2 className="heading"><u className="underline">Support</u> the 8by8 Challenge!</h2>
                     <div align="center">
                         <img src={Calendar} />
                     </div>

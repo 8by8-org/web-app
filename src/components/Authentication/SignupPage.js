@@ -44,11 +44,6 @@ export default function SignupPage() {
       return;
     }
 
-    if (currentUser && !playerStatus) {
-      history.push("/progress");
-      return;
-    }
-
     if (!auth.isSignInWithEmailLink(auth.getAuth(), window.location.href)) {
       // login step 1
       setButtonMessage("Continue");
