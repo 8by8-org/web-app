@@ -2,45 +2,45 @@
 @import "./../../styles/Fonts.scss";
 @import "./../../styles/Variables.scss";
 
-@mixin bold-shadow($color: $white) {
-  color: $color;
-  -webkit-text-stroke: 2px $black;
-  text-shadow: -4px 2.5px 0px $black;
-}
-
-@mixin blob-background(
-  $background: url(./../../assets/images/HomePage/Blob1.svg)
-) {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  height: 150px;
-  width: 300px;
-  background-repeat: no-repeat;
-  background-position: center;
-  text-align: center;
-  font-family: $bebas-neue;
-  font-size: 64px;
-  line-height: 77px;
-  letter-spacing: 0.03em;
-  @include bold-shadow();
-  background-image: $background;
-}
-
-.curve-div {
-  height: 0px;
-  .curve {
-    width: 100%;
-    position: relative;
-    bottom: 140px;
-  }
-  .curve-1 {
-    bottom: 160px;
-  }
-}
-
 .homepage {
+  @mixin bold-shadow($color: $white) {
+    color: $color;
+    -webkit-text-stroke: 2px $black;
+    text-shadow: -4px 2.5px 0px $black;
+  }
+
+  @mixin blob-background(
+    $background: url(./../../assets/images/HomePage/Blob1.svg)
+  ) {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 150px;
+    width: 280px;
+    background-repeat: no-repeat;
+    background-position: center;
+    text-align: center;
+    font-family: $bebas-neue;
+    font-size: 64px;
+    line-height: 77px;
+    letter-spacing: 0.03em;
+    @include bold-shadow();
+    background-image: $background;
+  }
+
+  .curve-div {
+    height: 0px;
+    .curve {
+      width: 100%;
+      position: relative;
+      bottom: 140px;
+    }
+    .curve-1 {
+      bottom: 160px;
+    }
+  }
+
   .content-1 {
     background-image: url(./../../assets/images/HomePage/Background.png);
     background-repeat: no-repeat;
@@ -73,7 +73,7 @@
     background-color: $yellow;
     position: relative;
     .speech-bubble {
-      margin: 30px 30px 10px 30px;
+      margin: 30px 0px 10px 30px;
     }
     .sign {
       width: 320px;
@@ -133,6 +133,8 @@
     }
     .mic {
       width: 225px;
+      max-width: calc(100vw / 2);
+      min-width: 140px;
       margin-left: 20px;
     }
   }
@@ -196,6 +198,7 @@
     padding: 30px;
     .speech-bubble {
       max-width: 300px;
+      max-width: 100%;
     }
     .text {
       @include heading-text($white, 36px);
@@ -220,6 +223,9 @@
         color: $blue;
         text-decoration: underline;
         text-underline-offset: 2px;
+        &:hover {
+          cursor: pointer;
+        }
       }
     }
   }

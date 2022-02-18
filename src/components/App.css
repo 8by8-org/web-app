@@ -5,11 +5,15 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  min-width: 280px;
 }
+
 #root {
   background-color: white;
   color: black;
+  min-width: 280px;
 }
+
 #app-outer-wrapper {
   display: flex;
   justify-content: center;
@@ -17,8 +21,11 @@
   height: 100%;
   position: relative;
   top: 57px;
+  min-width: 280px;
 }
+
 #app-wrapper {
   width: 100vw;
   max-width: 500px;
+  min-width: 280px;
 }

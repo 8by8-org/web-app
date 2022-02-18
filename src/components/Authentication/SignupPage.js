@@ -1,25 +1,29 @@
 import { useRef, useEffect, useState } from "react";
+import { useHistory } from "react-router-dom";
 import { useAuth } from "./../../contexts/AuthContext";
 import { auth } from "./../../firebase";
 import { getFirestore, doc, updateDoc } from "firebase/firestore";
 import errorMessage from "./../../errorMessage";
-import { useHistory } from "react-router-dom";
 import { dummyPassword } from "../../constants";
 import { Button, Form } from "react-bootstrap";
+import avatar1 from "../../assets/images/SignUpPage/avatar1.png";
+import avatar2 from "../../assets/images/SignUpPage/avatar2.png";
+import avatar3 from "../../assets/images/SignUpPage/avatar3.png";
+import avatar4 from "../../assets/images/SignUpPage/avatar4.png";
 import ReCAPTCHA from "react-google-recaptcha";
 import "./Signin.scss";
-const workingUrl = "localhost:3000";
 const db = getFirestore();
+
 export default function SignupPage() {
   const { currentUser } = useAuth();
   const history = useHistory();
+
   const [error, setError] = useState(null);
   const [message, setMessage] = useState(null);
   const [emailVisible] = useState(true);
-  const [buttonMessage, setButtonMessage] = useState(" "); // leave blank to hide button
+  const [buttonMessage, setButtonMessage] = useState(" ");
   const [reCaptchaPassed, setReCaptchaPassed] = useState(false);
   const [preselect, setPreselect] = useState(true);
-  const [avatarIndex, setAvatarIndex] = useState(0);
 
   const emailRef = useRef();
   const confirmEmailRef = useRef();
@@ -50,22 +54,26 @@ export default function SignupPage() {
       return;
     }
 
+    // signup logic
     if (!auth.isSignInWithEmailLink(auth.getAuth(), window.location.href)) {
-      // login step 1
       setButtonMessage("Continue");
       buttonRef.current.onclick = async function () {
         const email = emailRef.current.value;
         const confirmedEmail = confirmEmailRef.current.value;
         const username = nameRef.current.value;
-        const avatar = avatarIndex;
-        const addUserToDB = async () => {
-          let user = auth.getAuth().currentUser;
-          let userRef = doc(db, "users", user.uid);
-          await updateDoc(userRef, {
-            name: username,
+        const avatarNum = document.querySelector(
+          'input[name="avatar"]:checked'
+        ).id;
+
+        const addUserToDB = async (name, avatar) => {
+          const user = auth.getAuth().currentUser;
+          const userRef = doc(db, "users", user.uid);
+          updateDoc(userRef, {
+            name: name,
             avatar: avatar,
           });
         };
+
         const createUser = async (email) => {
           try {
             // CryptoRandomString generates a random hash for the password (because it has no use right now)
@@ -74,13 +82,15 @@ export default function SignupPage() {
               email,
               dummyPassword
             );
+            // waiting for user doc to be created before adding data
             await setTimeout(() => {
-              addUserToDB();
+              addUserToDB(username, avatarNum);
             }, 2000);
           } catch (e) {
             setError(errorMessage(e));
           }
         };
+
         if (!email) {
           setError("Please enter an email address");
         } else if (confirmedEmail !== email) {
@@ -88,7 +98,6 @@ export default function SignupPage() {
         } else {
           createUser(email);
           setMessage("Success");
-          window.location.href = `${workingUrl}/login`;
         }
       };
     }
@@ -128,78 +137,56 @@ export default function SignupPage() {
               ></Form.Control>
               <p className="signup-text signup-header">Which One's you? </p>
               <div className="avatar-container">
-                <input
-                  onClick={() => {
-                    setAvatarIndex(1);
-                  }}
-                  checked={preselect}
-                  type="radio"
-                  name="avatar"
-                />
-                <label htmlFor="0">
+                <input checked={preselect} type="radio" name="avatar" id="1" />
+                <label htmlFor="1">
                   <div className="avatar">
-                    <img
-                      className="avatar-img"
-                      src={process.env.PUBLIC_URL + "/avatars/avatar1.png"}
-                      alt="avatar"
-                    />
+                    <img className="avatar-img" src={avatar1} alt="avatar" />
                   </div>
                 </label>
                 <input
                   onClick={() => {
                     setPreselect(null);
-                    setAvatarIndex(2);
                   }}
                   type="radio"
                   name="avatar"
+                  id="2"
                 />
-                <label htmlFor="1">
+                <label htmlFor="2">
                   <div className="avatar">
-                    <img
-                      className="avatar-img"
-                      src={process.env.PUBLIC_URL + "/avatars/avatar2.png"}
-                      alt="avatar"
-                    />
+                    <img className="avatar-img" src={avatar2} alt="avatar" />
                   </div>
                 </label>
                 <br />
                 <input
                   onClick={() => {
                     setPreselect(null);
-                    setAvatarIndex(3);
                   }}
                   type="radio"
                   name="avatar"
+                  id="3"
                 />
-                <label htmlFor="2">
+                <label htmlFor="3">
                   <div className="avatar">
-                    <img
-                      className="avatar-img"
-                      src={process.env.PUBLIC_URL + "/avatars/avatar3.png"}
-                      alt="avatar"
-                    />
+                    <img className="avatar-img" src={avatar3} alt="avatar" />
                   </div>
                 </label>
                 <input
                   onClick={() => {
                     setPreselect(null);
-                    setAvatarIndex(4);
                   }}
                   type="radio"
                   name="avatar"
+                  id="4"
                 />
-                <label htmlFor="3">
+                <label htmlFor="4">
                   <div className="avatar">
-                    <img
-                      className="avatar-img"
-                      src={process.env.PUBLIC_URL + "/avatars/avatar4.png"}
-                      alt="avatar"
-                    />
+                    <img className="avatar-img" src={avatar4} alt="avatar" />
                   </div>
                 </label>
               </div>
             </div>
           )}
+
           <div className="recaptcha">
             <ReCAPTCHA
               sitekey="6LcVtjIeAAAAAEmNoh6l54YbfW8QoPm68aI8VJey"
@@ -233,7 +220,7 @@ export default function SignupPage() {
             <Button
               className="button"
               ref={buttonRef}
-              // disabled={!reCaptchaPassed}
+              disabled={!reCaptchaPassed}
             >
               {buttonMessage}
             </Button>
