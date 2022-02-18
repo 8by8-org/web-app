@@ -19,11 +19,12 @@ export default function SignupPage() {
   const [buttonMessage, setButtonMessage] = useState(" "); // leave blank to hide button
   const [reCaptchaPassed, setReCaptchaPassed] = useState(false);
   const [preselect, setPreselect] = useState(true);
+  const [avatarIndex, setAvatarIndex] = useState(0);
 
   const emailRef = useRef();
   const confirmEmailRef = useRef();
   const buttonRef = useRef();
-  const avatarRef = useRef();
+  const nameRef = useRef();
   const playerStatus = localStorage.getItem("player");
 
   useEffect(() => {
@@ -55,12 +56,14 @@ export default function SignupPage() {
       buttonRef.current.onclick = async function () {
         const email = emailRef.current.value;
         const confirmedEmail = confirmEmailRef.current.value;
-        const avatar = avatarRef.current.id;
-        const addAvatarToDB = async () => {
+        const username = nameRef.current.value;
+        const avatar = avatarIndex;
+        const addUserToDB = async () => {
           let user = auth.getAuth().currentUser;
           let userRef = doc(db, "users", user.uid);
           await updateDoc(userRef, {
-            avatar,
+            name: username,
+            avatar: avatar,
           });
         };
         const createUser = async (email) => {
@@ -71,7 +74,9 @@ export default function SignupPage() {
               email,
               dummyPassword
             );
-            await addAvatarToDB();
+            await setTimeout(() => {
+              addUserToDB();
+            }, 2000);
           } catch (e) {
             setError(errorMessage(e));
           }
@@ -107,6 +112,7 @@ export default function SignupPage() {
                 className="form-control name-field"
                 type="text"
                 placeholder="Name: "
+                ref={nameRef}
               ></Form.Control>
               <Form.Control
                 className="form-control email-field"
@@ -123,71 +129,71 @@ export default function SignupPage() {
               <p className="signup-text signup-header">Which One's you? </p>
               <div className="avatar-container">
                 <input
+                  onClick={() => {
+                    setAvatarIndex(1);
+                  }}
                   checked={preselect}
                   type="radio"
-                  id="0"
                   name="avatar"
-                  value="0"
-                  ref={avatarRef}
                 />
                 <label htmlFor="0">
                   <div className="avatar">
                     <img
                       className="avatar-img"
                       src={process.env.PUBLIC_URL + "/avatars/avatar1.png"}
-                      alt=""
+                      alt="avatar"
                     />
                   </div>
                 </label>
                 <input
-                  onClick={() => setPreselect(null)}
+                  onClick={() => {
+                    setPreselect(null);
+                    setAvatarIndex(2);
+                  }}
                   type="radio"
-                  id="1"
                   name="avatar"
-                  value="1"
-                  ref={avatarRef}
                 />
                 <label htmlFor="1">
                   <div className="avatar">
                     <img
                       className="avatar-img"
                       src={process.env.PUBLIC_URL + "/avatars/avatar2.png"}
-                      alt=""
+                      alt="avatar"
                     />
                   </div>
                 </label>
                 <br />
                 <input
-                  onClick={() => setPreselect(null)}
+                  onClick={() => {
+                    setPreselect(null);
+                    setAvatarIndex(3);
+                  }}
                   type="radio"
-                  id="2"
                   name="avatar"
-                  value="2"
-                  ref={avatarRef}
                 />
                 <label htmlFor="2">
                   <div className="avatar">
                     <img
                       className="avatar-img"
                       src={process.env.PUBLIC_URL + "/avatars/avatar3.png"}
-                      alt=""
+                      alt="avatar"
                     />
                   </div>
                 </label>
                 <input
-                  onClick={() => setPreselect(null)}
+                  onClick={() => {
+                    setPreselect(null);
+                    setAvatarIndex(4);
+                  }}
                   type="radio"
-                  id="3"
                   name="avatar"
-                  value="3"
-                  ref={avatarRef}
                 />
                 <label htmlFor="3">
                   <div className="avatar">
                     <img
                       className="avatar-img"
                       src={process.env.PUBLIC_URL + "/avatars/avatar4.png"}
-                      alt=""
+                      alt="avatar"
                     />
                   </div>
                 </label>
@@ -208,7 +214,7 @@ export default function SignupPage() {
               }}
             />
           </div>
-          <br />
+
           <p className="tos-text">
             By clicking on Continue, I agree to the &#160;
             <a
@@ -227,7 +233,7 @@ export default function SignupPage() {
             <Button
               className="button"
               ref={buttonRef}
-              disabled={!reCaptchaPassed}
+              // disabled={!reCaptchaPassed}
             >
               {buttonMessage}
             </Button>
