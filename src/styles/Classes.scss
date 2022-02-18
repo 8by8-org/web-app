@@ -2,7 +2,7 @@
 @import "./Fonts.scss";
 @import "./Variables.scss";
 
-// large title with underline
+// title with underline
 .normal-title {
   @include text-underline;
   font-family: $bebas-neue;
@@ -14,7 +14,18 @@
   text-align: center;
 }
 
-// medium title with underline
+// title without underline
+.no-underline-title {
+  font-family: $bebas-neue;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 48px;
+  line-height: 58px;
+  letter-spacing: 0.03em;
+  text-align: center;
+}
+
+// small title with underline
 .small-title {
   @include text-underline;
   font-family: $bebas-neue;
@@ -26,7 +37,7 @@
   text-align: center;
 }
 
-// smaller title without underline
+// heading without underline
 .normal-heading {
   font-family: $bebas-neue;
   font-style: normal;
