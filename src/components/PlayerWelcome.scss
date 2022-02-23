@@ -1,70 +1,70 @@
-@import "../styles/Components.scss";
+@import '../styles/Components.scss';
 
 .player-welcome {
-  background-color: $white;
-  color: $black;
+	background-color: $white;
+	color: $black;
 
-  button {
-    @include button;
-  }
+	button {
+		@include button;
+	}
 
-  .top {
-    padding-bottom: 100px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: space-around;
-    padding: 0 40px;
-    .logo {
-      margin: 50px 0;
-      width: 150px;
-    }
-  }
+	.top {
+		padding-bottom: 100px;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		justify-content: space-around;
+		padding: 0 40px;
+		.logo {
+			margin: 50px 0;
+			width: 150px;
+		}
+	}
 
-  .main-content {
-    padding: 20px 40px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-  }
+	.main-content {
+		padding: 20px 40px;
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+	}
 
-  .heading {
-    @include heading-text($black, 36px);
-    margin-top: 25px;
-    margin-bottom: 20px;
-    line-height: 43.2px;
-    letter-spacing: 0.03em;
-    text-align: center;
-    .underline {
-      @include text-underline;
-    }
-  }
+	.heading {
+		@include heading-text($black, 36px);
+		margin-top: 25px;
+		margin-bottom: 20px;
+		line-height: 43.2px;
+		letter-spacing: 0.03em;
+		text-align: center;
+		.underline {
+			@include text-underline;
+		}
+	}
 
-  .subheading {
-    @include heading-text($black, 24px);
-    line-height: 29px;
-    letter-spacing: 0.03em;
-  }
+	.subheading {
+		@include heading-text($black, 24px);
+		line-height: 29px;
+		letter-spacing: 0.03em;
+	}
 
-  .text {
-    font-family: $lato;
-    font-size: 18px;
-    line-height: 22px;
-    letter-spacing: 0.02em;
-    margin: 0;
-  }
+	.text {
+		font-family: $lato;
+		font-size: 18px;
+		line-height: 22px;
+		letter-spacing: 0.02em;
+		margin: 0;
+	}
 
-  .small-text {
-    font-family: $lato;
-    font-size: 15px;
-    letter-spacing: 0.02em;
-    padding: 10px;
-  }
+	.small-text {
+		font-family: $lato;
+		font-size: 15px;
+		letter-spacing: 0.02em;
+		padding: 10px;
+	}
 
-  .image {
-    display: block;
-    margin: auto;
-    padding-top: 10px;
-    padding-bottom: 20px;
-  }
+	.image {
+		display: block;
+		margin: auto;
+		padding-top: 10px;
+		padding-bottom: 20px;
+	}
 }

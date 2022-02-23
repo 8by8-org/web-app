@@ -1,109 +1,109 @@
-@import "../styles/Fonts.scss";
+@import '../styles/Fonts.scss';
 
 .invite-wrapper {
-  width: 100%;
-  display: flex;
-  justify-content: center;
+	width: 100%;
+	display: flex;
+	justify-content: center;
 
-  .invite-menu {
-    height: 90vh;
-    width: 100%;
-    max-width: 500px;
-    position: fixed;
-    bottom: -90vh;
-    transition: 400ms;
-    background-color: white;
-    color: black;
-    width: 100%;
-    overflow: auto;
-    padding: 20px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    font-family: $lato;
-    border-top: 2px solid black;
+	.invite-menu {
+		height: 90vh;
+		width: 100%;
+		max-width: 500px;
+		position: fixed;
+		bottom: -90vh;
+		transition: 400ms;
+		background-color: white;
+		color: black;
+		width: 100%;
+		overflow: auto;
+		padding: 20px;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		font-family: $lato;
+		border-top: 2px solid black;
 
-    .invite-toggle {
-      width: 100%;
-      height: 60px;
-      display: flex;
-    }
+		.invite-toggle {
+			width: 100%;
+			height: 60px;
+			display: flex;
+		}
 
-    .invite-title {
-      font-family: $bebas-neue;
-      margin: auto;
-      font-size: 36px;
-    }
+		.invite-title {
+			font-family: $bebas-neue;
+			margin: auto;
+			font-size: 36px;
+		}
 
-    .info {
-      display: inherit;
-      flex-direction: column;
-      align-items: center;
-      text-align: center;
+		.info {
+			display: inherit;
+			flex-direction: column;
+			align-items: center;
+			text-align: center;
 
-      p {
-        margin: 0;
-        position: relative;
-        bottom: 10px;
-      }
-    }
+			p {
+				margin: 0;
+				position: relative;
+				bottom: 10px;
+			}
+		}
 
-    .section {
-      width: 100%;
-      margin-top: 30px;
+		.section {
+			width: 100%;
+			margin-top: 30px;
 
-      p {
-        margin: 0;
-      }
+			p {
+				margin: 0;
+			}
 
-      .sub-heading {
-        font-weight: bolder;
-      }
+			.sub-heading {
+				font-weight: bolder;
+			}
 
-      .invite-icon {
-        width: 50px;
-        height: 50px;
-        margin: 0 30px 5px 30px;
-      }
-    }
+			.invite-icon {
+				width: 50px;
+				height: 50px;
+				margin: 0 30px 5px 30px;
+			}
+		}
 
-    .link-container {
-      display: flex;
-      align-items: baseline;
-      margin-bottom: 30px;
+		.link-container {
+			display: flex;
+			align-items: baseline;
+			margin-bottom: 30px;
 
-      p {
-        height: 30px;
-        margin-top: 20px;
-        margin-right: 20px;
-        background-image: linear-gradient(
-          90deg,
-          rgba(0, 212, 255, 1) 26%,
-          rgba(10, 255, 73, 1) 63%,
-          rgba(241, 255, 0, 1) 100%
-        );
-        background-size: 100% 4px;
-        background-repeat: no-repeat;
-        background-position: left bottom;
-        background-position: 120 0;
-        font-weight: bold;
-      }
+			p {
+				height: 30px;
+				margin-top: 20px;
+				margin-right: 20px;
+				background-image: linear-gradient(
+					90deg,
+					rgba(0, 212, 255, 1) 26%,
+					rgba(10, 255, 73, 1) 63%,
+					rgba(241, 255, 0, 1) 100%
+				);
+				background-size: 100% 4px;
+				background-repeat: no-repeat;
+				background-position: left bottom;
+				background-position: 120 0;
+				font-weight: bold;
+			}
 
-      button {
-        border-radius: 20px;
-        background-color: black;
-        border: 0;
-        color: white;
-        font-family: $bebas-neue;
-        font-size: 20px;
-        padding: 0 20px 0 20px;
-        height: min-content;
-      }
-    }
-  }
+			button {
+				border-radius: 20px;
+				background-color: black;
+				border: 0;
+				color: white;
+				font-family: $bebas-neue;
+				font-size: 20px;
+				padding: 0 20px 0 20px;
+				height: min-content;
+			}
+		}
+	}
 }
 
 .invite-menu.active {
-  bottom: 0;
-  transition: 400ms;
+	bottom: 0;
+	transition: 400ms;
 }

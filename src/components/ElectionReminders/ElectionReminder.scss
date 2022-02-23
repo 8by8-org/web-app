@@ -1,94 +1,94 @@
-@import "./../../styles/Components.scss";
-@import "./../../styles/Fonts.scss";
-@import "./../../styles/Variables.scss";
+@import './../../styles/Components.scss';
+@import './../../styles/Fonts.scss';
+@import './../../styles/Variables.scss';
 
 .electionReminderContainer {
-  width: 375px;
-  margin-left: 60px;
-  display: flex;
-  flex-direction: column;
+	width: 375px;
+	margin-left: 60px;
+	display: flex;
+	flex-direction: column;
 }
 
 .title {
-  margin-left: 20px;
-  @include heading-text;
-  text-align: left !important;
-  width: 300px;
-  float: left !important;
+	margin-left: 20px;
+	@include heading-text;
+	text-align: left !important;
+	width: 300px;
+	float: left !important;
 }
 
 .underline {
-  @include text-underline;
+	@include text-underline;
 }
 
 .ngp-form label {
-  color: black !important;
-  font-weight: bold !important;
-  margin-top: 18px !important;
-  margin-bottom: 0 !important;
-  font-family: "Lato", sans-serif !important;
+	color: black !important;
+	font-weight: bold !important;
+	margin-top: 18px !important;
+	margin-bottom: 0 !important;
+	font-family: 'Lato', sans-serif !important;
 }
 
 .ngp-form small {
-  display: none;
+	display: none;
 }
 
 .at-legend {
-  font-family: "Lato", sans-serif !important;
+	font-family: 'Lato', sans-serif !important;
 }
 
 .reminders-completed {
-  font-family: "Lato", sans-serif;
-  color: black;
-  margin-left: 20px;
+	font-family: 'Lato', sans-serif;
+	color: black;
+	margin-left: 20px;
 }
 
 .reminders-completed h3 {
-  font-weight: bold;
-  font-size: 18px;
-  margin-top: 20px;
-  margin-bottom: 20px;
+	font-weight: bold;
+	font-size: 18px;
+	margin-top: 20px;
+	margin-bottom: 20px;
 }
 
 .at-text input {
-  border-top: none !important;
-  border-right: none !important;
-  border-left: none !important;
-  border-width: 3px !important;
-  border-color: black !important;
-  border-radius: 0px !important;
+	border-top: none !important;
+	border-right: none !important;
+	border-left: none !important;
+	border-width: 3px !important;
+	border-color: black !important;
+	border-radius: 0px !important;
 }
 .thankYou {
-  background-color: white !important;
+	background-color: white !important;
 }
 
 #NVSignupForm61312-ContactInformation-SmsLegalDisclaimer {
-  margin-top: 40px;
-  font-family: "Lato", sans-serif;
-  color: black;
+	margin-top: 40px;
+	font-family: 'Lato', sans-serif;
+	color: black;
 }
 
 .btn-at-primary {
-  @include button;
+	@include button;
 }
 
 .contributions h1 {
-  width: 100%;
-  margin-left: 10px;
-  margin-top: 40px;
-  font-family: $bebas-neue !important;
-  font-size: 24px !important;
-  text-align: left !important;
+	width: 100%;
+	margin-left: 10px;
+	margin-top: 40px;
+	font-family: $bebas-neue !important;
+	font-size: 24px !important;
+	text-align: left !important;
 }
 
 .contributions p {
-  width: 100%;
-  margin-top: 40px;
-  margin-left: 10px;
+	width: 100%;
+	margin-top: 40px;
+	margin-left: 10px;
 }
 
 #continue {
-  @include button;
-  margin-top: 40px;
-  margin-bottom: 40px;
+	@include button;
+	margin-top: 40px;
+	margin-bottom: 40px;
 }

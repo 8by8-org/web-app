@@ -1,20 +1,19 @@
-@import "../../styles/Fonts.scss";
-
+@import '../../styles/Fonts.scss';
 
 .tos-container {
-    font-family: $lato;
-    text-align: center;
-    padding: 2rem;
-    .title {
-        margin: 2rem 0rem;
-        display: block;
-    }
-    .tos-text {
-        text-align: left;
-        font-size: 1rem;
-        display: block;
-        .tos-subheader {
-            font-size: 2rem;
-        }
-    }
+	font-family: $lato;
+	text-align: center;
+	padding: 2rem;
+	.title {
+		margin: 2rem 0rem;
+		display: block;
+	}
+	.tos-text {
+		text-align: left;
+		font-size: 1rem;
+		display: block;
+		.tos-subheader {
+			font-size: 2rem;
+		}
+	}
 }
