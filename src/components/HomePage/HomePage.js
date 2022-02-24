@@ -22,11 +22,11 @@ export default function HomePage() {
         <div className="description">
           <img className="logo" src={Logo} alt="8by8 Logo" />
           <div className="text">
-            GET <u class="underline">8 AAPI FRIENDS</u>
+            GET <u className="underline">8 AAPI FRIENDS</u>
             <br />
             TO RESISTER
             <br />
-            TO VOTE IN <u class="underline">8 DAYS</u>
+            TO VOTE IN <u className="underline">8 DAYS</u>
           </div>
           <button
             className="challenge-button"
@@ -82,7 +82,7 @@ export default function HomePage() {
       <div className="content-6">
         <div className="text">
           the path to fixing this problem starts with{" "}
-          <u class="underline">closing the representation gap</u> In
+          <u className="underline">closing the representation gap</u> In
           Asian-American communities.
         </div>
         <p className="stat">
@@ -115,7 +115,7 @@ export default function HomePage() {
         />
         <div className="text">
           we're asking everyone to join us in{" "}
-          <u class="underline">taking the #8by8challenge</u> and registering 8
+          <u className="underline">taking the #8by8challenge</u> and registering 8
           of their friends to vote in 8 days.
         </div>
         <Button

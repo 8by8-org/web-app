@@ -1,9 +1,9 @@
 import React from "react";
 import {
-  BrowserRouter as Router,
-  Redirect,
-  Route,
-  Switch,
+	BrowserRouter as Router,
+	Redirect,
+	Route,
+	Switch,
 } from "react-router-dom";
 import { AuthProvider } from "../contexts/AuthContext";
 import Signin from "./Authentication/Signin";
@@ -22,45 +22,42 @@ import PlayerWelcome from "./PlayerWelcome";
 import Actions from "./Actions";
 import VoterRegistration from "./VoterRegistration";
 import VoterRegistrationForm from "./VoterRegistration/VoterRegistrationForm";
+import TOS from "./TOS/TOS";
 
-function App() {
-  return (
-    <>
-      <AuthProvider>
-        <div id="header">
-          <Header />
-        </div>
-        <div id="app-outer-wrapper">
-          <div id="app-wrapper">
-            <Router>
-              <Switch>
-                <Route exact path="/">
-                  <Redirect to="/homepage" />
-                </Route>
-                <Route path="/homepage" component={HomePage} />
-                <Route
-                  path="/challengerwelcome"
-                  component={ChallengerWelcome}
-                />
-                <Route path="/signup" component={SignupPage} />
-                <Route path="/signin" component={Signin} />
-                <PrivateRoute
-                  path="/election-reminders"
-                  component={ElectionReminder}
-                />
-                <PrivateRoute path="/progress" component={Progress} />
-                <PrivateRoute path="/signout" component={Signout} />
-                <Route path="/playerwelcome" component={PlayerWelcome} />
-                <Route path="/actions" component={Actions} />
-                <Route path="/voterreg" component={VoterRegistrationForm} />
-              </Switch>
-            </Router>
-            <Footer />
-          </div>
-        </div>
-      </AuthProvider>
-    </>
-  );
+export default function App() {
+	return (
+		<>
+			<AuthProvider>
+				<div id="header">
+					<Header />
+				</div>
+				<div id="app-outer-wrapper">
+					<div id="app-wrapper">
+						<Router>
+							<Switch>
+								<Route exact path="/">
+									<Redirect to="/homepage" />
+								</Route>
+								<Route path="/homepage" component={HomePage} />
+								<Route
+									path="/challengerwelcome"
+									component={ChallengerWelcome}
+								/>
+								<Route path="/signup" component={SignupPage} />
+								<Route path="/signin" component={Signin} />
+								<PrivateRoute path="/election-reminders" component={ElectionReminder} />
+								<PrivateRoute path="/progress" component={Progress} />
+								<PrivateRoute path="/signout" component={Signout} />
+								<Route path="/playerwelcome" component={PlayerWelcome} />
+								<Route path="/actions" component={Actions} />
+								<Route path="/voterreg" component={VoterRegistrationForm} />
+								<Route path="/termsofservice" component = {TOS} />
+							</Switch>
+						</Router>
+						<Footer />
+					</div>
+				</div>
+			</AuthProvider>
+		</>
+	);
 }
-
-export default App;

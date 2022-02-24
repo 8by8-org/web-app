@@ -1,11 +1,12 @@
-import React, { useContext, useEffect, useState } from "react";
-import { auth } from "../firebase";
-
-const AuthContext = React.createContext();
+import React, { useContext, useEffect, useState } from 'react';
+import { ModalTitle } from 'react-bootstrap';
+import { auth } from '../firebase';
 
 export function useAuth() {
   return useContext(AuthContext);
 }
+
+export const AuthContext = React.createContext();;
 
 export function AuthProvider({ children }) {
   const [currentUser, setCurrentUser] = useState(null);
@@ -19,12 +20,12 @@ export function AuthProvider({ children }) {
     return unsubscribe;
   }, []);
 
-  const value = {
-    currentUser,
-  };
-  return (
-    <AuthContext.Provider value={value}>
-      {!authLoading && children}
-    </AuthContext.Provider>
-  );
+    const value = {
+        currentUser
+    };
+    return (
+        <AuthContext.Provider value={value}>
+            {!authLoading && children}
+        </AuthContext.Provider>
+    )
 }
