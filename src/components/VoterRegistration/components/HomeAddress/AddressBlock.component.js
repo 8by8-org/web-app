@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-export const AddressBlock = ({ addressType, parentRef }) => {
+export const AddressBlock = ({ addressType, parentRef, title }) => {
   const [formData, setFormData] = useState({
     street: "",
     streetLine2: "",
@@ -16,6 +16,7 @@ export const AddressBlock = ({ addressType, parentRef }) => {
 
   return (
     <>
+      <h2 className="register-form-title-small">{title}</h2>
       <label htmlFor={`${prefix}street`} className="register-label">
         Street Address*
       </label>

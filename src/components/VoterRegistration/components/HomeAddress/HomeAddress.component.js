@@ -8,13 +8,24 @@ export const HomeAddress = ({ parentRef, setParentState }) => {
 
   return (
     <>
-      <h2 className="register-form-title-small">HOME ADDRESS</h2>
-      <AddressBlock addressType={"home"} parentRef={parentRef} />
+      <AddressBlock
+        addressType={"home"}
+        parentRef={parentRef}
+        title="HOME ADDRESS"
+      />
       {hasMailingAddress && (
-        <AddressBlock addressType={"mailing"} parentRef={parentRef} />
+        <AddressBlock
+          addressType={"mailing"}
+          parentRef={parentRef}
+          title="MAILING ADDRESS"
+        />
       )}
       {hasChangeOfAddress && (
-        <AddressBlock addressType={"previous"} parentRef={parentRef} />
+        <AddressBlock
+          addressType={"previous"}
+          parentRef={parentRef}
+          title="PREVIOUS ADDRESS"
+        />
       )}
       <div>
         <label htmlFor="has_mailing_address" className="register-label">

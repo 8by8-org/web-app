@@ -140,6 +140,7 @@ export const YourName = ({ parentRef, setParentState }) => {
       <br />
       {formData.change_of_name && (
         <>
+          <h2 className="register-form-title-small">PREVIOUS NAME</h2>
           <label htmlFor="prev_name_title" className="register-label">
             Title*
           </label>

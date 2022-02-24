@@ -2,6 +2,14 @@ import React, { useState } from "react";
 import { useAuth } from "../../../../contexts/AuthContext";
 import "../../VoterRegistration.scss";
 
+//may want to add links to the latter 2 error messages for people who are ineligible to vote to help in other ways
+const ERROR_MESSAGES = [
+  "",
+  "Please complete all of the required fields.",
+  "You must be a US Citizen to vote.",
+  "You must be 18 by the next election to register.",
+];
+
 export const Eligibility = ({ parentRef, setParentState }) => {
   const { currentUser } = useAuth();
   const [formData, setFormData] = useState({
@@ -10,6 +18,7 @@ export const Eligibility = ({ parentRef, setParentState }) => {
     citizen: false,
     eighteenPlus: false,
   });
+  const [errorCode, setErrorCode] = useState(0);
 
   return (
     <>
@@ -95,11 +104,28 @@ export const Eligibility = ({ parentRef, setParentState }) => {
         </label>
       </div>
       <br />
+      <p style={{ color: "red", fontStyle: "italic", textAlign: "center" }}>
+        {ERROR_MESSAGES[errorCode]}
+      </p>
       <button
         className="next-btn"
         onClick={(event) => {
           event.preventDefault();
-          //need to add guards here
+          if (
+            formData.dob.length === 0 ||
+            !formData.zip.match(/^[0-9]{5}(?:-[0-9]{4})?$/)
+          ) {
+            setErrorCode(1);
+            return;
+          }
+          if (!formData.citizen) {
+            setErrorCode(2);
+            return;
+          }
+          if (!formData.eighteenPlus) {
+            setErrorCode(3);
+            return;
+          }
           setParentState("yourName");
         }}
       >

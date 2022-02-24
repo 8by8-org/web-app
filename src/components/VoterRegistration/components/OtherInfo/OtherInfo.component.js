@@ -114,9 +114,20 @@ export const OtherInfo = ({ parentRef, setParentState }) => {
         last 4 digits of your social security number. If you don’t include this
         info now, you’ll need to provide identification when you vote.
       </small>
+      <p
+        style={{
+          textAlign: "center",
+          fontStyle: "italic",
+          color: "gray",
+          marginTop: "8px",
+        }}
+      >
+        {isLoading && "creating form..."}
+      </p>
       <button
         className="next-btn"
         disabled={isLoading}
+        style={{ opacity: isLoading ? 0.5 : 1, marginTop: 0 }}
         onClick={(event) => {
           event.preventDefault();
           const {
@@ -153,7 +164,6 @@ export const OtherInfo = ({ parentRef, setParentState }) => {
             idNumber,
           };
           console.log(postBody);
-          setIsLoading(true);
           axios
             .post(apiUrl, postBody)
             .then((res) => {
@@ -166,14 +176,6 @@ export const OtherInfo = ({ parentRef, setParentState }) => {
             });
         }}
       >
-        {isLoading && (
-          <BeatLoader
-            color={"lightgray"}
-            loading={isLoading}
-            size={20}
-            style={{ marginTop: "4px", marginRight: "8px" }}
-          />
-        )}
         SUBMIT
       </button>
     </>
