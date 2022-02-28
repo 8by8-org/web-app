@@ -21,9 +21,9 @@ import EmailSvg from "../assets/images/Invite/Email.svg";
 import TextSvg from "../assets/images/Invite/Text.svg";
 
 function Invite({ toggleInvite }) {
-  const [show, setShow] = useState(false);
-  const [url, setUrl] = useState(false);
   const { currentUser } = useAuth();
+  const [ url, setUrl ] = useState(null);
+  const [show, setShow] = useState(false);
 
   React.useEffect(() => {
     toggleInvite.current = changeShow;
@@ -38,8 +38,8 @@ function Invite({ toggleInvite }) {
     navigator.clipboard.writeText(shareUrl);
   }
 
-  async function generateUrl() {
-     setUrl(`${window.location.origin}/playerwelcome?code=${currentUser.uid}`)
+  function generateUrl() {
+    setUrl(`${window.location.origin}/playerwelcome?code=${currentUser.uid}`)
   }
 
   // shareUrl is currently a temporary placeholder for UID link
@@ -70,7 +70,7 @@ function Invite({ toggleInvite }) {
         </div>
 
         <div className="section social-media">
-          <p className="sub-heading">Copy yout unique link</p>
+          <p className="sub-heading">Copy your unique link</p>
           <FacebookShareButton url={shareUrl} quote={quote} hashtag={hashtag}>
             <img className="invite-icon" src={FacebookSvg} />
             <p className="invite-icon-label">Facebook</p>
@@ -83,7 +83,7 @@ function Invite({ toggleInvite }) {
         </div>
 
         <div className="section messaging">
-          <p className="sub-heading">Copy yout unique link</p>
+          <p className="sub-heading">Copy your unique link</p>
           <FacebookMessengerShareButton url={shareUrl} appId={appId}>
             <img className="invite-icon" src={FacebookMessengerSvg} />
             <p className="invite-icon-label">Messenger</p>

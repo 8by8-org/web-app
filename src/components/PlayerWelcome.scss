@@ -6,18 +6,28 @@
 
   button {
     @include button;
+    outline: 4px solid white;
+    margin: 10px;
   }
 
   .top {
-    padding-bottom: 100px;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: space-around;
-    padding: 0 40px;
-    .logo {
-      margin: 50px 0;
-      width: 150px;
+    padding: 25px;
+    background-color: $black;
+    color: white;
+    .top-heading {
+      @include heading-text(white, 50px);
+      margin-top: 25px;
+      margin-bottom: 20px;
+      line-height: 43.2px;
+      letter-spacing: 0.03em;
+      text-align: center;
+      .underline {
+        @include text-underline;
+      }
     }
   }
 
@@ -66,5 +76,9 @@
     margin: auto;
     padding-top: 10px;
     padding-bottom: 20px;
+  }
+
+  .curve {
+    width: 100%;
   }
 }

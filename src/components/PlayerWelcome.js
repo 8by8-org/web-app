@@ -1,72 +1,79 @@
-import React, { useEffect, useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useHistory } from 'react-router-dom'
 import { Button } from "react-bootstrap";
-import { getFirestore, getDoc, doc } from 'firebase/firestore'
+import { getFirestore, getDoc, doc} from 'firebase/firestore'
 import SignUp1 from "../assets/images/PlayerWelcome/SignUp1.png"
 import SignUp2 from "../assets/images/PlayerWelcome/SignUp2.png"
 import Vote from "../assets/images/PlayerWelcome/Vote1.png"
-import Calendar from "../assets/images/PlayerWelcome/Complete1.svg"
-import Top from '../assets/images/PlayerWelcome/Top.svg'
+import BlackCurve from '../assets/images/PlayerWelcome/BlackCurve.svg'
 import './PlayerWelcome.scss'
+import { auth } from "../firebase";
+import { dummyPassword } from "../constants";
+import { useAuth } from "../contexts/AuthContext";
 
 export default function PlayerWelcome() {
     const history = useHistory(); 
-    const [loading, setLoading] = useState(null);
-    const [challengerInfo, setChallengerInfo] = useState(null);
+    const { currentUser } = useAuth();
+    const [ loading, setLoading ] = useState(true);
+    const [ challengerInfo, setChallengerInfo ] = useState(null);
 
     const url = new URL(window.location.href)
     const code = url.searchParams.get("code")
 
     async function getChallengerInfo() {
-        try {
-            const db = getFirestore();
-            const docRef = doc(db, "users", code)
+        const db = getFirestore();
+        const docRef = doc(db, "users", code)
+        
+        //only log in with substitute user if not already authenticated
+        if(currentUser) {
             const query = await getDoc(docRef)
-            
             localStorage.setItem('challengerInfo', JSON.stringify(query.data()))
-            setLoading(false)
-        } catch {
-            localStorage.setItem("code", code) //if user is not logged in, the code will still be stored
-            setLoading(false)
+        } else {
+            await auth.signInWithEmailAndPassword(
+                auth.getAuth(),
+                'wkvxgesiknosbamhei@kvhrr.com',
+                dummyPassword
+            );
+            const query = await getDoc(docRef)
+            localStorage.setItem('challengerInfo', JSON.stringify(query.data()))
+            auth.getAuth().signOut()
         }
     }
-
+    
     useEffect(() => {
-        if(code) {
-            getChallengerInfo()
-            setChallengerInfo(JSON.parse(localStorage.getItem('challengerInfo')))
+        //only queries challenger from firebase if not already in localstorage
+        if(localStorage.getItem("challengerInfo")) {
+            setChallengerInfo(JSON.parse(localStorage.getItem("challengerInfo")))
         } else {
-            setLoading(false)
+            getChallengerInfo()
+            setChallengerInfo(JSON.parse(localStorage.getItem("challengerInfo")))
         }
-      }, [loading]);
+
+        challengerInfo && setLoading(false)
+      });
 
     
     return (
-        loading == false? 
+        loading === false ? 
         <div className="player-welcome">
-            <div className="top" align="center">
-                <img src={Top}/>
-            </div>
-            <div className="main-content">
-                <div>
-                    <h2 className="heading"><u className="underline">Support</u> the 8by8 Challenge!</h2>
-                    <div align="center">
-                        <img src={Calendar} />
-                    </div>
-                </div>
+            <div className="top">
+                <h1 className="top-heading">
+                    <u className="underline">Support</u> {challengerInfo ? `${challengerInfo.name}'s`: 'the'} 8by8 Challenge!
+                </h1>
                 <div className="text">
-                    <p>
-                        <b>
-                            Help users win their <u>8BY8 Challenge</u> by registering to vote or taking other actions to #stopasianhate!
-                        </b>
-                    </p>
+                        <p>
+                            <b>
+                                Help {challengerInfo ? challengerInfo.name: 'your friend'} win their <u>8BY8 Challenge</u> by registering to vote or taking other actions to #stopasianhate!
+                            </b>
+                        </p>
                 </div>
-                <div>
-                    <Button onClick={() => {history.push('/actions')}}>Get Started</Button>
-                </div>
+                <Button onClick={() => {history.push(`/actions`)}}>Get Started</Button>
                 <div align="center">
                     <p className="small-text">Already have an account? <a href="/signin">Sign In</a></p>
                 </div>
+            </div>
+            <img src={BlackCurve} className="curve"/> 
+            <div className="main-content">
                 <div>
                     <h3 className="heading"><u className="underline">Here's how it works</u></h3>
                 </div>
@@ -99,9 +106,10 @@ export default function PlayerWelcome() {
                 <div className="image">
                         <img src={Vote} alt="8by8 Logo" />
                 </div>
-                <Button onClick={() => {history.push('actions')}}>Get Started</Button>
+                <Button onClick={() => {history.push(`/actions`)}}>Get Started</Button>
                 <p align="center" className="small-text">Already have an account? <a href="/signin">Sign In</a></p>
             </div>
-        </div> : <h1>loading...</h1>
-    )
+            </div>
+            : <h1>loading</h1>
+    ) 
 }
