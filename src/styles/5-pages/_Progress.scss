@@ -1,0 +1,58 @@
+.progress-page {
+  .section-1 {
+    .days-blob-container {
+      height: 0px;
+      bottom: 125px;
+      float: right;
+      position: relative;
+      .days-label {
+        @include horizontal-center;
+        flex-direction: column;
+        position: absolute;
+        left: 45%;
+        top: 40px;
+        @include xs-screen {
+          left: 38%;
+          top: 50px;
+        }
+        p {
+          font-size: 132px;
+          font-family: $bebas-neue;
+          line-height: 120px;
+          margin: 0;
+          @include sm-screen {
+            font-size: 115px;
+            line-height: 105px;
+          }
+          @include xs-screen {
+            font-size: 90px;
+            line-height: 90px;
+            text-shadow: -7px 7px 0px $black;
+          }
+        }
+        h3 {
+          @include sm-screen {
+            position: relative;
+            right: 10px;
+          }
+        }
+      }
+      .blob {
+        width: 220px;
+        height: 220px;
+        @include sm-screen {
+          width: 170px;
+        }
+        @include xs-screen {
+          width: 140px;
+        }
+      }
+    }
+  }
+
+  .section-2 {
+    span {
+      font-size: 48px;
+    }
+  }
+}

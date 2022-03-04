@@ -2,8 +2,9 @@ import * as firebase from "firebase/app";
 import * as authObject from "firebase/auth";
 
 const app = firebase.initializeApp({
-  apiKey: "AIzaSyDhMPNp_v1vl1APcbIuwhEYVwm0DJSckZg",
+  apiKey: "AIzaSyCADNiueqyRYQWObuq8BCew5yf8ZkBfMI4",
   authDomain: "by8-318322.firebaseapp.com",
+  databaseURL: "https://by8-318322-default-rtdb.firebaseio.com",
   projectId: "by8-318322",
   storageBucket: "by8-318322.appspot.com",
   messagingSenderId: "886066433112",

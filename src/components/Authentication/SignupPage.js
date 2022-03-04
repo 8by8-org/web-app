@@ -11,16 +11,14 @@ import avatar2 from "../../assets/images/SignUpPage/avatar2.png";
 import avatar3 from "../../assets/images/SignUpPage/avatar3.png";
 import avatar4 from "../../assets/images/SignUpPage/avatar4.png";
 import ReCAPTCHA from "react-google-recaptcha";
-import { getFunctions, httpsCallable } from "firebase/functions";
+import { getUserType } from "../../functions/UserData";
+import { emailUser } from "./../../functions/Email";
 import "./SignupPage.scss";
-const db = getFirestore();
 
 export default function SignupPage() {
   const { currentUser } = useAuth();
   const history = useHistory();
-
-  const functions = getFunctions();
-  const verifyReCaptcha = httpsCallable(functions, "verifyReCaptcha");
+  const db = getFirestore();
 
   const [error, setError] = useState(null);
   const [message, setMessage] = useState(null);
@@ -65,16 +63,28 @@ export default function SignupPage() {
         const email = emailRef.current.value;
         const confirmedEmail = confirmEmailRef.current.value;
         const username = nameRef.current.value;
-        const avatarNum = document.querySelector(
-          'input[name="avatar"]:checked'
-        ).id;
+        const avatarNumber = parseInt(
+          document.querySelector('input[name="avatar"]:checked').id
+        );
+        let challengeEndDate = "";
+        let startedChallenge = false;
+        if (getUserType() === "player") {
+          emailUser(email, "playerWelcome");
+          // add player data
+        } else {
+          emailUser(email, "challengerWelcome");
+          challengeEndDate = new Date(Date.now() + 8 * 24 * 60 * 60 * 1000); // now + 8 days
+          startedChallenge = true;
+        }
 
-        const addUserToDB = async (name, avatar) => {
+        const addUserToDB = async (name, avatar, endDate, isStarted) => {
           const user = auth.getAuth().currentUser;
           const userRef = doc(db, "users", user.uid);
           updateDoc(userRef, {
             name: name,
             avatar: avatar,
+            challengeEndDate: endDate,
+            startedChallenge: isStarted,
           });
         };
 
@@ -88,8 +98,13 @@ export default function SignupPage() {
             );
             // waiting a few seconds for user doc to be created before adding data
             await setTimeout(() => {
-              addUserToDB(username, avatarNum);
-            }, 3000); // blame this if username & avatar aren't stored
+              addUserToDB(
+                username,
+                avatarNumber,
+                challengeEndDate,
+                startedChallenge
+              );
+            }, 3000); // blame this if username, avatar, etc. aren't stored
           } catch (e) {
             setError(errorMessage(e));
           }
@@ -140,8 +155,8 @@ export default function SignupPage() {
             <p className="small-title">Which One's you? </p>
             <div className="avatar-container">
               {/* avatar 1 */}
-              <input checked={preselect} type="radio" name="avatar" id="1" />
-              <label htmlFor="1">
+              <input checked={preselect} type="radio" name="avatar" id={1} />
+              <label htmlFor={1}>
                 <img className="avatar-img" src={avatar1} alt="avatar1" />
               </label>
 
@@ -152,9 +167,9 @@ export default function SignupPage() {
                 }}
                 type="radio"
                 name="avatar"
-                id="2"
+                id={2}
               />
-              <label htmlFor="2">
+              <label htmlFor={2}>
                 <img className="avatar-img" src={avatar2} alt="avatar2" />
               </label>
               <br />
@@ -166,9 +181,9 @@ export default function SignupPage() {
                 }}
                 type="radio"
                 name="avatar"
-                id="3"
+                id={3}
               />
-              <label htmlFor="3">
+              <label htmlFor={3}>
                 <img className="avatar-img" src={avatar3} alt="avatar3" />
               </label>
 
@@ -179,9 +194,9 @@ export default function SignupPage() {
                 }}
                 type="radio"
                 name="avatar"
-                id="4"
+                id={4}
               />
-              <label htmlFor="4">
+              <label htmlFor={4}>
                 <img className="avatar-img" src={avatar4} alt="avatar4" />
               </label>
             </div>
@@ -191,16 +206,6 @@ export default function SignupPage() {
         <div className="recaptcha">
           <ReCAPTCHA
             sitekey="6LcVtjIeAAAAAEmNoh6l54YbfW8QoPm68aI8VJey"
-            // need to add server recaptcha check
-            // onChange={async (response) => {
-            //   await verifyReCaptcha({ response_key: response })
-            //     .then((result) => {
-            //       console.log(result);
-            //     })
-            //     .catch((error) => {
-            //       console.log(error);
-            //     });
-            // }}
             onChange={() => {
               setReCaptchaPassed(true);
             }}

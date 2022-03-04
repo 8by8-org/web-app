@@ -1,7 +1,11 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect } from "react";
 import { Button } from "react-bootstrap";
 import "./Progress.css";
-import Invite from "./Invite.js";
+import Invite from "../Invite.js";
+import { getUserDatabase, completedAction } from "./../../functions/UserData";
+
+import CurveA from "./../../assets/2-shapes/curve-a.svg";
+import BlobDay from "./../../assets/4-pages/Progress/BlobDay.svg";
 
 export default function Progress() {
   const data = {
@@ -84,7 +88,7 @@ export default function Progress() {
               <div className="avatar yellow-background">
                 <img
                   src={
-                    require(`../assets/avatars/${element["avatarString"]}`)
+                    require(`../../assets/avatars/${element["avatarString"]}`)
                       .default
                   }
                   alt="avatar"
@@ -126,9 +130,25 @@ export default function Progress() {
     );
   };
 
+  const [userData, setUserData] = useState();
+  const [daysLeft, setDaysLeft] = useState(0);
+  const [badges, setBadges] = useState([]);
+
+  useEffect(() => {
+    getUserDatabase().then((data) => {
+      const milisecondsLeft =
+        new Date(data.challengeEndDate.seconds * 1000) - new Date();
+      const days = Math.floor(milisecondsLeft / 1000 / 60 / 60 / 24 + 1);
+
+      setUserData(data);
+      setDaysLeft(days);
+      setBadges(data.badges);
+    });
+  }, []);
+
   return (
     <>
-      <div id="progress-container">
+      {/* <div id="progress-container">
         <p className="bebas-neue black spacing" id="challenge-badge-header">
           YOUR CHALLENGE BADGES
         </p>
@@ -166,6 +186,57 @@ export default function Progress() {
         </p>
       </div>
       <Invite toggleInvite={toggleInvite} />
+
+      <button
+        onClick={() => {
+          completedAction("register to vote");
+        }}
+      >
+        click me
+      </button> */}
+
+      <article className="progress-page">
+        <section className="section-1 bg-black pt-32px pl-30px pb-50px">
+          <h1>
+            Your <br /> challenge <br /> badges
+          </h1>
+          <div className="days-blob-container">
+            <div className="days-label">
+              <p className="number-shadow">{daysLeft}</p>
+              <h3 className="text-black">Days left</h3>
+            </div>
+            <img className="blob" src={BlobDay} />
+          </div>
+        </section>
+        <img className="curve" src={CurveA} />
+
+        <section className="section-2 pt-32px pl-30px pr-30px">
+          <h3 className="text-center pb-24px">
+            You completed <span className="underline">{badges.length}</span>{" "}
+            badges
+          </h3>
+          <button className="gradient" onClick={() => toggleInvite.current()}>
+            Invite friends
+          </button>
+          <p className="text-center mt-24px b6">Not registered to vote yet?</p>
+          <p className="text-center mb-24px b2">
+            <a href="/voterreg">Register now</a> and earn a badge!
+          </p>
+        </section>
+
+        <section className="section-3">8 badges</section>
+
+        <section className="section-4 pt-32px pl-30px pr-30px pb-40px">
+          <button className="gradient" onClick={() => toggleInvite.current()}>
+            Invite friends
+          </button>
+          <p className="text-center mt-24px b6">Not registered to vote yet?</p>
+          <p className="text-center b2">
+            <a href="/voterreg">Register now</a> and earn a badge!
+          </p>
+        </section>
+        <Invite toggleInvite={toggleInvite} />
+      </article>
     </>
   );
 }

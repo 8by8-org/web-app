@@ -5,7 +5,7 @@ import {
   Route,
   Switch,
 } from "react-router-dom";
-import ScrollToTop from "./ScrollToTop";
+import ScrollToTop from "../functions/ScrollToTop";
 import { AuthProvider } from "../contexts/AuthContext";
 import Signin from "./Authentication/Signin";
 import Signout from "./Authentication/Signout";
@@ -14,7 +14,7 @@ import PrivateRoute from "./Helpers/PrivateRoute";
 import Header from "./Header/Header";
 import "./App.css";
 import HomePage from "./HomePage/HomePage";
-import Progress from "./Progress";
+import Progress from "./Progress/Progress";
 import ChallengerWelcome from "./ChallengerWelcome/ChallengerWelcome";
 import ElectionReminder from "./ElectionReminders/ElectionReminder";
 import Footer from "./Footer";

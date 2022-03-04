@@ -50,33 +50,17 @@ exports.onSignup = functions.auth.user().onCreate(async (user) => {
     userRef.set({
       email: user.email,
       name: user.displayName,
+      avatar: "",
       inviteCode: await generateUniqueInviteCode(),
-      isRegisteredVoter: false,
+      invitedBy: "",
       lastActive: admin.firestore.FieldValue.serverTimestamp(),
+      notifyElectionReminders: false,
+      isRegisteredVoter: false,
+      startedChallenge: false,
+      sharedChallenge: false,
+      completedActionForChallenger: false,
+      challengeEndDate: "",
+      badges: [],
     });
   }
-});
-
-// verifying recaptcha function (hasn't been implemented nor tested yet)
-import fetch from "node-fetch";
-exports.verifyReCaptcha = functions.https.onCall(async (data) => {
-  const secret_key = "6LcVtjIeAAAAAMu7qszTrL0zjbdK_2ClFPW2jUMU";
-  const response_key = data.response_key;
-
-  await fetch(
-    `https://www.google.com/recaptcha/api/siteverify?secret=${secret_key}&response=${response_key}`,
-    {
-      method: "POST",
-    }
-  )
-    .then((response) => response.json())
-    .then((result) => {
-      return result;
-    })
-    .catch((error) => {
-      throw new functions.https.HttpsError(
-        "an error occured while calling the function: ",
-        error
-      );
-    });
 });
