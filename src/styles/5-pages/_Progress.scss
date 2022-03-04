@@ -2,7 +2,7 @@
   .section-1 {
     .days-blob-container {
       height: 0px;
-      bottom: 125px;
+      bottom: 110px;
       float: right;
       position: relative;
       .days-label {
@@ -11,40 +11,31 @@
         position: absolute;
         left: 45%;
         top: 40px;
-        @include xs-screen {
-          left: 38%;
-          top: 50px;
-        }
         p {
-          font-size: 132px;
+          font-size: 122px;
           font-family: $bebas-neue;
-          line-height: 120px;
+          line-height: 110px;
           margin: 0;
-          @include sm-screen {
-            font-size: 115px;
-            line-height: 105px;
-          }
-          @include xs-screen {
-            font-size: 90px;
-            line-height: 90px;
-            text-shadow: -7px 7px 0px $black;
-          }
-        }
-        h3 {
-          @include sm-screen {
-            position: relative;
-            right: 10px;
-          }
         }
       }
       .blob {
-        width: 220px;
+        width: 180px;
         height: 220px;
-        @include sm-screen {
-          width: 170px;
+      }
+    }
+    @include xs-screen {
+      .days-blob-container {
+        .days-label {
+          left: 45%;
+          top: 40px;
+          p {
+            font-size: 132px;
+            line-height: 120px;
+          }
         }
-        @include xs-screen {
-          width: 140px;
+        .blob {
+          width: 200px;
+          height: 220px;
         }
       }
     }
@@ -53,6 +44,66 @@
   .section-2 {
     span {
       font-size: 48px;
+    }
+  }
+
+  .section-3 {
+    display: grid;
+    display: -ms-grid;
+    grid-template-columns: auto auto;
+    -ms-grid-columns: auto auto;
+    overflow: hidden;
+    .badges {
+      @include center;
+      flex-direction: row;
+      margin-bottom: 80px;
+      .blob {
+        @include center;
+        position: relative;
+        z-index: 0;
+        width: 0px;
+      }
+      .disable {
+        opacity: 0.2;
+      }
+      .blob-content {
+        @include center;
+        flex-direction: column;
+        position: relative;
+        z-index: 0.1;
+        width: 0;
+        .icon {
+          width: 120px;
+          height: 120px;
+        }
+        .index {
+          color: $white;
+          font-size: 72px;
+          font-family: $bebas-neue;
+          line-height: 120px;
+          margin: 0;
+        }
+        h3 {
+          width: 120px;
+          text-align: center;
+        }
+      }
+    }
+    @include md-screen {
+      .badges {
+        .blob {
+          img {
+            width: 200px;
+            height: 200px;
+          }
+        }
+        .blob-content {
+          .icon {
+            width: 130px;
+            height: 130px;
+          }
+        }
+      }
     }
   }
 }

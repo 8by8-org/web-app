@@ -11,7 +11,6 @@ import avatar2 from "../../assets/images/SignUpPage/avatar2.png";
 import avatar3 from "../../assets/images/SignUpPage/avatar3.png";
 import avatar4 from "../../assets/images/SignUpPage/avatar4.png";
 import ReCAPTCHA from "react-google-recaptcha";
-import { getUserType } from "../../functions/UserData";
 import { emailUser } from "./../../functions/Email";
 import "./SignupPage.scss";
 
@@ -68,14 +67,14 @@ export default function SignupPage() {
         );
         let challengeEndDate = "";
         let startedChallenge = false;
-        if (getUserType() === "player") {
+        // will need to change data if user is not a challenger (is a player)
+        /**    if (getUserType() === "player") {
           emailUser(email, "playerWelcome");
           // add player data
-        } else {
-          emailUser(email, "challengerWelcome");
-          challengeEndDate = new Date(Date.now() + 8 * 24 * 60 * 60 * 1000); // now + 8 days
-          startedChallenge = true;
-        }
+        }  else { } */
+        emailUser(email, "challengerWelcome");
+        challengeEndDate = new Date(Date.now() + 8 * 24 * 60 * 60 * 1000); // now + 8 days
+        startedChallenge = true;
 
         const addUserToDB = async (name, avatar, endDate, isStarted) => {
           const user = auth.getAuth().currentUser;

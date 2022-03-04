@@ -10,85 +10,120 @@ import { emailUser } from "./Email";
 
 const db = getFirestore();
 
-export function setUserType(type) {
-  if (type === "challenger") {
-    localStorage.setItem("userType", "challenger");
-  } else if (type === "player") {
-    localStorage.setItem("userType", "player");
-  } else {
-    console.error(`user type ${type} does not exist`);
-  }
+export function delay(ms) {
+  return new Promise((resolve) => setTimeout(resolve, ms));
 }
 
-export function getUserType() {
-  if (localStorage.getItem("userType")) {
-    return localStorage.getItem("userType");
-  } else {
-    console.error("user does not have a type yet");
-  }
-}
-
+// gets user's data from firebase
 export async function getUserDatabase() {
-  const uid = auth.getAuth().currentUser.uid;
-  const docRef = doc(db, "users", uid);
-  const docSnap = await getDoc(docRef);
-  if (docSnap.exists()) {
+  let uid = auth.getAuth().currentUser.uid;
+  let docRef = doc(db, "users", uid);
+  let docSnap = await getDoc(docRef);
+  if (!docSnap.exists()) {
+    // tries to find user doc 5 times
+    for (let i = 0; i < 5; i++) {
+      await delay(2000);
+      uid = auth.getAuth().currentUser.uid;
+      docRef = doc(db, "users", uid);
+      docSnap = await getDoc(docRef);
+      if (docSnap.exists()) {
+        return docSnap.data();
+      }
+      console.log("tried");
+    }
+    throw new Error("user doc does not exist");
+  } else {
     console.log(docSnap.data());
     return docSnap.data();
-  } else {
-    throw new Error("user doc does not exist");
   }
 }
 
-// call this function when user completes an aciton (register to vote, election reminders, takes challenge, shares challenge)
-// could email user after certain completed actions
+// call this function when user completes an aciton
+// ADD email user after certain completed actions
 export async function completedAction(action) {
+  const userData = await getUserDatabase();
   const uid = auth.getAuth().currentUser.uid;
-  if (action === "register to vote") {
-    await updateChallengerBadges();
-    updateDoc(doc(db, "users", uid), {
-      isRegisteredVoter: true,
-      badges: arrayUnion({ challengerBadge: "you registered" }),
-    });
-  } else if (action === "election reminders") {
-    await updateChallengerBadges();
-    updateDoc(doc(db, "users", uid), {
+  // sign up for election reminders
+  if (action === "election reminders") {
+    await updateChallengerBadges(userData);
+    await updateDoc(doc(db, "users", uid), {
       notifyElectionReminders: true,
     });
-  } else if (action === "take challenge") {
-    await updateChallengerBadges();
-    updateDoc(doc(db, "users", uid), {
+  }
+  // takes the challenge
+  else if (action === "take challenge") {
+    await updateChallengerBadges(userData);
+    await updateDoc(doc(db, "users", uid), {
       startedChallenge: true,
     });
-  } else if (action === "share challenge") {
-    updateDoc(doc(db, "users", uid), {
+  }
+  // registers to vote
+  else if (action === "register to vote") {
+    await updateChallengerBadges(userData);
+    await updateDoc(doc(db, "users", uid), {
+      isRegisteredVoter: true,
+    });
+    if (userData.startedChallenge) {
+      await updateDoc(doc(db, "users", uid), {
+        badges: arrayUnion({
+          badge: {
+            name: "you registered",
+            icon: "mail",
+          },
+        }),
+      });
+    }
+  }
+  // shares challenge
+  else if (action === "share challenge") {
+    await updateDoc(doc(db, "users", uid), {
       sharedChallenge: true,
-      badges: arrayUnion({ challengerBadge: "you shared" }),
+    });
+    if (userData.startedChallenge) {
+      await updateDoc(doc(db, "users", uid), {
+        badges: arrayUnion({
+          badge: {
+            name: "you shared",
+            icon: "share",
+          },
+        }),
+      });
+    }
+    // remove after done testing
+  } else if (action === "test add badge") {
+    const name = "Mike" + Math.floor(Math.random() * 100) + 1;
+    const num = Math.floor(Math.random() * 4) + 1;
+    await updateDoc(doc(db, "users", uid), {
+      badges: arrayUnion({
+        badge: {
+          name: name,
+          icon: num,
+        },
+      }),
     });
   } else {
     throw new Error("specified action does not exist");
   }
 }
 
-// gives challenger a badge for player actions
-async function updateChallengerBadges() {
-  const userData = await getUserDatabase();
+// gives challenger a badge for player's actions
+async function updateChallengerBadges(userData) {
   const uid = auth.getAuth().currentUser.uid;
   if (
     userData.invitedBy !== "" &&
     userData.completedActionForChallenger === false
   ) {
-    updateDoc(doc(db, "users", userData.invitedBy), {
+    await updateDoc(doc(db, "users", userData.invitedBy), {
       badges: arrayUnion({
-        playerBadge: {
-          playerName: userData.name,
-          playerAvatar: userData.avatar,
-          playerID: uid,
+        badge: {
+          name: userData.name,
+          icon: userData.avatar,
+          uid: uid,
         },
       }),
     });
 
-    updateDoc(doc(db, "users", uid), {
+    await updateDoc(doc(db, "users", uid), {
       completedActionForChallenger: true,
     });
   }

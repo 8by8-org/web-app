@@ -1,5 +1,5 @@
 // add specific spacing to this list to use in any className
-$spacing-sizes: $spacing-sm, 30px, $spacing-md, $spacing-lg, 50px;
+$spacing-sizes: $spacing-sm, 30px, $spacing-md, $spacing-lg, 50px, 80px;
 
 @each $size in $spacing-sizes {
   .mt-#{$size} {

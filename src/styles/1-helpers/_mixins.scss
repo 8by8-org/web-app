@@ -24,21 +24,21 @@
 
 //Medium Screen - 391 to 445 screen size
 @mixin md-screen {
-  @media only screen and (max-width: $md-screen-sz) {
+  @media only screen and (min-width: $md-screen-sz) {
     @content;
   }
 }
 
 //Medium Screen - 336 to 390 screen size
 @mixin sm-screen {
-  @media only screen and (max-width: $sm-screen-sz) {
+  @media only screen and (min-width: $sm-screen-sz) {
     @content;
   }
 }
 
 // XSmall Screen - 280 to 335 screen size
 @mixin xs-screen {
-  @media only screen and (max-width: $xs-screen-sz) {
+  @media only screen and (min-width: $xs-screen-sz) {
     @content;
   }
 }
