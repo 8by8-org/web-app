@@ -62,6 +62,12 @@
   line-height: 58px !important;
 }
 
+@mixin subheading-text($color: $black, $fontSize: 36px) {
+  color: $color;
+  font-family: $bebas-neue;
+  font-size: $fontSize;
+}
+
 //blue text underline
 @mixin text-underline {
   text-decoration: underline;

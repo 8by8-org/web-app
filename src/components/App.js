@@ -21,6 +21,7 @@ import Footer from "./Footer";
 import PlayerWelcome from "./PlayerWelcome";
 import Actions from "./Actions";
 import VoterRegistration from "./VoterRegistration";
+import VoterRegistrationForm from "./VoterRegistration/VoterRegistrationForm";
 import TOS from "./TOS/TOS";
 
 export default function App() {
