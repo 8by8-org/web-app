@@ -1,8 +1,5 @@
 # 8by8 web app
 
-## Short note
-
-The "me" in all of these documentation files is referring to "Simon Cheng."
 
 ## First time developers
 
