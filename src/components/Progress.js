@@ -13,7 +13,7 @@ export default function Progress() {
         name: "placeholder",
       },
       {
-        avatarString: "Girl-2.png",
+        avatarString: "Girl-1.png",
         name: "placeholder",
       },
     ],

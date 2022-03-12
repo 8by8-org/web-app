@@ -21,7 +21,6 @@ import Footer from "./Footer";
 import PlayerWelcome from "./PlayerWelcome";
 import Actions from "./Actions";
 import VoterRegistration from "./VoterRegistration";
-import VoterRegistrationForm from "./VoterRegistration/VoterRegistrationForm";
 import TOS from "./TOS/TOS";
 
 export default function App() {
@@ -50,7 +49,7 @@ export default function App() {
 								<PrivateRoute path="/signout" component={Signout} />
 								<Route path="/playerwelcome" component={PlayerWelcome} />
 								<Route path="/actions" component={Actions} />
-								<Route path="/voterreg" component={VoterRegistrationForm} />
+								<Route path="/voterreg" component={VoterRegistration} />
 								<Route path="/termsofservice" component = {TOS} />
 							</Switch>
 						</Router>

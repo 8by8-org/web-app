@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useAuth } from "../contexts/AuthContext";
 import { Nav } from "react-bootstrap";
 import "./Invite.scss";
 import * as MdIcons from "react-icons/md";
@@ -20,9 +21,13 @@ import EmailSvg from "../assets/images/Invite/Email.svg";
 import TextSvg from "../assets/images/Invite/Text.svg";
 
 function Invite({ toggleInvite }) {
+  const { currentUser } = useAuth();
+  const [ url, setUrl ] = useState(null);
   const [show, setShow] = useState(false);
+
   React.useEffect(() => {
     toggleInvite.current = changeShow;
+    generateUrl();
   }, []);
 
   function changeShow() {
@@ -33,8 +38,12 @@ function Invite({ toggleInvite }) {
     navigator.clipboard.writeText(shareUrl);
   }
 
+  function generateUrl() {
+    setUrl(`${window.location.origin}/playerwelcome?code=${currentUser.uid}`)
+  }
+
   // shareUrl is currently a temporary placeholder for UID link
-  const shareUrl = "www.8by8.us";
+  const shareUrl = url;
   const quote = "Help me in my 8by8 Challenge to #stopasianhate";
   const hashtag = "#stopasianhate";
   // facebook developer app id (for now its from a personal account for testing)
@@ -61,7 +70,7 @@ function Invite({ toggleInvite }) {
         </div>
 
         <div className="section social-media">
-          <p className="sub-heading">Copy yout unique link</p>
+          <p className="sub-heading">Copy your unique link</p>
           <FacebookShareButton url={shareUrl} quote={quote} hashtag={hashtag}>
             <img className="invite-icon" src={FacebookSvg} />
             <p className="invite-icon-label">Facebook</p>
@@ -74,7 +83,7 @@ function Invite({ toggleInvite }) {
         </div>
 
         <div className="section messaging">
-          <p className="sub-heading">Copy yout unique link</p>
+          <p className="sub-heading">Copy your unique link</p>
           <FacebookMessengerShareButton url={shareUrl} appId={appId}>
             <img className="invite-icon" src={FacebookMessengerSvg} />
             <p className="invite-icon-label">Messenger</p>
@@ -94,7 +103,7 @@ function Invite({ toggleInvite }) {
         <div className="section copy-link">
           <p className="sub-heading">Copy your unique link</p>
           <div className="link-container">
-            <p>{shareUrl}</p>
+            <input type="text" value={shareUrl} readonly/>
             <button onClick={copyToClipboard}>COPY</button>
           </div>
         </div>
