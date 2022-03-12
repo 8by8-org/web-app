@@ -2,7 +2,7 @@ import * as firebase from "firebase/app";
 import * as authObject from "firebase/auth";
 
 const app = firebase.initializeApp({
-  apiKey: "AIzaSyCADNiueqyRYQWObuq8BCew5yf8ZkBfMI4",
+  apiKey: process.env.REACT_APP_FIREBASE,
   authDomain: "by8-318322.firebaseapp.com",
   databaseURL: "https://by8-318322-default-rtdb.firebaseio.com",
   projectId: "by8-318322",
