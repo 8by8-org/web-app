@@ -1,0 +1,36 @@
+// add specific spacing to this list to use in any className
+$spacing-sizes: $spacing-sm, 30px, $spacing-md, $spacing-lg, 50px, 80px;
+
+@each $size in $spacing-sizes {
+  .mt-#{$size} {
+    margin-top: $size;
+  }
+
+  .mb-#{$size} {
+    margin-bottom: $size;
+  }
+
+  .ml-#{$size} {
+    margin-left: $size;
+  }
+
+  .mr-#{$size} {
+    margin-right: $size;
+  }
+
+  .pt-#{$size} {
+    padding-top: $size;
+  }
+
+  .pb-#{$size} {
+    padding-bottom: $size;
+  }
+
+  .pl-#{$size} {
+    padding-left: $size;
+  }
+
+  .pr-#{$size} {
+    padding-right: $size;
+  }
+}

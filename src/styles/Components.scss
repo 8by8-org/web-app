@@ -70,6 +70,13 @@
 
 //blue text underline
 @mixin text-underline {
-  text-decoration: underline $blue 10px !important;
-  text-underline-offset: -5px !important;
+  text-decoration: underline;
+  text-decoration-color: $blue;
+  text-decoration-thickness: 10px;
+
+  // non-iOS devices (code breaks on iOS)
+  @supports not (-webkit-touch-callout: none) {
+    text-decoration: underline $blue 10px !important;
+    text-underline-offset: -5px !important;
+  }
 }
