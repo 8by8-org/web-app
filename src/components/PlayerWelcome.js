@@ -29,6 +29,7 @@ export default function PlayerWelcome() {
         if(currentUser) {
             const query = await getDoc(docRef)
             const info = (({name, avatar}) => ({name, avatar}))(query.data())
+            info.challengerID = code; 
             localStorage.setItem('challengerInfo', JSON.stringify(info))
         } else {
             await auth.signInWithEmailAndPassword(
@@ -38,6 +39,7 @@ export default function PlayerWelcome() {
             );
             const query = await getDoc(docRef)
             const info = (({name, avatar}) => ({name, avatar}))(query.data())
+            info.challengerID = code; 
             localStorage.setItem('challengerInfo', JSON.stringify(info))
             auth.getAuth().signOut()
         }
