@@ -33,6 +33,31 @@ export default function SignupPage() {
   const playerStatus = localStorage.getItem("player");
 
   useEffect(() => {
+    //console.log("useEffect  ")
+
+    if (currentUser) {
+      history.push("/progress");
+      console.log("create data structure")
+      const email = emailRef.current.value;
+      const docData = {
+
+        email:email,
+        name:"",//currentUser.displayname,
+        avatar:"",
+        inviteBy:"",
+        lactActive:0,//Timestamp.fromDate(new Date("December 1, 1700")),//example date //admin.firestore.FieldValue.serverTimestamp(),
+        notifyElectionRemindner:false,
+      
+        isRegisterToStart:false,
+        startedChallenge:false,
+        completedActionForChanlleger:false,
+        chllangeEndDate:"",
+        badges:[]
+      };
+       setDoc(doc(db, "users", email), docData);
+      return;
+    }
+
     if (currentUser) {
       history.push("/progress");
       return;
@@ -55,198 +80,110 @@ export default function SignupPage() {
       return;
     }
 
-    // signup logic
     if (!auth.isSignInWithEmailLink(auth.getAuth(), window.location.href)) {
-      setButtonMessage("Submit");
+      // login step 1
+      setButtonMessage("Sign Up");
       buttonRef.current.onclick = async function () {
         const email = emailRef.current.value;
-        const confirmedEmail = confirmEmailRef.current.value;
-        const username = nameRef.current.value;
-        const avatarNumber = parseInt(
-          document.querySelector('input[name="avatar"]:checked').id
-        );
-        let challengeEndDate = "";
-        let startedChallenge = false;
-        // will need to change data if user is not a challenger (is a player)
-        /**    if (getUserType() === "player") {
-          emailUser(email, "playerWelcome");
-          // add player data
-        }  else { } */
-        emailUser(email, "challengerWelcome");
-        challengeEndDate = new Date(Date.now() + 8 * 24 * 60 * 60 * 1000); // now + 8 days
-        startedChallenge = true;
-
-        const addUserToDB = async (name, avatar, endDate, isStarted) => {
-          const user = auth.getAuth().currentUser;
-          const userRef = doc(db, "users", user.uid);
-          updateDoc(userRef, {
-            name: name,
-            avatar: avatar,
-            challengeEndDate: endDate,
-            startedChallenge: isStarted,
+        const avatar = avatarRef.current.id;
+        console.dir(avatarRef);
+        await console.log(avatar);
+        const addAvatarToDB = async () => {
+          let user = auth.getAuth().currentUser;
+          console.log(user.uid); 
+          let userRef = doc(db, "users", user.uid);
+          await updateDoc(userRef, {
+            avatar
           });
-        };
-
+        }
         const createUser = async (email) => {
-          try {
-            // CryptoRandomString generates a random hash for the password (because it has no use right now)
-            await auth.createUserWithEmailAndPassword(
-              auth.getAuth(),
-              email,
-              dummyPassword
-            );
-            // waiting a few seconds for user doc to be created before adding data
-            await setTimeout(() => {
-              addUserToDB(
-                username,
-                avatarNumber,
-                challengeEndDate,
-                startedChallenge
-              );
-            }, 3000); // blame this if username, avatar, etc. aren't stored
-          } catch (e) {
-            setError(errorMessage(e));
-          }
-        };
+            try {
+              console.log("email")
+              console.log(email)
+              // CryptoRandomString generates a random hash for the password (because it has no use right now)
+              await auth.createUserWithEmailAndPassword(auth.getAuth(), email, dummyPassword); 
+              await addAvatarToDB();
 
-        if (!email) {
-          setError("Please enter an email address");
-        } else if (confirmedEmail !== email) {
-          setError("Emails do not match");
+            } catch (e) {
+              console.log(e);
+              setError(errorMessage(e));
+            }
+        };
+        if (!email ) {
+            setMessage("Missing email");
         } else {
-          createUser(email);
-          setMessage("Success");
+            createUser(email);
+            window.location.href = `${workingUrl}/login`
         }
       };
-    }
+    } 
     // eslint-disable-next-line
   }, [currentUser]);
 
   return (
-    <div className="signup">
-      <p className="normal-title">Sign up</p>
-      <p className="no-underline-title">to start your 8by8 journey</p>
-
-      <Form className="form">
-        {error && <p className="error">{error}</p>}
-        {message && <p> {message} </p>}
-        {emailVisible && (
-          <>
-            <p className="required-text">*Required information</p>
-            <Form.Control
-              className="text-input"
-              type="text"
-              placeholder="Name*"
-              ref={nameRef}
-            ></Form.Control>
-            <Form.Control
-              className="text-input"
-              type="email"
-              placeholder="Email address*"
-              ref={emailRef}
-            ></Form.Control>
-            <Form.Control
-              className="text-input"
-              type="email"
-              placeholder="Re-enter Email address*"
-              ref={confirmEmailRef}
-            ></Form.Control>
-            <p className="small-title">Which One's you? </p>
-            <div className="avatar-container">
-              {/* avatar 1 */}
-              <input checked={preselect} type="radio" name="avatar" id={1} />
-              <label htmlFor={1}>
-                <img className="avatar-img" src={avatar1} alt="avatar1" />
+    <>
+      <div className="signin p-3">
+         <Form className="d-grid signin-form">
+           <p className="signup-text"><span class="signup-header">Sign up</span><br />to start your 8by8 journey</p>
+           {error && <p className="error-col">{error}</p>}
+           {message && <p> {message} </p>}
+           {emailVisible && (
+             <div>
+               <Form.Control 
+                className="form-control"
+                type="text"
+                placeholder="Name: "
+                ></Form.Control>
+               <Form.Control
+                 className="form-control"
+                 type="email"
+                 placeholder="Email:"
+                 ref={emailRef}
+               ></Form.Control>
+               <p className="signup-text signup-header">Which One's you? </p>
+              <input type="radio" id='0' name="avatar" value='0' ref={avatarRef} />
+              <label htmlFor='0'>
+                    <div className='avatar'>
+                        <img className="avatar-img" src={process.env.PUBLIC_URL + "/avatars/avatar1.png"} alt="" />
+                    </div>
               </label>
-
-              {/* avatar 2 */}
-              <input
-                onClick={() => {
-                  setPreselect(null);
-                }}
-                type="radio"
-                name="avatar"
-                id={2}
-              />
-              <label htmlFor={2}>
-                <img className="avatar-img" src={avatar2} alt="avatar2" />
+              <input type="radio" id='1' name="avatar" value='1' ref={avatarRef} />
+              <label htmlFor='1'>
+                  <div className='avatar'>
+                      <img className="avatar-img" src={process.env.PUBLIC_URL + "/avatars/avatar2.png"} alt="" />
+                  </div>
               </label>
               <br />
-
-              {/* avatar 3 */}
-              <input
-                onClick={() => {
-                  setPreselect(null);
-                }}
-                type="radio"
-                name="avatar"
-                id={3}
-              />
-              <label htmlFor={3}>
-                <img className="avatar-img" src={avatar3} alt="avatar3" />
+              <input type="radio" id='2' name="avatar" value='2' ref={avatarRef} />
+              <label htmlFor='2'>
+                  <div className='avatar'>
+                      <img className="avatar-img" src={process.env.PUBLIC_URL + "/avatars/avatar3.png"} alt="" />
+                  </div>
               </label>
-
-              {/* avatar 4 */}
-              <input
-                onClick={() => {
-                  setPreselect(null);
-                }}
-                type="radio"
-                name="avatar"
-                id={4}
-              />
-              <label htmlFor={4}>
-                <img className="avatar-img" src={avatar4} alt="avatar4" />
+              <input type="radio" id='3' name="avatar" value='3' ref={avatarRef} />
+              <label htmlFor='3'>
+                  <div className='avatar'>
+                      <img className="avatar-img" src={process.env.PUBLIC_URL + "/avatars/avatar4.png"} alt="" />
+                  </div>
               </label>
-            </div>
-          </>
-        )}
-
-        <div className="recaptcha">
-          <ReCAPTCHA
-            sitekey="6LcVtjIeAAAAAEmNoh6l54YbfW8QoPm68aI8VJey"
-            onChange={() => {
-              setReCaptchaPassed(true);
-            }}
-            onExpired={() => {
-              setReCaptchaPassed(false);
-            }}
-            onErrored={() => {
-              setReCaptchaPassed(false);
-            }}
-          />
-        </div>
-
-        <p className="tos">
-          By clicking on Continue, I agree to the &#160;
-          <a onClick={() => history.push("/termsofservice")} className="link">
-            Terms of Service
-          </a>{" "}
-          and the{" "}
-          <a href="#" className="link">
-            Privacy Policy
-          </a>
-        </p>
-
-        {buttonMessage && (
-          <Button
-            className="gradient-button"
-            ref={buttonRef}
-            disabled={!reCaptchaPassed}
-          >
-            {buttonMessage}
-          </Button>
-        )}
-
-        {buttonMessage && (
-          <p class="signin small-text">
-            Already have an account?{" "}
-            <a href="/signin" className="link">
+              
+           </div>
+           )}
+           {buttonMessage && (
+             <Button className="button" ref={buttonRef}>
+               {buttonMessage}
+             </Button>
+           )}
+           {buttonMessage && (
+             <p class="signin-link">
+             Have an account? <> </>
+            <a href="/signin" style={{style: 'inline'}}>
               Sign In
-            </a>
-          </p>
-        )}
-      </Form>
-    </div>
+            </a></p>
+           )}
+           
+         </Form>
+        </div>
+    </>
   );
 }
