@@ -27,17 +27,19 @@
 
   .action-status {
     width: 50%;
+    padding-top: 10%;
   }
 
   .avatar-container {
     @include blob-background;
     width: 100%;
     height: auto;
+    padding: 10% 0% 10%;
     #challenger-avatar {
       width: 40%;
     }
     #challenger-name {
-      font-size: 30px;
+      @include heading-text($black, 30px);
     }
   }
 
