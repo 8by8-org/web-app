@@ -61,7 +61,7 @@ function Invite({ toggleInvite }) {
         </div>
 
         <div className="section social-media">
-          <p className="sub-heading">Copy yout unique link</p>
+          <p className="sub-heading">Copy your unique link</p>
           <FacebookShareButton url={shareUrl} quote={quote} hashtag={hashtag}>
             <img className="invite-icon" src={FacebookSvg} />
             <p className="invite-icon-label">Facebook</p>
@@ -74,7 +74,7 @@ function Invite({ toggleInvite }) {
         </div>
 
         <div className="section messaging">
-          <p className="sub-heading">Copy yout unique link</p>
+          <p className="sub-heading">Copy your unique link</p>
           <FacebookMessengerShareButton url={shareUrl} appId={appId}>
             <img className="invite-icon" src={FacebookMessengerSvg} />
             <p className="invite-icon-label">Messenger</p>
