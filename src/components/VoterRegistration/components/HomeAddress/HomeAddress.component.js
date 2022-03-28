@@ -1,10 +1,16 @@
 import React, { useState } from "react";
+import axios from "axios";
+import { IconContext } from "react-icons";
+import * as MdIcons from "react-icons/md";
+import "../../VoterRegistration.scss";
 import { AddressBlock } from "./AddressBlock.component";
-// import ZipCodeData from "zipcode-data";
+
+const apiUrl = "https://usvotes-6vsnwycl4q-uw.a.run.app/";
 
 export const HomeAddress = ({ parentRef, setParentState }) => {
   const [hasMailingAddress, setHasMailingAddress] = useState(false);
   const [hasChangeOfAddress, setHasChangeOfAddress] = useState(false);
+  const [showModal, setShowModal] = useState(false);
 
   return (
     <>
@@ -12,6 +18,7 @@ export const HomeAddress = ({ parentRef, setParentState }) => {
         addressType={"home"}
         parentRef={parentRef}
         title="HOME ADDRESS"
+        tooltipText="Provide your home address. Do not put your mailing address here if it’s different from your home address. Do not use a PO Box or rural route without a box number. If you live in a rural area but don’t have a street address or have no address, you can show where you live on a map later on the printed form."
       />
       {hasMailingAddress && (
         <AddressBlock
@@ -65,14 +72,88 @@ export const HomeAddress = ({ parentRef, setParentState }) => {
       </div>
       <button
         className="next-btn"
-        onClick={(event) => {
+        onClick={async (event) => {
           event.preventDefault();
           //need to add guards here
-          setParentState("otherInfo");
+          const { state, city, street, name_first, name_last, dob, zip } =
+            parentRef.current;
+          const ymd = dob.split("-");
+          const year = ymd[0];
+          const month = ymd[1];
+          const day = ymd[2];
+          const formattedDob = `${month}/${day}/${year}`;
+          const postBody = {
+            state,
+            city,
+            street,
+            name_first,
+            name_last,
+            dob: formattedDob,
+            zip,
+          };
+          try {
+            const res = await axios.post(`${apiUrl}registered/`, postBody);
+            const { registered } = res.data;
+            if (registered) {
+              setShowModal(true);
+            } else {
+              setParentState("otherInfo");
+            }
+          } catch (e) {
+            console.log(e);
+            setParentState("otherInfo");
+          }
+          // setParentState("otherInfo");
         }}
       >
         NEXT
       </button>
+      {showModal && (
+        <div className="voter-reg-modal-container">
+          <IconContext.Provider value={{ color: "black" }}>
+            <div className="voter-reg-modal">
+              <div className="voter-reg-toggle-container">
+                <button
+                  className="voter-reg-modal-toggle"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    setShowModal(false);
+                  }}
+                >
+                  <MdIcons.MdClose size={"1x"} />
+                </button>
+              </div>
+              <h3 className="voter-reg-modal-heading">Hey there!</h3>
+              <p className="voter-reg-modal-heading">
+                Looks like you've already registered to vote. Do you still want
+                to continue?
+              </p>
+              <p className="voter-reg-modal-text">
+                If you keep going, you are registering again with your state.
+                Keep going if you’ve changed your party affiliation.
+              </p>
+              <button
+                className="voter-reg-modal-btn"
+                onClick={(e) => {
+                  e.preventDefault();
+                  setParentState("otherInfo");
+                }}
+              >
+                <span>KEEP GOING</span>
+              </button>
+              <button
+                className="voter-reg-modal-btn"
+                onClick={(e) => {
+                  e.preventDefault();
+                  setShowModal(false);
+                }}
+              >
+                <span>OK, NEVER MIND</span>
+              </button>
+            </div>
+          </IconContext.Provider>
+        </div>
+      )}
     </>
   );
 };

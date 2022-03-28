@@ -5,18 +5,19 @@ import {
   HomeAddress,
   OtherInfo,
   FormCompleted,
+  ProgressBar,
 } from "./components";
 import { useAuth } from "../../contexts/AuthContext";
 import "./VoterRegistration.scss";
 
 export default function VoterRegistrationForm(props) {
-  const { currentUser } = useAuth();
+  // const { currentUser } = useAuth();
   const [page, setPage] = useState("eligibility");
   const formData = useRef({
     send_confirmation_reminder_emails: false,
     dob: "", //renamed from date_of_birth to match us votes api
     idNumber: "", //renamed from id_number to match us votes api
-    email: currentUser.email, //renamed from email_address to match us votes api
+    email: "dvorakjt@gmail.com", //currentUser.email, //renamed from email_address to match us votes api
     first_registration: false,
     zip: "", //renamed from home_zip_code to match us votes api
     citizen: false, //renamed from us_citizen to match us votes api
@@ -24,7 +25,7 @@ export default function VoterRegistrationForm(props) {
     eighteenPlus: false, //renamed from is_eighteen_or_older to match us votes api
     name_title: "", //Required. Must be one of “Mr.”, “Mrs.”, “Miss”, “Ms.”, “Sr.”, “Sra.”, “Srta.”
     name_first: "", //renamed from first_name to match us votes api
-    middle_name: "",
+    name_middle: "",
     name_last: "", //renamed from last_name to match us votes api
     street: "", //renamed from home_address to match us votes api
     home_unit: "",
@@ -38,7 +39,10 @@ export default function VoterRegistrationForm(props) {
     mailing_zip_code: "",
     phone: "Home",
     change_of_name: false,
-    prev_last_name: "",
+    prev_name_title: "",
+    prev_name_first: "",
+    prev_name_middle: "",
+    prev_name_last: "",
     change_of_address: false,
     prev_address: "",
     prev_unit: "",
@@ -57,6 +61,7 @@ export default function VoterRegistrationForm(props) {
       <h1 className="register-form-title">
         <span className="underline">REGISTE</span>R TO VOTE
       </h1>
+      <ProgressBar page={page} />
       {(() => {
         switch (page) {
           case "eligibility":
