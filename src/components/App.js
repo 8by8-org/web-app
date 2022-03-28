@@ -5,6 +5,7 @@ import {
   Route,
   Switch,
 } from "react-router-dom";
+import ScrollToTop from "../functions/ScrollToTop";
 import { AuthProvider } from "../contexts/AuthContext";
 import Signin from "./Authentication/Signin";
 import Signout from "./Authentication/Signout";
@@ -13,8 +14,7 @@ import PrivateRoute from "./Helpers/PrivateRoute";
 import Header from "./Header/Header";
 import "./App.css";
 import HomePage from "./HomePage/HomePage";
-import "./App.css";
-import Progress from "./Progress";
+import Progress from "./Progress/Progress";
 import ChallengerWelcome from "./ChallengerWelcome/ChallengerWelcome";
 import ElectionReminder from "./ElectionReminders/ElectionReminder";
 import Footer from "./Footer";
@@ -34,6 +34,7 @@ export default function App() {
         <div id="app-outer-wrapper">
           <div id="app-wrapper">
             <Router>
+              <ScrollToTop />
               <Switch>
                 <Route exact path="/">
                   <Redirect to="/homepage" />
@@ -45,7 +46,7 @@ export default function App() {
                 />
                 <Route path="/signup" component={SignupPage} />
                 <Route path="/signin" component={Signin} />
-                <Route
+                <PrivateRoute
                   path="/election-reminders"
                   component={ElectionReminder}
                 />

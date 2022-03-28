@@ -226,39 +226,41 @@ export default function ElectionReminder() {
   }, []);
 
   return (
-    <div className="electionReminderContainer">
-      <header className="title">
-        <span className="underline">GET ELEC</span>TION ALERTS
-      </header>
-      {!showCompletedMessage ? (
-        <div
-          className="ngp-form"
-          data-form-url="https://actions.everyaction.com/v1/Forms/7VylZ7q7eEGLlwKVNb-MqQ2"
-          data-fastaction-endpoint="https://fastaction.ngpvan.com"
-          data-inline-errors="true"
-          data-fastaction-nologin="true"
-          data-databag="everybody"
-        ></div>
-      ) : (
-        <div className="reminders-completed">
-          <h3>Thank you for your action!</h3>
-          <p>
-            {showCompletedMessage === "has_completed_reminders"
-              ? "You have already signed up for election reminders. If you would like to contribute in another manner, please continue."
-              : "You have already contributed to this user's challenge. Please continue to explore more ways to contribute."}
-          </p>
-        </div>
-      )}
-      {showContinueButton && (
-        <button
-          id="continue"
-          onClick={() => {
-            history.push("/actions");
-          }}
-        >
-          CONTINUE
-        </button>
-      )}
+    <div className="election-reminder">
+      <div className="electionReminderContainer">
+        <header className="title">
+          <span className="underline">GET ELEC</span>TION ALERTS
+        </header>
+        {!showCompletedMessage ? (
+          <div
+            className="ngp-form"
+            data-form-url="https://actions.everyaction.com/v1/Forms/7VylZ7q7eEGLlwKVNb-MqQ2"
+            data-fastaction-endpoint="https://fastaction.ngpvan.com"
+            data-inline-errors="true"
+            data-fastaction-nologin="true"
+            data-databag="everybody"
+          ></div>
+        ) : (
+          <div className="reminders-completed">
+            <h3>Thank you for your action!</h3>
+            <p>
+              {showCompletedMessage === "has_completed_reminders"
+                ? "You have already signed up for election reminders. If you would like to contribute in another manner, please continue."
+                : "You have already contributed to this user's challenge. Please continue to explore more ways to contribute."}
+            </p>
+          </div>
+        )}
+        {showContinueButton && (
+          <button
+            id="continue"
+            onClick={() => {
+              history.push("/actions");
+            }}
+          >
+            CONTINUE
+          </button>
+        )}
+      </div>
     </div>
   );
 }
