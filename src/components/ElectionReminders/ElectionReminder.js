@@ -2,18 +2,16 @@ import React, { useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
 import { getFirestore, doc, getDoc, updateDoc } from "firebase/firestore";
 import { useAuth } from "../../contexts/AuthContext";
+import { completedAction } from "../../functions/UserData";
 import "./ElectionReminder.scss";
 const db = getFirestore();
 
 export default function ElectionReminder() {
   const [showContinueButton, setShowContinueButton] = useState(false);
   const [showCompletedMessage, setShowCompletedMessage] = useState(false);
+  const { currentUser } = useAuth();
 
   const history = useHistory();
-
-  //get information for challenger who referred the player
-  const referrer_id = "2dEvu5h62vb1aHhN4E82bjCTWgT2";
-  const { currentUser } = useAuth();
 
   const onSubmit = (
     firstNameInput,
@@ -35,50 +33,24 @@ export default function ElectionReminder() {
       console.log("Please complete all of the required fields.");
       return;
     } else {
-      updateUsers();
+      completedAction("election reminders");
     }
   };
 
   useEffect(() => {
     async function initialize() {
       //get the information for the user and the referrer
-      // const userRef = doc(db, "users", currentUser.uid);
-      // const referrerRef = doc(db, "users", referrer_id);
+      const userRef = doc(db, "users", currentUser.uid);
 
       //determine if the user has already signed up for election reminders
-      // const user = await getDoc(userRef);
-      // const uData = user.data();
+      const user = await getDoc(userRef);
+      const uData = user.data();
 
-      // //if they have, show the completed message and return
-      // if (uData.hasSignedUpForReminders) {
-      //   setShowContinueButton(true);
-      //   setShowCompletedMessage("has_completed_reminders");
-      // } else {
-      //   //otherwise declare a function to pass to submit button
-      //   const referrer = await getDoc(referrerRef);
-      //   const referrerData = referrer.data();
-      //   let referrerBadges;
-      //   if (referrerData.badges) {
-      //     referrerBadges = JSON.parse(referrerData.badges);
-      //   } else referrerBadges = [];
-
-      //   //if the user has already contributed to the challenger's challenge, set the completed message and return
-      //   if (referrerBadges.includes(currentUser.uid)) {
-      //     setShowContinueButton(true);
-      //     setShowCompletedMessage(true);
-      //   } else {
-      //     //otherwise set up a function to pass to the submit button
-      //     async function awardUsers() {
-      //       referrerBadges.push(currentUser.uid);
-
-      //       await updateDoc(userRef, {
-      //         hasSignedUpForReminders: true,
-      //       });
-
-      //       await updateDoc(referrerRef, {
-      //         badges: JSON.stringify(referrerBadges),
-      //       });
-      //     }
+      //if they have, show the completed message and return
+      if (uData.hasSignedUpForReminders) {
+        setShowContinueButton(true);
+        setShowCompletedMessage("has_completed_reminders");
+      }
 
       //first set up an observer to listen for mutations to the ngp-form div
       const targetNode = document.getElementsByClassName("ngp-form")[0];
@@ -178,7 +150,6 @@ export default function ElectionReminder() {
                   addressLine1Input,
                   zipCodeInput,
                   emailAddressInput
-                  // awardUsers
                 );
             }
 

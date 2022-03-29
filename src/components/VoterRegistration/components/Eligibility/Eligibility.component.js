@@ -38,7 +38,8 @@ export const Eligibility = ({ parentRef, setParentState }) => {
       <p>Registering to vote is easy, and only takes a few minutes!</p>
       <h2 className="register-form-title-small">ELIGIBILITY</h2>
       <label className="register-label">Email</label>
-      <p>{parentRef.current.email}</p>
+      <p className="register-input">{parentRef.current.email}</p>
+      <br />
       <label
         className={
           activeFields.dob ? "floating-label-active" : "floating-label-default"

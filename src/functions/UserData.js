@@ -38,7 +38,7 @@ export async function getUserDatabase() {
   }
 }
 
-// call this function when user completes an aciton
+// call this function when user completes an action
 // ADD email user after certain completed actions
 export async function completedAction(action) {
   const userData = await getUserDatabase();

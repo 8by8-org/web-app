@@ -18,42 +18,44 @@ export const Tooltip = ({ text }) => {
         <span className="tooltipQuestionMark">?</span>
       </button>
       {showTooltip && (
-        <div className="tooltip-modal-container">
-          <IconContext.Provider value={{ color: "black" }}>
-            <div className="tooltip-modal">
-              <div className="tooltip-toggle-container">
-                <button
-                  className="tooltip-modal-toggle"
-                  onClick={(e) => {
-                    e.preventDefault();
-                    setShowTooltip(false);
-                  }}
-                >
-                  <MdIcons.MdClose size={"1x"} />
-                </button>
+        <div className="tooltip-modal-outer-container">
+          <div className="tooltip-modal-inner-container">
+            <IconContext.Provider value={{ color: "black" }}>
+              <div className="tooltip-modal">
+                <div className="tooltip-toggle-container">
+                  <button
+                    className="tooltip-modal-toggle"
+                    onClick={(e) => {
+                      e.preventDefault();
+                      setShowTooltip(false);
+                    }}
+                  >
+                    <MdIcons.MdClose size={"1x"} />
+                  </button>
+                </div>
+                <div className="tooltip-inner-container">
+                  <p
+                    style={{
+                      marginLeft: "4px",
+                      marginRight: "4px",
+                      textAlign: "center",
+                    }}
+                  >
+                    {text}
+                  </p>
+                  <button
+                    className="tooltip-modal-btn"
+                    onClick={(e) => {
+                      e.preventDefault();
+                      setShowTooltip(false);
+                    }}
+                  >
+                    OK, GOT IT
+                  </button>
+                </div>
               </div>
-              <div className="tooltip-inner-container">
-                <p
-                  style={{
-                    marginLeft: "4px",
-                    marginRight: "4px",
-                    textAlign: "center",
-                  }}
-                >
-                  {text}
-                </p>
-                <button
-                  className="tooltip-modal-btn"
-                  onClick={(e) => {
-                    e.preventDefault();
-                    setShowTooltip(false);
-                  }}
-                >
-                  OK, GOT IT
-                </button>
-              </div>
-            </div>
-          </IconContext.Provider>
+            </IconContext.Provider>
+          </div>
         </div>
       )}
     </>

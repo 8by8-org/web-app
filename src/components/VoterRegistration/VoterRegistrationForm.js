@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import {
   Eligibility,
   YourName,
@@ -7,30 +7,45 @@ import {
   FormCompleted,
   ProgressBar,
 } from "./components";
+import { getFirestore, doc, getDoc, updateDoc } from "firebase/firestore";
 import { useAuth } from "../../contexts/AuthContext";
+import { LoadingWheel } from "./components/LoadingWheel/LoadingWheel.component";
 import "./VoterRegistration.scss";
+const db = getFirestore();
 
 export default function VoterRegistrationForm(props) {
-  // const { currentUser } = useAuth();
-  const [page, setPage] = useState("eligibility");
+  const { currentUser } = useAuth();
+  //if the user has already completed the register to vote action, set the page to "formCompleted"
+  const [page, setPage] = useState("loading");
+  useEffect(() => {
+    //when the page loads, check if the user has already registered to vote
+    (async () => {
+      const userRef = doc(db, "users", currentUser.uid);
+      const user = await getDoc(userRef);
+      const uData = user.data();
+      if (uData.isRegisteredVoter) {
+        setPage("formCompleted");
+      } else setPage("eligibility");
+    })();
+  }, []);
   const formData = useRef({
     send_confirmation_reminder_emails: false,
-    dob: "", //renamed from date_of_birth to match us votes api
-    idNumber: "", //renamed from id_number to match us votes api
-    email: "dvorakjt@gmail.com", //currentUser.email, //renamed from email_address to match us votes api
+    dob: "",
+    idNumber: "",
+    email: currentUser.email,
     first_registration: false,
-    zip: "", //renamed from home_zip_code to match us votes api
-    citizen: false, //renamed from us_citizen to match us votes api
+    zip: "",
+    citizen: false,
     has_state_license: false,
-    eighteenPlus: false, //renamed from is_eighteen_or_older to match us votes api
-    name_title: "", //Required. Must be one of “Mr.”, “Mrs.”, “Miss”, “Ms.”, “Sr.”, “Sra.”, “Srta.”
-    name_first: "", //renamed from first_name to match us votes api
+    eighteenPlus: false,
+    name_title: "",
+    name_first: "",
     name_middle: "",
-    name_last: "", //renamed from last_name to match us votes api
-    street: "", //renamed from home_address to match us votes api
+    name_last: "",
+    street: "",
     home_unit: "",
-    city: "", //renamed from home_city to match us votes api
-    state: "", //renamed from home_state_id to match us votes api
+    city: "",
+    state: "",
     has_mailing_address: false,
     mailing_address: "",
     mailing_unit: "",
@@ -58,10 +73,22 @@ export default function VoterRegistrationForm(props) {
 
   return (
     <form className="container">
-      <h1 className="register-form-title">
-        <span className="underline">REGISTE</span>R TO VOTE
-      </h1>
-      <ProgressBar page={page} />
+      {page !== "loading" && (
+        <h1 className="register-form-title">
+          {page !== "formCompleted" ? (
+            <>
+              <span className="underline">REGISTE</span>R TO VOTE
+            </>
+          ) : (
+            <>
+              <span className="underline">YOU COMPLETE</span>D THE FORM
+            </>
+          )}
+        </h1>
+      )}
+      {page !== "formCompleted" && page !== "loading" && (
+        <ProgressBar page={page} />
+      )}
       {(() => {
         switch (page) {
           case "eligibility":
@@ -78,6 +105,8 @@ export default function VoterRegistrationForm(props) {
             return <OtherInfo parentRef={formData} setParentState={setPage} />;
           case "formCompleted":
             return <FormCompleted />;
+          case "loading":
+            return <LoadingWheel />;
         }
       })()}
     </form>

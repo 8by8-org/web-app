@@ -3,17 +3,21 @@ import axios from "axios";
 import { IconContext } from "react-icons";
 import * as MdIcons from "react-icons/md";
 import "../../VoterRegistration.scss";
+import { LoadingWheel } from "../LoadingWheel/LoadingWheel.component";
 import { AddressBlock } from "./AddressBlock.component";
 
-const apiUrl = "https://usvotes-6vsnwycl4q-uw.a.run.app/";
+const apiUrl = "https://usvotes-6vsnwycl4q-uw.a.run.app";
 
 export const HomeAddress = ({ parentRef, setParentState }) => {
   const [hasMailingAddress, setHasMailingAddress] = useState(false);
   const [hasChangeOfAddress, setHasChangeOfAddress] = useState(false);
+  const [error, setError] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
   const [showModal, setShowModal] = useState(false);
 
   return (
     <>
+      {isLoading && <LoadingWheel />}
       <AddressBlock
         addressType={"home"}
         parentRef={parentRef}
@@ -74,9 +78,21 @@ export const HomeAddress = ({ parentRef, setParentState }) => {
         className="next-btn"
         onClick={async (event) => {
           event.preventDefault();
-          //need to add guards here
           const { state, city, street, name_first, name_last, dob, zip } =
             parentRef.current;
+          if (
+            state.length === 0 ||
+            city.length === 0 ||
+            street.length === 0 ||
+            name_first.length === 0 ||
+            name_last.length === 0 ||
+            dob.length === 0 ||
+            zip.length === 0
+          ) {
+            setError("Please complete all of the required fields");
+            return;
+          }
+          setIsLoading(true);
           const ymd = dob.split("-");
           const year = ymd[0];
           const month = ymd[1];
@@ -92,7 +108,8 @@ export const HomeAddress = ({ parentRef, setParentState }) => {
             zip,
           };
           try {
-            const res = await axios.post(`${apiUrl}registered/`, postBody);
+            const res = await axios.post(`${apiUrl}/registered/`, postBody);
+            setIsLoading(false);
             const { registered } = res.data;
             if (registered) {
               setShowModal(true);
@@ -101,6 +118,7 @@ export const HomeAddress = ({ parentRef, setParentState }) => {
             }
           } catch (e) {
             console.log(e);
+            setIsLoading(false);
             setParentState("otherInfo");
           }
           // setParentState("otherInfo");

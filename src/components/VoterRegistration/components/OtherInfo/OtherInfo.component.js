@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import axios from "axios";
 import "../../VoterRegistration.scss";
 import { Tooltip } from "../Tooltip/Tooltip.component";
+import { completedAction } from "../../../../functions/UserData";
+import { LoadingWheel } from "../LoadingWheel/LoadingWheel.component";
 
 const apiUrl = "https://usvotes-6vsnwycl4q-uw.a.run.app";
 
@@ -24,6 +26,7 @@ export const OtherInfo = ({ parentRef, setParentState }) => {
 
   return (
     <>
+      {isLoading && <LoadingWheel />}
       <h2 className="register-form-title-small">OTHER DETAILS</h2>
       <label
         htmlFor="party"
@@ -198,6 +201,7 @@ export const OtherInfo = ({ parentRef, setParentState }) => {
         style={{ opacity: isLoading ? 0.5 : 1, marginTop: 0 }}
         onClick={async (event) => {
           event.preventDefault();
+          setIsLoading(true);
           const {
             state,
             city,
@@ -235,8 +239,8 @@ export const OtherInfo = ({ parentRef, setParentState }) => {
           axios
             .post(`${apiUrl}/registertovote/`, postBody)
             .then((res) => {
-              console.log(res);
               setIsLoading(false);
+              completedAction("register to vote");
               setParentState("formCompleted");
             })
             .catch((e) => {

@@ -30,36 +30,36 @@ export const ProgressBar = ({ page }) => {
             id="greenish-yellow-gradient"
             gradientUnits="userSpaceOnUse"
           >
-            <stop offset="0%" stop-color="#02ddc3" />
-            <stop offset="100%" stop-color="#ffed10" />
+            <stop offset="0%" stopColor="#02ddc3" />
+            <stop offset="100%" stopColor="#ffed10" />
           </linearGradient>
           <linearGradient
             id="transparent-grey-gradient-25%"
             gradientUnits="userSpaceOnUse"
           >
-            <stop offset="8.75%" stop-color="transparent" />
-            <stop offset="8.75%" stop-color="lightgrey" />
+            <stop offset="8.75%" stopColor="transparent" />
+            <stop offset="8.75%" stopColor="lightgrey" />
           </linearGradient>
           <linearGradient
             id="transparent-grey-gradient-50%"
             gradientUnits="userSpaceOnUse"
           >
-            <stop offset="38.25%" stop-color="transparent" />
-            <stop offset="38.25%" stop-color="lightgrey" />
+            <stop offset="38.25%" stopColor="transparent" />
+            <stop offset="38.25%" stopColor="lightgrey" />
           </linearGradient>
           <linearGradient
             id="transparent-grey-gradient-75%"
             gradientUnits="userSpaceOnUse"
           >
-            <stop offset="68%" stop-color="transparent" />
-            <stop offset="68%" stop-color="lightgrey" />
+            <stop offset="68%" stopColor="transparent" />
+            <stop offset="68%" stopColor="lightgrey" />
           </linearGradient>
           <linearGradient
             id="transparent-grey-gradient-100%"
             gradientUnits="userSpaceOnUse"
           >
-            <stop offset="100%" stop-color="transparent" />
-            <stop offset="100%" stop-color="lightgrey" />
+            <stop offset="100%" stopColor="transparent" />
+            <stop offset="100%" stopColor="lightgrey" />
           </linearGradient>
         </defs>
         <g fill="url(#greenish-yellow-gradient)">
