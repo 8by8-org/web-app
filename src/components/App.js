@@ -53,7 +53,7 @@ export default function App() {
                 <PrivateRoute path="/signout" component={Signout} />
                 <Route path="/playerwelcome" component={PlayerWelcome} />
                 <Route path="/actions" component={Actions} />
-                <Route path="/voterreg" component={VoterRegistration} />
+                <PrivateRoute path="/voterreg" component={VoterRegistration} />
                 <Route path="/termsofservice" component={TOS} />
               </Switch>
             </Router>

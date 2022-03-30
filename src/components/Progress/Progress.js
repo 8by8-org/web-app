@@ -8,18 +8,37 @@ import Invite from "../Invite.js";
 
 import CurveA from "./../../assets/2-shapes/curve-a.svg";
 import BlobDay from "./../../assets/4-pages/Progress/BlobDay.svg";
+import { doc, getFirestore, updateDoc } from "firebase/firestore";
+import { useAuth } from "../../contexts/AuthContext";
 
 export default function Progress() {
+  const { currentUser } = useAuth();
   const [userData, setUserData] = useState();
   const [daysLeft, setDaysLeft] = useState(0);
   const [badges, setBadges] = useState([]);
   const [completedBadges, setCompletedBadges] = useState(0);
   const [registeredVoter, setRegisteredVoter] = useState(false);
+  const [ loading, setLoading ] = useState(false);
 
   const toggleInvite = React.useRef();
+  const db = getFirestore();
+
+  async function addInvitedBy() {
+    const userRef = doc(db, "users", await currentUser.uid)
+    await updateDoc(userRef, {
+        invitedBy: JSON.parse(localStorage.getItem("challengerInfo")).challengerID
+    })
+}
 
   useEffect(() => {
     fetchUserData();
+
+    if(localStorage.getItem('player') && currentUser) {
+      addInvitedBy()
+      setLoading(true)
+    } else {
+        setLoading(true)
+    }
   }, []);
 
   function fetchUserData() {
@@ -91,6 +110,7 @@ export default function Progress() {
   }
 
   return (
+    loading ? 
     <article className="progress-page">
       <section className="section-1 bg-black pt-32px pl-30px pb-80px">
         <h1>
@@ -191,6 +211,7 @@ export default function Progress() {
       </section>
 
       <Invite toggleInvite={toggleInvite} />
-    </article>
+    </article> :
+    <h1>loading...</h1>
   );
 }

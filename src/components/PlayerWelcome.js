@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useHistory } from 'react-router-dom'
 import { Button } from "react-bootstrap";
-import { getFirestore, getDoc, doc} from 'firebase/firestore'
+import { getFirestore, getDoc, doc } from 'firebase/firestore'
 import SignUp1 from "../assets/images/PlayerWelcome/SignUp1.png"
 import SignUp2 from "../assets/images/PlayerWelcome/SignUp2.png"
 import Vote from "../assets/images/PlayerWelcome/Vote1.png"
@@ -47,11 +47,12 @@ export default function PlayerWelcome() {
     }
     
     useEffect(() => {
-        getChallengerInfo()
+        code ? getChallengerInfo() : setChallengerInfo(JSON.parse(localStorage.getItem("challengerInfo")))
     }, []);
 
     useEffect(() => {
         challengerInfo && setLoading(false);
+        console.log(currentUser)
     }, [challengerInfo])
 
     

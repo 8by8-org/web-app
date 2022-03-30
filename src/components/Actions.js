@@ -48,13 +48,13 @@ export default function Actions() {
             <img src={WhiteCurve} className="curve"/> 
             <div className="action-items">
                 <div className="py-2">
-                    <Button className="primary-button" onClick={() => {history.push(`/voterreg`); localStorage.setItem('player', 'voter')}}>Register to vote</Button>
+                    <Button className="primary-button" onClick={() => {history.push(`/voterreg`); localStorage.setItem('player', 'voterreg')}}>Register to vote</Button>
                 </div>
                 <div className="py-2">
-                    <Button className="secondary-button" onClick={() => {history.push(`/election-reminders`); localStorage.setItem('player', 'reminder')}}>Get election reminders</Button>
+                    <Button className="secondary-button" onClick={() => {history.push(`/election-reminders`); localStorage.setItem('player', 'election-reminders')}}>Get election reminders</Button>
                 </div>
                 <div className="py-2">
-                    <Button className="secondary-button" onClick={() => {history.push('/challengerwelcome')}}>Take the challenge</Button>
+                    <Button className="secondary-button" onClick={() => {history.push('/challengerwelcome'); localStorage.setItem('player', 'progress')}}>Take the challenge</Button>
                 </div>
             </div>
         </div>

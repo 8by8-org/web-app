@@ -25,7 +25,7 @@ export default function SignupPage() {
   const [buttonMessage, setButtonMessage] = useState(" ");
   const [reCaptchaPassed, setReCaptchaPassed] = useState(false);
   const [preselect, setPreselect] = useState(true);
-
+  
   const emailRef = useRef();
   const confirmEmailRef = useRef();
   const buttonRef = useRef();
@@ -34,25 +34,7 @@ export default function SignupPage() {
 
   useEffect(() => {
     if (currentUser) {
-      history.push("/progress");
-      return;
-    }
-
-    if (currentUser && playerStatus === "voter") {
-      localStorage.removeItem("player");
-      history.push("/voterreg");
-      return;
-    }
-
-    if (currentUser && playerStatus === "reminder") {
-      localStorage.removeItem("player");
-      history.push("/electionreminder");
-      return;
-    }
-
-    if (currentUser && !playerStatus) {
-      history.push("/progress");
-      return;
+      playerStatus ? history.push(`/${playerStatus}`) : history.push('/progress')
     }
 
     // signup logic
