@@ -30,13 +30,16 @@ export default function Login() {
 
   const emailRef = useRef();
   const buttonRef = useRef();
+  
+  const playerStatus = localStorage.getItem("player");
 
   useEffect(() => {
     let isMounted = true;
+    
     if (currentUser) {
-      history.push("/progress");
-      return;
+      playerStatus ? history.push(`/${playerStatus}`) : history.push('/progress')
     }
+    
     if (!auth.isSignInWithEmailLink(auth.getAuth(), window.location.href)) {
       // login step 1
       setButtonMessage("Sign In");
