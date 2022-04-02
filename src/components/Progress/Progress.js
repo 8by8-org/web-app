@@ -28,17 +28,20 @@ export default function Progress() {
     await updateDoc(userRef, {
         invitedBy: JSON.parse(localStorage.getItem("challengerInfo")).challengerID
     })
+    localStorage.removeItem('player')
 }
 
   useEffect(() => {
-    fetchUserData();
-
-    if(localStorage.getItem('player') && currentUser) {
-      addInvitedBy()
-      setLoading(true)
-    } else {
-        setLoading(true)
-    }
+    setTimeout(() => {
+      if(localStorage.getItem('player') && currentUser) {
+          addInvitedBy()
+          fetchUserData();
+          setLoading(true)
+      } else {
+          fetchUserData();
+          setLoading(true)
+      }
+    }, 3000)
   }, []);
 
   function fetchUserData() {

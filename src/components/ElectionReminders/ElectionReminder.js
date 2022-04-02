@@ -22,7 +22,7 @@ export default function ElectionReminder() {
         invitedBy: JSON.parse(localStorage.getItem("challengerInfo")).challengerID
     })
     localStorage.removeItem('player')
-  }
+}
 
   const onSubmit = (
     firstNameInput,
@@ -49,13 +49,6 @@ export default function ElectionReminder() {
   };
 
   useEffect(() => {
-    if(localStorage.getItem('player') && currentUser) {
-      addInvitedBy()
-      setLoading(true)
-    } else {
-      setLoading(true)
-    }
-    
     async function initialize() {
       //get the information for the user and the referrer
       const userRef = doc(db, "users", currentUser.uid);
@@ -241,11 +234,20 @@ export default function ElectionReminder() {
         }
       }
     }
-    initialize();
+
+    setTimeout(() => {
+      if(localStorage.getItem('player') && currentUser) {
+          addInvitedBy()
+          setLoading(true)
+      } else {
+          setLoading(true)
+      }
+      initialize();
+    }, 2000)
   }, []);
 
   return (
-    loading ?
+    loading ? 
     <div className="election-reminder">
       <div className="electionReminderContainer">
         <header className="title">
@@ -282,6 +284,6 @@ export default function ElectionReminder() {
         )}
       </div>
     </div> :
-    <h1>Loading...</h1>
+    <h1>loading...</h1>
   );
 }

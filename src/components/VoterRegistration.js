@@ -6,21 +6,19 @@ import { useHistory } from 'react-router';
 import {ReactComponent as VoteLogo} from '../assets/images/VoterReg/votefingers.svg'
 import './VoterRegistration.scss'
 import { doc, getFirestore, updateDoc } from 'firebase/firestore';
-import { auth } from '../firebase';
-import { wait } from '@testing-library/react';
 
 export default function VoterRegistration() {
     const { currentUser } = useAuth();
     const [ loading, setLoading ] = useState(false);
     const history = useHistory();
     const db = getFirestore();
-    const playerStatus = localStorage.getItem('player')
 
     async function addInvitedBy() {
         const userRef = doc(db, "users", await currentUser.uid)
         await updateDoc(userRef, {
             invitedBy: JSON.parse(localStorage.getItem("challengerInfo")).challengerID
         })
+        localStorage.removeItem('player')
     }
     
     const handleClick = () => {
@@ -32,12 +30,14 @@ export default function VoterRegistration() {
     } 
 
     useEffect(() => {
-        if(localStorage.getItem('player') && currentUser) {
-            addInvitedBy()
-            setLoading(true)
-        } else {
-            setLoading(true)
-        }
+        setTimeout(() => {
+            if(localStorage.getItem('player') && currentUser) {
+                addInvitedBy()
+                setLoading(true)
+            } else {
+                setLoading(true)
+            }
+        }, 2000)
     }, []);
     
     return (
