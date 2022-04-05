@@ -9,6 +9,7 @@ import {
   WhatsappShareButton,
   EmailShareButton,
 } from "react-share";
+import completedActions, { completedAction, delay } from "../functions/UserData"
 import CalendarSvg from "../assets/images/Invite/Calendar.svg";
 import FacebookSvg from "../assets/images/Invite/Facebook.svg";
 import TwitterSvg from "../assets/images/Invite/Twitter.svg";
@@ -33,6 +34,11 @@ function Invite({ toggleInvite }) {
     navigator.clipboard.writeText(shareUrl);
   }
 
+  async function reloadPage() {
+    await delay(500);
+    window.location.reload();
+  }
+
   // shareUrl is currently a temporary placeholder for UID link
   const shareUrl = "www.8by8.us";
   const quote = "Help me in my 8by8 Challenge to #stopasianhate";
@@ -47,7 +53,7 @@ function Invite({ toggleInvite }) {
       <nav className={show ? "invite-menu active" : "invite-menu"}>
         <li className="invite-toggle">
           <Nav.Link to="#" id="close-icon">
-            <MdIcons.MdClose onClick={changeShow} />
+            <MdIcons.MdClose onClick={()=>{changeShow(); reloadPage()}} />
           </Nav.Link>
           <span className="invite-title">Invite Friends</span>
         </li>
@@ -62,12 +68,14 @@ function Invite({ toggleInvite }) {
 
         <div className="section social-media">
           <p className="sub-heading">Copy your unique link</p>
-          <FacebookShareButton url={shareUrl} quote={quote} hashtag={hashtag}>
+          <FacebookShareButton url={shareUrl} quote={quote} hashtag={hashtag}
+              onShareWindowClose={()=>{completedAction("share challenge")}}>
             <img className="invite-icon" src={FacebookSvg} />
             <p className="invite-icon-label">Facebook</p>
           </FacebookShareButton>
 
-          <TwitterShareButton url={shareUrl} title={quote}>
+          <TwitterShareButton url={shareUrl} title={quote} 
+            onShareWindowClose={()=>{completedAction("share challenge")}}>
             <img className="invite-icon" src={TwitterSvg} />
             <p className="invite-icon-label">Twitter</p>
           </TwitterShareButton>
@@ -75,17 +83,17 @@ function Invite({ toggleInvite }) {
 
         <div className="section messaging">
           <p className="sub-heading">Copy your unique link</p>
-          <FacebookMessengerShareButton url={shareUrl} appId={appId}>
+          <FacebookMessengerShareButton url={shareUrl} appId={appId} onShareWindowClose={()=>{completedAction("share challenge")}}>
             <img className="invite-icon" src={FacebookMessengerSvg} />
             <p className="invite-icon-label">Messenger</p>
           </FacebookMessengerShareButton>
 
-          <WhatsappShareButton url={shareUrl} title={quote}>
-            <img className="invite-icon" src={WhatsAppSvg} />
+          <WhatsappShareButton url={shareUrl} title={quote} onShareWindowClose={()=>{completedAction("share challenge")}}>
+            <img className="invite-icon" src={WhatsAppSvg}/>
             <p className="invite-icon-label">WhatsApp</p>
           </WhatsappShareButton>
 
-          <EmailShareButton url={shareUrl} subject={quote} body={body}>
+          <EmailShareButton url={shareUrl} subject={quote} body={body} beforeOnClick={()=>{completedAction("share challenge")}}>
             <img className="invite-icon" src={EmailSvg} />
             <p className="invite-icon-label">Email</p>
           </EmailShareButton>
@@ -95,7 +103,7 @@ function Invite({ toggleInvite }) {
           <p className="sub-heading">Copy your unique link</p>
           <div className="link-container">
             <p>{shareUrl}</p>
-            <button onClick={copyToClipboard}>COPY</button>
+            <button onClick={()=>{copyToClipboard(); completedAction("share challenge")}}>COPY</button>
           </div>
         </div>
       </nav>
