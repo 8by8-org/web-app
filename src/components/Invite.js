@@ -9,7 +9,7 @@ import {
   WhatsappShareButton,
   EmailShareButton,
 } from "react-share";
-import completedActions, { completedAction, delay } from "../functions/UserData"
+import { completedAction, delay } from "../functions/UserData"
 import CalendarSvg from "../assets/images/Invite/Calendar.svg";
 import FacebookSvg from "../assets/images/Invite/Facebook.svg";
 import TwitterSvg from "../assets/images/Invite/Twitter.svg";
