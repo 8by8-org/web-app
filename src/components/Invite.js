@@ -19,8 +19,9 @@ import DiscordSvg from "../assets/images/Invite/Discord.svg";
 import WhatsAppSvg from "../assets/images/Invite/WhatsApp.svg";
 import EmailSvg from "../assets/images/Invite/Email.svg";
 import TextSvg from "../assets/images/Invite/Text.svg";
+import Instagram from "./Instagram";
 
-function Invite({ toggleInvite }) {
+function Invite({ toggleInvite , isShare}) {
   const { currentUser } = useAuth();
   const [ url, setUrl ] = useState(null);
   const [show, setShow] = useState(false);
@@ -51,6 +52,8 @@ function Invite({ toggleInvite }) {
   // temporary email body text
   const body = "Use this link to " + quote;
 
+  const toggleIG = React.useRef();
+
   return (
     <div className="invite-wrapper">
       <nav className={show ? "invite-menu active" : "invite-menu"}>
@@ -58,19 +61,21 @@ function Invite({ toggleInvite }) {
           <Nav.Link to="#" id="close-icon">
             <MdIcons.MdClose onClick={changeShow} />
           </Nav.Link>
-          <span className="invite-title">Invite Friends</span>
+          <span className="invite-title">{isShare ? 'Share' : 'Invite Friends'}</span>
         </li>
 
         <div className="info">
           <img src={CalendarSvg} width="225px" />
           <p>
-            Invite friends to support your challenge by registering to vote, get
-            election reminders or take the 8by8 challenge themselves.
+            {isShare ?
+            'Share about your action. Invite friends to help Yang’s challenge and learn more about the 8by8 cause! If you are curious, preview what they’ll see.' :
+            'Invite friends to support your challenge by registering to vote, get election reminders or take the 8by8 challenge themselves.'
+            }
           </p>
         </div>
 
         <div className="section social-media">
-          <p className="sub-heading">Copy your unique link</p>
+          <p className="sub-heading">{isShare ? 'Social Media' : 'Copy yout unique link'}</p>
           <FacebookShareButton url={shareUrl} quote={quote} hashtag={hashtag}>
             <img className="invite-icon" src={FacebookSvg} />
             <p className="invite-icon-label">Facebook</p>
@@ -80,10 +85,20 @@ function Invite({ toggleInvite }) {
             <img className="invite-icon" src={TwitterSvg} />
             <p className="invite-icon-label">Twitter</p>
           </TwitterShareButton>
+
+          <button className="instagram-button" onClick={() => {
+            if (navigator.clipboard) {
+              copyToClipboard();
+            }
+            toggleIG.current();
+          }}>
+            <img className="invite-icon" src={InstagramSvg} />
+            <p className="invite-icon-label">Instagram</p>
+          </button>
         </div>
 
         <div className="section messaging">
-          <p className="sub-heading">Copy your unique link</p>
+          <p className="sub-heading">{isShare ? 'Messaging' : 'Copy yout unique link'}</p>
           <FacebookMessengerShareButton url={shareUrl} appId={appId}>
             <img className="invite-icon" src={FacebookMessengerSvg} />
             <p className="invite-icon-label">Messenger</p>
@@ -98,16 +113,30 @@ function Invite({ toggleInvite }) {
             <img className="invite-icon" src={EmailSvg} />
             <p className="invite-icon-label">Email</p>
           </EmailShareButton>
+          
+          <button className="sms-button" onClick={() => window.open('sms:&body=' + body + ' ' + shareUrl)}>
+            <img className="invite-icon" src={TextSvg} />
+            <p className="invite-icon-label">Text</p>
+          </button>
         </div>
 
         <div className="section copy-link">
           <p className="sub-heading">Copy your unique link</p>
           <div className="link-container">
-            <input type="text" value={shareUrl} readonly/>
-            <button onClick={copyToClipboard}>COPY</button>
+            <div className="unique-link">
+              <p>{shareUrl}</p>
+              <div className="underline"></div>
+            </div>
+            <button onClick={() => {
+              if (navigator.clipboard) {
+                copyToClipboard();
+              }
+            }}>COPY</button>
           </div>
+          
         </div>
       </nav>
+      <Instagram toggleIG={toggleIG} isShare={isShare} shareUrl={shareUrl} />
     </div>
   );
 }
