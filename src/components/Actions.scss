@@ -21,13 +21,14 @@
 .top {
   .avatar-and-status {
     display: flex;
-    padding: 50px;
     position: relative;
   }
 
   .action-status {
     width: 50%;
+    font-size: 112px;
     padding-top: 10%;
+    padding-left: 10%
   }
 
   .avatar-container {

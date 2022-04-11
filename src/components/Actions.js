@@ -31,7 +31,7 @@ export default function Actions() {
                     <>
                         <div className="avatar-and-status">
                             <div className="action-status">
-                                <h1 className="heading">Take Action For:</h1>
+                                <h1>Take Action For:</h1>
                             </div>
                             <div className="avatar-container">
                                 <img 
