@@ -46,14 +46,14 @@ export default function Progress() {
     if (challengeFinished) {
       setConfettiAnimation(<ConfettiAnimation time={8000} />);
 
-      setButton(
-        <button
-          className="inverted"
-          onClick={() => alert("no sharing functionality yet")}
-        >
-          Share
-        </button>
-      );
+      // setButton(
+      //   <button
+      //     className="inverted"
+      //     onClick={() => alert("no sharing functionality yet")}
+      //   >
+      //     Share
+      //   </button>
+      // );
     }
   }, [challengeVoid, challengeFinished]);
 
@@ -189,7 +189,6 @@ export default function Progress() {
   return (
     <article className="progress-page">
       {confettiAnimation}
-      <Invite toggleInvite={toggleInvite} />
 
       <section className="section-1 bg-black pt-32px pl-30px pb-80px">
         <h1>
@@ -275,6 +274,8 @@ export default function Progress() {
           }
         />
       )}
+
+      <Invite toggleInvite={toggleInvite} />
     </article>
   );
 }
