@@ -128,3 +128,11 @@ async function updateChallengerBadges(userData) {
     });
   }
 }
+
+// resets days left to complete challenge to 8
+export async function restartChallenge() {
+  const uid = auth.getAuth().currentUser.uid;
+  await updateDoc(doc(db, "users", uid), {
+    challengeEndDate: new Date(Date.now() + 8 * 24 * 60 * 60 * 1000),
+  });
+}
