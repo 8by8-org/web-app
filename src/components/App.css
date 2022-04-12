@@ -22,6 +22,7 @@
   position: relative;
   top: 57px;
   min-width: 280px;
+  z-index: 0;
 }
 
 #app-wrapper {
