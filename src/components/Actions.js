@@ -6,12 +6,26 @@ import { ReactComponent as Avatar } from "../assets/avatars/Boy1.svg";
 import WhiteCurve from "../assets/images/Actions/Union.svg";
 import "./Actions.scss";
 import ConfettiAnimation from "./ConfettiAnimation";
+import Avatar1 from "../assets/avatars/avatar1.svg";
+import Avatar2 from "../assets/avatars/avatar2.svg";
+import Avatar3 from "../assets/avatars/avatar3.svg";
+import Avatar4 from "../assets/avatars/avatar4.svg";
+
+const avatars = [Avatar1, Avatar2, Avatar3, Avatar4];
 
 export default function Actions() {
   const history = useHistory();
-  const validChallenger = false;
 
   const [confettiAnimation, setConfettiAnimation] = useState();
+  const [loading, setLoading] = useState(true);
+  const [challengerInfo, setChallengerInfo] = useState(null);
+
+  useEffect(() => {
+    if (localStorage.getItem("challengerInfo")) {
+      setChallengerInfo(JSON.parse(localStorage.getItem("challengerInfo")));
+    }
+    setLoading(false);
+  }, [loading]);
 
   useEffect(() => {
     fetchUserData();
@@ -31,39 +45,44 @@ export default function Actions() {
       .catch((e) => console.log(e));
   }
 
-  return (
-    <div className="Actions">
-      {confettiAnimation}
+  return loading === false ? (
+    <>
       <div className="main-content">
+        {confettiAnimation}
         <div className="top">
-          {validChallenger ? (
-            <div>
-              <div className="avatar-and-status" align="center">
+          {challengerInfo ? (
+            <>
+              <div className="avatar-and-status">
                 <div className="action-status">
-                  <h1 className="heading">Take Action For:</h1>
+                  <h1>Take Action For:</h1>
                 </div>
                 <div className="avatar-container">
-                  <Avatar id="challenger-avatar" />{" "}
-                  {/**Avatar will change based on challenger*/}
-                  <p id="challenger-name">Name</p>{" "}
-                  {/**Get challenger name from url */}
+                  <img
+                    src={
+                      challengerInfo.avatar
+                        ? avatars[challengerInfo.avatar - 1]
+                        : avatars[0]
+                    }
+                    id="challenger-avatar"
+                  />
+                  <p id="challenger-name">{challengerInfo.name}</p>
                 </div>
               </div>
-              <img src={WhiteCurve} className="curve" />
-            </div>
+            </>
           ) : (
             <h1 id="action-no-challenger" align="center">
               Take Action
             </h1>
           )}
         </div>
+        <img src={WhiteCurve} className="curve" />
         <div className="action-items">
           <div className="py-2">
             <Button
               className="primary-button"
               onClick={() => {
-                history.push("/voterreg");
-                localStorage.setItem("player", "voter");
+                history.push(`/voterreg`);
+                localStorage.setItem("player", "voterreg");
               }}
             >
               Register to vote
@@ -73,8 +92,8 @@ export default function Actions() {
             <Button
               className="secondary-button"
               onClick={() => {
-                history.push("/election-reminders");
-                localStorage.setItem("player", "reminder");
+                history.push(`/election-reminders`);
+                localStorage.setItem("player", "election-reminders");
               }}
             >
               Get election reminders
@@ -85,13 +104,21 @@ export default function Actions() {
               className="secondary-button"
               onClick={() => {
                 history.push("/challengerwelcome");
+                localStorage.setItem("player", "progress");
               }}
             >
               Take the challenge
             </Button>
           </div>
         </div>
+        ) : (
+        <h1 id="action-no-challenger" align="center">
+          Take Action
+        </h1>
+        )
       </div>
-    </div>
+    </>
+  ) : (
+    <h1>loading</h1>
   );
 }

@@ -34,7 +34,10 @@ button.gradient {
 button.inverted {
   @include button-base();
   background: $black;
+<<<<<<< HEAD
   color: $teal;
+=======
+>>>>>>> 3b413a124101a09995387c8b0a6179393a7c8516
   span {
     background: $gradient;
     -webkit-background-clip: text;

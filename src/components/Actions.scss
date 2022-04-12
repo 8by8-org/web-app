@@ -17,84 +17,98 @@
   letter-spacing: 0.03em;
   background-image: $background;
 }
-.Actions {
-  .main-content {
-    background-color: $white;
-    color: $black;
 
-    .primary-button {
-      @include button;
-      outline: 4px solid white;
-    }
+.main-content {
+  background-color: $white;
+  color: $black;
 
-    .secondary-button {
-      @include secondary-button;
-    }
+  .primary-button {
+    @include button;
+    outline: 4px solid white;
+  }
+}
 
-    .avatar-and-status {
-      display: flex;
-      padding: 50px;
-      position: relative;
-    }
+.top {
+  .avatar-and-status {
+    display: flex;
+    position: relative;
+  }
 
-    .action-status {
-      width: 55%;
-    }
+  .action-status {
+    width: 50%;
+    font-size: 112px;
+    padding-top: 10%;
+    padding-left: 10%;
+  }
 
-    .avatar-container {
-      @include blob-background;
-      width: 100%;
-      height: auto;
-      #challenger-avatar {
-        width: 100%;
-      }
-      #challenger-name {
-        font-size: 30px;
-      }
+  .avatar-container {
+    @include blob-background;
+    width: 100%;
+    height: auto;
+    padding: 10% 0% 10%;
+    #challenger-avatar {
+      width: 40%;
     }
+    #challenger-name {
+      @include heading-text($black, 30px);
+    }
+  }
 
-    #action-no-challenger {
-      @include heading-text($black, 36px);
-      padding: 30px;
-    }
+  #action-no-challenger {
+    @include heading-text($black, 36px);
+    padding: 30px;
+  }
+}
 
-    .heading {
-      @include heading-text($black, 36px);
-      margin: 0px 0px 0px 0px;
-      letter-spacing: 0.03em;
-      .underline {
-        @include text-underline;
-      }
-    }
+.main-content {
+  background-color: $white;
+  color: $black;
 
-    .subheading {
-      @include heading-text($black, 24px);
-      margin: 30px 0px 15px 30px;
-      line-height: 29px;
-      letter-spacing: 0.03em;
-    }
+  .secondary-button {
+    @include secondary-button;
+  }
 
-    .text {
-      font-family: $lato;
-      font-size: 18px;
-      line-height: 22px;
-      letter-spacing: 0.02em;
-      margin: 0;
-    }
+  .avatar-and-status {
+    display: flex;
+    padding: 50px;
+    position: relative;
+  }
 
-    .image {
-      display: block;
-      margin: auto;
+  .heading {
+    @include heading-text($black, 36px);
+    letter-spacing: 0.03em;
+    .underline {
+      @include text-underline;
     }
+  }
 
-    .action-items {
-      background: $black;
-      padding: 35px;
-    }
+  .subheading {
+    @include heading-text($black, 24px);
+    margin: 30px 0px 15px 30px;
+    line-height: 29px;
+    letter-spacing: 0.03em;
+  }
 
-    .curve {
-      background-color: $black;
-      width: 100%;
-    }
+  .text {
+    font-family: $lato;
+    font-size: 18px;
+    line-height: 22px;
+    letter-spacing: 0.02em;
+    margin: 0;
+  }
+
+  .image {
+    display: block;
+    margin: auto;
+  }
+
+  .action-items {
+    background: $black;
+    padding: 35px;
+  }
+
+  .curve {
+    background-color: $black;
+    width: 100%;
   }
 }

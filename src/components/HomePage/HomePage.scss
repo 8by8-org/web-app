@@ -58,7 +58,10 @@
       }
       .text {
         @include heading-text($white);
+<<<<<<< HEAD
         width: 100%;
+=======
+>>>>>>> 3b413a124101a09995387c8b0a6179393a7c8516
         .underline {
           @include text-underline;
         }
