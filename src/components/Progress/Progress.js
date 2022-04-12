@@ -188,6 +188,9 @@ export default function Progress() {
 
   return (
     <article className="progress-page">
+      {confettiAnimation}
+      <Invite toggleInvite={toggleInvite} />
+
       <section className="section-1 bg-black pt-32px pl-30px pb-80px">
         <h1>
           Your <br /> challenge <br /> badges
@@ -272,10 +275,6 @@ export default function Progress() {
           }
         />
       )}
-
-      {confettiAnimation}
-
-      <Invite toggleInvite={toggleInvite} />
     </article>
   );
 }
