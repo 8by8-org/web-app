@@ -40,7 +40,7 @@ function Invite({ toggleInvite , isShare}) {
   }
 
   function generateUrl() {
-    setUrl(`${window.location.origin}/playerwelcome?code=${currentUser.uid}`)
+    setUrl(`${window.location.origin}/share/${currentUser.uid}`)
   }
 
   // shareUrl is currently a temporary placeholder for UID link
