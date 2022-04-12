@@ -17,8 +17,9 @@ export default function PlayerWelcome() {
     const [ loading, setLoading ] = useState(true);
     const [ challengerInfo, setChallengerInfo ] = useState(null);
 
-    const url = new URL(window.location.href)
-    const code = url.searchParams.get("code")
+    const url = window.location.href
+    // const code = url.searchParams.get("code")
+    const code = url.split('/').pop();
 
     async function getChallengerInfo() {
         const db = getFirestore();

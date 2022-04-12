@@ -52,6 +52,7 @@ export default function App() {
                 <PrivateRoute path="/progress" component={Progress} />
                 <PrivateRoute path="/signout" component={Signout} />
                 <Route path="/playerwelcome" component={PlayerWelcome} />
+                <Route path="/share" component={PlayerWelcome} />
                 <Route path="/actions" component={Actions} />
                 <PrivateRoute path="/voterreg" component={VoterRegistration} />
                 <Route path="/termsofservice" component={TOS} />
