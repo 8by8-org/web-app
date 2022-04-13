@@ -28,6 +28,12 @@
       height: 60px;
       display: flex;
       margin-top: 50px;
+
+      a.nav-link, a.nav-link:hover {
+        color: black;
+        fill: black;
+        margin: 25px;
+      }
     }
 
     .invite-title {
@@ -137,10 +143,4 @@
 .invite-menu.active {
   bottom: 0;
   transition: 400ms;
-}
-
-a.nav-link, a.nav-link:hover {
-  color: black;
-  fill: black;
-  margin: 25px;
 }
