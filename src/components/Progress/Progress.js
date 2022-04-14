@@ -46,14 +46,14 @@ export default function Progress() {
     if (challengeFinished) {
       setConfettiAnimation(<ConfettiAnimation time={8000} />);
 
-      // setButton(
-      //   <button
-      //     className="inverted"
-      //     onClick={() => alert("no sharing functionality yet")}
-      //   >
-      //     Share
-      //   </button>
-      // );
+        setButton(
+        <button
+          className="inverted"
+          onClick={() => alert("no sharing functionality yet")}
+        >
+          Share
+        </button>
+      );
     }
   }, [challengeVoid, challengeFinished]);
 
