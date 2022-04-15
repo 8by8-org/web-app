@@ -11,7 +11,6 @@ import emailUser from "../../functions/Email";
 import Invite from "../Invite.js";
 import PopupModal from "../PopupModal";
 import ConfettiAnimation from "../ConfettiAnimation";
-
 import CurveA from "./../../assets/2-shapes/curve-a.svg";
 import BlobDay from "./../../assets/4-pages/Progress/BlobDay.svg";
 
@@ -37,7 +36,16 @@ export default function Progress() {
   const db = getFirestore();
 
   useEffect(() => {
-    fetchUserData();
+    if (localStorage.getItem("player") && currentUser) {
+      setTimeout(() => {
+        addInvitedBy();
+        fetchUserData();
+        setLoading(true);
+      }, 3000);
+    } else {
+      fetchUserData();
+      setLoading(true);
+    }
   }, []);
 
   useEffect(() => {
@@ -69,19 +77,6 @@ export default function Progress() {
     });
     localStorage.removeItem("player");
   }
-
-  useEffect(() => {
-    setTimeout(() => {
-      if (localStorage.getItem("player") && currentUser) {
-        addInvitedBy();
-        fetchUserData();
-        setLoading(true);
-      } else {
-        fetchUserData();
-        setLoading(true);
-      }
-    }, 3000);
-  }, []);
 
   function fetchUserData() {
     getUserDatabase()
