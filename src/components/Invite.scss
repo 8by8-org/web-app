@@ -6,11 +6,11 @@
   justify-content: center;
 
   .invite-menu {
-    height: 90vh;
+    height: 95%;
     width: 100%;
     max-width: 500px;
     position: fixed;
-    bottom: -90vh;
+    bottom: -100vh;
     transition: 400ms;
     background-color: white;
     color: black;
@@ -27,6 +27,13 @@
       width: 100%;
       height: 60px;
       display: flex;
+      margin-top: 50px;
+
+      a.nav-link, a.nav-link:hover {
+        color: black;
+        fill: black;
+        margin: 25px;
+      }
     }
 
     .invite-title {
@@ -65,6 +72,17 @@
         height: 50px;
         margin: 0 30px 5px 30px;
       }
+
+      .instagram-button, .sms-button {
+        background: none;
+        border: none;
+        padding: 0;
+        color: black;
+      }
+
+      button {
+        margin-top: 15px;
+      }
     }
 
     .link-container {
@@ -99,8 +117,26 @@
         font-size: 20px;
         padding: 0 20px 0 20px;
         height: min-content;
+        margin-bottom: 7px;
+      }
+
+      .unique-link {
+        margin-right: 20px;
+        max-width: 70%;
+
+        p {
+          white-space: nowrap;
+          overflow: hidden;
+        }
       }
     }
+
+    .underline {
+      margin-top: 4px;
+      height: 3px;
+      background: linear-gradient(270deg, #ffed10 0%, #02ddc3 100%);
+    }
+
   }
 }
 
