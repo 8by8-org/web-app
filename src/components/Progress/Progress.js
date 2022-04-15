@@ -5,6 +5,8 @@ import {
   delay,
   restartChallenge,
 } from "./../../functions/UserData";
+import { doc, getFirestore, updateDoc } from "firebase/firestore";
+import { useAuth } from "../../contexts/AuthContext";
 import emailUser from "../../functions/Email";
 import Invite from "../Invite.js";
 import PopupModal from "../PopupModal";
@@ -14,6 +16,7 @@ import CurveA from "./../../assets/2-shapes/curve-a.svg";
 import BlobDay from "./../../assets/4-pages/Progress/BlobDay.svg";
 
 export default function Progress() {
+  const { currentUser } = useAuth();
   const [userData, setUserData] = useState();
   const [challengeVoid, setChallengeVoid] = useState(false);
   const [challengeFinished, setChallengeFinished] = useState(false);
@@ -21,16 +24,17 @@ export default function Progress() {
   const [badges, setBadges] = useState([]);
   const [completedBadges, setCompletedBadges] = useState(0);
   const [registeredVoter, setRegisteredVoter] = useState(false);
-
   const [openModal, setOpenModal] = useState(false);
   const [button, setButton] = useState(
     <button className="gradient" onClick={() => toggleInvite.current()}>
       Invite friends
     </button>
-  ); // invite btn changes to share btn on challenge completion
+  );
   const [confettiAnimation, setConfettiAnimation] = useState();
+  const [loading, setLoading] = useState(false);
 
   const toggleInvite = React.useRef();
+  const db = getFirestore();
 
   useEffect(() => {
     fetchUserData();
@@ -46,7 +50,7 @@ export default function Progress() {
     if (challengeFinished) {
       setConfettiAnimation(<ConfettiAnimation time={8000} />);
 
-        setButton(
+      setButton(
         <button
           className="inverted"
           onClick={() => alert("no sharing functionality yet")}
@@ -56,6 +60,28 @@ export default function Progress() {
       );
     }
   }, [challengeVoid, challengeFinished]);
+
+  async function addInvitedBy() {
+    const userRef = doc(db, "users", await currentUser.uid);
+    await updateDoc(userRef, {
+      invitedBy: JSON.parse(localStorage.getItem("challengerInfo"))
+        .challengerID,
+    });
+    localStorage.removeItem("player");
+  }
+
+  useEffect(() => {
+    setTimeout(() => {
+      if (localStorage.getItem("player") && currentUser) {
+        addInvitedBy();
+        fetchUserData();
+        setLoading(true);
+      } else {
+        fetchUserData();
+        setLoading(true);
+      }
+    }, 3000);
+  }, []);
 
   function fetchUserData() {
     getUserDatabase()
@@ -186,10 +212,9 @@ export default function Progress() {
     );
   }
 
-  return (
+  return loading ? (
     <article className="progress-page">
       {confettiAnimation}
-
       <section className="section-1 bg-black pt-32px pl-30px pb-80px">
         <h1>
           Your <br /> challenge <br /> badges
@@ -275,7 +300,9 @@ export default function Progress() {
         />
       )}
 
-      <Invite toggleInvite={toggleInvite} />
+      <Invite toggleInvite={toggleInvite} isShare={false} />
     </article>
+  ) : (
+    <h1>loading...</h1>
   );
 }
