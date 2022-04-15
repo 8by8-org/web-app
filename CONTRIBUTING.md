@@ -35,7 +35,7 @@ Have the following installed before you proceed:
 - NodeJS, preferably v12 and above
   - Ensure you can run `node --version` and `npm --version` in a terminal without a problem
 - `firebase-cli`
-  - install by running `npm install -g firebase-cli`
+  - install by running `npm install -g firebase-tools`
 
 After you have satisfied the above installation requirements, run `firebase login` and login with the Google account that I added to the firebase project.
 
