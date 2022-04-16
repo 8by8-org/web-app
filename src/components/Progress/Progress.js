@@ -214,7 +214,7 @@ export default function Progress() {
         )}
       </section>
 
-      <Invite toggleInvite={toggleInvite} />
+      <Invite toggleInvite={toggleInvite} isShare={false} />
     </article> :
     <LoadingWheel/>
   );
