@@ -3,6 +3,7 @@ import { useHistory } from "react-router-dom";
 import { getFirestore, doc, getDoc, updateDoc } from "firebase/firestore";
 import { useAuth } from "../../contexts/AuthContext";
 import "./ElectionReminder.scss";
+import { LoadingWheel } from "../LoadingWheel";
 const db = getFirestore();
 
 export default function ElectionReminder() {
@@ -284,6 +285,6 @@ export default function ElectionReminder() {
         )}
       </div>
     </div> :
-    <h1>loading...</h1>
+    <LoadingWheel/>
   );
 }

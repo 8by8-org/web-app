@@ -5,6 +5,7 @@ import {
   delay,
 } from "./../../functions/UserData";
 import Invite from "../Invite.js";
+import { LoadingWheel } from "../LoadingWheel";
 
 import CurveA from "./../../assets/2-shapes/curve-a.svg";
 import BlobDay from "./../../assets/4-pages/Progress/BlobDay.svg";
@@ -215,6 +216,6 @@ export default function Progress() {
 
       <Invite toggleInvite={toggleInvite} />
     </article> :
-    <h1>loading...</h1>
+    <LoadingWheel/>
   );
 }

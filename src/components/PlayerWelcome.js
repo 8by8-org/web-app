@@ -10,6 +10,7 @@ import './PlayerWelcome.scss'
 import { auth } from "../firebase";
 import { dummyPassword } from "../constants";
 import { useAuth } from "../contexts/AuthContext";
+import { LoadingWheel } from "./LoadingWheel";
 
 export default function PlayerWelcome() {
     const history = useHistory(); 
@@ -113,6 +114,6 @@ export default function PlayerWelcome() {
                 <p align="center" className="small-text">Already have an account? <a href="/signin"><b>Sign In</b></a></p>
             </div>
             </div>
-            : <h1>loading</h1>
+            : <LoadingWheel/>
     ) 
 }
