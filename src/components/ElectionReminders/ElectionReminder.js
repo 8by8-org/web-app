@@ -200,7 +200,7 @@ export default function ElectionReminder() {
     <div className="election-reminder">
       <div className="electionReminderContainer">
         <header className="title">
-          <span className="underline">GET ELEC</span>TION ALERTS
+          <u className="underline">GET ELEC</u>TION ALERTS
         </header>
         {!showCompletedMessage ? (
           <div

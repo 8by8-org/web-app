@@ -3,7 +3,7 @@ import axios from "axios";
 import "../../VoterRegistration.scss";
 import { Tooltip } from "../Tooltip/Tooltip.component";
 import { completedAction } from "../../../../functions/UserData";
-import { LoadingWheel } from "../LoadingWheel/LoadingWheel.component";
+import { LoadingWheel } from "../../../LoadingWheel/LoadingWheel.component";
 
 const apiUrl = "https://usvotes-6vsnwycl4q-uw.a.run.app";
 
@@ -26,7 +26,7 @@ export const OtherInfo = ({ parentRef, setParentState }) => {
 
   return (
     <>
-      {isLoading && <LoadingWheel />}
+      {isLoading && <LoadingWheel overlay={true} />}
       <h2 className="register-form-title-small">OTHER DETAILS</h2>
       <label
         htmlFor="party"

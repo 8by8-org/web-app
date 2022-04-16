@@ -9,7 +9,7 @@ import {
 } from "./components";
 import { getFirestore, doc, getDoc, updateDoc } from "firebase/firestore";
 import { useAuth } from "../../contexts/AuthContext";
-import { LoadingWheel } from "./components/LoadingWheel/LoadingWheel.component";
+import { LoadingWheel } from "../LoadingWheel/LoadingWheel.component";
 import "./VoterRegistration.scss";
 const db = getFirestore();
 
@@ -20,12 +20,13 @@ export default function VoterRegistrationForm(props) {
   useEffect(() => {
     //when the page loads, check if the user has already registered to vote
     (async () => {
-      const userRef = doc(db, "users", currentUser.uid);
-      const user = await getDoc(userRef);
-      const uData = user.data();
-      if (uData.isRegisteredVoter) {
-        setPage("formCompleted");
-      } else setPage("eligibility");
+      // const userRef = doc(db, "users", currentUser.uid);
+      // const user = await getDoc(userRef);
+      // const uData = user.data();
+      // if (uData.isRegisteredVoter) {
+      //   setPage("formCompleted");
+      // } else
+      setPage("eligibility");
     })();
   }, []);
   const formData = useRef({
@@ -72,16 +73,16 @@ export default function VoterRegistrationForm(props) {
   });
 
   return (
-    <form className="container">
+    <form className={page !== "loading" && "container"}>
       {page !== "loading" && (
         <h1 className="register-form-title">
           {page !== "formCompleted" ? (
             <>
-              <span className="underline">REGISTE</span>R TO VOTE
+              <u className="underline">REGISTE</u>R TO VOTE
             </>
           ) : (
             <>
-              <span className="underline">YOU COMPLETE</span>D THE FORM
+              <u className="underline">YOU COMPLETE</u>D THE FORM
             </>
           )}
         </h1>
@@ -106,7 +107,7 @@ export default function VoterRegistrationForm(props) {
           case "formCompleted":
             return <FormCompleted />;
           case "loading":
-            return <LoadingWheel />;
+            return <LoadingWheel overlay={false} />;
         }
       })()}
     </form>

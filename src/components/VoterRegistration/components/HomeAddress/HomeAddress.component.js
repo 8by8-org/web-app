@@ -3,7 +3,7 @@ import axios from "axios";
 import { IconContext } from "react-icons";
 import * as MdIcons from "react-icons/md";
 import "../../VoterRegistration.scss";
-import { LoadingWheel } from "../LoadingWheel/LoadingWheel.component";
+import { LoadingWheel } from "../../../LoadingWheel/LoadingWheel.component";
 import { AddressBlock } from "./AddressBlock.component";
 
 const apiUrl = "https://usvotes-6vsnwycl4q-uw.a.run.app";
@@ -17,7 +17,7 @@ export const HomeAddress = ({ parentRef, setParentState }) => {
 
   return (
     <>
-      {isLoading && <LoadingWheel />}
+      {isLoading && <LoadingWheel overlay={true} />}
       <AddressBlock
         addressType={"home"}
         parentRef={parentRef}

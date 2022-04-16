@@ -10,6 +10,15 @@
   z-index: 999;
 }
 
+.loading-wheel-outer-container-block {
+  width: 100%;
+  height: calc(100vh - 75px);
+  box-sizing: border-box;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .loading-wheel-inner-container {
   background-color: rgba(111, 111, 111, 0.5);
   width: 500px;
