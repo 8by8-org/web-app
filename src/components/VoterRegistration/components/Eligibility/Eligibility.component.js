@@ -70,7 +70,15 @@ export const Eligibility = ({ parentRef, setParentState }) => {
             dob: event.target.value,
           };
           setFormData({ ...formData, dob: event.target.value });
-          getAge(event.target.value);
+          if (
+            formData.dob &&
+            parentRef.current.state &&
+            parentRef.current.state.length > 0
+          ) {
+            setEligibility(
+              getEligibility(formData.dob, parentRef.current.state)
+            );
+          }
         }}
         required
       />
