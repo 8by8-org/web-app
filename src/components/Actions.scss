@@ -18,85 +18,58 @@
   background-image: $background;
 }
 
-.top {
-  .avatar-and-status {
-    display: flex;
-    padding: 50px;
-    position: relative;
-  }
-
-  .action-status {
-    width: 50%;
-    padding-top: 10%;
-  }
-
-  .avatar-container {
-    @include blob-background;
-    width: 100%;
-    height: auto;
-    padding: 10% 0% 10%;
-    #challenger-avatar {
-      width: 40%;
-    }
-    #challenger-name {
-      @include heading-text($black, 30px);
-    }
-  }
-
-  #action-no-challenger {
-    @include heading-text($black, 36px);
-    padding: 30px;
-  }
-}
-
-.main-content {
+.actions {
   background-color: $white;
   color: $black;
 
-  .primary-button {
-    @include button;
-    outline: 4px solid white;
-  }
-
-  .secondary-button {
-    @include secondary-button;
-  }
-
-  .heading {
-    @include heading-text($black, 36px);
-    letter-spacing: 0.03em;
-    .underline {
-      @include text-underline;
+  .top {
+    .avatar-and-status {
+      display: flex;
+      position: relative;
     }
-  }
 
-  .subheading {
-    @include heading-text($black, 24px);
-    margin: 30px 0px 15px 30px;
-    line-height: 29px;
-    letter-spacing: 0.03em;
-  }
+    .action-status {
+      width: 50%;
+      font-size: 112px;
+      padding-top: 10%;
+      padding-left: 10%;
+    }
 
-  .text {
-    font-family: $lato;
-    font-size: 18px;
-    line-height: 22px;
-    letter-spacing: 0.02em;
-    margin: 0;
-  }
+    .avatar-container {
+      @include blob-background;
+      width: 100%;
+      height: auto;
+      padding: 10% 0% 10%;
+      #challenger-avatar {
+        width: 40%;
+      }
+      #challenger-name {
+        @include heading-text($black, 30px);
+      }
+    }
 
-  .image {
-    display: block;
-    margin: auto;
-  }
-
-  .action-items {
-    background: $black;
-    padding: 35px;
+    #action-no-challenger {
+      @include heading-text($black, 36px);
+      padding: 30px;
+    }
   }
 
   .curve {
     background-color: $black;
     width: 100%;
+  }
+
+  .action-items {
+    background: $black;
+    padding: 35px;
+
+    .primary-button {
+      @include button;
+      outline: 4px solid white;
+    }
+
+    .secondary-button {
+      @include secondary-button;
+    }
   }
 }

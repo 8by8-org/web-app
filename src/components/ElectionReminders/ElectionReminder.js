@@ -8,7 +8,7 @@ const db = getFirestore();
 export default function ElectionReminder() {
   const [showContinueButton, setShowContinueButton] = useState(false);
   const [showCompletedMessage, setShowCompletedMessage] = useState(false);
-  const [ loading, setLoading ] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   const history = useHistory();
 
@@ -17,12 +17,13 @@ export default function ElectionReminder() {
   const { currentUser } = useAuth();
 
   async function addInvitedBy() {
-    const userRef = doc(db, "users", await currentUser.uid)
+    const userRef = doc(db, "users", await currentUser.uid);
     await updateDoc(userRef, {
-        invitedBy: JSON.parse(localStorage.getItem("challengerInfo")).challengerID
-    })
-    localStorage.removeItem('player')
-}
+      invitedBy: JSON.parse(localStorage.getItem("challengerInfo"))
+        .challengerID,
+    });
+    localStorage.removeItem("player");
+  }
 
   const onSubmit = (
     firstNameInput,
@@ -236,18 +237,17 @@ export default function ElectionReminder() {
     }
 
     setTimeout(() => {
-      if(localStorage.getItem('player') && currentUser) {
-          addInvitedBy()
-          setLoading(true)
+      if (localStorage.getItem("player") && currentUser) {
+        addInvitedBy();
+        setLoading(true);
       } else {
-          setLoading(true)
+        setLoading(true);
       }
       initialize();
-    }, 2000)
+    }, 2000);
   }, []);
 
-  return (
-    loading ? 
+  return loading ? (
     <div className="election-reminder">
       <div className="electionReminderContainer">
         <header className="title">
@@ -283,7 +283,8 @@ export default function ElectionReminder() {
           </button>
         )}
       </div>
-    </div> :
+    </div>
+  ) : (
     <h1>loading...</h1>
   );
 }

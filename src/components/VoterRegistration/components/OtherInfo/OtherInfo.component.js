@@ -3,7 +3,7 @@ import axios from "axios";
 import BeatLoader from "react-spinners/BeatLoader";
 import "../../VoterRegistration.scss";
 
-const apiUrl = "https://usvotes-3ulcxuufea-uw.a.run.app/registertovote/";
+const apiUrl = "https://usvotes-6vsnwycl4q-uw.a.run.app/registertovote/";
 
 export const OtherInfo = ({ parentRef, setParentState }) => {
   const [showOtherPartyField, setShowOtherPartyField] = useState(false);
