@@ -19,17 +19,17 @@ export async function getUserDatabase() {
   let uid = auth.getAuth().currentUser.uid;
   let docRef = doc(db, "users", uid);
   let docSnap = await getDoc(docRef);
-  if (!docSnap.exists()) {
+  if (!docSnap.exists() || docSnap.data().avatar === undefined) {
     // tries to find user doc 5 times
     for (let i = 0; i < 5; i++) {
-      await delay(2000);
+      console.log("trying for " + i + " times");
+      await delay(3000);
       uid = auth.getAuth().currentUser.uid;
       docRef = doc(db, "users", uid);
       docSnap = await getDoc(docRef);
-      if (docSnap.exists()) {
+      if (docSnap.exists() && docSnap.data().avatar !== undefined) {
         return docSnap.data();
       }
-      console.log("tried");
     }
     throw new Error("user doc does not exist");
   } else {

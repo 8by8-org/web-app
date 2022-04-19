@@ -82,8 +82,8 @@ export default function Progress() {
     getUserDatabase()
       .then((data) => {
         // days left of challenge
-        let milisecondsLeft =
-          new Date(data.challengeEndDate.seconds * 1000) - new Date();
+        let daysLeft = data.challengeEndDate;
+        let milisecondsLeft = new Date(daysLeft.seconds * 1000) - new Date();
         let days = Math.floor(milisecondsLeft / 1000 / 60 / 60 / 24 + 1);
         if (days < 1) {
           days = 0;
