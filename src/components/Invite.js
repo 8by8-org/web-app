@@ -34,8 +34,7 @@ function Invite({ toggleInvite }) {
     navigator.clipboard.writeText(shareUrl);
   }
 
-  async function reloadPage() {
-    await delay(500);
+  function reloadPage() {
     window.location.reload();
   }
 
