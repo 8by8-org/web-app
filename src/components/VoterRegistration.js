@@ -76,7 +76,7 @@ export default function VoterRegistration() {
 
                 <p align="center" className="small-text">Not eligible? <a href="/actions">Other actions to help</a></p>
             </div>
-        </div> :
-        <LoadingWheel overlay={true}/>
+        </div>
+        : <LoadingWheel overlay={true}/>
     )
 }
