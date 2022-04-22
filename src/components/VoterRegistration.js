@@ -6,7 +6,7 @@ import { useHistory } from 'react-router';
 import {ReactComponent as VoteLogo} from '../assets/images/VoterReg/votefingers.svg'
 import './VoterRegistration.scss'
 import { doc, getFirestore, updateDoc } from 'firebase/firestore';
-import { LoadingWheel } from './LoadingWheel';
+import { LoadingWheel } from "./LoadingWheel/LoadingWheel.component";
 
 export default function VoterRegistration() {
     const { currentUser } = useAuth();
@@ -77,6 +77,6 @@ export default function VoterRegistration() {
                 <p align="center" className="small-text">Not eligible? <a href="/actions">Other actions to help</a></p>
             </div>
         </div> :
-        <LoadingWheel/>
+        <LoadingWheel overlay={true}/>
     )
 }

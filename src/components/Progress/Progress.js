@@ -5,8 +5,7 @@ import {
   delay,
 } from "./../../functions/UserData";
 import Invite from "../Invite.js";
-import { LoadingWheel } from "../LoadingWheel";
-
+import { LoadingWheel } from "../LoadingWheel/LoadingWheel.component";
 import CurveA from "./../../assets/2-shapes/curve-a.svg";
 import BlobDay from "./../../assets/4-pages/Progress/BlobDay.svg";
 import { doc, getFirestore, updateDoc } from "firebase/firestore";
@@ -23,11 +22,14 @@ export default function Progress() {
 
   const toggleInvite = React.useRef();
   const db = getFirestore();
+  const challengeEndDate = new Date(Date.now() + 8 * 24 * 60 * 60 * 1000);
 
   async function addInvitedBy() {
     const userRef = doc(db, "users", await currentUser.uid)
     await updateDoc(userRef, {
-        invitedBy: JSON.parse(localStorage.getItem("challengerInfo")).challengerID
+        invitedBy: JSON.parse(localStorage.getItem("challengerInfo")).challengerID,
+        startedChallenge: true,
+        challengeEndDate: challengeEndDate
     })
     localStorage.removeItem('player')
 }
@@ -215,7 +217,7 @@ export default function Progress() {
       </section>
 
       <Invite toggleInvite={toggleInvite} isShare={false} />
-    </article> :
-    <LoadingWheel/>
+    </article>
+    : <LoadingWheel overlay={true}/>
   );
 }

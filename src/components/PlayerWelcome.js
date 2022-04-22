@@ -10,7 +10,7 @@ import './PlayerWelcome.scss'
 import { auth } from "../firebase";
 import { dummyPassword } from "../constants";
 import { useAuth } from "../contexts/AuthContext";
-import { LoadingWheel } from "./LoadingWheel";
+import { LoadingWheel } from "./LoadingWheel/LoadingWheel.component";
 
 export default function PlayerWelcome() {
     const history = useHistory(); 
@@ -19,7 +19,6 @@ export default function PlayerWelcome() {
     const [ challengerInfo, setChallengerInfo ] = useState(null);
 
     const url = window.location.href
-    // const code = url.searchParams.get("code")
     const code = url.split('/').pop();
 
     async function getChallengerInfo() {
@@ -113,7 +112,7 @@ export default function PlayerWelcome() {
                 <Button onClick={() => {history.push(`/actions`)}}>Get Started</Button>
                 <p align="center" className="small-text">Already have an account? <a href="/signin"><b>Sign In</b></a></p>
             </div>
-            </div>
-            : <LoadingWheel/>
+        </div>
+        : <LoadingWheel overlay={true}/>
     ) 
 }
