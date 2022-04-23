@@ -3,32 +3,91 @@ import {
   getUserDatabase,
   completedAction,
   delay,
+  restartChallenge,
 } from "./../../functions/UserData";
+import { doc, getFirestore, updateDoc } from "firebase/firestore";
+import { useAuth } from "../../contexts/AuthContext";
+import emailUser from "../../functions/Email";
 import Invite from "../Invite.js";
-
+import PopupModal from "../PopupModal";
+import ConfettiAnimation from "../ConfettiAnimation";
 import CurveA from "./../../assets/2-shapes/curve-a.svg";
 import BlobDay from "./../../assets/4-pages/Progress/BlobDay.svg";
 
 export default function Progress() {
+  const { currentUser } = useAuth();
   const [userData, setUserData] = useState();
+  const [challengeVoid, setChallengeVoid] = useState(false);
+  const [challengeFinished, setChallengeFinished] = useState(false);
   const [daysLeft, setDaysLeft] = useState(0);
   const [badges, setBadges] = useState([]);
   const [completedBadges, setCompletedBadges] = useState(0);
   const [registeredVoter, setRegisteredVoter] = useState(false);
+  const [openModal, setOpenModal] = useState(false);
+  const [button, setButton] = useState(
+    <button className="gradient" onClick={() => toggleInvite.current()}>
+      Invite friends
+    </button>
+  );
+  const [confettiAnimation, setConfettiAnimation] = useState();
+  const [loading, setLoading] = useState(false);
 
   const toggleInvite = React.useRef();
+  const db = getFirestore();
 
   useEffect(() => {
-    fetchUserData();
+    if (localStorage.getItem("player") && currentUser) {
+      setTimeout(() => {
+        addInvitedBy();
+        fetchUserData();
+        setLoading(true);
+      }, 3000);
+    } else {
+      fetchUserData();
+      setLoading(true);
+    }
   }, []);
+
+  useEffect(() => {
+    // 8 days complete
+    if (challengeVoid) {
+      setOpenModal(true);
+    }
+
+    // successfully completes challenge
+    if (challengeFinished) {
+      setConfettiAnimation(<ConfettiAnimation time={8000} />);
+
+      setButton(
+        <button
+          className="inverted"
+          onClick={() => alert("no sharing functionality yet")}
+        >
+          Share
+        </button>
+      );
+    }
+  }, [challengeVoid, challengeFinished]);
+
+  async function addInvitedBy() {
+    const userRef = doc(db, "users", await currentUser.uid);
+    await updateDoc(userRef, {
+      invitedBy: JSON.parse(localStorage.getItem("challengerInfo"))
+        .challengerID,
+    });
+    localStorage.removeItem("player");
+  }
 
   function fetchUserData() {
     getUserDatabase()
       .then((data) => {
         // days left of challenge
-        let milisecondsLeft =
-          new Date(data.challengeEndDate.seconds * 1000) - new Date();
+        let daysLeft = data.challengeEndDate;
+        let milisecondsLeft = new Date(daysLeft.seconds * 1000) - new Date();
         let days = Math.floor(milisecondsLeft / 1000 / 60 / 60 / 24 + 1);
+        if (days < 1) {
+          days = 0;
+        }
 
         // gets all badges
         let badgeArr = data.badges;
@@ -36,14 +95,25 @@ export default function Progress() {
           badgeArr.pop();
         }
         setCompletedBadges(badgeArr.length);
+        const badgesLength = badgeArr.length;
         while (badgeArr.length < 8) {
           badgeArr.push(0);
         }
 
         setUserData(data);
         setDaysLeft(days);
-        setBadges(badgeArr);
         setRegisteredVoter(data.isRegisteredVoter);
+        setBadges(badgeArr);
+
+        // checks if challenge is void
+        if (badgesLength < 8 && days < 1) {
+          setChallengeVoid(true);
+        }
+
+        // checks if challenge is completed
+        if (badgesLength === 8) {
+          setChallengeFinished(true);
+        }
       })
       .catch((e) => console.log(e));
   }
@@ -52,6 +122,53 @@ export default function Progress() {
     await delay(500);
     window.location.reload();
   }
+
+  const testing = (
+    <section
+      style={{
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+        border: "4px red solid",
+        margin: "20px 0",
+        textAlign: "center",
+      }}
+    >
+      temporary testing
+      <button
+        onClick={() => {
+          completedAction("test add badge");
+          reloadPage();
+        }}
+      >
+        add player badge
+      </button>
+      <button
+        onClick={() => {
+          completedAction("share challenge");
+          reloadPage();
+        }}
+      >
+        add share badge
+      </button>
+      <button
+        onClick={() => {
+          completedAction("register to vote");
+          reloadPage();
+        }}
+      >
+        add register badge
+      </button>
+      <button
+        onClick={() => {
+          restartChallenge();
+          reloadPage();
+        }}
+      >
+        restart challenge
+      </button>
+    </section>
+  );
 
   function Badge(props) {
     const index = props.index + 1;
@@ -90,8 +207,9 @@ export default function Progress() {
     );
   }
 
-  return (
+  return loading ? (
     <article className="progress-page">
+      {confettiAnimation}
       <section className="section-1 bg-black pt-32px pl-30px pb-80px">
         <h1>
           Your <br /> challenge <br /> badges
@@ -99,7 +217,9 @@ export default function Progress() {
         <div className="days-blob-container">
           <div className="days-label">
             <p className="number-shadow">{daysLeft}</p>
-            <h3 className="text-black">Days left</h3>
+            <h3 className="text-black">
+              {daysLeft === 1 ? "Day" : "Days"} left
+            </h3>
           </div>
           <img className="blob" src={BlobDay} />
         </div>
@@ -108,12 +228,10 @@ export default function Progress() {
 
       <section className="section-2 pt-32px pl-30px pr-30px">
         <h3 className="text-center pb-24px">
-          You completed <span className="underline">{completedBadges}</span>{" "}
-          badges
+          You completed {completedBadges === 8 ? " all " : " "}
+          <span className="underline">{completedBadges}</span> badges
         </h3>
-        <button className="gradient" onClick={() => toggleInvite.current()}>
-          Invite friends
-        </button>
+        {button}
         {!registeredVoter ? (
           <div>
             <p className="text-center mt-24px b6">
@@ -129,42 +247,7 @@ export default function Progress() {
       </section>
 
       {/* remove this setion when done with testing */}
-      <section
-        style={{
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "center",
-          border: "4px red solid",
-          margin: "20px 0",
-          textAlign: "center",
-        }}
-      >
-        temporary testing
-        <button
-          onClick={() => {
-            completedAction("test add badge");
-            reloadPage();
-          }}
-        >
-          add player badge
-        </button>
-        <button
-          onClick={() => {
-            completedAction("share challenge");
-            reloadPage();
-          }}
-        >
-          add share badge
-        </button>
-        <button
-          onClick={() => {
-            completedAction("register to vote");
-            reloadPage();
-          }}
-        >
-          add register badge
-        </button>
-      </section>
+      {testing}
 
       <section className="section-3 mt-24px">
         {badges.map((value, index) => {
@@ -173,9 +256,7 @@ export default function Progress() {
       </section>
 
       <section className="section-4 pl-30px pr-30px pb-40px">
-        <button className="gradient" onClick={() => toggleInvite.current()}>
-          Invite friends
-        </button>
+        {button}
         {!registeredVoter ? (
           <div>
             <p className="text-center mt-24px b6">
@@ -190,7 +271,33 @@ export default function Progress() {
         )}
       </section>
 
-      <Invite toggleInvite={toggleInvite} />
+      {openModal && (
+        <PopupModal
+          setOpenModal={setOpenModal}
+          content={
+            <>
+              <div className="b1">
+                Oops, times up! But no worries, restart your challenge to
+                continue!
+              </div>
+              <button
+                className="gradient"
+                onClick={() => {
+                  restartChallenge();
+                  fetchUserData();
+                  setOpenModal(false);
+                }}
+              >
+                <span>Restart Challenge</span>
+              </button>
+            </>
+          }
+        />
+      )}
+
+      <Invite toggleInvite={toggleInvite} isShare={false} />
     </article>
+  ) : (
+    <h1>loading...</h1>
   );
 }

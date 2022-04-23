@@ -9,9 +9,21 @@ const db = getFirestore();
 export default function ElectionReminder() {
   const [showContinueButton, setShowContinueButton] = useState(false);
   const [showCompletedMessage, setShowCompletedMessage] = useState(false);
-  const { currentUser } = useAuth();
+  const [loading, setLoading] = useState(false);
 
   const history = useHistory();
+
+  //get information for challenger who referred the player
+  const { currentUser } = useAuth();
+
+  async function addInvitedBy() {
+    const userRef = doc(db, "users", await currentUser.uid);
+    await updateDoc(userRef, {
+      invitedBy: JSON.parse(localStorage.getItem("challengerInfo"))
+        .challengerID,
+    });
+    localStorage.removeItem("player");
+  }
 
   const onSubmit = (
     firstNameInput,
@@ -193,10 +205,19 @@ export default function ElectionReminder() {
       //   }
       // };
     }
-    initialize();
+
+    setTimeout(() => {
+      if (localStorage.getItem("player") && currentUser) {
+        addInvitedBy();
+        setLoading(true);
+      } else {
+        setLoading(true);
+      }
+      initialize();
+    }, 2000);
   }, []);
 
-  return (
+  return loading ? (
     <div className="election-reminder">
       <div className="electionReminderContainer">
         <header className="title">
@@ -233,5 +254,7 @@ export default function ElectionReminder() {
         )}
       </div>
     </div>
+  ) : (
+    <h1>loading...</h1>
   );
 }
