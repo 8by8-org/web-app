@@ -30,6 +30,17 @@
   animation: fadeIn 250ms ease-in-out 1 forwards;
 }
 
+.loading-wheel-inner-container-white {
+  background-color: white;
+  width: 500px;
+  max-width: 100vw;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  animation: fadeIn 250ms ease-in-out 1 forwards;
+}
+
 .lds-ring {
   display: inline-block;
   position: relative;
