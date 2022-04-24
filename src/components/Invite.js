@@ -79,7 +79,7 @@ function Invite({ toggleInvite , isShare}) {
         </div>
 
         <div className="section social-media">
-          <p className="sub-heading">{isShare ? 'Social Media' : 'Copy yout unique link'}</p>
+          <p className="sub-heading">{isShare ? 'Social Media' : 'Copy your unique link'}</p>
           <FacebookShareButton url={shareUrl} quote={quote} hashtag={hashtag}
               onShareWindowClose={()=>{completedAction("share challenge")}}>
             <img className="invite-icon" src={FacebookSvg} />
@@ -105,7 +105,7 @@ function Invite({ toggleInvite , isShare}) {
 
         <div className="section messaging">
 
-          <p className="sub-heading">{isShare ? 'Messaging' : 'Copy yout unique link'}</p>
+          <p className="sub-heading">{isShare ? 'Messaging' : 'Copy your unique link'}</p>
           <FacebookMessengerShareButton url={shareUrl} appId={appId} onShareWindowClose={()=>{completedAction("share challenge")}}>
             <img className="invite-icon" src={FacebookMessengerSvg} />
             <p className="invite-icon-label">Messenger</p>
