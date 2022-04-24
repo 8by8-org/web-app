@@ -91,51 +91,55 @@ function Header() {
   return (
     <>
       <IconContext.Provider value={{ color: "white" }}>
-        <div className="navbar">
-          <Navbar.Brand href="/">
-            <img src={logo} alt="8by8 logo" id="brand-logo" />
-          </Navbar.Brand>
-          <div id="icons-tray">
-            <Nav.Link to="#" id="sidebar-icon">
-              <MdIcons.MdNotificationsNone onClick={showNotif} />
-            </Nav.Link>
-            <Nav.Link to="#" id="notif-icon">
-              <FaIcons.FaBars onClick={showSidebar} />
-            </Nav.Link>
+        <div className="navbar" id="navbar">
+          <div className="navbar-buttons">
+            <Navbar.Brand href="/">
+              <img src={logo} alt="8by8 logo" id="brand-logo" />
+            </Navbar.Brand>
+            <div id="icons-tray">
+              <Nav.Link to="#" id="sidebar-icon">
+                <MdIcons.MdNotificationsNone onClick={showNotif} />
+              </Nav.Link>
+              <Nav.Link to="#" id="notif-icon">
+                <FaIcons.FaBars onClick={showSidebar} />
+              </Nav.Link>
+            </div>
           </div>
         </div>
 
         {/* Sidebar */}
-        <nav className={sidebar ? "nav-menu active" : "nav-menu"}>
-          <ul className="menu-items" onClick={showSidebar}>
-            <li className="menu-header">
-              <Nav.Link to="#">
-                <IoIcons.IoIosArrowForward />
-              </Nav.Link>
-              <img src={sidebarLogo} alt="8by8 logo" />
-            </li>
-            <p className="menu-greeting">{greeting}</p>
-            {SidebarData.map((item, index) => {
-              return (
-                <li key={index} className="nav-text">
-                  <Nav.Link href={item.path}>
-                    {item.icon}
-                    <p>{item.title}</p>
-                  </Nav.Link>
-                </li>
-              );
-            })}
-            <div className="menu-settings">
-              <Nav.Link href="/">Settings</Nav.Link>
-              <Nav.Link href="/">Privacy Policy</Nav.Link>
-              {currentUser ? (
-                <Nav.Link href="/signout">Sign out</Nav.Link>
-              ) : (
-                <Nav.Link href="/signin">Sign In</Nav.Link>
-              )}
-            </div>
-          </ul>
-        </nav>
+        <div className={sidebar ? "nav-container active" : "nav-container"}>
+          <nav className="nav-menu">
+            <ul className="menu-items" onClick={showSidebar}>
+              <li className="menu-header">
+                <Nav.Link to="#">
+                  <IoIcons.IoIosArrowForward />
+                </Nav.Link>
+                <img src={sidebarLogo} alt="8by8 logo" />
+              </li>
+              <p className="menu-greeting">{greeting}</p>
+              {SidebarData.map((item, index) => {
+                return (
+                  <li key={index} className="nav-text">
+                    <Nav.Link href={item.path}>
+                      {item.icon}
+                      <p>{item.title}</p>
+                    </Nav.Link>
+                  </li>
+                );
+              })}
+              <div className="menu-settings">
+                <Nav.Link href="/">Settings</Nav.Link>
+                <Nav.Link href="/">Privacy Policy</Nav.Link>
+                {currentUser ? (
+                  <Nav.Link href="/signout">Sign out</Nav.Link>
+                ) : (
+                  <Nav.Link href="/signin">Sign In</Nav.Link>
+                )}
+              </div>
+            </ul>
+          </nav>
+        </div>
 
         {/* Notifications */}
         <div className="notif-wrapper">

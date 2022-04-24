@@ -10,6 +10,7 @@ import StepFour from "./../../assets/images/ChallengerWelcome/StepFour.png";
 
 function ChallengerWelcome() {
   const history = useHistory();
+  sessionStorage.setItem("UserType", "Challenger");
 
   return (
     <div className="challenger-welcome">

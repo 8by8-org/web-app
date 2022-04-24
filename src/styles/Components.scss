@@ -3,7 +3,7 @@
 
 // greenish-yellow gradient button
 @mixin button {
-  height: 40% !important;
+  height: 40% !important; //!important is required to override the predefined CSS in the election reminders form
   width: 100% !important;
   font-family: $bebas-neue !important;
   font-size: 200% !important;
@@ -54,12 +54,41 @@
   }
 }
 
+//black button with greenish-yellow gradient applied to the text. The button should have a <span> element as a child
+@mixin inverted-button {
+  height: 40%;
+  width: fit-content;
+  font-family: $bebas-neue;
+  font-size: 200%;
+  text-align: center;
+  background-color: #101010;
+  border-radius: 40px;
+  border: 4px solid #101010;
+  position: relative;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  padding-left: 20px;
+  padding-right: 20px;
+
+  :first-child {
+    //a span element should be added inside the button to contain the text, these styles will apply to it
+    background: linear-gradient(270deg, #ffed10 0%, #02ddc3 100%);
+    // set the background clip to clip around the text content
+    background-clip: text;
+    -webkit-background-clip: text;
+    -moz-background-clip: text;
+    //set the text fill color to transparent
+    -webkit-text-fill-color: transparent;
+    -moz-text-fill-color: transparent;
+    color: transparent;
+  }
+}
+
 //headings
 @mixin heading-text($color: $black, $fontSize: 48px) {
   color: $color !important;
   font-family: $bebas-neue !important;
   font-size: $fontSize !important;
-  line-height: 58px !important;
 }
 
 @mixin subheading-text($color: $black, $fontSize: 36px) {

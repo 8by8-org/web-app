@@ -1,0 +1,134 @@
+@import "../../../../styles/Fonts.scss";
+@import "../../../../styles/Components.scss";
+
+.tooltipBtn {
+  height: 18px;
+  width: 18px;
+  min-height: 20px;
+  min-width: 20px;
+  background-color: white;
+  border-radius: 10px;
+  border: 2px solid black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: bold;
+  font-family: $lato;
+  box-sizing: border-box;
+  margin-left: 10px;
+}
+
+.tooltipBtn:hover {
+  cursor: pointer;
+}
+
+.tooltip-modal-outer-container {
+  position: fixed;
+  top: 57px;
+  left: 0;
+  width: 100%;
+  height: calc(100vh - 57px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+}
+
+.tooltip-modal-inner-container {
+  background-color: rgba(111, 111, 111, 0.5);
+  width: 500px;
+  max-width: 100vw;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  animation: fadeIn 250ms ease-in-out 1 forwards;
+}
+
+.tooltip-modal {
+  background-color: white;
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-family: $lato;
+  box-sizing: border-box;
+  width: 100%;
+  margin-left: 15%;
+  margin-right: 15%;
+}
+
+.tooltip-toggle-container {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  margin-bottom: 24px;
+}
+
+.tooltip-modal-toggle {
+  height: 24px;
+  background-color: transparent;
+  border: none;
+  outline: none;
+}
+
+.tooltip-toggle:hover {
+  cursor: pointer;
+}
+
+.voter-reg-modal-heading {
+  font-weight: bold;
+}
+
+.tooltip-inner-container {
+  margin-left: 20px;
+  margin-right: 20px;
+}
+
+.tooltip-modal-btn {
+  @include button;
+  margin-top: 24px;
+  margin-bottom: 32px;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+// .tooltipContainer-active {
+//   background-color: #02ddc3;
+// }
+
+// .tooltipContainer span {
+//   text-align: center;
+//   color: black;
+// }
+
+// .tooltipTextContainer {
+//   position: absolute;
+//   top: 20px;
+//   right: 0px;
+// }
+
+// .tooltipTextContainer-hidden {
+//   visibility: hidden;
+// }
+
+// .tooltipContainer:hover .tooltipTextContainer-hidden {
+//   visibility: visible;
+// }
+
+// .tooltipTextContainer-show {
+//   visibility: show;
+// }
+
+// .tooltipText {
+//   font-family: $lato;
+//   font-size: 16px;
+// }
