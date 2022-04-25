@@ -14,17 +14,15 @@ import Curve3 from "./../../assets/images/HomePage/Curve3.svg";
 
 export default function HomePage() {
   const history = useHistory();
+
   return (
     <div className="homepage">
       <div className="content-1">
         <div className="description">
           <img className="logo" src={Logo} alt="8by8 Logo" />
           <div className="text">
-            GET <u className="underline">8 AAPI FRIENDS</u>
-            <br />
-            TO RESISTER
-            <br />
-            TO VOTE IN <u className="underline">8 DAYS</u>
+            GET <u className="underline">8 AAPI FRIENDS</u> TO RESISTER TO VOTE
+            IN <u className="underline">8 DAYS</u>
           </div>
           <button
             className="challenge-button"

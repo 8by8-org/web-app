@@ -1,9 +1,11 @@
 import React, { useState } from "react";
+import { Tooltip } from "../Tooltip/Tooltip.component";
 import "../../VoterRegistration.scss";
 
 export const YourName = ({ parentRef, setParentState }) => {
+  const [error, setError] = useState("");
   const [formData, setFormData] = useState({
-    title: parentRef.current.title,
+    name_title: parentRef.current.name_title,
     name_first: parentRef.current.name_first,
     name_middle: parentRef.current.name_middle,
     name_last: parentRef.current.name_last,
@@ -16,23 +18,66 @@ export const YourName = ({ parentRef, setParentState }) => {
     prev_name_suffix: parentRef.current.prev_name_suffix,
   });
 
+  const [activeFields, setActiveFields] = useState({
+    name_title:
+      parentRef.current.name_title && parentRef.current.name_title.length > 0,
+    name_first:
+      parentRef.current.name_first && parentRef.current.name_first.length > 0,
+    name_middle:
+      parentRef.current.name_middle && parentRef.current.name_middle.length > 0,
+    name_last:
+      parentRef.current.name_last && parentRef.current.name_last.length > 0,
+    suffix: parentRef.current.suffix && parentRef.current.suffix.length > 0,
+    prev_name_title:
+      parentRef.current.prev_name_title &&
+      parentRef.current.prev_name_title.length > 0,
+    prev_name_first:
+      parentRef.current.prev_name_first &&
+      parentRef.current.prev_name_first.length > 0,
+    prev_name_middle:
+      parentRef.current.prev_name_middle &&
+      parentRef.current.prev_name_middle.length > 0,
+    prev_name_last:
+      parentRef.current.prev_name_last &&
+      parentRef.current.prev_name_last.length > 0,
+    prev_name_suffix:
+      parentRef.current.prev_name_suffix &&
+      parentRef.current.prev_name_suffix.length > 0,
+  });
+
   return (
     <>
-      <h2 className="register-form-title-small">YOUR NAME</h2>
-      <label htmlFor="title" className="register-label">
+      <div className="horizontalContainer">
+        <h2 className="register-form-title-small">YOUR NAME </h2>
+        <Tooltip text="Put your full name in these boxes. Please do not use nicknames or initials. If this application is for a change of name, you will be asked for your previous name in a later section. Don't forget to include your title (Mr., Mrs., Miss, Ms.)." />
+      </div>
+      <label
+        htmlFor="title"
+        className={
+          activeFields.name_title
+            ? "floating-label-active"
+            : "floating-label-default"
+        }
+        onClick={() => {
+          setActiveFields({ ...activeFields, name_title: true });
+        }}
+      >
         Title*
       </label>
       <select
-        name="title"
-        id="title"
-        value={formData.title}
+        name="name_title"
+        id="name_title"
+        value={formData.name_title}
         className="register-input"
+        onFocus={() => {
+          setActiveFields({ ...activeFields, name_title: true });
+        }}
         onChange={(event) => {
           parentRef.current = {
             ...parentRef.current,
-            title: event.target.value,
+            name_title: event.target.value,
           };
-          setFormData({ ...formData, title: event.target.value });
+          setFormData({ ...formData, name_title: event.target.value });
         }}
         required
       >
@@ -46,7 +91,14 @@ export const YourName = ({ parentRef, setParentState }) => {
         <option value="Srta.">Srta.</option>
       </select>
       <br />
-      <label htmlFor="name_first" className="register-label">
+      <label
+        htmlFor="name_first"
+        className={
+          activeFields.name_first
+            ? "floating-label-active"
+            : "floating-label-default"
+        }
+      >
         First Name*
       </label>
       <input
@@ -55,6 +107,12 @@ export const YourName = ({ parentRef, setParentState }) => {
         name="name_first"
         className="register-input"
         value={formData.name_first}
+        onClick={() => {
+          setActiveFields({ ...activeFields, name_first: true });
+        }}
+        onFocus={() => {
+          setActiveFields({ ...activeFields, name_first: true });
+        }}
         onChange={(event) => {
           parentRef.current = {
             ...parentRef.current,
@@ -64,7 +122,14 @@ export const YourName = ({ parentRef, setParentState }) => {
         }}
       />
       <br />
-      <label htmlFor="name_middle" className="register-label">
+      <label
+        htmlFor="name_middle"
+        className={
+          activeFields.name_middle
+            ? "floating-label-active"
+            : "floating-label-default"
+        }
+      >
         Middle Name
       </label>
       <input
@@ -73,6 +138,12 @@ export const YourName = ({ parentRef, setParentState }) => {
         name="name_middle"
         className="register-input"
         value={formData.name_middle}
+        onClick={() => {
+          setActiveFields({ ...activeFields, name_middle: true });
+        }}
+        onFocus={() => {
+          setActiveFields({ ...activeFields, name_middle: true });
+        }}
         onChange={(event) => {
           parentRef.current = {
             ...parentRef.current,
@@ -82,7 +153,14 @@ export const YourName = ({ parentRef, setParentState }) => {
         }}
       />
       <br />
-      <label htmlFor="name_last" className="register-label">
+      <label
+        htmlFor="name_last"
+        className={
+          activeFields.name_last
+            ? "floating-label-active"
+            : "floating-label-default"
+        }
+      >
         Last name*
       </label>
       <input
@@ -91,6 +169,12 @@ export const YourName = ({ parentRef, setParentState }) => {
         name="name_last"
         className="register-input"
         value={formData.name_last}
+        onClick={() => {
+          setActiveFields({ ...activeFields, name_last: true });
+        }}
+        onFocus={() => {
+          setActiveFields({ ...activeFields, name_last: true });
+        }}
         onChange={(event) => {
           parentRef.current = {
             ...parentRef.current,
@@ -101,7 +185,14 @@ export const YourName = ({ parentRef, setParentState }) => {
         required
       />
       <br />
-      <label htmlFor="suffix" className="register-label">
+      <label
+        htmlFor="suffix"
+        className={
+          activeFields.suffix
+            ? "floating-label-active"
+            : "floating-label-default"
+        }
+      >
         Suffix
       </label>
       <input
@@ -109,6 +200,12 @@ export const YourName = ({ parentRef, setParentState }) => {
         id="suffix"
         name="suffix"
         className="register-input"
+        onClick={() => {
+          setActiveFields({ ...activeFields, suffix: true });
+        }}
+        onFocus={() => {
+          setActiveFields({ ...activeFields, suffix: true });
+        }}
         value={formData.suffix}
         onChange={(event) => {
           parentRef.current = {
@@ -119,7 +216,7 @@ export const YourName = ({ parentRef, setParentState }) => {
         }}
       />
       <br />
-      <div>
+      <div style={{ width: "100%", display: "flex", alignItems: "center" }}>
         <input
           type="checkbox"
           id="change_of_name"
@@ -136,12 +233,20 @@ export const YourName = ({ parentRef, setParentState }) => {
         <label htmlFor="change_of_name" className="register-label">
           I've changed my name.
         </label>
+        <Tooltip text="If you have changed your name since your last registration, check this box and enter your previous name below." />
       </div>
       <br />
       {formData.change_of_name && (
         <>
           <h2 className="register-form-title-small">PREVIOUS NAME</h2>
-          <label htmlFor="prev_name_title" className="register-label">
+          <label
+            htmlFor="prev_name_title"
+            className={
+              activeFields.prev_name_title
+                ? "floating-label-active"
+                : "floating-label-default"
+            }
+          >
             Title*
           </label>
           <select
@@ -149,6 +254,12 @@ export const YourName = ({ parentRef, setParentState }) => {
             id="prev_name_title"
             className="register-input"
             value={formData.prev_name_title}
+            onClick={() => {
+              setActiveFields({ ...activeFields, prev_name_title: true });
+            }}
+            onFocus={() => {
+              setActiveFields({ ...activeFields, prev_name_title: true });
+            }}
             onChange={(event) => {
               parentRef.current = {
                 ...parentRef.current,
@@ -168,7 +279,14 @@ export const YourName = ({ parentRef, setParentState }) => {
             <option value="Srta.">Srta.</option>
           </select>
           <br />
-          <label htmlFor="prev_name_first" className="register-label">
+          <label
+            htmlFor="prev_name_first"
+            className={
+              activeFields.prev_name_first
+                ? "floating-label-active"
+                : "floating-label-default"
+            }
+          >
             First Name*
           </label>
           <input
@@ -176,6 +294,12 @@ export const YourName = ({ parentRef, setParentState }) => {
             id="prev_name_first"
             name="prev_name_first"
             className="register-input"
+            onClick={() => {
+              setActiveFields({ ...activeFields, prev_name_first: true });
+            }}
+            onFocus={() => {
+              setActiveFields({ ...activeFields, prev_name_first: true });
+            }}
             value={formData.prev_name_first}
             onChange={(event) => {
               parentRef.current = {
@@ -186,7 +310,14 @@ export const YourName = ({ parentRef, setParentState }) => {
             }}
           />
           <br />
-          <label htmlFor="prev_name_middle" className="register-label">
+          <label
+            htmlFor="prev_name_middle"
+            className={
+              activeFields.prev_name_middle
+                ? "floating-label-active"
+                : "floating-label-default"
+            }
+          >
             Middle Name
           </label>
           <input
@@ -195,6 +326,12 @@ export const YourName = ({ parentRef, setParentState }) => {
             name="prev_name_middle"
             className="register-input"
             value={formData.prev_name_middle}
+            onClick={() => {
+              setActiveFields({ ...activeFields, prev_name_middle: true });
+            }}
+            onFocus={() => {
+              setActiveFields({ ...activeFields, prev_name_middle: true });
+            }}
             onChange={(event) => {
               parentRef.current = {
                 ...parentRef.current,
@@ -207,7 +344,14 @@ export const YourName = ({ parentRef, setParentState }) => {
             }}
           />
           <br />
-          <label htmlFor="prev_name_last" className="register-label">
+          <label
+            htmlFor="prev_name_last"
+            className={
+              activeFields.prev_name_last
+                ? "floating-label-active"
+                : "floating-label-default"
+            }
+          >
             Last name*
           </label>
           <input
@@ -216,6 +360,12 @@ export const YourName = ({ parentRef, setParentState }) => {
             name="prev_name_last"
             className="register-input"
             value={formData.prev_name_last}
+            onClick={() => {
+              setActiveFields({ ...activeFields, prev_name_last: true });
+            }}
+            onFocus={() => {
+              setActiveFields({ ...activeFields, prev_name_last: true });
+            }}
             onChange={(event) => {
               parentRef.current = {
                 ...parentRef.current,
@@ -226,7 +376,14 @@ export const YourName = ({ parentRef, setParentState }) => {
             required
           />
           <br />
-          <label htmlFor="prev_name_suffix" className="register-label">
+          <label
+            htmlFor="prev_name_suffix"
+            className={
+              activeFields.prev_name_suffix
+                ? "floating-label-active"
+                : "floating-label-default"
+            }
+          >
             Suffix
           </label>
           <input
@@ -235,6 +392,12 @@ export const YourName = ({ parentRef, setParentState }) => {
             name="prev_name_suffix"
             value={formData.prev_name_suffix}
             className="register-input"
+            onClick={() => {
+              setActiveFields({ ...activeFields, prev_name_suffix: true });
+            }}
+            onFocus={() => {
+              setActiveFields({ ...activeFields, prev_name_suffix: true });
+            }}
             onChange={(event) => {
               parentRef.current = {
                 ...parentRef.current,
@@ -249,11 +412,25 @@ export const YourName = ({ parentRef, setParentState }) => {
           <br />
         </>
       )}
+      <p style={{ color: "red", fontStyle: "italic", textAlign: "center" }}>
+        {error}
+      </p>
       <button
         className="next-btn"
         onClick={(event) => {
           event.preventDefault();
-          //need to add guards here
+          if (
+            formData.name_title.length === 0 ||
+            formData.name_first.length === 0 ||
+            formData.name_last.length === 0 ||
+            (formData.change_of_name &&
+              (formData.prev_name_title.length === 0 ||
+                formData.prev_name_first.length === 0 ||
+                formData.prev_name_last.length === 0))
+          ) {
+            setError("Please complete all of the required fields");
+            return;
+          }
           setParentState("homeAddress");
         }}
       >

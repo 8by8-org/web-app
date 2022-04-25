@@ -11,7 +11,7 @@
 #root {
   background-color: white;
   color: black;
-  min-width: 280px;
+  min-width: 375px;
 }
 
 #app-outer-wrapper {
@@ -21,12 +21,12 @@
   height: 100%;
   position: relative;
   top: 57px;
-  min-width: 280px;
+  min-width: 375px;
   z-index: 0;
 }
 
 #app-wrapper {
   width: 100vw;
   max-width: 500px;
-  min-width: 280px;
+  min-width: 375px;
 }
