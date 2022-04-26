@@ -1,13 +1,17 @@
 import React, { useState } from "react";
+import { IconContext } from "react-icons";
+import * as MdIcons from "react-icons/md";
 import { useAuth } from "../../../../contexts/AuthContext";
 import "../../VoterRegistration.scss";
+import ZipCodeData from "zipcode-data";
+import { getAge, getEligibility } from "../../utils";
+import { Tooltip } from "../Tooltip/Tooltip.component";
 
-//may want to add links to the latter 2 error messages for people who are ineligible to vote to help in other ways
 const ERROR_MESSAGES = [
   "",
   "Please complete all of the required fields.",
   "You must be a US Citizen to vote.",
-  "You must be 18 by the next election to register.",
+  "Please enter a valid US zipcode.",
 ];
 
 export const Eligibility = ({ parentRef, setParentState }) => {
@@ -18,6 +22,15 @@ export const Eligibility = ({ parentRef, setParentState }) => {
     citizen: false,
     eighteenPlus: false,
   });
+  const [activeFields, setActiveFields] = useState({
+    zip: formData.zip.length > 0,
+    dob: formData.dob.length > 0,
+  });
+  const [showModal, setShowModal] = useState(false);
+  const [eligibility, setEligibility] = useState({
+    eligibility: "",
+    message: "",
+  });
   const [errorCode, setErrorCode] = useState(0);
 
   return (
@@ -25,25 +38,57 @@ export const Eligibility = ({ parentRef, setParentState }) => {
       <p>Registering to vote is easy, and only takes a few minutes!</p>
       <h2 className="register-form-title-small">ELIGIBILITY</h2>
       <label className="register-label">Email</label>
-      <p>{currentUser.email}</p>
-      <label className="register-label">Date of Birth*</label>
+      <p className="register-input">{parentRef.current.email}</p>
+      <br />
+      <label
+        className={
+          activeFields.dob ? "floating-label-active" : "floating-label-default"
+        }
+        onClick={() => {
+          setActiveFields({ ...activeFields, dob: true });
+        }}
+      >
+        Date of Birth*
+      </label>
+
       <input
         className="register-input"
         type="date"
         id="dob"
         name="dob"
         value={formData.dob}
+        style={{
+          color: activeFields.dob ? "black" : "white",
+          transition: "color 250ms 150ms ease-out",
+        }}
+        onFocus={() => {
+          setActiveFields({ ...activeFields, dob: true });
+        }}
         onChange={(event) => {
           parentRef.current = {
             ...parentRef.current,
             dob: event.target.value,
           };
           setFormData({ ...formData, dob: event.target.value });
+          if (
+            formData.dob &&
+            parentRef.current.state &&
+            parentRef.current.state.length > 0
+          ) {
+            setEligibility(
+              getEligibility(formData.dob, parentRef.current.state)
+            );
+          }
         }}
         required
       />
       <br />
-      <label for="zip" className="register-label">
+      <label
+        htmlFor="zip"
+        className={
+          activeFields.zip ? "floating-label-active" : "floating-label-default"
+        }
+      >
         Zip Code*
       </label>
       <input
@@ -52,12 +97,36 @@ export const Eligibility = ({ parentRef, setParentState }) => {
         id="zip"
         name="zip"
         value={formData.zip}
+        onClick={() => {
+          setActiveFields({ ...activeFields, zip: true });
+        }}
+        onFocus={() => {
+          setActiveFields({ ...activeFields, zip: true });
+        }}
         onChange={(event) => {
-          parentRef.current = {
-            ...parentRef.current,
-            zip: event.target.value,
-          };
-          setFormData({ ...formData, zip: event.target.value });
+          let state = "";
+          let zip;
+          if (event.target.value) {
+            zip = Number(event.target.value).toString();
+          } else {
+            zip = "";
+          }
+          if (zip.length <= 5) {
+            if (ZipCodeData.lookupZip(zip)) {
+              state = ZipCodeData.stateFromZip(zip);
+            }
+
+            parentRef.current = {
+              ...parentRef.current,
+              zip: zip,
+              state: state,
+            };
+            setFormData({ ...formData, zip: zip });
+            //if the user has entered their dob and if their state was found, set their eligibility
+            if (formData.dob && state.length > 0) {
+              setEligibility(getEligibility(formData.dob, state));
+            }
+          }
         }}
         required
       />
@@ -111,10 +180,7 @@ export const Eligibility = ({ parentRef, setParentState }) => {
         className="next-btn"
         onClick={(event) => {
           event.preventDefault();
-          if (
-            formData.dob.length === 0 ||
-            !formData.zip.match(/^[0-9]{5}(?:-[0-9]{4})?$/)
-          ) {
+          if (formData.dob.length === 0 || formData.zip.length === 0) {
             setErrorCode(1);
             return;
           }
@@ -122,15 +188,64 @@ export const Eligibility = ({ parentRef, setParentState }) => {
             setErrorCode(2);
             return;
           }
-          if (!formData.eighteenPlus) {
+          if (!ZipCodeData.lookupZip(formData.zip)) {
             setErrorCode(3);
             return;
           }
-          setParentState("yourName");
+          if (eligibility.eligibility === "eligible")
+            setParentState("yourName");
+          else if (
+            eligibility.eligibility === "preregister" ||
+            eligibility.eligibility === "underage"
+          ) {
+            setShowModal(true);
+          }
         }}
       >
         NEXT
       </button>
+      {showModal && (
+        <div className="voter-reg-modal-container">
+          <IconContext.Provider value={{ color: "black" }}>
+            <div className="voter-reg-modal">
+              <div className="voter-reg-toggle-container">
+                <button
+                  className="voter-reg-modal-toggle"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    setShowModal(false);
+                  }}
+                >
+                  <MdIcons.MdClose size={"1x"} />
+                </button>
+              </div>
+              <h3 className="voter-reg-modal-heading">Hey there!</h3>
+              <p className="voter-reg-modal-heading">
+                Looks like you're not 18 yet.
+              </p>
+              <p className="voter-reg-modal-text">{eligibility.message}</p>
+              <button
+                className="voter-reg-modal-btn"
+                onClick={(e) => {
+                  e.preventDefault();
+                  setParentState("yourName");
+                }}
+              >
+                <span>KEEP GOING</span>
+              </button>
+              <button
+                className="voter-reg-modal-btn"
+                onClick={(e) => {
+                  e.preventDefault();
+                  setShowModal(false);
+                }}
+              >
+                <span>OK, NEVER MIND</span>
+              </button>
+            </div>
+          </IconContext.Provider>
+        </div>
+      )}
     </>
   );
 };

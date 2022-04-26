@@ -20,7 +20,8 @@ import ElectionReminder from "./ElectionReminders/ElectionReminder";
 import Footer from "./Footer";
 import PlayerWelcome from "./PlayerWelcome";
 import Actions from "./Actions";
-import VoterRegistration from "./VoterRegistration";
+//the most up-to-date version of the voter-registration feature is found at ./VoterRegistration/VoterRegistrationForm.js
+import VoterRegistrationForm from "./VoterRegistration/VoterRegistrationForm";
 import TOS from "./TOS/TOS";
 
 export default function App() {
@@ -54,7 +55,10 @@ export default function App() {
                 <Route path="/playerwelcome" component={PlayerWelcome} />
                 <Route path="/share" component={PlayerWelcome} />
                 <Route path="/actions" component={Actions} />
-                <PrivateRoute path="/voterreg" component={VoterRegistration} />
+                <PrivateRoute
+                  path="/voterreg"
+                  component={VoterRegistrationForm}
+                />
                 <Route path="/termsofservice" component={TOS} />
               </Switch>
             </Router>

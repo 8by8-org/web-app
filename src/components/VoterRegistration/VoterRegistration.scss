@@ -4,16 +4,31 @@
 
 .container {
   width: 375px;
+  min-height: 100%;
   margin-left: 60px;
   padding-bottom: 20px;
   display: flex;
   flex-direction: column;
+  position: relative;
+}
+
+.verticalContainer {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.horizontalContainer {
+  display: flex;
+  align-items: center;
 }
 
 .register-form-title {
   @include heading-text;
   text-align: left !important;
   float: left !important;
+  margin-bottom: 40px;
+  margin-top: 40px;
 }
 
 .register-form-title-small {
@@ -24,12 +39,30 @@
   margin-bottom: 20px;
 }
 
+.register-form-text {
+  font-family: $lato;
+  margin-top: 40px;
+  margin-bottom: 40px;
+}
+
 .underline {
   @include text-underline;
 }
 
 .register-label {
+  font-family: $lato;
   font-weight: bold;
+}
+.floating-label-default {
+  font-family: $lato;
+  font-weight: bold;
+  transform: translate(0px, 24px);
+}
+
+.floating-label-active {
+  font-family: $lato;
+  font-weight: bold;
+  transition: transform 250ms ease-in-out;
 }
 
 .register-input {
@@ -41,6 +74,10 @@
   border-radius: 0px;
 }
 
+.register-input:focus {
+  outline: none;
+}
+
 .register-checkbox {
   border-radius: 0;
   border: 2px solid black;
@@ -48,7 +85,7 @@
 }
 
 .reminders-completed {
-  font-family: "Lato", sans-serif;
+  font-family: $lato;
   color: black;
   margin-left: 20px;
 }
@@ -79,4 +116,87 @@
   width: 100%;
   margin-top: 40px;
   margin-left: 10px;
+}
+
+.voter-reg-modal-container {
+  background-color: rgba(111, 111, 111, 0.5);
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  animation: fadeIn 250ms ease-in-out 1 forwards;
+}
+
+.voter-reg-modal {
+  background-color: white;
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-family: $lato;
+  box-sizing: border-box;
+  width: 100%;
+  margin-left: 80px;
+  margin-right: 80px;
+}
+
+.voter-reg-toggle-container {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+}
+
+.voter-reg-modal-toggle {
+  height: 24px;
+  background-color: transparent;
+  border: none;
+  outline: none;
+}
+
+.voter-reg-modal-toggle:hover {
+  cursor: pointer;
+}
+
+.voter-reg-modal-heading {
+  font-weight: bold;
+  margin-left: 4px;
+  margin-right: 4px;
+  margin-bottom: 12px;
+  text-align: center;
+  font-family: $lato;
+}
+
+.voter-reg-modal-text {
+  margin-left: 4px;
+  margin-right: 4px;
+  text-align: center;
+}
+
+.voter-reg-modal-btn {
+  @include inverted-button;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.error-message {
+  color: red;
+  font-style: italic;
+  font-family: $lato;
+  margin-top: 12px;
+  margin-bottom: 18px;
+  animation: fadeIn 250ms ease-in-out 1 forwards;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
