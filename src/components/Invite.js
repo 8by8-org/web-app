@@ -10,6 +10,7 @@ import {
   WhatsappShareButton,
   EmailShareButton,
 } from "react-share";
+import { completedAction, delay } from "../functions/UserData"
 import CalendarSvg from "../assets/images/Invite/Calendar.svg";
 import FacebookSvg from "../assets/images/Invite/Facebook.svg";
 import TwitterSvg from "../assets/images/Invite/Twitter.svg";
@@ -39,6 +40,9 @@ function Invite({ toggleInvite , isShare}) {
     navigator.clipboard.writeText(shareUrl);
   }
 
+  function reloadPage() {
+    window.location.reload();
+  }
   function generateUrl() {
     setUrl(`${window.location.origin}/share/${currentUser.uid}`)
   }
@@ -59,7 +63,7 @@ function Invite({ toggleInvite , isShare}) {
       <nav className={show ? "invite-menu active" : "invite-menu"}>
         <li className="invite-toggle">
           <Nav.Link to="#" id="close-icon">
-            <MdIcons.MdClose onClick={changeShow} />
+            <MdIcons.MdClose onClick={()=>{changeShow(); reloadPage()}} />
           </Nav.Link>
           <span className="invite-title">{isShare ? 'Share' : 'Invite Friends'}</span>
         </li>
@@ -75,13 +79,15 @@ function Invite({ toggleInvite , isShare}) {
         </div>
 
         <div className="section social-media">
-          <p className="sub-heading">{isShare ? 'Social Media' : 'Copy yout unique link'}</p>
-          <FacebookShareButton url={shareUrl} quote={quote} hashtag={hashtag}>
+          <p className="sub-heading">{isShare ? 'Social Media' : 'Copy your unique link'}</p>
+          <FacebookShareButton url={shareUrl} quote={quote} hashtag={hashtag}
+              onShareWindowClose={()=>{completedAction("share challenge")}}>
             <img className="invite-icon" src={FacebookSvg} />
             <p className="invite-icon-label">Facebook</p>
           </FacebookShareButton>
 
-          <TwitterShareButton url={shareUrl} title={quote}>
+          <TwitterShareButton url={shareUrl} title={quote} 
+            onShareWindowClose={()=>{completedAction("share challenge")}}>
             <img className="invite-icon" src={TwitterSvg} />
             <p className="invite-icon-label">Twitter</p>
           </TwitterShareButton>
@@ -98,18 +104,19 @@ function Invite({ toggleInvite , isShare}) {
         </div>
 
         <div className="section messaging">
-          <p className="sub-heading">{isShare ? 'Messaging' : 'Copy yout unique link'}</p>
-          <FacebookMessengerShareButton url={shareUrl} appId={appId}>
+
+          <p className="sub-heading">{isShare ? 'Messaging' : 'Copy your unique link'}</p>
+          <FacebookMessengerShareButton url={shareUrl} appId={appId} onShareWindowClose={()=>{completedAction("share challenge")}}>
             <img className="invite-icon" src={FacebookMessengerSvg} />
             <p className="invite-icon-label">Messenger</p>
           </FacebookMessengerShareButton>
 
-          <WhatsappShareButton url={shareUrl} title={quote}>
-            <img className="invite-icon" src={WhatsAppSvg} />
+          <WhatsappShareButton url={shareUrl} title={quote} onShareWindowClose={()=>{completedAction("share challenge")}}>
+            <img className="invite-icon" src={WhatsAppSvg}/>
             <p className="invite-icon-label">WhatsApp</p>
           </WhatsappShareButton>
 
-          <EmailShareButton url={shareUrl} subject={quote} body={body}>
+          <EmailShareButton url={shareUrl} subject={quote} body={body} beforeOnClick={()=>{completedAction("share challenge")}}>
             <img className="invite-icon" src={EmailSvg} />
             <p className="invite-icon-label">Email</p>
           </EmailShareButton>
@@ -123,14 +130,15 @@ function Invite({ toggleInvite , isShare}) {
         <div className="section copy-link">
           <p className="sub-heading">Copy your unique link</p>
           <div className="link-container">
+
             <div className="unique-link">
               <p>{shareUrl}</p>
               <div className="underline"></div>
             </div>
             <button onClick={() => {
               if (navigator.clipboard) {
-                copyToClipboard();
-              }
+                copyToClipboard(); 
+                completedAction("share challenge")}
             }}>COPY</button>
           </div>
           
