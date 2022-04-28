@@ -54,11 +54,15 @@ export default function SignupPage() {
         let startedChallenge = false;
         // will need to change data if user is not a challenger (is a player)
         if (getUserType() === "player") {
-          emailUser(email, "playerWelcome");
+          await setTimeout(() => {
+            emailUser(email, "playerWelcome");
+          }, 3000);
         } else {
-          emailUser(email, "challengerWelcome");
           challengeEndDate = new Date(Date.now() + 8 * 24 * 60 * 60 * 1000); // now + 8 days
           startedChallenge = true;
+          await setTimeout(() => {
+            emailUser(email, "challengerWelcome");
+          }, 3000);
         }
 
         const addUserToDB = async (name, avatar, endDate, isStarted) => {

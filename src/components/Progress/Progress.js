@@ -7,7 +7,7 @@ import {
 } from "./../../functions/UserData";
 import { doc, getFirestore, updateDoc } from "firebase/firestore";
 import { useAuth } from "../../contexts/AuthContext";
-import emailUser from "../../functions/Email";
+import { emailUser } from "../../functions/Email";
 import Invite from "../Invite.js";
 import PopupModal from "../PopupModal";
 import ConfettiAnimation from "../ConfettiAnimation";
