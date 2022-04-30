@@ -224,7 +224,7 @@ export default function SignupPage() {
         )}
 
         {buttonMessage && (
-          <p class="signin small-text">
+          <p className="signin small-text">
             Already have an account?{" "}
             <a href="/signin" className="link">
               Sign In

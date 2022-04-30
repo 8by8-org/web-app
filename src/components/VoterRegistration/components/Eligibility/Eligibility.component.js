@@ -4,7 +4,6 @@ import * as MdIcons from "react-icons/md";
 import { useAuth } from "../../../../contexts/AuthContext";
 import "../../VoterRegistration.scss";
 import ZipCodeData from "zipcode-data";
-import { DateTime } from "luxon";
 import { getAge, getEligibility } from "../../utils";
 import { Tooltip } from "../Tooltip/Tooltip.component";
 
