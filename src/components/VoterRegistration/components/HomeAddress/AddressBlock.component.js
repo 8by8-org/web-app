@@ -1,13 +1,35 @@
 import React, { useState } from "react";
+import "../../VoterRegistration.scss";
+import { Tooltip } from "../Tooltip/Tooltip.component";
 
-export const AddressBlock = ({ addressType, parentRef, title }) => {
+export const AddressBlock = ({
+  addressType,
+  parentRef,
+  title,
+  tooltipText,
+}) => {
   const [formData, setFormData] = useState({
     street: "",
     streetLine2: "",
     unit: "",
     city: "",
-    state: "",
-    zip: "",
+    state:
+      addressType === "home" && parentRef.current.state
+        ? parentRef.current.state
+        : "",
+    zip:
+      addressType === "home" && parentRef.current.zip
+        ? parentRef.current.zip
+        : "",
+  });
+
+  const [activeFields, setActiveFields] = useState({
+    street: formData.street.length > 0,
+    streetLine2: formData.streetLine2.length > 0,
+    unit: formData.unit.length > 0,
+    city: formData.city.length > 0,
+    state: formData.state.length > 0,
+    zip: formData.zip.length > 0,
   });
 
   let prefix = "";
@@ -16,8 +38,18 @@ export const AddressBlock = ({ addressType, parentRef, title }) => {
 
   return (
     <>
-      <h2 className="register-form-title-small">{title}</h2>
-      <label htmlFor={`${prefix}street`} className="register-label">
+      <div className="horizontalContainer">
+        <h2 className="register-form-title-small">{title}</h2>
+        {tooltipText && <Tooltip text={tooltipText} />}
+      </div>
+      <label
+        htmlFor={`${prefix}street`}
+        className={
+          activeFields.street || formData.street.length > 0
+            ? "floating-label-active"
+            : "floating-label-default"
+        }
+      >
         Street Address*
       </label>
       <input
@@ -26,6 +58,12 @@ export const AddressBlock = ({ addressType, parentRef, title }) => {
         id={`${prefix}street`}
         name={`${prefix}street`}
         value={formData.street}
+        onClick={() => {
+          setActiveFields({ ...activeFields, street: true });
+        }}
+        onFocus={() => {
+          setActiveFields({ ...activeFields, street: true });
+        }}
         onChange={(event) => {
           parentRef.current = {
             ...parentRef.current,
@@ -38,7 +76,14 @@ export const AddressBlock = ({ addressType, parentRef, title }) => {
         }}
       />
       <br />
-      <label htmlFor={`${prefix}street_line_2`} className="register-label">
+      <label
+        htmlFor={`${prefix}street_line_2`}
+        className={
+          activeFields.streetLine2 || formData.streetLine2.length > 0
+            ? "floating-label-active"
+            : "floating-label-default"
+        }
+      >
         Address Line 2
       </label>
       <input
@@ -47,6 +92,12 @@ export const AddressBlock = ({ addressType, parentRef, title }) => {
         id={`${prefix}street_line_2`}
         name={`${prefix}street_line_2`}
         value={formData.streetLine2}
+        onClick={() => {
+          setActiveFields({ ...activeFields, streetLine2: true });
+        }}
+        onFocus={() => {
+          setActiveFields({ ...activeFields, streetLine2: true });
+        }}
         onChange={(event) => {
           const fullAddress =
             formData.street + ", " + event.target.value + formData.unit.length >
@@ -64,7 +115,14 @@ export const AddressBlock = ({ addressType, parentRef, title }) => {
         }}
       />
       <br />
-      <label htmlFor={`${prefix}home_unit`} className="register-label">
+      <label
+        htmlFor={`${prefix}home_unit`}
+        className={
+          activeFields.unit || formData.unit.length > 0
+            ? "floating-label-active"
+            : "floating-label-default"
+        }
+      >
         Unit #
       </label>
       <input
@@ -73,6 +131,12 @@ export const AddressBlock = ({ addressType, parentRef, title }) => {
         id={`${prefix}home_unit`}
         name={`${prefix}home_unit`}
         value={formData.unit}
+        onClick={() => {
+          setActiveFields({ ...activeFields, unit: true });
+        }}
+        onFocus={() => {
+          setActiveFields({ ...activeFields, unit: true });
+        }}
         onChange={(event) => {
           const fullAddress =
             formData.street +
@@ -92,7 +156,14 @@ export const AddressBlock = ({ addressType, parentRef, title }) => {
         }}
       />
       <br />
-      <label htmlFor={`${prefix}city`} className="register-label">
+      <label
+        htmlFor={`${prefix}city`}
+        className={
+          activeFields.city || formData.city.length > 0
+            ? "floating-label-active"
+            : "floating-label-default"
+        }
+      >
         City*
       </label>
       <input
@@ -101,6 +172,12 @@ export const AddressBlock = ({ addressType, parentRef, title }) => {
         id={`${prefix}city`}
         name={`${prefix}city`}
         value={formData.city}
+        onClick={() => {
+          setActiveFields({ ...activeFields, city: true });
+        }}
+        onFocus={() => {
+          setActiveFields({ ...activeFields, city: true });
+        }}
         onChange={(event) => {
           parentRef.current = {
             ...parentRef.current,
@@ -113,19 +190,38 @@ export const AddressBlock = ({ addressType, parentRef, title }) => {
         }}
       />
       <br />
-      <label htmlFor={`${prefix}state`} className="register-label">
+      <label
+        htmlFor={`${prefix}state`}
+        className={
+          addressType === "home"
+            ? "register-label"
+            : activeFields.state || formData.state.length > 0
+            ? "floating-label-active"
+            : "floating-label-default"
+        }
+      >
         State
       </label>
       <select
         className="register-input"
+        disabled={addressType === "home"}
         id={`${prefix}state`}
         name={`${prefix}state`}
-        value={
-          // parentRef.zip
-          //   ? ZipCodeData.stateFromZip(parentRef.zip)
-          //   : "CA"
-          formData.state
-        }
+        value={formData.state}
+        style={{
+          color:
+            addressType === "home" ||
+            activeFields.state ||
+            formData.state.length > 0
+              ? "black"
+              : "white",
+        }}
+        onClick={() => {
+          setActiveFields({ ...activeFields, state: true });
+        }}
+        onFocus={() => {
+          setActiveFields({ ...activeFields, state: true });
+        }}
         onChange={(event) => {
           parentRef.current = {
             ...parentRef.current,
@@ -190,15 +286,29 @@ export const AddressBlock = ({ addressType, parentRef, title }) => {
         <option value="WY">Wyoming</option>
       </select>
       <br />
-      <label htmlFor={`${prefix}zip`} className="register-label">
+      <label
+        htmlFor={`${prefix}zip`}
+        className={
+          activeFields.zip || formData.zip.length > 0
+            ? "floating-label-active"
+            : "floating-label-default"
+        }
+      >
         Zip Code*
       </label>
       <input
         className="register-input"
+        readOnly={addressType === "home"}
         type="text"
         id={`${prefix}zip`}
         name={`${prefix}zip`}
         value={formData.zip}
+        onClick={() => {
+          setActiveFields({ ...activeFields, zip: true });
+        }}
+        onFocus={() => {
+          setActiveFields({ ...activeFields, zip: true });
+        }}
         onChange={(event) => {
           parentRef.current = {
             ...parentRef.current,

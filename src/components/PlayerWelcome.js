@@ -60,7 +60,7 @@ export default function PlayerWelcome() {
 
     
     return (
-        loading === false ? 
+        loading === false ? (
         <div className="player-welcome">
             <div className="top">
                 <h1 className="top-heading">
@@ -115,6 +115,8 @@ export default function PlayerWelcome() {
                 <p align="center" className="small-text">Already have an account? <a href="/signin"><b>Sign In</b></a></p>
             </div>
         </div>
-        : <LoadingWheel overlay={false}/>
+        ) : (
+        <LoadingWheel overlay={false}/>
+        )
     ) 
 }

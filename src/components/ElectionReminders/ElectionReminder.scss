@@ -4,22 +4,26 @@
 
 .election-reminder {
   .electionReminderContainer {
-    width: 375px;
-    margin-left: 60px;
     display: flex;
     flex-direction: column;
   }
 
   .title {
     margin-left: 20px;
+    margin-top: 24px;
     @include heading-text;
     text-align: left !important;
-    width: 300px;
-    float: left !important;
+    width: 100%;
+    // float: left !important;
   }
 
   .underline {
     @include text-underline;
+  }
+
+  .at-form-submit {
+    display: flex;
+    justify-content: center;
   }
 
   .ngp-form label {
@@ -36,6 +40,7 @@
 
   .at-legend {
     font-family: "Lato", sans-serif !important;
+    padding-right: 18px !important;
   }
 
   .reminders-completed {

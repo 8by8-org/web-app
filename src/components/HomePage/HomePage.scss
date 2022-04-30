@@ -58,6 +58,7 @@
       }
       .text {
         @include heading-text($white);
+        width: 100%;
         .underline {
           @include text-underline;
         }
