@@ -13,8 +13,8 @@ export const LoadingWheel = ({ overlay }) => {
     >
       <div className={
         overlay
-        ? "loading-wheel-inner-container-white"
-        : "loading-wheel-inner-container"
+        ? "loading-wheel-inner-container"
+        : "loading-wheel-inner-container-white"
         }
       >
         <div class="lds-ring">

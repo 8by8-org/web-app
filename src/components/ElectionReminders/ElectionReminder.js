@@ -285,6 +285,6 @@ export default function ElectionReminder() {
         )}
       </div>
     </div>
-    : <LoadingWheel overlay={true}/>
+    : <LoadingWheel overlay={false}/>
   );
 }

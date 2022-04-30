@@ -20,7 +20,7 @@ import ElectionReminder from "./ElectionReminders/ElectionReminder";
 import Footer from "./Footer";
 import PlayerWelcome from "./PlayerWelcome";
 import Actions from "./Actions";
-import VoterRegistration from "./VoterRegistration";
+import VoterRegistration from "./VoterRegistration/VoterRegistrationForm.js";
 import TOS from "./TOS/TOS";
 
 export default function App() {

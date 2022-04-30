@@ -48,7 +48,9 @@ export default function PlayerWelcome() {
     }
     
     useEffect(() => {
-        code ? getChallengerInfo() : setChallengerInfo(JSON.parse(localStorage.getItem("challengerInfo")))
+        code
+      ? getChallengerInfo()
+      : setChallengerInfo(JSON.parse(localStorage.getItem("challengerInfo")));
     }, []);
 
     useEffect(() => {
@@ -113,6 +115,6 @@ export default function PlayerWelcome() {
                 <p align="center" className="small-text">Already have an account? <a href="/signin"><b>Sign In</b></a></p>
             </div>
         </div>
-        : <LoadingWheel overlay={true}/>
+        : <LoadingWheel overlay={false}/>
     ) 
 }
