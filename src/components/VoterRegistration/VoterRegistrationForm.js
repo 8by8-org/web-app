@@ -68,8 +68,8 @@ export default function VoterRegistrationForm(props) {
     opt_in_email: false,
     opt_in_sms: false,
     opt_in_volunteer: false,
-    party: "", //renamed from political_party to match us votes api
-    race: "",
+    party: "democratic", //default values so <select> tags work as expected
+    race: "asian",
   });
 
   return (

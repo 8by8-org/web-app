@@ -4,6 +4,7 @@ import * as MdIcons from "react-icons/md";
 import { useAuth } from "../../../../contexts/AuthContext";
 import "../../VoterRegistration.scss";
 import ZipCodeData from "zipcode-data";
+import { DateTime } from "luxon";
 import { getAge, getEligibility } from "../../utils";
 import { Tooltip } from "../Tooltip/Tooltip.component";
 
@@ -71,12 +72,12 @@ export const Eligibility = ({ parentRef, setParentState }) => {
           };
           setFormData({ ...formData, dob: event.target.value });
           if (
-            formData.dob &&
+            event.target.value &&
             parentRef.current.state &&
             parentRef.current.state.length > 0
           ) {
             setEligibility(
-              getEligibility(formData.dob, parentRef.current.state)
+              getEligibility(event.target.value, parentRef.current.state)
             );
           }
         }}
@@ -102,6 +103,22 @@ export const Eligibility = ({ parentRef, setParentState }) => {
         }}
         onFocus={() => {
           setActiveFields({ ...activeFields, zip: true });
+        }}
+        onKeyDown={(e) => {
+          //prevent user from entering a non-digit
+          if (
+            e.key !== "Backspace" &&
+            e.key !== "Delete" &&
+            e.key !== "Tab" &&
+            e.key !== "." &&
+            e.key !== "ArrowLeft" &&
+            e.key !== "ArrowRight" &&
+            e.key !== "ArrowUp" &&
+            e.key !== "ArrowDown" &&
+            !e.key.match(/\d/)
+          ) {
+            e.preventDefault();
+          }
         }}
         onChange={(event) => {
           let state = "";
