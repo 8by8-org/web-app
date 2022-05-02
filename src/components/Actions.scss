@@ -21,7 +21,7 @@
 .top {
   .avatar-and-status {
     display: flex;
-    padding: 50px;
+    padding: 0px 50px;
     position: relative;
   }
 
@@ -30,13 +30,40 @@
     padding-top: 10%;
   }
 
+  .avatar-and-status-finished {
+    display: flex;
+    padding: 0px 50px;
+    position: relative;
+    flex-direction: column;
+  }
+
+  .action-status-finished {
+    width: 100%;
+    padding-top: 10%;
+  }
+
   .avatar-container {
     @include blob-background;
     width: 100%;
     height: auto;
     padding: 10% 0% 10%;
+    .images {
+      position: relative;
+    }
     #challenger-avatar {
-      width: 40%;
+      width: 100%;
+    }
+    #challenger-crown {
+      background-color: black;
+      width: 30px;
+      height: 30px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border-radius: 50%;
+      position: absolute;
+      bottom: 0px;
+      right: -5px;
     }
     #challenger-name {
       @include heading-text($black, 30px);
@@ -63,36 +90,45 @@
   }
 
   .heading {
-    @include heading-text($black, 36px);
+    @include heading-text($black, 48px);
     letter-spacing: 0.03em;
-    .underline {
-      @include text-underline;
-    }
   }
 
   .subheading {
-    @include heading-text($black, 24px);
-    margin: 30px 0px 15px 30px;
+    @include subheading-text($white, 24px);
+    margin: 0px 0px 30px;
     line-height: 29px;
     letter-spacing: 0.03em;
   }
 
   .text {
-    font-family: $lato;
-    font-size: 18px;
+    @include text($white, 18px);
     line-height: 22px;
     letter-spacing: 0.02em;
-    margin: 0;
-  }
-
-  .image {
-    display: block;
-    margin: auto;
+    padding: 30px 0px 10px 0px;
+    margin: 0px;
   }
 
   .action-items {
     background: $black;
-    padding: 35px;
+    padding: 35px 35px 10px 35px;
+    color: white;
+    text-align: center;
+  }
+
+  .links-container {
+    display: flex;
+    text-align: center;
+    flex-direction: column;
+  }
+
+  .links {
+    font-family: $lato;
+    font-size: 18px;
+    line-height: 22px;
+    letter-spacing: 0.02em;
+    color: $blue;
+    padding-bottom: 10px;
   }
 
   .curve {
