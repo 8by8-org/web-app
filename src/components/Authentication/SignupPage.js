@@ -25,13 +25,17 @@ export default function SignupPage() {
   const [emailVisible] = useState(true);
   const [buttonMessage, setButtonMessage] = useState(" ");
   const [reCaptchaPassed, setReCaptchaPassed] = useState(false);
-  const [preselect, setPreselect] = useState(true);
+  const [selectedAvatar, setSelectedAvatar] = useState("avatar1");
 
   const emailRef = useRef();
   const confirmEmailRef = useRef();
   const buttonRef = useRef();
   const nameRef = useRef();
   const playerStatus = localStorage.getItem("player");
+
+  const changeAvatar = (event) => {
+    setSelectedAvatar(event.target.value);
+  }
 
   useEffect(() => {
     if (currentUser) {
@@ -139,19 +143,26 @@ export default function SignupPage() {
             <p className="small-title">Which One's you? </p>
             <div className="avatar-container">
               {/* avatar 1 */}
-              <input checked={preselect} type="radio" name="avatar" id={1} />
+              <input 
+                checked={selectedAvatar === 'avatar1'} 
+                value="avatar1"
+                type="radio"
+                name="avatar"  
+                id={1}
+                onChange={changeAvatar}
+              />
               <label htmlFor={1}>
                 <img className="avatar-img" src={avatar1} alt="avatar1" />
               </label>
 
               {/* avatar 2 */}
               <input
-                onClick={() => {
-                  setPreselect(null);
-                }}
+                checked={selectedAvatar === "avatar2"}
+                value = "avatar2"
                 type="radio"
                 name="avatar"
                 id={2}
+                onChange={changeAvatar}
               />
               <label htmlFor={2}>
                 <img className="avatar-img" src={avatar2} alt="avatar2" />
@@ -160,12 +171,12 @@ export default function SignupPage() {
 
               {/* avatar 3 */}
               <input
-                onClick={() => {
-                  setPreselect(null);
-                }}
+                checked={selectedAvatar === "avatar3"}
+                value = "avatar3"
                 type="radio"
                 name="avatar"
                 id={3}
+                onChange={changeAvatar}
               />
               <label htmlFor={3}>
                 <img className="avatar-img" src={avatar3} alt="avatar3" />
@@ -173,12 +184,12 @@ export default function SignupPage() {
 
               {/* avatar 4 */}
               <input
-                onClick={() => {
-                  setPreselect(null);
-                }}
+                checked={selectedAvatar === "avatar4"}
+                value = "avatar4"
                 type="radio"
                 name="avatar"
                 id={4}
+                onChange={changeAvatar}
               />
               <label htmlFor={4}>
                 <img className="avatar-img" src={avatar4} alt="avatar4" />

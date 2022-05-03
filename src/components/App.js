@@ -20,7 +20,6 @@ import ElectionReminder from "./ElectionReminders/ElectionReminder";
 import Footer from "./Footer";
 import PlayerWelcome from "./PlayerWelcome";
 import Actions from "./Actions";
-//the most up-to-date version of the voter-registration feature is found at ./VoterRegistration/VoterRegistrationForm.js
 import VoterRegistrationForm from "./VoterRegistration/VoterRegistrationForm";
 import TOS from "./TOS/TOS";
 
