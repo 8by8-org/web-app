@@ -20,13 +20,12 @@ export default function VoterRegistrationForm(props) {
   useEffect(() => {
     //when the page loads, check if the user has already registered to vote
     (async () => {
-      // const userRef = doc(db, "users", currentUser.uid);
-      // const user = await getDoc(userRef);
-      // const uData = user.data();
-      // if (uData.isRegisteredVoter) {
-      //   setPage("formCompleted");
-      // } else
-      setPage("eligibility");
+      const userRef = doc(db, "users", currentUser.uid);
+      const user = await getDoc(userRef);
+      const uData = user.data();
+      if (uData.isRegisteredVoter) {
+        setPage("formCompleted");
+      } else setPage("eligibility");
     })();
   }, []);
   const formData = useRef({
