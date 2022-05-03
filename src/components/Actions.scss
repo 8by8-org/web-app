@@ -26,13 +26,25 @@
     .avatar-and-status {
       display: flex;
       position: relative;
+      padding: 0px 50px;
     }
 
     .action-status {
       width: 50%;
       font-size: 112px;
       padding-top: 10%;
-      padding-left: 10%;
+    }
+
+    .avatar-and-status-finished {
+      display: flex;
+      padding: 0px 50px;
+      position: relative;
+      flex-direction: column;
+    }
+
+    .action-status-finished {
+      width: 100%;
+      padding-top: 10%;
     }
 
     .avatar-container {
@@ -40,8 +52,23 @@
       width: 100%;
       height: auto;
       padding: 10% 0% 10%;
+      .images {
+        position: relative;
+      }
       #challenger-avatar {
-        width: 40%;
+        width: 100%;
+      }
+      #challenger-crown {
+        background-color: black;
+        width: 30px;
+        height: 30px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-radius: 50%;
+        position: absolute;
+        bottom: 0px;
+        right: -5px;
       }
       #challenger-name {
         @include heading-text($black, 30px);
@@ -59,9 +86,31 @@
     width: 100%;
   }
 
+  .heading {
+    @include heading-text($black, 48px);
+    letter-spacing: 0.03em;
+  }
+
+  .subheading {
+    @include subheading-text($white, 24px);
+    margin: 0px 0px 30px;
+    line-height: 29px;
+    letter-spacing: 0.03em;
+  }
+
+  .text {
+    @include text($white, 18px);
+    line-height: 22px;
+    letter-spacing: 0.02em;
+    padding: 30px 0px 10px 0px;
+    margin: 0px;
+  }
+
   .action-items {
     background: $black;
-    padding: 35px;
+    padding: 35px 35px 10px 35px;
+    color: white;
+    text-align: center;
 
     .primary-button {
       @include button;
@@ -71,5 +120,20 @@
     .secondary-button {
       @include secondary-button;
     }
+  }
+
+  .links-container {
+    display: flex;
+    text-align: center;
+    flex-direction: column;
+  }
+
+  .links {
+    font-family: $lato;
+    font-size: 18px;
+    line-height: 22px;
+    letter-spacing: 0.02em;
+    color: $blue;
+    padding-bottom: 10px;
   }
 }
