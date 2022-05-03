@@ -7,8 +7,10 @@ import {
 } from "./../../functions/UserData";
 import { doc, getFirestore, updateDoc } from "firebase/firestore";
 import { useAuth } from "../../contexts/AuthContext";
+import { addInvitedBy } from "../../functions/AddInvite";
 import emailUser from "../../functions/Email";
 import Invite from "../Invite.js";
+import { LoadingWheel } from "../LoadingWheel/LoadingWheel.component";
 import PopupModal from "../PopupModal";
 import ConfettiAnimation from "../ConfettiAnimation";
 import CurveA from "./../../assets/2-shapes/curve-a.svg";
@@ -34,6 +36,7 @@ export default function Progress() {
 
   const toggleInvite = React.useRef();
   const db = getFirestore();
+  const challengeEndDate = new Date(Date.now() + 8 * 24 * 60 * 60 * 1000);
 
   useEffect(() => {
     if (localStorage.getItem("player") && currentUser) {
@@ -68,15 +71,6 @@ export default function Progress() {
       );
     }
   }, [challengeVoid, challengeFinished]);
-
-  async function addInvitedBy() {
-    const userRef = doc(db, "users", await currentUser.uid);
-    await updateDoc(userRef, {
-      invitedBy: JSON.parse(localStorage.getItem("challengerInfo"))
-        .challengerID,
-    });
-    localStorage.removeItem("player");
-  }
 
   function fetchUserData() {
     getUserDatabase()
@@ -297,7 +291,7 @@ export default function Progress() {
 
       <Invite toggleInvite={toggleInvite} isShare={false} />
     </article>
-  ) : (
-    <h1>loading...</h1>
+    ) : (
+    <LoadingWheel overlay={false}/>
   );
 }
