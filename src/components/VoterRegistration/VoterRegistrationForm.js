@@ -9,25 +9,36 @@ import {
 } from "./components";
 import { getFirestore, doc, getDoc, updateDoc } from "firebase/firestore";
 import { useAuth } from "../../contexts/AuthContext";
+import { addInvitedBy } from "../../functions/AddInvite";
 import { LoadingWheel } from "../LoadingWheel/LoadingWheel.component";
 import "./VoterRegistration.scss";
 const db = getFirestore();
 
 export default function VoterRegistrationForm(props) {
   const { currentUser } = useAuth();
+  const [loading, setLoading] = useState(false);
+
   //if the user has already completed the register to vote action, set the page to "formCompleted"
   const [page, setPage] = useState("loading");
   useEffect(() => {
     //when the page loads, check if the user has already registered to vote
-    (async () => {
-      // const userRef = doc(db, "users", currentUser.uid);
-      // const user = await getDoc(userRef);
-      // const uData = user.data();
-      // if (uData.isRegisteredVoter) {
-      //   setPage("formCompleted");
-      // } else
-      setPage("eligibility");
-    })();
+    setTimeout(() => {
+      if (localStorage.getItem("player") && currentUser) {
+        addInvitedBy();
+        setLoading(true);
+      } else {
+        setLoading(true);
+      }      
+      (async () => {
+        // const userRef = doc(db, "users", currentUser.uid);
+        // const user = await getDoc(userRef);
+        // const uData = user.data();
+        // if (uData.isRegisteredVoter) {
+        //   setPage("formCompleted");
+        // } else
+        setPage("eligibility");
+      })();
+    }, 3000)
   }, []);
   const formData = useRef({
     send_confirmation_reminder_emails: false,
@@ -72,7 +83,7 @@ export default function VoterRegistrationForm(props) {
     race: "",
   });
 
-  return (
+  return loading ? (
     <form className={page !== "loading" && "container"}>
       {page !== "loading" && (
         <h1 className="register-form-title">
@@ -111,5 +122,7 @@ export default function VoterRegistrationForm(props) {
         }
       })()}
     </form>
-  );
+  ) : (
+    <LoadingWheel overlay={false}/>
+  )
 }
