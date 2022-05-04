@@ -36,7 +36,7 @@ export const OtherInfo = ({ parentRef, setParentState }) => {
             : "floating-label-default"
         }
       >
-        Political Party
+        Political Party*
       </label>
       <select
         className="register-input"
@@ -50,6 +50,7 @@ export const OtherInfo = ({ parentRef, setParentState }) => {
         onFocus={() => {
           setActiveFields({ ...activeFields, party: true });
         }}
+        value={formData.party}
         onChange={({ target }) => {
           const { value } = target;
           if (value === "other") {
@@ -160,7 +161,7 @@ export const OtherInfo = ({ parentRef, setParentState }) => {
             : "floating-label-default"
         }
       >
-        ID Number
+        ID Number*
       </label>
       <input
         className="register-input"
@@ -172,6 +173,22 @@ export const OtherInfo = ({ parentRef, setParentState }) => {
         }}
         onFocus={() => {
           setActiveFields({ ...activeFields, idNumber: true });
+        }}
+        onKeyDown={(e) => {
+          //prevent user from entering a non-digit
+          if (
+            e.key !== "Backspace" &&
+            e.key !== "Delete" &&
+            e.key !== "Tab" &&
+            e.key !== "." &&
+            e.key !== "ArrowLeft" &&
+            e.key !== "ArrowRight" &&
+            e.key !== "ArrowUp" &&
+            e.key !== "ArrowDown" &&
+            !e.key.match(/\d/)
+          ) {
+            e.preventDefault();
+          }
         }}
         onChange={({ target }) => {
           parentRef.current = { ...parentRef.current, idNumber: target.value };
@@ -201,6 +218,15 @@ export const OtherInfo = ({ parentRef, setParentState }) => {
         style={{ opacity: isLoading ? 0.5 : 1, marginTop: 0 }}
         onClick={async (event) => {
           event.preventDefault();
+          //first make sure the required fields are completed
+          if (
+            !parentRef.current.party ||
+            !parentRef.current.race ||
+            !parentRef.current.idNumber
+          ) {
+            setError("Please complete all of the required fields");
+            return;
+          }
           setIsLoading(true);
           const {
             state,
@@ -235,7 +261,6 @@ export const OtherInfo = ({ parentRef, setParentState }) => {
             party,
             idNumber,
           };
-          //create a pdf for the user to mail to their state
           axios
             .post(`${apiUrl}/registertovote/`, postBody)
             .then((res) => {
@@ -246,7 +271,7 @@ export const OtherInfo = ({ parentRef, setParentState }) => {
             .catch((e) => {
               setIsLoading(false);
               setError(
-                "There was a problem creating your paperwork. Please ensure that all of your information is entered correctly."
+                `There was a problem creating your paperwork. ${e.response.data.error}.`
               );
             });
         }}

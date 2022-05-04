@@ -28,17 +28,16 @@ export default function VoterRegistrationForm(props) {
         setLoading(true);
       } else {
         setLoading(true);
-      }      
+      }
       (async () => {
-        // const userRef = doc(db, "users", currentUser.uid);
-        // const user = await getDoc(userRef);
-        // const uData = user.data();
-        // if (uData.isRegisteredVoter) {
-        //   setPage("formCompleted");
-        // } else
-        setPage("eligibility");
+        const userRef = doc(db, "users", currentUser.uid);
+        const user = await getDoc(userRef);
+        const uData = user.data();
+        if (uData.isRegisteredVoter) {
+          setPage("formCompleted");
+        } else setPage("eligibility");
       })();
-    }, 3000)
+    }, 3000);
   }, []);
   const formData = useRef({
     send_confirmation_reminder_emails: false,
@@ -79,8 +78,8 @@ export default function VoterRegistrationForm(props) {
     opt_in_email: false,
     opt_in_sms: false,
     opt_in_volunteer: false,
-    party: "", //renamed from political_party to match us votes api
-    race: "",
+    party: "democratic", //default values so <select> tags work as expected
+    race: "asian",
   });
 
   return loading ? (
@@ -123,6 +122,6 @@ export default function VoterRegistrationForm(props) {
       })()}
     </form>
   ) : (
-    <LoadingWheel overlay={false}/>
-  )
+    <LoadingWheel overlay={false} />
+  );
 }
