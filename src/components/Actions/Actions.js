@@ -1,14 +1,14 @@
 import React, { useState, useEffect } from "react";
-import { getUserDatabase } from "./../functions/UserData";
+import { getUserDatabase } from "./../../functions/UserData";
 import { Button } from "react-bootstrap";
 import { useHistory } from "react-router";
-import Avatar1 from "../assets/avatars/avatar1.svg";
-import Avatar2 from "../assets/avatars/avatar2.svg";
-import Avatar3 from "../assets/avatars/avatar3.svg";
-import Avatar4 from "../assets/avatars/avatar4.svg";
-import WhiteCurve from "../assets/images/Actions/Union.svg";
-import Crown from "../assets/images/Actions/Crown.svg";
-import ConfettiAnimation from "./ConfettiAnimation";
+import Avatar1 from "./../../assets/avatars/avatar1.svg";
+import Avatar2 from "./../../assets/avatars/avatar2.svg";
+import Avatar3 from "./../../assets/avatars/avatar3.svg";
+import Avatar4 from "./../../assets/avatars/avatar4.svg";
+import WhiteCurve from "./../../assets/images/Actions/Union.svg";
+import Crown from "./../../assets/images/Actions/Crown.svg";
+import ConfettiAnimation from "./../ConfettiAnimation";
 import "./Actions.scss";
 
 const avatars = [Avatar1, Avatar2, Avatar3, Avatar4];
@@ -20,7 +20,6 @@ export default function Actions() {
   const [ registeredVoter, setRegisteredVoter ] = useState(false);
   const [ notifyElectionReminders, setNotifyElectionReminders ] = useState(false);
   const [ startedChallenge, setStartedChallenge ] = useState(false);
-  const [confettiAnimation, setConfettiAnimation] = useState();
 
   useEffect(() => {
     if (localStorage.getItem("challengerInfo")) {
@@ -42,9 +41,11 @@ export default function Actions() {
 
   return (
     loading === false ?
+      // if all three actions are completed
       registeredVoter && notifyElectionReminders && startedChallenge ?
         <div className="actions">
           <ConfettiAnimation time={8000} />
+
           <div className="top">
             <div className="avatar-and-status-finished">
               <div className="action-status-finished">
@@ -53,18 +54,23 @@ export default function Actions() {
                   You Supported:
                 </h1>
               </div>
+
               <div className="avatar-container">
                 <div className="images">
                   <img
+                    alt="Challenger Avatar"
                     src={challengerInfo.avatar ? avatars[(challengerInfo.avatar)-1] : avatars[0]}
                     id="challenger-avatar"
                   />
                 </div>
+
                 <p id="challenger-name">{challengerInfo.name}</p>
               </div>
             </div>
           </div>
-          <img src={WhiteCurve} className="curve"/>
+
+          <img alt="White Curve" src={WhiteCurve} className="curve"/>
+
           <div className="action-items">
             <div className="py-2">
               <Button
@@ -74,6 +80,7 @@ export default function Actions() {
                 See Your Challenge
               </Button>
             </div>
+
             <div className="py-2">
               <Button
                 className="secondary-button"
@@ -85,9 +92,11 @@ export default function Actions() {
           </div>
         </div>
       :
+        // when there are actions that can still be completed by the user
         <div className="actions">
           <div className="top">
             {challengerInfo ?
+              // if the user is doing actions for someone else's challenge
               <div className="avatar-and-status">
                 <div className="action-status">
                   {registeredVoter || notifyElectionReminders || startedChallenge ?
@@ -96,32 +105,41 @@ export default function Actions() {
                     <h1 className="heading">Take Action For:</h1>
                   }
                 </div>
+
                 <div className="avatar-container">
                   <div className="images">
                     <img
+                      alt="Challenger Avatar"
                       src={challengerInfo.avatar ? avatars[(challengerInfo.avatar)-1] : avatars[0]}
                       id="challenger-avatar"
                     />
                     {(registeredVoter || notifyElectionReminders || startedChallenge) &&
                       <div id="challenger-crown">
-                        <img src={Crown} className="crown"/>
+                        <img alt="Challenger Crown" src={Crown} className="crown"/>
                       </div>
                     }
                   </div>
+
                   <p id="challenger-name">{challengerInfo.name}</p>
                 </div>
               </div>
-            : <h1 id="action-no-challenger" align="center">Take Action</h1>
+            :
+              // if the user is not doing actions for someone else's challenge
+              <h1 id="action-no-challenger" align="center">Take Action</h1>
             }
           </div>
-          <img src={WhiteCurve} className="curve"/>
+
+          <img alt="White Curve" src={WhiteCurve} className="curve"/>
+
           <div className="action-items">
+            {/* when only Take the challenge action is left */}
             {registeredVoter && notifyElectionReminders && !startedChallenge ?
               <h6 className="subheading">
                 OTHER ACTIONS YOU CAN TAKE TO<br/>
                 HELP THE AAPI COMMUNITY
               </h6>
             :
+              // when there is at least one action completed
               (registeredVoter || notifyElectionReminders || startedChallenge) &&
                 <h6 className="subheading">
                   {challengerInfo.name} GOT A BADGE!<br/>
@@ -129,6 +147,8 @@ export default function Actions() {
                   THE AAPI COMMUNITY<br/>
                 </h6>
             }
+
+            {/* action buttons only displayed when they are not completed */}
             {!registeredVoter &&
               <div className="py-2">
                 <Button
@@ -139,6 +159,7 @@ export default function Actions() {
                 </Button>
               </div>
             }
+
             {!notifyElectionReminders &&
             <div className="py-2">
               <Button
@@ -149,6 +170,7 @@ export default function Actions() {
               </Button>
             </div>
             }
+
             {!startedChallenge &&
             <div className="py-2">
               <Button
@@ -159,7 +181,9 @@ export default function Actions() {
               </Button>
             </div>
             }
+
             {registeredVoter && notifyElectionReminders && !startedChallenge ?
+              // when only Take the challenge action is left
               <div>
                 <h6 className="text">
                   Voting matters towards better AAPI<br/>
@@ -173,25 +197,33 @@ export default function Actions() {
                 </div>
               </div>
             :
-            <div>
-              {registeredVoter && !notifyElectionReminders && !startedChallenge && <h6 className="text">Thanks for registering to vote!</h6>}
-              {!registeredVoter && notifyElectionReminders && !startedChallenge && <h6 className="text">Thanks for getting election reminders!</h6>}
-              {!registeredVoter && !notifyElectionReminders && startedChallenge && <h6 className="text">Thanks for taking the challenge!</h6>}
-              {((!registeredVoter && notifyElectionReminders && startedChallenge) ||
-                (registeredVoter && !notifyElectionReminders && startedChallenge) ||
-                (registeredVoter && notifyElectionReminders && !startedChallenge)) &&
-                <h6 className="text">Thanks for your actions!</h6>}
-              <div className="links-container">
-                {((registeredVoter && !notifyElectionReminders && !startedChallenge) ||
-                  (!registeredVoter && notifyElectionReminders && !startedChallenge)) &&
-                  <a href="url" className="links">Share about your action</a>}
-                {((!registeredVoter && notifyElectionReminders && startedChallenge) ||
-                  (registeredVoter && !notifyElectionReminders && startedChallenge) ||
-                  (registeredVoter && notifyElectionReminders && !startedChallenge)) &&
-                  <a href="url" className="links">Share about your actions</a>}
-                {startedChallenge && <a href="/signin" className="links">See your challenge</a>}
+              // when at least one action is completed
+              <div>
+                {/* these are for when only that specific action is completed */}
+                {registeredVoter && !notifyElectionReminders && !startedChallenge && <h6 className="text">Thanks for registering to vote!</h6>}
+
+                {!registeredVoter && notifyElectionReminders && !startedChallenge && <h6 className="text">Thanks for getting election reminders!</h6>}
+
+                {!registeredVoter && !notifyElectionReminders && startedChallenge && <h6 className="text">Thanks for taking the challenge!</h6>}
+
+                {/* this is for when registered to vote or election reminders are turned on and challenge has been started */}
+                {((registeredVoter || notifyElectionReminders) && startedChallenge) &&
+                  <h6 className="text">Thanks for your actions!</h6>}
+
+                <div className="links-container">
+                  {/* this is for when registered to vote or election reminders are turned on */}
+                  {((registeredVoter && !notifyElectionReminders && !startedChallenge) ||
+                    (!registeredVoter && notifyElectionReminders && !startedChallenge)) &&
+                    <a href="url" className="links">Share about your action</a>}
+
+                  {/* this is for when registered to vote or election reminders are turned on and challenge has been started */}
+                  {((registeredVoter || notifyElectionReminders) && startedChallenge) &&
+                    <a href="url" className="links">Share about your actions</a>}
+
+                  {/* this is for when user has started their own challenge */}
+                  {startedChallenge && <a href="/signin" className="links">See your challenge</a>}
+                </div>
               </div>
-            </div>
             }
           </div>
         </div>

@@ -1,7 +1,7 @@
-@import "./../styles/Components.scss";
+@import "./../../styles/Components.scss";
 
 @mixin blob-background(
-  $background: url(../assets/images/Actions/TealCurve.svg)
+  $background: url(./../../assets/images/Actions/TealCurve.svg)
 ) {
   display: flex;
   flex-direction: column;
