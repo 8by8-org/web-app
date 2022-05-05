@@ -38,16 +38,23 @@ export async function emailUser(email, emailType) {
   }
 
   // emails challenger when 8 badges earned
-  if (emailType === "challengeWon") {
+  else if (emailType === "challengeWon") {
     formData.append("avatar", userData.avatar);
   }
 
-  // emails player
-  if (emailType === "registered" || emailType === "electionReminder") {
-    const challengerData = await getChallengerDatabase();
+  // emails for action completion
+  else if (emailType === "registered" || emailType === "electionReminder") {
+    // if user is a player
+    if (!userData.startedChallenge) {
+      const challengerData = await getChallengerDatabase();
 
-    formData.append("firstName", challengerData.name);
-    formData.append("avatar", challengerData.avatar);
+      formData.append("firstName", challengerData.name);
+      formData.append("avatar", challengerData.avatar);
+    } else {
+      formData.append("firstName", userData.name);
+      formData.append("avatar", userData.avatar);
+      formData.append("isChallenger", true);
+    }
   }
 
   return fetch(URL, {

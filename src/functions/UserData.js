@@ -59,9 +59,7 @@ export async function completedAction(action) {
   const uid = auth.getAuth().currentUser.uid;
   // sign up for election reminders
   if (action === "election reminders") {
-    if (!userData.startedChallenge) {
-      emailUser(userData.email, "electionReminder");
-    }
+    emailUser(userData.email, "electionReminder");
     await updateChallengerBadges(userData);
     await updateDoc(doc(db, "users", uid), {
       notifyElectionReminders: true,
@@ -76,9 +74,7 @@ export async function completedAction(action) {
   }
   // registers to vote
   else if (action === "register to vote") {
-    if (!userData.startedChallenge) {
-      emailUser(userData.email, "electionReminder");
-    }
+    emailUser(userData.email, "registered");
     await updateChallengerBadges(userData);
     await updateDoc(doc(db, "users", uid), {
       isRegisteredVoter: true,
@@ -131,6 +127,11 @@ export async function completedAction(action) {
         },
       }),
     });
+
+    const userData = await getUserDatabase();
+    if (userData.badges.length === 8) {
+      emailUser(userData.email, "challengeWon");
+    }
   } else {
     throw new Error("specified action does not exist");
   }
