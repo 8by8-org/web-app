@@ -8,6 +8,7 @@ import igpost2 from "../assets/images/Invite/igpost2.png";
 import igpost3 from "../assets/images/Invite/igpost3.png";
 import igpostchallenger from "../assets/images/Invite/igpostchallenger.png";
 import igpostplayer from "../assets/images/Invite/igpostplayer.png";
+import {completedAction} from "../functions/UserData";
 
 function Instagram({ toggleIG, isShare, shareUrl }) {
   const [show, setShow] = useState(false);
@@ -66,8 +67,10 @@ function Instagram({ toggleIG, isShare, shareUrl }) {
         onClick={() => {
           if (mobile) {
             window.open("https://www.instagram.com/8by8vote/", "_self")
+            completedAction("share challenge");
           } else {
             window.open("https://www.instagram.com/8by8vote/", "_blank")
+            completedAction("share challenge");
           }
         }}
         >
@@ -78,6 +81,7 @@ function Instagram({ toggleIG, isShare, shareUrl }) {
           <span className="link" onClick={() => {
             if (navigator.clipboard) {
               copyToClipboard();
+              completedAction("share challenge");
             }
           }}>
             Copy Invite Link Again

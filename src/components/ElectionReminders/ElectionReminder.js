@@ -4,6 +4,7 @@ import { getFirestore, doc, getDoc, updateDoc } from "firebase/firestore";
 import { useAuth } from "../../contexts/AuthContext";
 import { completedAction } from "../../functions/UserData";
 import { LoadingWheel } from "../LoadingWheel/LoadingWheel.component";
+import { addInvitedBy } from "../../functions/AddInvite";
 import "./ElectionReminder.scss";
 const db = getFirestore();
 
@@ -16,15 +17,6 @@ export default function ElectionReminder() {
 
   //get information for challenger who referred the player
   const { currentUser } = useAuth();
-
-  async function addInvitedBy() {
-    const userRef = doc(db, "users", await currentUser.uid);
-    await updateDoc(userRef, {
-      invitedBy: JSON.parse(localStorage.getItem("challengerInfo"))
-        .challengerID,
-    });
-    localStorage.removeItem("player");
-  }
 
   const onSubmit = (
     firstNameInput,
@@ -215,7 +207,7 @@ export default function ElectionReminder() {
         setLoading(true);
       }
       initialize();
-    }, 2000);
+    }, 3000)
   }, []);
 
   return loading ? (
@@ -255,7 +247,7 @@ export default function ElectionReminder() {
         )}
       </div>
     </div>
-  ) : (
+    ) : (
     <LoadingWheel overlay={false} />
-  );
+    )
 }
