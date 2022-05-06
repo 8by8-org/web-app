@@ -19,7 +19,7 @@ export const LoadingWheel = ({ overlay }) => {
             : "loading-wheel-inner-container-white"
         }
       >
-        <div class="lds-ring">
+        <div className="lds-ring">
           <div></div>
           <div></div>
           <div></div>

@@ -16,7 +16,7 @@ const db = getFirestore();
 
 export default function VoterRegistrationForm(props) {
   const { currentUser } = useAuth();
-  const [loading, setLoading] = useState(false);
+  //const [loading, setLoading] = useState(false);
 
   //if the user has already completed the register to vote action, set the page to "formCompleted"
   const [page, setPage] = useState("loading");
@@ -25,9 +25,9 @@ export default function VoterRegistrationForm(props) {
     setTimeout(() => {
       if (localStorage.getItem("player") && currentUser) {
         addInvitedBy();
-        setLoading(true);
+       // setLoading(true);
       } else {
-        setLoading(true);
+        //setLoading(true);
       }
       (async () => {
         const userRef = doc(db, "users", currentUser.uid);
@@ -82,8 +82,8 @@ export default function VoterRegistrationForm(props) {
     race: "asian",
   });
 
-  return loading ? (
-    <form className={page !== "loading" && "container"}>
+  return page !== "loading" ? (
+    <form className={page !== "loading" ? "container" : null}>
       {page !== "loading" && (
         <h1 className="register-form-title">
           {page !== "formCompleted" ? (
