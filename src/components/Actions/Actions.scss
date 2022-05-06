@@ -136,4 +136,20 @@
     color: $blue;
     padding-bottom: 10px;
   }
+
+  .link-share {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    text-decoration: underline;
+    display: inline;
+    margin: 0;
+    padding: 0px 0px 10px 0px;
+    font-family: $lato;
+    font-size: 18px;
+    line-height: 22px;
+    letter-spacing: 0.02em;
+    color: $blue;
+    font-weight: 900;
+  }
 }

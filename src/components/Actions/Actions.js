@@ -9,6 +9,7 @@ import Avatar4 from "./../../assets/avatars/avatar4.svg";
 import WhiteCurve from "./../../assets/images/Actions/Union.svg";
 import Crown from "./../../assets/images/Actions/Crown.svg";
 import ConfettiAnimation from "./../ConfettiAnimation";
+import Invite from "../Invite.js";
 import "./Actions.scss";
 
 const avatars = [Avatar1, Avatar2, Avatar3, Avatar4];
@@ -20,13 +21,18 @@ export default function Actions() {
   const [ registeredVoter, setRegisteredVoter ] = useState(false);
   const [ notifyElectionReminders, setNotifyElectionReminders ] = useState(false);
   const [ startedChallenge, setStartedChallenge ] = useState(false);
+  const toggleInvite = React.useRef();
 
   useEffect(() => {
+    // if the user is not doing actions for another user then send them to signin page
     if (localStorage.getItem("challengerInfo")) {
       setChallengerInfo(JSON.parse(localStorage.getItem("challengerInfo")));
       fetchUserData();
+      setLoading(false);
     }
-    setLoading(false);
+    else {
+      history.push(`/signin`);
+    }
   }, [loading]);
 
   function fetchUserData() {
@@ -41,8 +47,9 @@ export default function Actions() {
 
   return (
     loading === false ?
-      // if all three actions are completed
-      registeredVoter && notifyElectionReminders && startedChallenge ?
+      <div>
+      {/* if all three actions are completed */}
+      {registeredVoter && notifyElectionReminders && startedChallenge ?
         <div className="actions">
           <ConfettiAnimation time={8000} />
 
@@ -84,7 +91,7 @@ export default function Actions() {
             <div className="py-2">
               <Button
                 className="secondary-button"
-                onClick={() => {}}
+                onClick={() => toggleInvite.current()}
               >
                 Share About Your Actions
               </Button>
@@ -95,38 +102,32 @@ export default function Actions() {
         // when there are actions that can still be completed by the user
         <div className="actions">
           <div className="top">
-            {challengerInfo ?
-              // if the user is doing actions for someone else's challenge
-              <div className="avatar-and-status">
-                <div className="action-status">
-                  {registeredVoter || notifyElectionReminders || startedChallenge ?
-                    <h1 className="heading">You Took Action!</h1>
-                  :
-                    <h1 className="heading">Take Action For:</h1>
+            <div className="avatar-and-status">
+              <div className="action-status">
+                {registeredVoter || notifyElectionReminders || startedChallenge ?
+                  <h1 className="heading">You Took Action!</h1>
+                :
+                  <h1 className="heading">Take Action For:</h1>
+                }
+              </div>
+
+              <div className="avatar-container">
+                <div className="images">
+                  <img
+                    alt="Challenger Avatar"
+                    src={challengerInfo.avatar ? avatars[(challengerInfo.avatar)-1] : avatars[0]}
+                    id="challenger-avatar"
+                  />
+                  {(registeredVoter || notifyElectionReminders || startedChallenge) &&
+                    <div id="challenger-crown">
+                      <img alt="Challenger Crown" src={Crown} className="crown"/>
+                    </div>
                   }
                 </div>
 
-                <div className="avatar-container">
-                  <div className="images">
-                    <img
-                      alt="Challenger Avatar"
-                      src={challengerInfo.avatar ? avatars[(challengerInfo.avatar)-1] : avatars[0]}
-                      id="challenger-avatar"
-                    />
-                    {(registeredVoter || notifyElectionReminders || startedChallenge) &&
-                      <div id="challenger-crown">
-                        <img alt="Challenger Crown" src={Crown} className="crown"/>
-                      </div>
-                    }
-                  </div>
-
-                  <p id="challenger-name">{challengerInfo.name}</p>
-                </div>
+                <p id="challenger-name">{challengerInfo.name}</p>
               </div>
-            :
-              // if the user is not doing actions for someone else's challenge
-              <h1 id="action-no-challenger" align="center">Take Action</h1>
-            }
+            </div>
           </div>
 
           <img alt="White Curve" src={WhiteCurve} className="curve"/>
@@ -193,7 +194,7 @@ export default function Actions() {
                 </h6>
                 <div className="links-container">
                   <a href="/homepage" className="links">What is 8by8 Challenge?</a>
-                  <a href="url" className="links">Share about your actions</a>
+                  <button type="button" className="link-share" onClick={() => toggleInvite.current()}>Share about your actions</button>
                 </div>
               </div>
             :
@@ -214,11 +215,11 @@ export default function Actions() {
                   {/* this is for when registered to vote or election reminders are turned on */}
                   {((registeredVoter && !notifyElectionReminders && !startedChallenge) ||
                     (!registeredVoter && notifyElectionReminders && !startedChallenge)) &&
-                    <a href="url" className="links">Share about your action</a>}
+                    <button type="button" className="link-share" onClick={() => toggleInvite.current()}>Share about your action</button>}
 
                   {/* this is for when registered to vote or election reminders are turned on and challenge has been started */}
                   {((registeredVoter || notifyElectionReminders) && startedChallenge) &&
-                    <a href="url" className="links">Share about your actions</a>}
+                    <button type="button" className="link-share" onClick={() => toggleInvite.current()}>Share about your actions</button>}
 
                   {/* this is for when user has started their own challenge */}
                   {startedChallenge && <a href="/signin" className="links">See your challenge</a>}
@@ -227,6 +228,10 @@ export default function Actions() {
             }
           </div>
         </div>
+      }
+
+        <Invite toggleInvite={toggleInvite} isShare={true} />
+      </div>
     : <h1>loading</h1>
   )
 }
