@@ -30,7 +30,7 @@ function Header() {
     if(localStorage.getItem("challengerInfo")) {
         return "/actions"
     }
-    return "/"
+    return "/signin"
   }
 
   // all sidebar links lead to path: /

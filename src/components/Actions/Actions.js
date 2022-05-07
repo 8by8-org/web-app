@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { getUserDatabase } from "./../../functions/UserData";
 import { Button } from "react-bootstrap";
 import { useHistory } from "react-router";
+import { useAuth } from "../../contexts/AuthContext";
 import Avatar1 from "./../../assets/avatars/avatar1.svg";
 import Avatar2 from "./../../assets/avatars/avatar2.svg";
 import Avatar3 from "./../../assets/avatars/avatar3.svg";
@@ -16,18 +17,22 @@ const avatars = [Avatar1, Avatar2, Avatar3, Avatar4];
 
 export default function Actions() {
   const history = useHistory();
+  const { currentUser } = useAuth();
   const [loading, setLoading] = useState(true);
   const [challengerInfo, setChallengerInfo] = useState(null);
-  const [ registeredVoter, setRegisteredVoter ] = useState(false);
-  const [ notifyElectionReminders, setNotifyElectionReminders ] = useState(false);
-  const [ startedChallenge, setStartedChallenge ] = useState(false);
+  const [registeredVoter, setRegisteredVoter] = useState(false);
+  const [notifyElectionReminders, setNotifyElectionReminders] = useState(false);
+  const [startedChallenge, setStartedChallenge] = useState(false);
   const toggleInvite = React.useRef();
 
   useEffect(() => {
     // if the user is not doing actions for another user then send them to signin page
     if (localStorage.getItem("challengerInfo")) {
       setChallengerInfo(JSON.parse(localStorage.getItem("challengerInfo")));
-      fetchUserData();
+      // if the user is signed in then get their data about what actions they completed
+      if (currentUser) {
+        fetchUserData();
+      }
       setLoading(false);
     }
     else {
