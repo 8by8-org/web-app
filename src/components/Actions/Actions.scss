@@ -1,0 +1,155 @@
+@import "./../../styles/Components.scss";
+
+@mixin blob-background(
+  $background: url(./../../assets/images/Actions/TealCurve.svg)
+) {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 150px;
+  width: 300px;
+  background-repeat: no-repeat;
+  background-position: center;
+  text-align: center;
+  font-family: $bebas-neue;
+  line-height: 77px;
+  letter-spacing: 0.03em;
+  background-image: $background;
+}
+
+.actions {
+  background-color: $white;
+  color: $black;
+
+  .top {
+    .avatar-and-status {
+      display: flex;
+      position: relative;
+      padding: 0px 50px;
+    }
+
+    .action-status {
+      width: 50%;
+      font-size: 112px;
+      padding-top: 10%;
+    }
+
+    .avatar-and-status-finished {
+      display: flex;
+      padding: 0px 50px;
+      position: relative;
+      flex-direction: column;
+    }
+
+    .action-status-finished {
+      width: 100%;
+      padding-top: 10%;
+    }
+
+    .avatar-container {
+      @include blob-background;
+      width: 100%;
+      height: auto;
+      padding: 10% 0% 10%;
+      .images {
+        position: relative;
+      }
+      #challenger-avatar {
+        width: 100%;
+      }
+      #challenger-crown {
+        background-color: black;
+        width: 30px;
+        height: 30px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-radius: 50%;
+        position: absolute;
+        bottom: 0px;
+        right: -5px;
+      }
+      #challenger-name {
+        @include heading-text($black, 30px);
+      }
+    }
+
+    #action-no-challenger {
+      @include heading-text($black, 36px);
+      padding: 30px;
+    }
+  }
+
+  .curve {
+    background-color: $black;
+    width: 100%;
+  }
+
+  .heading {
+    @include heading-text($black, 48px);
+    letter-spacing: 0.03em;
+  }
+
+  .subheading {
+    @include subheading-text($white, 24px);
+    margin: 0px 0px 30px;
+    line-height: 29px;
+    letter-spacing: 0.03em;
+  }
+
+  .text {
+    @include text($white, 18px);
+    line-height: 22px;
+    letter-spacing: 0.02em;
+    padding: 30px 0px 10px 0px;
+    margin: 0px;
+  }
+
+  .action-items {
+    background: $black;
+    padding: 35px 35px 10px 35px;
+    color: white;
+    text-align: center;
+
+    .primary-button {
+      @include button;
+      outline: 4px solid white;
+    }
+
+    .secondary-button {
+      @include secondary-button;
+    }
+  }
+
+  .links-container {
+    display: flex;
+    text-align: center;
+    flex-direction: column;
+  }
+
+  .links {
+    font-family: $lato;
+    font-size: 18px;
+    line-height: 22px;
+    letter-spacing: 0.02em;
+    color: $blue;
+    padding-bottom: 10px;
+  }
+
+  .link-share {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    text-decoration: underline;
+    display: inline;
+    margin: 0;
+    padding: 0px 0px 10px 0px;
+    font-family: $lato;
+    font-size: 18px;
+    line-height: 22px;
+    letter-spacing: 0.02em;
+    color: $blue;
+    font-weight: 900;
+  }
+}
