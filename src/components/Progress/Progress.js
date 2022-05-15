@@ -5,9 +5,9 @@ import {
   delay,
   restartChallenge,
 } from "./../../functions/UserData";
-import { doc, getFirestore, updateDoc } from "firebase/firestore";
 import { useAuth } from "../../contexts/AuthContext";
 import { addInvitedBy } from "../../functions/AddInvite";
+import { makePlayerChallenger } from "../../functions/UserData";
 import emailUser from "../../functions/Email";
 import Invite from "../Invite.js";
 import { LoadingWheel } from "../LoadingWheel/LoadingWheel.component";
@@ -35,12 +35,11 @@ export default function Progress() {
   const [loading, setLoading] = useState(false);
 
   const toggleInvite = React.useRef();
-  const db = getFirestore();
-  const challengeEndDate = new Date(Date.now() + 8 * 24 * 60 * 60 * 1000);
 
   useEffect(() => {
     if (localStorage.getItem("player") && currentUser) {
       setTimeout(() => {
+        makePlayerChallenger();
         addInvitedBy();
         fetchUserData();
         setLoading(true);

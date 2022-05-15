@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { getUserDatabase } from "./../functions/UserData";
 import { Button } from "react-bootstrap";
 import { useHistory } from "react-router";
+import { LoadingWheel } from "./LoadingWheel/LoadingWheel.component";
 import Avatar1 from "../assets/avatars/avatar1.svg";
 import Avatar2 from "../assets/avatars/avatar2.svg";
 import Avatar3 from "../assets/avatars/avatar3.svg";
@@ -113,6 +114,6 @@ export default function Actions() {
       </div>
     </>
   ) : (
-    <h1>loading</h1>
+    <LoadingWheel overlay={false}/>
   );
 }
