@@ -30,7 +30,9 @@ function Invite({ toggleInvite, isShare }) {
 
   React.useEffect(() => {
     toggleInvite.current = changeShow;
-    generateUrl();
+    if (currentUser) {
+      generateUrl();
+    }
   }, []);
 
   function changeShow() {

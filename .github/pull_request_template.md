@@ -7,7 +7,7 @@
 
 ## Test Plan 
 > REQUIRED 
-> What you did to verify your PR works as claimed? You should list things/steps/screenshots/screentcasts so that others could reproduce your test easily
+> What you did to verify your PR works as claimed? Make sure to list **things/steps/screenshots/screentcasts** so that others could reproduce your test easily. Share styling changes and component updates through screenshots
 
 
 
