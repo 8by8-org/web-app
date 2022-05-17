@@ -36,7 +36,9 @@ function Invite({ toggleInvite , isShare}) {
       setChallengerInfo(JSON.parse(localStorage.getItem("challengerInfo")));
     }
 
-    generateUrl();
+    if (currentUser) {
+      generateUrl();
+    }
   }, []);
 
   function changeShow() {

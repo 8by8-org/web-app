@@ -7,8 +7,8 @@ import {
 } from "./../../functions/UserData";
 import { doc, getFirestore, updateDoc } from "firebase/firestore";
 import { useAuth } from "../../contexts/AuthContext";
+import { emailUser } from "../../functions/Email";
 import { addInvitedBy } from "../../functions/AddInvite";
-import emailUser from "../../functions/Email";
 import Invite from "../Invite.js";
 import { LoadingWheel } from "../LoadingWheel/LoadingWheel.component";
 import PopupModal from "../PopupModal";
@@ -291,7 +291,7 @@ export default function Progress() {
 
       <Invite toggleInvite={toggleInvite} isShare={false} />
     </article>
-    ) : (
-    <LoadingWheel overlay={false}/>
+  ) : (
+    <LoadingWheel overlay={false} />
   );
 }

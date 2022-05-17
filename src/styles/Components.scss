@@ -97,6 +97,12 @@
   font-size: $fontSize;
 }
 
+@mixin text($color: $black, $fontSize: 18px) {
+  color: $color;
+  font-family: $lato;
+  font-size: $fontSize;
+}
+
 //blue text underline
 @mixin text-underline {
   text-decoration: underline;

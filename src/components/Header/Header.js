@@ -26,6 +26,13 @@ function Header() {
   const { currentUser } = useAuth();
   const greeting = "Hi There!";
 
+  const actionLink = () => {
+    if(localStorage.getItem("challengerInfo")) {
+        return "/actions"
+    }
+    return "/signin"
+  }
+
   // all sidebar links lead to path: /
   const SidebarData = [
     {
@@ -35,7 +42,7 @@ function Header() {
     },
     {
       title: "Take Action",
-      path: "/",
+      path: actionLink(),
       icon: <GiIcons.GiJeweledChalice />,
     },
     {
