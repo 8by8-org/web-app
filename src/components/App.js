@@ -19,7 +19,7 @@ import ChallengerWelcome from "./ChallengerWelcome/ChallengerWelcome";
 import ElectionReminder from "./ElectionReminders/ElectionReminder";
 import Footer from "./Footer";
 import PlayerWelcome from "./PlayerWelcome";
-import Actions from "./Actions";
+import Actions from "./Actions/Actions";
 import VoterRegistrationForm from "./VoterRegistration/VoterRegistrationForm";
 import TOS from "./TOS/TOS";
 

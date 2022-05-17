@@ -290,7 +290,7 @@ export default function Progress() {
 
       <Invite toggleInvite={toggleInvite} isShare={false} />
     </article>
-    ) : (
-    <LoadingWheel overlay={false}/>
+  ) : (
+    <LoadingWheel overlay={false} />
   );
 }

@@ -117,7 +117,6 @@ export const HomeAddress = ({ parentRef, setParentState }) => {
               setParentState("otherInfo");
             }
           } catch (e) {
-            console.log(e);
             setIsLoading(false);
             setParentState("otherInfo");
           }

@@ -9,12 +9,9 @@ export const getAge = (dob) => {
 
 export const getEligibility = (dob, state) => {
   const dateOfBirth = new DateTime.fromISO(dob);
+
   const today = new DateTime.now();
   const age = today.diff(dateOfBirth, "years").toObject().years;
-
-  console.log(age);
-  console.log(state);
-  console.log(age >= 16);
 
   if (age >= 18)
     return {
