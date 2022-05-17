@@ -1,0 +1,66 @@
+@import "../../../styles/Fonts.scss";
+
+.preview-wrapper {
+  width: 0;
+  height: 95%;
+  max-width: 500px;
+  position: fixed;
+  bottom: -100vh;
+  transition: 400ms;
+  background-color: white;
+  color: black;
+  overflow: auto;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-family: $lato;
+  border-top: 2px solid black;
+
+  .preview-header {
+    width: 100%;
+    height: 60px;
+    display: flex;
+    margin-top: 50px;
+
+    a.nav-link, a.nav-link:hover {
+      color: black;
+      fill: black;
+      margin: 25px;
+    }
+  }
+
+  .invite-title {
+    font-family: $bebas-neue;
+    margin: auto;
+    font-size: 36px;
+  }
+
+  .view {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    .preview-bordor {
+      width: 300px;
+      height: 100%;
+    }
+
+    .playerwelcome-page {
+      overflow: auto;
+      position: relative;
+      width: 228px;
+      height: 79%;
+      top: -55%;
+      left: 2px;
+    }
+  }
+}
+
+.preview-wrapper.active {
+  bottom: 0;
+  transition: 400ms;
+  width: 100%;
+}
