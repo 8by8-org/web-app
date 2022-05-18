@@ -6,7 +6,7 @@
   display: flex;
   flex-direction: column;
 
-  button {
+  .getStarted-button {
     @include button;
     outline: 4px solid white;
     margin: 10px;
@@ -30,17 +30,37 @@
       }
     }
 
-    a:link,
-    a:active,
-    a:visited {
+    .signin-link {
+      background-color: transparent;
+      border: none;
+      cursor: pointer;
+      text-decoration: underline;
+      display: inline;
+      margin: 0;
+      padding: 0px 0px 10px 0px;
+      font-family: $lato;
+      font-size: 14px;
+      line-height: 22px;
+      letter-spacing: 0.02em;
       color: $blue;
+      font-weight: 900;
     }
   }
 
-  a:link,
-  a:active,
-  a:visited {
+  .signin-link {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    text-decoration: underline;
+    display: inline;
+    margin: 0;
+    padding: 0px 0px 10px 0px;
+    font-family: $lato;
+    font-size: 14px;
+    line-height: 22px;
+    letter-spacing: 0.02em;
     color: $black;
+    font-weight: 900;
   }
 
   .main-content {

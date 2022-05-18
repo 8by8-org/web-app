@@ -76,10 +76,10 @@ export default function PlayerWelcome({ isShare }) {
                 </b>
               </p>
             </div>
-            <Button onClick={() => {isShare === undefined && history.push(`/actions`)}}>Get Started</Button>
+            <Button className="getStarted-button" onClick={() => {isShare === undefined && history.push(`/actions`)}}>Get Started</Button>
             <div align="center">
               <p className="small-text">
-                Already have an account? <button onClick={() => {isShare === undefined && history.push(`/signin`)}}>Sign In</button>
+                Already have an account? <button className="signin-link" onClick={() => {isShare === undefined && history.push(`/signin`)}}>Sign In</button>
               </p>
             </div>
           </div>
@@ -116,9 +116,9 @@ export default function PlayerWelcome({ isShare }) {
             <div className="image">
               <img src={Vote} alt="8by8 Logo" />
             </div>
-            <Button onClick={() => {isShare === undefined && history.push(`/actions`)}}>Get Started</Button>
+            <Button className="getStarted-button" onClick={() => {isShare === undefined && history.push(`/actions`)}}>Get Started</Button>
             <p align="center" className="small-text">
-              Already have an account? <button onClick={() => {isShare === undefined && history.push(`/signin`)}}>Sign In</button>
+              Already have an account? <button className="signin-link" onClick={() => {isShare === undefined && history.push(`/signin`)}}>Sign In</button>
             </p>
           </div>
         </div>
