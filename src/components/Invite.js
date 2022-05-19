@@ -92,16 +92,14 @@ function Invite({ toggleInvite, isShare }) {
         <div className="info">
           <img src={CalendarSvg} width="225px" />
           <p>
-            {isShare
-              ? "Share about your action. Invite friends to help Yang’s challenge and learn more about the 8by8 cause! If you are curious, preview what they’ll see."
-              : "Invite friends to support your challenge by registering to vote, get election reminders or take the 8by8 challenge themselves."}
+            Invite friends to support your challenge by taking an action:
+            register to vote, get election reminders or take the 8by8 challenge.
+            If you are curious, preview what they'll see.
           </p>
         </div>
 
         <div className="section social-media">
-          <p className="sub-heading">
-            {isShare ? "Social Media" : "Copy your unique link"}
-          </p>
+          <p className="sub-heading">Social Media</p>
           <FacebookShareButton
             url={shareUrl}
             quote={quote}
@@ -140,9 +138,7 @@ function Invite({ toggleInvite, isShare }) {
         </div>
 
         <div className="section messaging">
-          <p className="sub-heading">
-            {isShare ? "Messaging" : "Copy your unique link"}
-          </p>
+          <p className="sub-heading">Messaging</p>
           <FacebookMessengerShareButton
             url={shareUrl}
             appId={appId}

@@ -1,5 +1,9 @@
 import React, { useState, useEffect } from "react";
-import { getUserDatabase, restartChallenge } from "./../../functions/UserData";
+import {
+  completedAction,
+  getUserDatabase,
+  restartChallenge,
+} from "./../../functions/UserData";
 import { useAuth } from "../../contexts/AuthContext";
 import { addInvitedBy } from "../../functions/AddInvite";
 import { makePlayerChallenger } from "../../functions/UserData";
@@ -35,6 +39,7 @@ export default function Progress() {
     if (localStorage.getItem("player") && currentUser) {
       setTimeout(() => {
         makePlayerChallenger();
+        completedAction("take challenge");
         addInvitedBy();
         fetchUserData();
         setLoading(true);
@@ -50,10 +55,7 @@ export default function Progress() {
       setConfettiAnimation(<ConfettiAnimation time={8000} />);
 
       setButton(
-        <button
-          className="inverted"
-          onClick={() => alert("no sharing functionality yet")}
-        >
+        <button className="inverted" onClick={() => toggleInvite.current()}>
           Share
         </button>
       );
@@ -229,7 +231,11 @@ export default function Progress() {
         />
       )}
 
-      <Invite toggleInvite={toggleInvite} isShare={false} />
+      {challengeFinished ? (
+        <Invite toggleInvite={toggleInvite} isShare={true} />
+      ) : (
+        <Invite toggleInvite={toggleInvite} isShare={false} />
+      )}
     </article>
   ) : (
     <LoadingWheel overlay={false} />

@@ -1,4 +1,4 @@
-@import "../styles/Components.scss";
+@import "./../../styles/Components.scss";
 
 .player-welcome {
   background-color: $white;
@@ -8,6 +8,7 @@
     @include button;
     outline: 4px solid white;
     margin: 10px;
+    margin-top: 20px;
   }
 
   .top {
@@ -84,6 +85,7 @@
 
   .image {
     padding: 20px;
+    padding-bottom: 60px;
     text-align: center;
   }
 }

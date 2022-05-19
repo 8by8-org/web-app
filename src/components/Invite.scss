@@ -10,8 +10,8 @@
     width: 100%;
     max-width: 500px;
     position: fixed;
-    bottom: -100vh;
-    transition: 400ms;
+    bottom: -130vh;
+    transition: 600ms;
     background-color: white;
     color: black;
     width: 100%;
@@ -29,7 +29,8 @@
       display: flex;
       margin-top: 50px;
 
-      a.nav-link, a.nav-link:hover {
+      a.nav-link,
+      a.nav-link:hover {
         color: black;
         fill: black;
         margin: 25px;
@@ -73,7 +74,8 @@
         margin: 0 30px 5px 30px;
       }
 
-      .instagram-button, .sms-button {
+      .instagram-button,
+      .sms-button {
         background: none;
         border: none;
         padding: 0;
@@ -136,7 +138,6 @@
       height: 3px;
       background: linear-gradient(270deg, #ffed10 0%, #02ddc3 100%);
     }
-
   }
 }
 
