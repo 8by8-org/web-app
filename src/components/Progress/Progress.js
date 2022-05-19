@@ -9,6 +9,7 @@ import PopupModal from "../PopupModal/PopupModal";
 import ConfettiAnimation from "../ConfettiAnimation";
 import CurveA from "./../../assets/2-shapes/curve-a.svg";
 import BlobDay from "./../../assets/4-pages/Progress/BlobDay.svg";
+import "./Progress.scss";
 
 export default function Progress() {
   const { currentUser } = useAuth();
@@ -118,14 +119,14 @@ export default function Progress() {
       <div className="badges">
         <div className="blob">
           <img
-            className={icon ? "" : "disable"}
+            className={icon ? "blob-img blob-img-" + index : "disable"}
             src={
-              require(`./../../assets/4-pages/Progress/Badges/Blob${index}.svg`)
+              require(`./../../assets/4-pages/Progress/Badges/Blob${index}.png`)
                 .default
             }
           />
         </div>
-        <div className="blob-content">
+        <div className={"blob-content"}>
           {icon ? (
             <img
               className="icon"

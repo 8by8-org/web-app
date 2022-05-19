@@ -3,7 +3,7 @@ import { useHistory } from "react-router-dom";
 import { useAuth } from "./../../contexts/AuthContext";
 import { auth } from "./../../firebase";
 import { getFirestore, doc, updateDoc } from "firebase/firestore";
-import errorMessage from "./../../errorMessage";
+import errorMessage from "./../../functions/errorMessage";
 import { dummyPassword } from "../../constants";
 import { Button, Form } from "react-bootstrap";
 import avatar1 from "../../assets/images/SignUpPage/avatar1.png";
