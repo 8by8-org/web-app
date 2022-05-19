@@ -122,6 +122,6 @@ export default function VoterRegistrationForm(props) {
       })()}
     </form>
   ) : (
-    <LoadingWheel overlay={false} />
-  );
+    <LoadingWheel overlay={false}/>
+  )
 }
