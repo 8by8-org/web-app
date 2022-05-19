@@ -74,14 +74,16 @@ export default function SignupPage() {
         }
 
         const addUserToDB = async (name, avatar, endDate, isStarted) => {
-          const user = auth.getAuth().currentUser;
-          const userRef = doc(db, "users", user.uid);
-          updateDoc(userRef, {
-            name: name,
-            avatar: avatar,
-            challengeEndDate: endDate,
-            startedChallenge: isStarted,
-          });
+          await setTimeout(() => {
+            const user = auth.getAuth().currentUser;
+            const userRef = doc(db, "users", user.uid);
+            updateDoc(userRef, {
+              name: name,
+              avatar: avatar,
+              challengeEndDate: endDate,
+              startedChallenge: isStarted,
+            });
+          }, 3000);
         };
 
         const createUser = async (email) => {
@@ -93,20 +95,18 @@ export default function SignupPage() {
               dummyPassword
             );
             // waiting a few seconds for user doc to be created before adding data
-            await setTimeout(() => {
-              addUserToDB(
-                username,
-                avatarNumber,
-                challengeEndDate,
-                startedChallenge
-              );
-            }, 3000); // blame this if username, avatar, etc. aren't stored
+            addUserToDB(
+              username,
+              avatarNumber,
+              challengeEndDate,
+              startedChallenge
+            );
           } catch (e) {
             const error = errorMessage(e);
 
             if (error == "Please enter a correct email address.") {
-              setDuplicateError(error);
-              setEmailError("");
+              setEmailError(error);
+              setDuplicateError("");
             } else if (error == "This email is already in use.") {
               setEmailError(error);
               setDuplicateError("");

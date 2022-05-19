@@ -46,7 +46,6 @@ export default function Progress() {
       }, 3000);
     } else {
       fetchUserData();
-      setLoading(true);
     }
   }, []);
 
@@ -71,7 +70,7 @@ export default function Progress() {
     }
   }, [challengeVoid, challengeFinished]);
 
-  function fetchUserData() {
+  async function fetchUserData() {
     getUserDatabase()
       .then((data) => {
         // days left of challenge
@@ -107,6 +106,8 @@ export default function Progress() {
         if (badgesLength === 8) {
           setChallengeFinished(true);
         }
+
+        setLoading(true);
       })
       .catch((e) => console.log(e));
   }
