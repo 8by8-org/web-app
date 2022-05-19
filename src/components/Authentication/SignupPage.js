@@ -20,12 +20,16 @@ export default function SignupPage() {
   const history = useHistory();
   const db = getFirestore();
 
-  const [error, setError] = useState(null);
   const [message, setMessage] = useState(null);
   const [emailVisible] = useState(true);
   const [buttonMessage, setButtonMessage] = useState(" ");
   const [reCaptchaPassed, setReCaptchaPassed] = useState(false);
   const [selectedAvatar, setSelectedAvatar] = useState("avatar1");
+
+  const [error, setError] = useState(null);
+  const [nameError, setNameError] = useState(null);
+  const [emailError, setEmailError] = useState(null);
+  const [duplicateError, setDuplicateError] = useState(null);
 
   const emailRef = useRef();
   const confirmEmailRef = useRef();
@@ -35,7 +39,7 @@ export default function SignupPage() {
 
   const changeAvatar = (event) => {
     setSelectedAvatar(event.target.value);
-  }
+  };
 
   useEffect(() => {
     if (currentUser) {
@@ -98,17 +102,38 @@ export default function SignupPage() {
               );
             }, 3000); // blame this if username, avatar, etc. aren't stored
           } catch (e) {
-            setError(errorMessage(e));
+            const error = errorMessage(e);
+
+            if (error == "Please enter a correct email address.") {
+              setDuplicateError(error);
+              setEmailError("");
+            } else if (error == "This email is already in use.") {
+              setEmailError(error);
+              setDuplicateError("");
+            } else if (error == "Something went wrong. Please try again.") {
+              setDuplicateError("");
+              setEmailError("");
+              setError(error);
+            }
           }
         };
 
-        if (!email) {
-          setError("Please enter an email address");
-        } else if (confirmedEmail !== email) {
-          setError("Emails do not match");
+        if (!username) {
+          setNameError("Please enter your name.");
         } else {
+          setNameError("");
+        }
+
+        if (!email) {
+          setEmailError("Please enter an email address.");
+        }
+
+        if (confirmedEmail !== email) {
+          setDuplicateError("Emails do not match.");
+        }
+
+        if (username && email && confirmedEmail === email) {
           createUser(email);
-          setMessage("Success");
         }
       };
     }
@@ -121,7 +146,6 @@ export default function SignupPage() {
       <p className="no-underline-title">to start your 8by8 journey</p>
 
       <Form className="form">
-        {error && <p className="error">{error}</p>}
         {message && <p> {message} </p>}
         {emailVisible && (
           <>
@@ -132,26 +156,32 @@ export default function SignupPage() {
               placeholder="Name*"
               ref={nameRef}
             ></Form.Control>
+            {nameError && <p className="error-msg">{nameError}</p>}
+
             <Form.Control
               className="text-input"
               type="email"
               placeholder="Email address*"
               ref={emailRef}
             ></Form.Control>
+            {emailError && <p className="error-msg">{emailError}</p>}
+
             <Form.Control
               className="text-input"
               type="email"
               placeholder="Re-enter Email address*"
               ref={confirmEmailRef}
             ></Form.Control>
+            {duplicateError && <p className="error-msg">{duplicateError}</p>}
+
             <p className="small-title">Which One's you? </p>
             <div className="avatar-container">
               {/* avatar 1 */}
-              <input 
-                checked={selectedAvatar === 'avatar1'} 
+              <input
+                checked={selectedAvatar === "avatar1"}
                 value="avatar1"
                 type="radio"
-                name="avatar"  
+                name="avatar"
                 id={1}
                 onChange={changeAvatar}
               />
@@ -162,7 +192,7 @@ export default function SignupPage() {
               {/* avatar 2 */}
               <input
                 checked={selectedAvatar === "avatar2"}
-                value = "avatar2"
+                value="avatar2"
                 type="radio"
                 name="avatar"
                 id={2}
@@ -176,7 +206,7 @@ export default function SignupPage() {
               {/* avatar 3 */}
               <input
                 checked={selectedAvatar === "avatar3"}
-                value = "avatar3"
+                value="avatar3"
                 type="radio"
                 name="avatar"
                 id={3}
@@ -189,7 +219,7 @@ export default function SignupPage() {
               {/* avatar 4 */}
               <input
                 checked={selectedAvatar === "avatar4"}
-                value = "avatar4"
+                value="avatar4"
                 type="radio"
                 name="avatar"
                 id={4}
@@ -228,6 +258,7 @@ export default function SignupPage() {
           </a>
         </p>
 
+        {error && <p className="unknown-error">{error}</p>}
         {buttonMessage && (
           <Button
             className="gradient-button"

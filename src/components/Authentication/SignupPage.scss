@@ -6,6 +6,23 @@
 .signup {
   padding: 30px;
 
+  .error-msg {
+    color: red;
+    font-weight: bold;
+    position: relative;
+    bottom: 33px;
+    border-top: 3px solid red;
+  }
+
+  .unknown-error {
+    color: red;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 0;
+    position: relative;
+    top: 13px;
+  }
+
   .normal-title,
   .no-underline-title {
     text-align: left;
@@ -19,20 +36,23 @@
     }
     .text-input {
       padding: 8px 0;
-      margin-bottom: 30px;
       background-color: white;
       border-radius: 0px;
       border: none;
       border-bottom: 3px black solid;
       font-style: normal;
       font-weight: bold;
+      margin-bottom: 30px;
       font-size: 18px;
       line-height: 22px;
       letter-spacing: 0.02em;
     }
+    .text-input.error {
+      border-bottom: 3px black red;
+    }
     .small-title {
       text-align: left;
-      margin-top: 50px;
+      margin-top: 20px;
     }
     .avatar-container {
       margin: 20px 0;
