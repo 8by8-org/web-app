@@ -27,11 +27,11 @@ function Header() {
   const greeting = "Hi There!";
 
   const actionLink = () => {
-    if(localStorage.getItem("challengerInfo")) {
-        return "/actions"
+    if (localStorage.getItem("challengerInfo")) {
+      return "/actions";
     }
-    return "/signin"
-  }
+    return "/signin";
+  };
 
   // all sidebar links lead to path: /
   const SidebarData = [
@@ -104,9 +104,10 @@ function Header() {
               <img src={logo} alt="8by8 logo" id="brand-logo" />
             </Navbar.Brand>
             <div id="icons-tray">
-              <Nav.Link to="#" id="sidebar-icon">
+              {/* no notifications for now */}
+              {/* <Nav.Link to="#" id="sidebar-icon">
                 <MdIcons.MdNotificationsNone onClick={showNotif} />
-              </Nav.Link>
+              </Nav.Link> */}
               <Nav.Link to="#" id="notif-icon">
                 <FaIcons.FaBars onClick={showSidebar} />
               </Nav.Link>
