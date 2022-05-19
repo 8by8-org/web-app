@@ -175,3 +175,15 @@ export async function restartChallenge() {
     challengeEndDate: new Date(Date.now() + 8 * 24 * 60 * 60 * 1000),
   });
 }
+
+export async function makePlayerChallenger() {
+  let uid = auth.getAuth().currentUser.uid;
+  const userRef = doc(db, "users", await uid);
+  
+  await updateDoc(userRef, {
+    startedChallenge: true,
+    challengeEndDate: new Date(Date.now() + 8 * 24 * 60 * 60 * 1000)
+  });
+
+  localStorage.removeItem("player")
+}
