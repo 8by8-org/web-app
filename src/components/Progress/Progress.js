@@ -112,58 +112,6 @@ export default function Progress() {
       .catch((e) => console.log(e));
   }
 
-  async function reloadPage() {
-    await delay(500);
-    window.location.reload();
-  }
-
-  const testing = (
-    <section
-      style={{
-        display: "flex",
-        flexDirection: "column",
-        alignItems: "center",
-        border: "4px red solid",
-        margin: "20px 0",
-        textAlign: "center",
-      }}
-    >
-      temporary testing
-      <button
-        onClick={() => {
-          completedAction("test add badge");
-          reloadPage();
-        }}
-      >
-        add player badge
-      </button>
-      <button
-        onClick={() => {
-          completedAction("share challenge");
-          reloadPage();
-        }}
-      >
-        add share badge
-      </button>
-      <button
-        onClick={() => {
-          completedAction("register to vote");
-          reloadPage();
-        }}
-      >
-        add register badge
-      </button>
-      <button
-        onClick={() => {
-          restartChallenge();
-          reloadPage();
-        }}
-      >
-        restart challenge
-      </button>
-    </section>
-  );
-
   function Badge(props) {
     const index = props.index + 1;
     let name = null;
@@ -239,9 +187,6 @@ export default function Progress() {
           <></>
         )}
       </section>
-
-      {/* remove this setion when done with testing */}
-      {testing}
 
       <section className="section-3 mt-24px">
         {badges.map((value, index) => {
