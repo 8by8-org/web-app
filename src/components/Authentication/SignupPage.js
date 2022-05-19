@@ -50,7 +50,7 @@ export default function SignupPage() {
 
     // signup logic
     if (!auth.isSignInWithEmailLink(auth.getAuth(), window.location.href)) {
-      setButtonMessage("Submit");
+      setButtonMessage("Sign Up");
       buttonRef.current.onclick = async function () {
         const email = emailRef.current.value;
         const confirmedEmail = confirmEmailRef.current.value;
@@ -248,7 +248,7 @@ export default function SignupPage() {
         </div>
 
         <p className="tos">
-          By clicking on Continue, I agree to the &#160;
+          By signing up, I agree to the &#160;
           <a onClick={() => history.push("/termsofservice")} className="link">
             Terms of Service
           </a>{" "}
