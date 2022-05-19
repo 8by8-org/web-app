@@ -1,17 +1,11 @@
 import React, { useState, useEffect } from "react";
-import {
-  getUserDatabase,
-  completedAction,
-  delay,
-  restartChallenge,
-} from "./../../functions/UserData";
+import { getUserDatabase, restartChallenge } from "./../../functions/UserData";
 import { useAuth } from "../../contexts/AuthContext";
 import { addInvitedBy } from "../../functions/AddInvite";
 import { makePlayerChallenger } from "../../functions/UserData";
-import emailUser from "../../functions/Email";
 import Invite from "../Invite.js";
 import { LoadingWheel } from "../LoadingWheel/LoadingWheel.component";
-import PopupModal from "../PopupModal";
+import PopupModal from "../PopupModal/PopupModal";
 import ConfettiAnimation from "../ConfettiAnimation";
 import CurveA from "./../../assets/2-shapes/curve-a.svg";
 import BlobDay from "./../../assets/4-pages/Progress/BlobDay.svg";
@@ -50,11 +44,6 @@ export default function Progress() {
   }, []);
 
   useEffect(() => {
-    // 8 days complete
-    if (challengeVoid) {
-      setOpenModal(true);
-    }
-
     // successfully completes challenge
     if (challengeFinished) {
       setConfettiAnimation(<ConfettiAnimation time={8000} />);
@@ -67,6 +56,11 @@ export default function Progress() {
           Share
         </button>
       );
+    }
+
+    // 8 days complete
+    else if (challengeVoid) {
+      setOpenModal(true);
     }
   }, [challengeVoid, challengeFinished]);
 
