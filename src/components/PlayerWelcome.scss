@@ -29,22 +29,6 @@
         @include text-underline;
       }
     }
-
-    .signin-link {
-      background-color: transparent;
-      border: none;
-      cursor: pointer;
-      text-decoration: underline;
-      display: inline;
-      margin: 0;
-      padding: 0px 0px 10px 0px;
-      font-family: $lato;
-      font-size: 14px;
-      line-height: 22px;
-      letter-spacing: 0.02em;
-      color: $blue;
-      font-weight: 900;
-    }
   }
 
   .signin-link {
@@ -59,8 +43,15 @@
     font-size: 14px;
     line-height: 22px;
     letter-spacing: 0.02em;
-    color: $black;
     font-weight: 900;
+  }
+
+  .blue {
+    color: $blue;
+  }
+
+  .black {
+    color: $black;
   }
 
   .main-content {
@@ -108,7 +99,7 @@
   }
 
   .image {
-    padding: 20px;
+    padding: 20px 0px;
     text-align: center;
   }
 }

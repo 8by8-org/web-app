@@ -10,13 +10,15 @@ import logo from "./../../assets/logos/white-logo.svg";
 import sidebarLogo from "./../../assets/logos/white-logo.svg";
 import "./Header.scss";
 
-function Header() {
+function Header({ isShare }) {
+  // Open and closes sidebar and closes the notification pop-up.
   const [sidebar, setSidebar] = useState(false);
   const showSidebar = () => {
     setSidebar(!sidebar);
     setNotif(false);
   };
 
+  // Open and closes notification pop-up and closes the sidebar.
   const [notif, setNotif] = useState(false);
   const showNotif = () => {
     setNotif(!notif);
@@ -26,6 +28,7 @@ function Header() {
   const { currentUser } = useAuth();
   const greeting = "Hi There!";
 
+  // If there is no challenger info in local storage, then when the user clicks on actions, they get sent to the signin page.
   const actionLink = () => {
     if(localStorage.getItem("challengerInfo")) {
         return "/actions"
@@ -98,9 +101,9 @@ function Header() {
   return (
     <>
       <IconContext.Provider value={{ color: "white" }}>
-        <div className="navbar" id="navbar">
+        <div className="navbar" id={isShare ? "navbar-share" : "navbar"}>
           <div className="navbar-buttons">
-            <Navbar.Brand href="/">
+            <Navbar.Brand href={isShare ? "#" : "/"}>
               <img src={logo} alt="8by8 logo" id="brand-logo" />
             </Navbar.Brand>
             <div id="icons-tray">
@@ -114,7 +117,8 @@ function Header() {
           </div>
         </div>
 
-        {/* Sidebar */}
+        {/* Sidebar (don't render when isShare is true, when used in preview) */}
+        {!isShare &&
         <div className={sidebar ? "nav-container active" : "nav-container"}>
           <nav className="nav-menu">
             <ul className="menu-items" onClick={showSidebar}>
@@ -146,9 +150,10 @@ function Header() {
               </div>
             </ul>
           </nav>
-        </div>
+        </div>}
 
-        {/* Notifications */}
+        {/* Notifications (don't render when isShare is true, when used in preview) */}
+        {!isShare &&
         <div className="notif-wrapper">
           <nav className={notif ? "notif-menu active" : "notif-menu"}>
             <ul className="notif-items" onClick={showNotif}>
@@ -169,7 +174,7 @@ function Header() {
               })}
             </ul>
           </nav>
-        </div>
+        </div>}
       </IconContext.Provider>
     </>
   );

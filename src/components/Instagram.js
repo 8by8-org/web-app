@@ -17,10 +17,12 @@ function Instagram({ toggleIG, isShare, shareUrl }) {
     toggleIG.current = changeShow;
   }, []);
 
+  // Open and closses the instagram pop-up.
   function changeShow() {
     setShow(!show);
   }
 
+  // Copys the url thats to be shared into the clipboard.
   function copyToClipboard() {
     navigator.clipboard.writeText(shareUrl);
   }

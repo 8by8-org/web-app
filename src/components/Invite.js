@@ -41,18 +41,25 @@ function Invite({ toggleInvite , isShare}) {
     }
   }, []);
 
+  // Open and closses the invite pop-up.
   function changeShow() {
     setShow(!show);
   }
 
+  // Copys the url thats to be shared into the clipboard.
   function copyToClipboard() {
     navigator.clipboard.writeText(shareUrl);
   }
 
+  // Reload the current page(only on invite pop-up).
   function reloadPage() {
-    window.location.reload();
+    if (!isShare) {
+      window.location.reload();
+    }
   }
 
+  // Creates the url to be shared. If isShare is true(for share on actions page) then use the uid of the challenger info in local storage, else use the
+  // uid of the person logged in(for invite on progress page).
   function generateUrl() {
     if (isShare) {
       setUrl(`${window.location.origin}/share/${JSON.parse(localStorage.getItem("challengerInfo")).challengerID}`)

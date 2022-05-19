@@ -23,12 +23,14 @@ export default function PlayerWelcome({ isShare }) {
 
     async function getChallengerInfo() {
         const db = getFirestore();
+        // If isShare is false then use the uid of the current user, else use the code gotten from the url.
         const docRef = doc(db, "users", isShare === false ? currentUser.uid : code)
 
         //only log in with substitute user if not already authenticated
         //only challenger's name and avatar is stored for security
         if(currentUser) {
             const query = await getDoc(docRef)
+            // Just in case query.data() does not return anything, then send the user to the signin page.
             if (query.data()) {
               const info = (({name, avatar}) => ({name, avatar}))(query.data())
               info.challengerID = code;
@@ -51,17 +53,20 @@ export default function PlayerWelcome({ isShare }) {
         setChallengerInfo(JSON.parse(localStorage.getItem("challengerInfo")))
     }
 
+    // If code that is gotten from the url is playerwelcome or isShare is true then, if there is challengerInfo in
+    // local storage then set it to challengerInfo, else send the user to the signin page. For eveything else run getChallengerInfo.
     useEffect(() => {
         code === "playerwelcome" || isShare
         ? localStorage.getItem("challengerInfo") ? setChallengerInfo(JSON.parse(localStorage.getItem("challengerInfo"))) : history.push(`/signin`)
         : getChallengerInfo()
     }, []);
 
+    // Render page after challengerInfo is gotten.
     useEffect(() => {
         challengerInfo && setLoading(false);
     }, [challengerInfo])
 
-
+    // If isShare is undefined, when playerwelcome page is rendered not in invite or share, then the buttons work.
     return (
         loading === false ? (
         <div className="player-welcome">
@@ -79,7 +84,7 @@ export default function PlayerWelcome({ isShare }) {
             <Button className="getStarted-button" onClick={() => {isShare === undefined && history.push(`/actions`)}}>Get Started</Button>
             <div align="center">
               <p className="small-text">
-                Already have an account? <button className="signin-link" onClick={() => {isShare === undefined && history.push(`/signin`)}}>Sign In</button>
+                Already have an account? <button className="signin-link blue" onClick={() => {isShare === undefined && history.push(`/signin`)}}>Sign In</button>
               </p>
             </div>
           </div>
@@ -118,7 +123,7 @@ export default function PlayerWelcome({ isShare }) {
             </div>
             <Button className="getStarted-button" onClick={() => {isShare === undefined && history.push(`/actions`)}}>Get Started</Button>
             <p align="center" className="small-text">
-              Already have an account? <button className="signin-link" onClick={() => {isShare === undefined && history.push(`/signin`)}}>Sign In</button>
+              Already have an account? <button className="signin-link black" onClick={() => {isShare === undefined && history.push(`/signin`)}}>Sign In</button>
             </p>
           </div>
         </div>

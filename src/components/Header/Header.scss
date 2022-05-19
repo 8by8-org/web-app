@@ -9,11 +9,19 @@
   justify-content: center;
 }
 
+#navbar-share {
+  background-color: black;
+  height: 57px;
+  padding: 0px 10px 0px 10px;
+  overflow: hidden;
+  width: 100%;
+  justify-content: center;
+}
+
 .navbar-buttons {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  min-width: 375px;
   max-width: 500px;
   width: 100%;
 }
