@@ -10,7 +10,15 @@ import logo from "./../../assets/logos/white-logo.svg";
 import sidebarLogo from "./../../assets/logos/white-logo.svg";
 import "./Header.scss";
 
+
+
+
+import { getUserType } from "./../../functions/UserType.js";
+
+
 function Header() {
+  
+  console.log(getUserType())
   const [sidebar, setSidebar] = useState(false);
   const showSidebar = () => {
     setSidebar(!sidebar);
@@ -26,46 +34,68 @@ function Header() {
   const { currentUser } = useAuth();
   const greeting = "Hi There!";
 
-  const actionLink = () => {
-    if(localStorage.getItem("challengerInfo")) {
-        return "/actions"
-    }
-    return "/signin"
+  // all sidebar links lead to path: /
+  var SidebarData;
+  var flagForTestNonChallenger=0;// make it non 0 if want to test the case for User Type is not challenger
+  if(getUserType()=="challenger" & flagForTestNonChallenger==0){
+
+    SidebarData = [
+      {
+        title: "My Challenge",
+        path: "/progress",
+        icon: <GiIcons.GiJeweledChalice />,
+      },
+      
+      {
+        title: "Share",
+        path: "/share",
+        icon: <GiIcons.GiJeweledChalice />,
+      },
+      {
+        title: "Why 8by8?",
+        path: "/home",
+        icon: <GiIcons.GiJeweledChalice />,
+      },
+      {
+        title: "FAQS",
+        path: "/FAQ",
+        icon: <GiIcons.GiJeweledChalice />,
+      },
+    ];
+  }else{
+    SidebarData = [
+      {
+        title: "Take the Challenge",
+        path: "/progress",
+        icon: <GiIcons.GiJeweledChalice />,
+      },
+      {
+        title: "Take Action",
+        path: "/action",
+        icon: <GiIcons.GiJeweledChalice />,
+      },
+      {
+        title: "Share",
+        path: "/share",
+        icon: <GiIcons.GiJeweledChalice />,
+      },
+      {
+        title: "Why 8by8?",
+        path: "/home",
+        icon: <GiIcons.GiJeweledChalice />,
+      },
+      {
+        title: "FAQS",
+        path: "/FAQ",
+        icon: <GiIcons.GiJeweledChalice />,
+      },
+    ];
+    
   }
 
-  // all sidebar links lead to path: /
-  const SidebarData = [
-    {
-      title: "Take the Challenge",
-      path: "/",
-      icon: <GiIcons.GiJeweledChalice />,
-    },
-    {
-      title: "Take Action",
-      path: actionLink(),
-      icon: <GiIcons.GiJeweledChalice />,
-    },
-    {
-      title: "Notifications",
-      path: "/",
-      icon: <GiIcons.GiJeweledChalice />,
-    },
-    {
-      title: "Share",
-      path: "/",
-      icon: <GiIcons.GiJeweledChalice />,
-    },
-    {
-      title: "Why 8by8?",
-      path: "/",
-      icon: <GiIcons.GiJeweledChalice />,
-    },
-    {
-      title: "FAQS",
-      path: "/",
-      icon: <GiIcons.GiJeweledChalice />,
-    },
-  ];
+  // if(getUserType()=="challenger"){
+  //   SidebarData=SidebarDataForChallenger;
+  // }
 
   // static notification data for testing
   const NotifData = [
