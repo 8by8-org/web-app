@@ -42,32 +42,23 @@ function Header() {
     SidebarData = [
       {
         title: "My Challenge",
-        path: "/",
+        path: "/progress",
         icon: <GiIcons.GiJeweledChalice />,
       },
-      {
-        title: "Take Action",
-        path: "/",
-        icon: <GiIcons.GiJeweledChalice />,
-      },
-      {
-        title: "Notifications",
-        path: "/",
-        icon: <GiIcons.GiJeweledChalice />,
-      },
+      
       {
         title: "Share",
-        path: "/",
+        path: "/share",
         icon: <GiIcons.GiJeweledChalice />,
       },
       {
         title: "Why 8by8?",
-        path: "/",
+        path: "/home",
         icon: <GiIcons.GiJeweledChalice />,
       },
       {
         title: "FAQS",
-        path: "/",
+        path: "/FAQ",
         icon: <GiIcons.GiJeweledChalice />,
       },
     ];
@@ -75,32 +66,27 @@ function Header() {
     SidebarData = [
       {
         title: "Take the Challenge",
-        path: "/",
+        path: "/progress",
         icon: <GiIcons.GiJeweledChalice />,
       },
       {
         title: "Take Action",
-        path: "/",
-        icon: <GiIcons.GiJeweledChalice />,
-      },
-      {
-        title: "Notifications",
-        path: "/",
+        path: "/action",
         icon: <GiIcons.GiJeweledChalice />,
       },
       {
         title: "Share",
-        path: "/",
+        path: "/share",
         icon: <GiIcons.GiJeweledChalice />,
       },
       {
         title: "Why 8by8?",
-        path: "/",
+        path: "/home",
         icon: <GiIcons.GiJeweledChalice />,
       },
       {
         title: "FAQS",
-        path: "/",
+        path: "/FAQ",
         icon: <GiIcons.GiJeweledChalice />,
       },
     ];
