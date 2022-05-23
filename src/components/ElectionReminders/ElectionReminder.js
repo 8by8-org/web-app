@@ -102,7 +102,7 @@ export default function ElectionReminder() {
             );
             if (legend)
               legend.textContent =
-                "Get localized reminders about upcoming election dates and deadlines so you never miss an election.";
+                "8by8 partners with Rock the Vote to help you get reminders for upcoming elections near you, so you'll never miss an election!";
 
             if (fnameLabel) {
               if (fnameLabel.childNodes.length)
