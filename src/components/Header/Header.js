@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Nav, Navbar } from "react-bootstrap";
 import { IconContext } from "react-icons";
 import * as FaIcons from "react-icons/fa";
+import feedback from "./../../assets/4-pages/Header/Feedback.svg";
 import logo from "./../../assets/logos/white-logo.svg";
 import "./Header.scss";
 import Sidebar from "./Sidebar";
@@ -21,6 +22,14 @@ function Header() {
               <img src={logo} alt="8by8 logo" id="brand-logo" />
             </Navbar.Brand>
             <div id="icons-tray">
+              <a
+                href="https://forms.gle/r33L2NAKT69MrvsZ7"
+                target="_blank"
+                id="feedback-icon"
+              >
+                <img src={feedback} />
+              </a>
+
               <Nav.Link to="#" id="sidebar-icon">
                 <FaIcons.FaBars onClick={showSidebar} />
               </Nav.Link>

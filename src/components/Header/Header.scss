@@ -1,7 +1,6 @@
 #navbar {
   background-color: black;
   height: 57px;
-  padding: 0px 10px 0px 10px;
   overflow: hidden;
   position: fixed;
   top: 0;
@@ -20,23 +19,32 @@
 
 #brand-logo {
   height: 38px;
-  padding-left: 10px;
+  padding-left: 15px;
 }
 
 #icons-tray {
   height: 35px;
-  margin-top: 7px;
-  padding-right: 5px;
+  padding-right: 10px;
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
 }
 
+#feedback-icon {
+  img {
+    height: 30px;
+    width: 30px;
+  }
+  position: relative;
+  bottom: 2px;
+  margin-right: 15px;
+}
+
 #sidebar-icon {
   font-size: 30px;
   position: relative;
-  bottom: 4px;
+  bottom: 2px;
 }
 
 a.nav-link {
