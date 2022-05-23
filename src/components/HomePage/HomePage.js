@@ -34,7 +34,7 @@ export default function HomePage() {
       </div>
 
       <div className="curve-div">
-        <img className="curve curve-1" src={Curve1} />
+        <img className="curve curve-1" id="why8by8" src={Curve1} />
       </div>
 
       <div className="content-2">

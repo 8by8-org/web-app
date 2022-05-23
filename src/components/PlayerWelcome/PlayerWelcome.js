@@ -62,7 +62,7 @@ export default function PlayerWelcome() {
     <div className="player-welcome">
       <div className="top">
         <h1 className="top-heading">
-          <u className="underline">Support</u>{" "}
+          <h1 className="underline">Support</h1>{" "}
           {challengerInfo && challengerInfo.name !== null
             ? `${challengerInfo.name}'s`
             : "the"}{" "}
@@ -75,7 +75,7 @@ export default function PlayerWelcome() {
               {challengerInfo && challengerInfo.name !== null
                 ? challengerInfo.name
                 : "your friend"}{" "}
-              win their <u>8BY8 Challenge</u> by registering to vote or taking
+              win their <u>8by8 Challenge</u> by registering to vote or taking
               other actions to #stopasianhate!
             </b>
           </p>

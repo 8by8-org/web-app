@@ -1,5 +1,6 @@
 import React from "react";
 import { useHistory } from "react-router-dom";
+import { useAuth } from "../../contexts/AuthContext";
 import "./ChallengerWelcome.scss";
 import Top from "./../../assets/images/ChallengerWelcome/Top.png";
 import Logo from "./../../assets/logos/white-logo.svg";
@@ -11,6 +12,8 @@ import StepFour from "./../../assets/images/ChallengerWelcome/StepFour.png";
 function ChallengerWelcome() {
   const history = useHistory();
   sessionStorage.setItem("UserType", "Challenger");
+
+  const { currentUser } = useAuth();
 
   return (
     <div className="challenger-welcome">
@@ -34,12 +37,14 @@ function ChallengerWelcome() {
         >
           Get Started
         </button>
-        <p className="small-text">
-          Already have an account?{" "}
-          <span className="link" onClick={() => history.push("/signin")}>
-            Sign in
-          </span>
-        </p>
+        {!currentUser && (
+          <p className="small-text">
+            Already have an account?{" "}
+            <span className="link" onClick={() => history.push("/signin")}>
+              Sign in
+            </span>
+          </p>
+        )}
       </div>
 
       <div className="content-3">
@@ -84,12 +89,14 @@ function ChallengerWelcome() {
         >
           Get Started
         </button>
-        <p className="small-text">
-          Already have an account?{" "}
-          <span className="link" onClick={() => history.push("/signin")}>
-            Sign in
-          </span>
-        </p>
+        {!currentUser && (
+          <p className="small-text">
+            Already have an account?{" "}
+            <span className="link" onClick={() => history.push("/signin")}>
+              Sign in
+            </span>
+          </p>
+        )}
       </div>
     </div>
   );

@@ -217,7 +217,7 @@ export default function Progress() {
                 continue!
               </div>
               <button
-                className="gradient"
+                className="gradient small"
                 onClick={() => {
                   restartChallenge();
                   fetchUserData();
