@@ -27,13 +27,29 @@
       width: 100%;
       height: 60px;
       display: flex;
-      margin-top: 50px;
+      margin-top: 20px;
 
       a.nav-link,
       a.nav-link:hover {
         color: black;
         fill: black;
         margin: 25px;
+      }
+
+      #close-icon {
+        position: relative;
+        right: 20px;
+        bottom: 20px;
+        svg {
+          width: 30px;
+          height: 30px;
+        }
+      }
+
+      .invite-title {
+        position: relative;
+        right: 40px;
+        bottom: 5px;
       }
     }
 
