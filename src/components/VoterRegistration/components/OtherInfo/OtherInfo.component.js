@@ -65,6 +65,7 @@ export const OtherInfo = ({ parentRef, setParentState }) => {
           }
         }}
       >
+        <option value=""></option>
         <option value="democratic">Democratic</option>
         <option value="green">Green</option>
         <option value="libertarian">Libertarian</option>
@@ -133,6 +134,7 @@ export const OtherInfo = ({ parentRef, setParentState }) => {
               setFormData({ ...formData, race: target.value });
             }}
           >
+            <option value=""></option>
             <option value="asian">Asian</option>
             <option value="black/african american">
               Black or African American
@@ -220,8 +222,8 @@ export const OtherInfo = ({ parentRef, setParentState }) => {
           event.preventDefault();
           //first make sure the required fields are completed
           if (
-            !parentRef.current.party ||
-            !parentRef.current.race ||
+            parentRef.current.party === "" ||
+            parentRef.current.race === "" ||
             !parentRef.current.idNumber
           ) {
             setError("Please complete all of the required fields");
