@@ -2,7 +2,6 @@ import { useRef, useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
 import { useAuth } from "./../../contexts/AuthContext";
 import { auth } from "./../../firebase";
-import { getFirestore, doc, updateDoc } from "firebase/firestore";
 import errorMessage from "./../../functions/errorMessage";
 import { dummyPassword } from "../../constants";
 import { Button, Form } from "react-bootstrap";
@@ -13,12 +12,12 @@ import avatar4 from "../../assets/images/SignUpPage/avatar4.png";
 import ReCAPTCHA from "react-google-recaptcha";
 import { emailUser } from "./../../functions/Email";
 import { getUserType } from "./../../functions/UserType";
+import { addUserToDB } from "./AddUserToDB";
 import "./SignupPage.scss";
 
 export default function SignupPage() {
   const { currentUser } = useAuth();
   const history = useHistory();
-  const db = getFirestore();
 
   const [message, setMessage] = useState(null);
   const [emailVisible] = useState(true);
@@ -72,19 +71,6 @@ export default function SignupPage() {
             emailUser(email, "challengerWelcome");
           }, 3000);
         }
-
-        const addUserToDB = async (name, avatar, endDate, isStarted) => {
-          await setTimeout(() => {
-            const user = auth.getAuth().currentUser;
-            const userRef = doc(db, "users", user.uid);
-            updateDoc(userRef, {
-              name: name,
-              avatar: avatar,
-              challengeEndDate: endDate,
-              startedChallenge: isStarted,
-            });
-          }, 3000);
-        };
 
         const createUser = async (email) => {
           try {
