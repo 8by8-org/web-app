@@ -1,41 +1,76 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { useHistory } from "react-router-dom";
+import { useAuth } from "../../../../contexts/AuthContext";
+import { ProgressBar } from "../ProgressBar/ProgressBar.component";
 import axios from "axios";
 import "../../VoterRegistration.scss";
 import { Tooltip } from "../Tooltip/Tooltip.component";
 import { completedAction } from "../../../../functions/UserData";
 import { LoadingWheel } from "../../../LoadingWheel/LoadingWheel.component";
+import ScrollToTop from "../../../../functions/ScrollToTop";
 
 const apiUrl = "https://usvotes-6vsnwycl4q-uw.a.run.app";
 
-export const OtherInfo = ({ parentRef, setParentState }) => {
+export const OtherInfo = () => {
+  const history = useHistory();
+  const {
+    currentUserData,
+    setCurrentUserData,
+    voterRegistrationData,
+    setVoterRegistrationData,
+  } = useAuth();
   const [showOtherPartyField, setShowOtherPartyField] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
-  const [formData, setFormData] = useState({
-    party: parentRef.current.party,
-    race: parentRef.current.race,
-    idNumber: parentRef.current.idNumber,
-  });
+  const [politicalParty, setPoliticalParty] = useState("");
+  const [otherPartyField, setOtherPartyField] = useState("");
   const [activeFields, setActiveFields] = useState({
-    party: parentRef.current.party && parentRef.current.party.length > 0,
-    otherParty: false,
-    race: parentRef.current.race && parentRef.current.race.length > 0,
-    idNumber:
-      parentRef.current.idNumber && parentRef.current.idNumber.length > 0,
+    otherParty:
+      voterRegistrationData.party.length > 0 &&
+      voterRegistrationData.party !== "democratic" &&
+      voterRegistrationData.party !== "green" &&
+      voterRegistrationData.party !== "libertarian" &&
+      voterRegistrationData.party !== "republican" &&
+      voterRegistrationData.party !== "none",
+    idNumber: voterRegistrationData.idNumber.length > 0,
   });
 
+  /*redirect the user to the form completed page if they've already register to vote
+  using the 8x8 app, or to the appropriate previous page if that information is incomplete
+  */
+  useEffect(() => {
+    if (currentUserData.isRegisteredVoter) history.push("/voterreg/completed");
+    if (
+      voterRegistrationData.zip.length === 0 ||
+      voterRegistrationData.dob.length === 0
+    ) {
+      history.push("/voterreg/eligibility");
+    } else if (
+      voterRegistrationData.name_title.length === 0 ||
+      voterRegistrationData.name_first.length === 0 ||
+      voterRegistrationData.name_last.length === 0
+    ) {
+      history.push("/voterreg/yourname");
+    } else if (
+      voterRegistrationData.street.length === 0 ||
+      voterRegistrationData.city.length === 0 ||
+      voterRegistrationData.state.length === 0
+    ) {
+      history.push("/voterreg/homeaddress");
+    }
+  }, []);
+
+  ScrollToTop();
+
   return (
-    <>
+    <form className="voterRegForm">
+      <h1 className="register-form-title">
+        <u className="underline">REGISTE</u>R TO VOTE
+      </h1>
+      <ProgressBar progressPercent={100} />
       {isLoading && <LoadingWheel overlay={true} />}
       <h2 className="register-form-title-small">OTHER DETAILS</h2>
-      <label
-        htmlFor="party"
-        className={
-          activeFields.party
-            ? "floating-label-active"
-            : "floating-label-default"
-        }
-      >
+      <label htmlFor="party" className="floating-label-active">
         Political Party*
       </label>
       <select
@@ -43,29 +78,24 @@ export const OtherInfo = ({ parentRef, setParentState }) => {
         required
         name="party"
         id="party"
-        style={{ color: activeFields.party ? "black" : "white" }}
-        onClick={() => {
-          setActiveFields({ ...activeFields, party: true });
-        }}
-        onFocus={() => {
-          setActiveFields({ ...activeFields, party: true });
-        }}
-        value={formData.party}
+        value={politicalParty}
         onChange={({ target }) => {
           const { value } = target;
+          setPoliticalParty(value);
           if (value === "other") {
             setShowOtherPartyField(true);
+            setVoterRegistrationData({ ...voterRegistrationData, party: "" });
           } else {
+            setOtherPartyField("");
             setShowOtherPartyField(false);
-            parentRef.current = {
-              ...parentRef.current,
+            setVoterRegistrationData({
+              ...voterRegistrationData,
               party: value,
-            };
-            setFormData({ ...formData, party: value });
+            });
           }
         }}
       >
-        <option value=""></option>
+        <option value="">{""}</option>
         <option value="democratic">Democratic</option>
         <option value="green">Green</option>
         <option value="libertarian">Libertarian</option>
@@ -92,16 +122,22 @@ export const OtherInfo = ({ parentRef, setParentState }) => {
             required
             className="register-input"
             type="text"
-            value={formData.party}
+            id="otherParty"
+            value={otherPartyField}
+            onClick={() => {
+              setActiveFields({ ...activeFields, otherParty: true });
+            }}
             onFocus={() => {
               setActiveFields({ ...activeFields, otherParty: true });
             }}
             onChange={({ target }) => {
-              parentRef.current = {
-                ...parentRef.current,
+              const otherPartyInput = document.getElementById("otherParty");
+              otherPartyInput.classList.remove("requiredField");
+              setOtherPartyField(target.value);
+              setVoterRegistrationData({
+                ...voterRegistrationData,
                 party: target.value,
-              };
-              setFormData({ ...formData, party: target.value });
+              });
             }}
           />
           <br />
@@ -109,32 +145,27 @@ export const OtherInfo = ({ parentRef, setParentState }) => {
       )}
       <div className="horizontalContainer">
         <div className="verticalContainer">
-          <label
-            htmlFor="race"
-            className={
-              activeFields.race
-                ? "floating-label-active"
-                : "floating-label-default"
-            }
-          >
+          <label htmlFor="race" className="floating-label-active">
             Race*
           </label>
           <select
             className="register-input"
             id="race"
-            style={{ color: activeFields.race ? "black" : "white" }}
-            onClick={() => {
-              setActiveFields({ ...activeFields, race: true });
-            }}
-            onFocus={() => {
-              setActiveFields({ ...activeFields, race: true });
-            }}
+            value={voterRegistrationData.race}
             onChange={({ target }) => {
-              parentRef.current = { ...parentRef.current, race: target.value };
-              setFormData({ ...formData, race: target.value });
+              if (target.value.length > 0) {
+                const raceInput = document.getElementById("race");
+                raceInput.classList.remove("requiredField");
+              }
+              setVoterRegistrationData({
+                ...voterRegistrationData,
+                race: target.value,
+              });
             }}
           >
-            <option value=""></option>
+            <option value="" selected>
+              {""}
+            </option>
             <option value="asian">Asian</option>
             <option value="black/african american">
               Black or African American
@@ -170,6 +201,7 @@ export const OtherInfo = ({ parentRef, setParentState }) => {
         type="text"
         name="idNumber"
         id="idNumber"
+        value={voterRegistrationData.idNumber}
         onClick={() => {
           setActiveFields({ ...activeFields, idNumber: true });
         }}
@@ -193,8 +225,12 @@ export const OtherInfo = ({ parentRef, setParentState }) => {
           }
         }}
         onChange={({ target }) => {
-          parentRef.current = { ...parentRef.current, idNumber: target.value };
-          setFormData({ ...formData, idNumber: target.value });
+          const idInput = document.getElementById("idNumber");
+          idInput.classList.remove("requiredField");
+          setVoterRegistrationData({
+            ...voterRegistrationData,
+            idNumber: target.value,
+          });
         }}
       />
       <br />
@@ -221,11 +257,28 @@ export const OtherInfo = ({ parentRef, setParentState }) => {
         onClick={async (event) => {
           event.preventDefault();
           //first make sure the required fields are completed
-          if (
-            parentRef.current.party === "" ||
-            parentRef.current.race === "" ||
-            !parentRef.current.idNumber
-          ) {
+          let checksPassed = true;
+          if (!voterRegistrationData.party.length > 0) {
+            if (!showOtherPartyField) {
+              const partyInput = document.getElementById("party");
+              partyInput.classList.add("requiredField");
+            } else {
+              const otherPartyInput = document.getElementById("otherParty");
+              otherPartyInput.classList.add("requiredField");
+            }
+            checksPassed = false;
+          }
+          if (!voterRegistrationData.race.length > 0) {
+            const raceInput = document.getElementById("race");
+            raceInput.classList.add("requiredField");
+            checksPassed = false;
+          }
+          if (!voterRegistrationData.idNumber.length > 0) {
+            const idInput = document.getElementById("idNumber");
+            idInput.classList.add("requiredField");
+            checksPassed = false;
+          }
+          if (!checksPassed) {
             setError("Please complete all of the required fields");
             return;
           }
@@ -234,6 +287,8 @@ export const OtherInfo = ({ parentRef, setParentState }) => {
             state,
             city,
             street,
+            streetLine2,
+            unit,
             name_first,
             name_last,
             dob,
@@ -243,7 +298,14 @@ export const OtherInfo = ({ parentRef, setParentState }) => {
             eighteenPlus,
             party,
             idNumber,
-          } = parentRef.current;
+          } = voterRegistrationData;
+          let formattedAddress = street;
+          if (streetLine2) {
+            formattedAddress += ` ${streetLine2}`;
+          }
+          if (unit) {
+            formattedAddress += ` ${unit}`;
+          }
           const ymd = dob.split("-");
           const year = ymd[0];
           const month = ymd[1];
@@ -252,7 +314,7 @@ export const OtherInfo = ({ parentRef, setParentState }) => {
           const postBody = {
             state,
             city,
-            street,
+            street: formattedAddress,
             name_first,
             name_last,
             dob: formattedDob,
@@ -268,7 +330,7 @@ export const OtherInfo = ({ parentRef, setParentState }) => {
             .then((res) => {
               setIsLoading(false);
               completedAction("register to vote");
-              setParentState("formCompleted");
+              history.push("/voterreg/completed");
             })
             .catch((e) => {
               setIsLoading(false);
@@ -280,6 +342,6 @@ export const OtherInfo = ({ parentRef, setParentState }) => {
       >
         SUBMIT
       </button>
-    </>
+    </form>
   );
 };
