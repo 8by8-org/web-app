@@ -116,7 +116,7 @@ function Sidebar({ sidebar, showSidebar }) {
       </div>
 
       <div className="bottom-links">
-        <a href="/">Privacy Policy</a>
+        <a href="/privacypolicy">Privacy Policy</a>
         {currentUser ? (
           <a onClick={() => setSignoutModal(true)}>Sign Out</a>
         ) : (
