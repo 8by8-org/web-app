@@ -31,15 +31,15 @@ export default function Actions() {
       setChallengerInfo(JSON.parse(localStorage.getItem("challengerInfo")));
       if (currentUser) {
         fetchUserData();
+      } else {
+        setLoading(true);
       }
-      setLoading(true);
     } else {
       history.push(`/signin`);
     }
-  }, [loading]);
+  }, []);
 
   function fetchUserData() {
-    setLoading(false);
     getUserDatabase()
       .then((data) => {
         setRegisteredVoter(data.isRegisteredVoter);

@@ -1,10 +1,17 @@
 import React from "react";
 import { useHistory } from "react-router";
+import { useAuth } from "../../../../contexts/AuthContext";
+
 import "../../VoterRegistration.scss";
 import ScrollToTop from "../../../../functions/ScrollToTop";
 
 export const FormCompleted = () => {
   const history = useHistory();
+  const { currentUserData } = useAuth();
+  let redirect = "/progress";
+  if (currentUserData && currentUserData.invitedBy.length > 0) {
+    redirect = "/actions";
+  }
 
   ScrollToTop();
 
@@ -22,7 +29,7 @@ export const FormCompleted = () => {
         className="next-btn"
         onClick={(e) => {
           e.preventDefault();
-          history.push("/challengerwelcome");
+          history.push(redirect);
         }}
       >
         GO BACK TO THE CHALLENGE
