@@ -2,14 +2,16 @@
 @import "./../../styles/Fonts.scss";
 @import "./../../styles/Variables.scss";
 
-.container {
-  width: 375px;
-  min-height: 100%;
-  margin-left: 60px;
-  padding-bottom: 20px;
+.voterRegForm {
+  width: 100%;
+  max-width: 500px;
   display: flex;
   flex-direction: column;
   position: relative;
+  padding-left: 30px;
+  padding-right: 30px;
+  padding-top: 40px;
+  box-sizing: border-box;
 }
 
 .verticalContainer {
@@ -27,8 +29,6 @@
   @include heading-text;
   text-align: left !important;
   float: left !important;
-  margin-bottom: 40px;
-  margin-top: 40px;
 }
 
 .register-form-title-small {
@@ -78,6 +78,10 @@
   outline: none;
 }
 
+.requiredField {
+  animation: required 250ms linear 1 forwards;
+}
+
 .register-checkbox {
   border-radius: 0;
   border: 2px solid black;
@@ -118,13 +122,21 @@
   margin-left: 10px;
 }
 
-.voter-reg-modal-container {
-  background-color: rgba(111, 111, 111, 0.5);
-  position: absolute;
+.voter-reg-modal-outer-container {
+  position: fixed;
   top: 0;
   left: 0;
   width: 100%;
-  height: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.voter-reg-modal-container {
+  background-color: rgba(111, 111, 111, 0.5);
+  width: 100%;
+  max-width: 500px;
+  min-width: 375px;
+  height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -139,9 +151,7 @@
   align-items: center;
   font-family: $lato;
   box-sizing: border-box;
-  width: 100%;
-  margin-left: 80px;
-  margin-right: 80px;
+  width: 315px;
 }
 
 .voter-reg-toggle-container {
@@ -183,6 +193,10 @@
   margin-bottom: 20px;
 }
 
+.voterRegForm input[type="checkbox"] {
+  margin-right: 12px;
+}
+
 .error-message {
   color: red;
   font-style: italic;
@@ -198,5 +212,14 @@
   }
   to {
     opacity: 1;
+  }
+}
+
+@keyframes required {
+  from {
+    border-color: black;
+  }
+  to {
+    border-color: red;
   }
 }

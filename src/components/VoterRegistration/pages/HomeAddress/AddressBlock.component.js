@@ -1,40 +1,23 @@
 import React, { useState } from "react";
 import "../../VoterRegistration.scss";
 import { Tooltip } from "../Tooltip/Tooltip.component";
+import { useAuth } from "../../../../contexts/AuthContext";
 
-export const AddressBlock = ({
-  addressType,
-  parentRef,
-  title,
-  tooltipText,
-}) => {
-  const [formData, setFormData] = useState({
-    street: "",
-    streetLine2: "",
-    unit: "",
-    city: "",
-    state:
-      addressType === "home" && parentRef.current.state
-        ? parentRef.current.state
-        : "",
-    zip:
-      addressType === "home" && parentRef.current.zip
-        ? parentRef.current.zip
-        : "",
-  });
-
-  const [activeFields, setActiveFields] = useState({
-    street: formData.street.length > 0,
-    streetLine2: formData.streetLine2.length > 0,
-    unit: formData.unit.length > 0,
-    city: formData.city.length > 0,
-    state: formData.state.length > 0,
-    zip: formData.zip.length > 0,
-  });
-
+export const AddressBlock = ({ addressType, title, tooltipText }) => {
   let prefix = "";
   if (addressType === "previous") prefix = "prev_";
   else if (addressType === "mailing") prefix = "mailing_";
+
+  const { voterRegistrationData, setVoterRegistrationData } = useAuth();
+
+  const [activeFields, setActiveFields] = useState({
+    street: voterRegistrationData[`${prefix}street`].length > 0,
+    streetLine2: voterRegistrationData[`${prefix}streetLine2`].length > 0,
+    unit: voterRegistrationData[`${prefix}unit`].length > 0,
+    city: voterRegistrationData[`${prefix}city`].length > 0,
+    state: voterRegistrationData[`${prefix}state`].length > 0,
+    zip: voterRegistrationData[`${prefix}zip`].length > 0,
+  });
 
   return (
     <>
@@ -45,7 +28,7 @@ export const AddressBlock = ({
       <label
         htmlFor={`${prefix}street`}
         className={
-          activeFields.street || formData.street.length > 0
+          activeFields.street
             ? "floating-label-active"
             : "floating-label-default"
         }
@@ -57,29 +40,33 @@ export const AddressBlock = ({
         type="text"
         id={`${prefix}street`}
         name={`${prefix}street`}
-        value={formData.street}
+        value={voterRegistrationData[`${prefix}street`]}
+        //when the user clicks on the field, the label should float
         onClick={() => {
           setActiveFields({ ...activeFields, street: true });
         }}
+        //when the user tabs to the field the label should float
         onFocus={() => {
           setActiveFields({ ...activeFields, street: true });
         }}
         onChange={(event) => {
-          parentRef.current = {
-            ...parentRef.current,
+          const streetInput = document.getElementById(`${prefix}street`);
+          streetInput.classList.remove("requiredField");
+          setVoterRegistrationData({
+            ...voterRegistrationData,
             [`${prefix}street`]: event.target.value,
-          };
-          setFormData({
-            ...formData,
-            street: event.target.value,
           });
+          /*when the user selects a suggested address, and fields are autocompleted, 
+          the label should float
+          */
+          setActiveFields({ ...activeFields, street: true });
         }}
       />
       <br />
       <label
         htmlFor={`${prefix}street_line_2`}
         className={
-          activeFields.streetLine2 || formData.streetLine2.length > 0
+          activeFields.streetLine2
             ? "floating-label-active"
             : "floating-label-default"
         }
@@ -91,7 +78,7 @@ export const AddressBlock = ({
         type="text"
         id={`${prefix}street_line_2`}
         name={`${prefix}street_line_2`}
-        value={formData.streetLine2}
+        value={voterRegistrationData[`${prefix}streetLine2`]}
         onClick={() => {
           setActiveFields({ ...activeFields, streetLine2: true });
         }}
@@ -99,28 +86,18 @@ export const AddressBlock = ({
           setActiveFields({ ...activeFields, streetLine2: true });
         }}
         onChange={(event) => {
-          const fullAddress =
-            formData.street + ", " + event.target.value + formData.unit.length >
-            0
-              ? `, ${formData.unit}`
-              : "";
-          parentRef.current = {
-            ...parentRef.current,
-            [`${prefix}street`]: fullAddress,
-          };
-          setFormData({
-            ...formData,
-            streetLine2: event.target.value,
+          setVoterRegistrationData({
+            ...voterRegistrationData,
+            [`${prefix}streetLine2`]: event.target.value,
           });
+          setActiveFields({ ...activeFields, streetLine2: true });
         }}
       />
       <br />
       <label
         htmlFor={`${prefix}home_unit`}
         className={
-          activeFields.unit || formData.unit.length > 0
-            ? "floating-label-active"
-            : "floating-label-default"
+          activeFields.unit ? "floating-label-active" : "floating-label-default"
         }
       >
         Unit #
@@ -130,7 +107,7 @@ export const AddressBlock = ({
         type="text"
         id={`${prefix}home_unit`}
         name={`${prefix}home_unit`}
-        value={formData.unit}
+        value={voterRegistrationData[`${prefix}unit`]}
         onClick={() => {
           setActiveFields({ ...activeFields, unit: true });
         }}
@@ -138,30 +115,18 @@ export const AddressBlock = ({
           setActiveFields({ ...activeFields, unit: true });
         }}
         onChange={(event) => {
-          const fullAddress =
-            formData.street +
-            ", " +
-            (formData.streetLine2.length > 0
-              ? `${formData.streetLine2}, `
-              : "") +
-            formData.unit;
-          parentRef.current = {
-            ...parentRef.current,
-            [`${prefix}street`]: fullAddress,
-          };
-          setFormData({
-            ...formData,
-            unit: event.target.value,
+          setVoterRegistrationData({
+            ...voterRegistrationData,
+            [`${prefix}unit`]: event.target.value,
           });
+          setActiveFields({ ...activeFields, unit: true });
         }}
       />
       <br />
       <label
         htmlFor={`${prefix}city`}
         className={
-          activeFields.city || formData.city.length > 0
-            ? "floating-label-active"
-            : "floating-label-default"
+          activeFields.city ? "floating-label-active" : "floating-label-default"
         }
       >
         City*
@@ -171,7 +136,7 @@ export const AddressBlock = ({
         type="text"
         id={`${prefix}city`}
         name={`${prefix}city`}
-        value={formData.city}
+        value={voterRegistrationData[`${prefix}city`]}
         onClick={() => {
           setActiveFields({ ...activeFields, city: true });
         }}
@@ -179,14 +144,13 @@ export const AddressBlock = ({
           setActiveFields({ ...activeFields, city: true });
         }}
         onChange={(event) => {
-          parentRef.current = {
-            ...parentRef.current,
+          const cityInput = document.getElementById(`${prefix}city`);
+          cityInput.classList.remove("requiredField");
+          setVoterRegistrationData({
+            ...voterRegistrationData,
             [`${prefix}city`]: event.target.value,
-          };
-          setFormData({
-            ...formData,
-            city: event.target.value,
           });
+          setActiveFields({ ...activeFields, city: true });
         }}
       />
       <br />
@@ -195,7 +159,7 @@ export const AddressBlock = ({
         className={
           addressType === "home"
             ? "register-label"
-            : activeFields.state || formData.state.length > 0
+            : activeFields.state
             ? "floating-label-active"
             : "floating-label-default"
         }
@@ -204,17 +168,12 @@ export const AddressBlock = ({
       </label>
       <select
         className="register-input"
-        disabled={addressType === "home"}
         id={`${prefix}state`}
         name={`${prefix}state`}
-        value={formData.state}
+        value={voterRegistrationData[`${prefix}state`]}
         style={{
           color:
-            addressType === "home" ||
-            activeFields.state ||
-            formData.state.length > 0
-              ? "black"
-              : "white",
+            addressType === "home" || activeFields.state ? "black" : "white",
         }}
         onClick={() => {
           setActiveFields({ ...activeFields, state: true });
@@ -223,14 +182,13 @@ export const AddressBlock = ({
           setActiveFields({ ...activeFields, state: true });
         }}
         onChange={(event) => {
-          parentRef.current = {
-            ...parentRef.current,
+          const stateInput = document.getElementById(`${prefix}state`);
+          stateInput.classList.remove("requiredField");
+          setVoterRegistrationData({
+            ...voterRegistrationData,
             [`${prefix}state`]: event.target.value,
-          };
-          setFormData({
-            ...formData,
-            state: event.target.value,
           });
+          setActiveFields({ ...activeFields, state: true });
         }}
       >
         <option value="AL">Alabama</option>
@@ -289,35 +247,47 @@ export const AddressBlock = ({
       <label
         htmlFor={`${prefix}zip`}
         className={
-          activeFields.zip || formData.zip.length > 0
-            ? "floating-label-active"
-            : "floating-label-default"
+          activeFields.zip ? "floating-label-active" : "floating-label-default"
         }
       >
         Zip Code*
       </label>
       <input
         className="register-input"
-        readOnly={addressType === "home"}
         type="text"
         id={`${prefix}zip`}
         name={`${prefix}zip`}
-        value={formData.zip}
+        value={voterRegistrationData[`${prefix}zip`]}
         onClick={() => {
           setActiveFields({ ...activeFields, zip: true });
         }}
         onFocus={() => {
           setActiveFields({ ...activeFields, zip: true });
         }}
+        onKeyDown={(e) => {
+          //prevent user from entering a non-digit
+          if (
+            e.key !== "Backspace" &&
+            e.key !== "Delete" &&
+            e.key !== "Tab" &&
+            e.key !== "." &&
+            e.key !== "ArrowLeft" &&
+            e.key !== "ArrowRight" &&
+            e.key !== "ArrowUp" &&
+            e.key !== "ArrowDown" &&
+            !e.key.match(/\d/)
+          ) {
+            e.preventDefault();
+          }
+        }}
         onChange={(event) => {
-          parentRef.current = {
-            ...parentRef.current,
+          const zipInput = document.getElementById(`${prefix}zip`);
+          zipInput.classList.remove("requiredField");
+          setVoterRegistrationData({
+            ...voterRegistrationData,
             [`${prefix}zip`]: event.target.value,
-          };
-          setFormData({
-            ...formData,
-            zip: event.target.value,
           });
+          setActiveFields({ ...activeFields, zip: true });
         }}
       />
       <br />

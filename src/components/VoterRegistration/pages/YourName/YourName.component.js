@@ -1,83 +1,83 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { useHistory } from "react-router-dom";
+import { useAuth } from "../../../../contexts/AuthContext";
 import { Tooltip } from "../Tooltip/Tooltip.component";
+import { ProgressBar } from "../ProgressBar/ProgressBar.component";
+import ScrollToTop from "../../../../functions/ScrollToTop";
 import "../../VoterRegistration.scss";
 
-export const YourName = ({ parentRef, setParentState }) => {
+export const YourName = () => {
+  const history = useHistory();
+  const { currentUserData, voterRegistrationData, setVoterRegistrationData } =
+    useAuth();
   const [error, setError] = useState("");
-  const [formData, setFormData] = useState({
-    name_title: parentRef.current.name_title,
-    name_first: parentRef.current.name_first,
-    name_middle: parentRef.current.name_middle,
-    name_last: parentRef.current.name_last,
-    suffix: parentRef.current.suffix,
-    change_of_name: parentRef.current.change_of_name,
-    prev_name_title: parentRef.current.prev_name_title,
-    prev_name_first: parentRef.current.prev_name_first,
-    prev_name_middle: parentRef.current.prev_name_middle,
-    prev_name_last: parentRef.current.prev_name_last,
-    prev_name_suffix: parentRef.current.prev_name_suffix,
-  });
 
+  /*redirect user to form completed page if they have already completed the flow, 
+  and to eligibility page if that information isn't complete
+  */
+  useEffect(() => {
+    if (currentUserData.isRegisteredVoter) history.push("/voterreg/completed");
+    if (
+      voterRegistrationData.zip.length === 0 ||
+      voterRegistrationData.dob.length === 0
+    )
+      history.push("/voterreg/eligibility");
+  }, []);
+
+  ScrollToTop();
+
+  //determines whether floating label should float up
   const [activeFields, setActiveFields] = useState({
-    name_title:
-      parentRef.current.name_title && parentRef.current.name_title.length > 0,
     name_first:
-      parentRef.current.name_first && parentRef.current.name_first.length > 0,
+      voterRegistrationData.name_first &&
+      voterRegistrationData.name_first.length > 0,
     name_middle:
-      parentRef.current.name_middle && parentRef.current.name_middle.length > 0,
+      voterRegistrationData.name_middle &&
+      voterRegistrationData.name_middle.length > 0,
     name_last:
-      parentRef.current.name_last && parentRef.current.name_last.length > 0,
-    suffix: parentRef.current.suffix && parentRef.current.suffix.length > 0,
-    prev_name_title:
-      parentRef.current.prev_name_title &&
-      parentRef.current.prev_name_title.length > 0,
+      voterRegistrationData.name_last &&
+      voterRegistrationData.name_last.length > 0,
+    suffix:
+      voterRegistrationData.suffix && voterRegistrationData.suffix.length > 0,
     prev_name_first:
-      parentRef.current.prev_name_first &&
-      parentRef.current.prev_name_first.length > 0,
+      voterRegistrationData.prev_name_first &&
+      voterRegistrationData.prev_name_first.length > 0,
     prev_name_middle:
-      parentRef.current.prev_name_middle &&
-      parentRef.current.prev_name_middle.length > 0,
+      voterRegistrationData.prev_name_middle &&
+      voterRegistrationData.prev_name_middle.length > 0,
     prev_name_last:
-      parentRef.current.prev_name_last &&
-      parentRef.current.prev_name_last.length > 0,
+      voterRegistrationData.prev_name_last &&
+      voterRegistrationData.prev_name_last.length > 0,
     prev_name_suffix:
-      parentRef.current.prev_name_suffix &&
-      parentRef.current.prev_name_suffix.length > 0,
+      voterRegistrationData.prev_name_suffix &&
+      voterRegistrationData.prev_name_suffix.length > 0,
   });
 
   return (
-    <>
+    <form className="voterRegForm">
+      <h1 className="register-form-title">
+        <u className="underline">REGISTE</u>R TO VOTE
+      </h1>
+      <ProgressBar progressPercent={50} />
       <div className="horizontalContainer">
         <h2 className="register-form-title-small">YOUR NAME </h2>
         <Tooltip text="Put your full name in these boxes. Please do not use nicknames or initials. If this application is for a change of name, you will be asked for your previous name in a later section. Don't forget to include your title (Mr., Mrs., Miss, Ms.)." />
       </div>
-      <label
-        htmlFor="title"
-        className={
-          activeFields.name_title
-            ? "floating-label-active"
-            : "floating-label-default"
-        }
-        onClick={() => {
-          setActiveFields({ ...activeFields, name_title: true });
-        }}
-      >
+      <label htmlFor="title" className="floating-label-active">
         Title*
       </label>
       <select
         name="name_title"
         id="name_title"
-        value={formData.name_title}
+        value={voterRegistrationData.name_title}
         className="register-input"
-        onFocus={() => {
-          setActiveFields({ ...activeFields, name_title: true });
-        }}
         onChange={(event) => {
-          parentRef.current = {
-            ...parentRef.current,
+          const titleInput = document.getElementById("name_title");
+          titleInput.classList.remove("requiredField");
+          setVoterRegistrationData({
+            ...voterRegistrationData,
             name_title: event.target.value,
-          };
-          setFormData({ ...formData, name_title: event.target.value });
+          });
         }}
         required
       >
@@ -106,19 +106,24 @@ export const YourName = ({ parentRef, setParentState }) => {
         id="name_first"
         name="name_first"
         className="register-input"
-        value={formData.name_first}
+        value={voterRegistrationData.name_first}
+        //label should float up when the field is clicked on
         onClick={() => {
           setActiveFields({ ...activeFields, name_first: true });
         }}
+        //label should float up when the field is tabbed to
         onFocus={() => {
           setActiveFields({ ...activeFields, name_first: true });
         }}
         onChange={(event) => {
-          parentRef.current = {
-            ...parentRef.current,
+          //label should float up in the event it is autocompleted
+          setActiveFields({ ...activeFields, name_first: true });
+          const fnameInput = document.getElementById("name_first");
+          fnameInput.classList.remove("requiredField");
+          setVoterRegistrationData({
+            ...voterRegistrationData,
             name_first: event.target.value,
-          };
-          setFormData({ ...formData, name_first: event.target.value });
+          });
         }}
       />
       <br />
@@ -137,7 +142,7 @@ export const YourName = ({ parentRef, setParentState }) => {
         id="name_middle"
         name="name_middle"
         className="register-input"
-        value={formData.name_middle}
+        value={voterRegistrationData.name_middle}
         onClick={() => {
           setActiveFields({ ...activeFields, name_middle: true });
         }}
@@ -145,11 +150,11 @@ export const YourName = ({ parentRef, setParentState }) => {
           setActiveFields({ ...activeFields, name_middle: true });
         }}
         onChange={(event) => {
-          parentRef.current = {
-            ...parentRef.current,
-            name_middle: event.target.value,
-          };
-          setFormData({ ...formData, name_middle: event.target.value });
+          setActiveFields({ ...activeFields, name_middle: true });
+          setVoterRegistrationData({
+            ...voterRegistrationData,
+            name_middle: event.target.name_middle,
+          });
         }}
       />
       <br />
@@ -168,7 +173,7 @@ export const YourName = ({ parentRef, setParentState }) => {
         id="name_last"
         name="name_last"
         className="register-input"
-        value={formData.name_last}
+        value={voterRegistrationData.name_last}
         onClick={() => {
           setActiveFields({ ...activeFields, name_last: true });
         }}
@@ -176,11 +181,13 @@ export const YourName = ({ parentRef, setParentState }) => {
           setActiveFields({ ...activeFields, name_last: true });
         }}
         onChange={(event) => {
-          parentRef.current = {
-            ...parentRef.current,
+          setActiveFields({ ...activeFields, name_last: true });
+          const lnameInput = document.getElementById("name_last");
+          lnameInput.classList.remove("requiredField");
+          setVoterRegistrationData({
+            ...voterRegistrationData,
             name_last: event.target.value,
-          };
-          setFormData({ ...formData, name_last: event.target.value });
+          });
         }}
         required
       />
@@ -206,13 +213,13 @@ export const YourName = ({ parentRef, setParentState }) => {
         onFocus={() => {
           setActiveFields({ ...activeFields, suffix: true });
         }}
-        value={formData.suffix}
+        value={voterRegistrationData.suffix}
         onChange={(event) => {
-          parentRef.current = {
-            ...parentRef.current,
+          setActiveFields({ ...activeFields, suffix: true });
+          setVoterRegistrationData({
+            ...voterRegistrationData,
             suffix: event.target.value,
-          };
-          setFormData({ ...formData, suffix: event.target.value });
+          });
         }}
       />
       <br />
@@ -223,11 +230,10 @@ export const YourName = ({ parentRef, setParentState }) => {
           name="change_of_name"
           className="register-checkbox"
           onChange={(event) => {
-            parentRef.current = {
-              ...parentRef.current,
+            setVoterRegistrationData({
+              ...voterRegistrationData,
               change_of_name: event.target.checked,
-            };
-            setFormData({ ...formData, change_of_name: event.target.checked });
+            });
           }}
         />
         <label htmlFor="change_of_name" className="register-label">
@@ -236,36 +242,24 @@ export const YourName = ({ parentRef, setParentState }) => {
         <Tooltip text="If you have changed your name since your last registration, check this box and enter your previous name below." />
       </div>
       <br />
-      {formData.change_of_name && (
+      {voterRegistrationData.change_of_name && (
         <>
           <h2 className="register-form-title-small">PREVIOUS NAME</h2>
-          <label
-            htmlFor="prev_name_title"
-            className={
-              activeFields.prev_name_title
-                ? "floating-label-active"
-                : "floating-label-default"
-            }
-          >
+          <label htmlFor="prev_name_title" className="floating-label-active">
             Title*
           </label>
           <select
             name="prev_name_title"
             id="prev_name_title"
             className="register-input"
-            value={formData.prev_name_title}
-            onClick={() => {
-              setActiveFields({ ...activeFields, prev_name_title: true });
-            }}
-            onFocus={() => {
-              setActiveFields({ ...activeFields, prev_name_title: true });
-            }}
+            value={voterRegistrationData.prev_name_title}
             onChange={(event) => {
-              parentRef.current = {
-                ...parentRef.current,
+              const prevTitleInput = document.getElementById("prev_name_title");
+              prevTitleInput.classList.remove("requiredField");
+              setVoterRegistrationData({
+                ...voterRegistrationData,
                 prev_name_title: event.target.value,
-              };
-              setFormData({ ...formData, prev_name_title: event.target.value });
+              });
             }}
             required
           >
@@ -300,13 +294,15 @@ export const YourName = ({ parentRef, setParentState }) => {
             onFocus={() => {
               setActiveFields({ ...activeFields, prev_name_first: true });
             }}
-            value={formData.prev_name_first}
+            value={voterRegistrationData.prev_name_first}
             onChange={(event) => {
-              parentRef.current = {
-                ...parentRef.current,
+              setActiveFields({ ...activeFields, prev_name_first: true });
+              const prevFNameInput = document.getElementById("prev_name_first");
+              prevFNameInput.classList.remove("requiredField");
+              setVoterRegistrationData({
+                ...voterRegistrationData,
                 prev_name_first: event.target.value,
-              };
-              setFormData({ ...formData, prev_name_first: event.target.value });
+              });
             }}
           />
           <br />
@@ -325,7 +321,7 @@ export const YourName = ({ parentRef, setParentState }) => {
             id="prev_name_middle"
             name="prev_name_middle"
             className="register-input"
-            value={formData.prev_name_middle}
+            value={voterRegistrationData.prev_name_middle}
             onClick={() => {
               setActiveFields({ ...activeFields, prev_name_middle: true });
             }}
@@ -333,12 +329,9 @@ export const YourName = ({ parentRef, setParentState }) => {
               setActiveFields({ ...activeFields, prev_name_middle: true });
             }}
             onChange={(event) => {
-              parentRef.current = {
-                ...parentRef.current,
-                prev_name_middle: event.target.value,
-              };
-              setFormData({
-                ...formData,
+              setActiveFields({ ...activeFields, prev_name_middle: true });
+              setVoterRegistrationData({
+                ...voterRegistrationData,
                 prev_name_middle: event.target.value,
               });
             }}
@@ -359,7 +352,7 @@ export const YourName = ({ parentRef, setParentState }) => {
             id="prev_name_last"
             name="prev_name_last"
             className="register-input"
-            value={formData.prev_name_last}
+            value={voterRegistrationData.prev_name_last}
             onClick={() => {
               setActiveFields({ ...activeFields, prev_name_last: true });
             }}
@@ -367,11 +360,13 @@ export const YourName = ({ parentRef, setParentState }) => {
               setActiveFields({ ...activeFields, prev_name_last: true });
             }}
             onChange={(event) => {
-              parentRef.current = {
-                ...parentRef.current,
+              setActiveFields({ ...activeFields, prev_name_last: true });
+              const prevLNameInput = document.getElementById("prev_name_last");
+              prevLNameInput.classList.remove("requiredField");
+              setVoterRegistrationData({
+                ...voterRegistrationData,
                 prev_name_last: event.target.value,
-              };
-              setFormData({ ...formData, prev_name_last: event.target.value });
+              });
             }}
             required
           />
@@ -390,7 +385,7 @@ export const YourName = ({ parentRef, setParentState }) => {
             type="text"
             id="prev_name_suffix"
             name="prev_name_suffix"
-            value={formData.prev_name_suffix}
+            value={voterRegistrationData.prev_name_suffix}
             className="register-input"
             onClick={() => {
               setActiveFields({ ...activeFields, prev_name_suffix: true });
@@ -399,12 +394,9 @@ export const YourName = ({ parentRef, setParentState }) => {
               setActiveFields({ ...activeFields, prev_name_suffix: true });
             }}
             onChange={(event) => {
-              parentRef.current = {
-                ...parentRef.current,
-                prev_name_suffix: event.target.value,
-              };
-              setFormData({
-                ...formData,
+              setActiveFields({ ...activeFields, prev_name_suffix: true });
+              setVoterRegistrationData({
+                ...voterRegistrationData,
                 prev_name_suffix: event.target.value,
               });
             }}
@@ -419,23 +411,48 @@ export const YourName = ({ parentRef, setParentState }) => {
         className="next-btn"
         onClick={(event) => {
           event.preventDefault();
-          if (
-            formData.name_title.length === 0 ||
-            formData.name_first.length === 0 ||
-            formData.name_last.length === 0 ||
-            (formData.change_of_name &&
-              (formData.prev_name_title.length === 0 ||
-                formData.prev_name_first.length === 0 ||
-                formData.prev_name_last.length === 0))
-          ) {
+          let checksPassed = true;
+          if (voterRegistrationData.name_title.length === 0) {
+            const titleInput = document.getElementById("name_title");
+            titleInput.classList.add("requiredField");
+            checksPassed = false;
+          }
+          if (voterRegistrationData.name_first.length === 0) {
+            const fnameInput = document.getElementById("name_first");
+            fnameInput.classList.add("requiredField");
+            checksPassed = false;
+          }
+          if (voterRegistrationData.name_last.length === 0) {
+            const lnameInput = document.getElementById("name_last");
+            lnameInput.classList.add("requiredField");
+            checksPassed = false;
+          }
+          if (voterRegistrationData.change_of_name) {
+            if (voterRegistrationData.prev_name_title.length === 0) {
+              const prevTitleInput = document.getElementById("prev_name_title");
+              prevTitleInput.classList.add("requiredField");
+              checksPassed = false;
+            }
+            if (voterRegistrationData.prev_name_first.length === 0) {
+              const prevFNameInput = document.getElementById("prev_name_first");
+              prevFNameInput.classList.add("requiredField");
+              checksPassed = false;
+            }
+            if (voterRegistrationData.prev_name_last.length === 0) {
+              const prevLNameInput = document.getElementById("prev_name_last");
+              prevLNameInput.classList.add("requiredField");
+              checksPassed = false;
+            }
+          }
+          if (!checksPassed) {
             setError("Please complete all of the required fields");
             return;
           }
-          setParentState("homeAddress");
+          history.push("/voterreg/homeaddress");
         }}
       >
         Next
       </button>
-    </>
+    </form>
   );
 };

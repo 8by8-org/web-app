@@ -20,9 +20,14 @@ import ElectionReminder from "./ElectionReminders/ElectionReminder";
 import Footer from "./Footer";
 import PlayerWelcome from "./PlayerWelcome/PlayerWelcome";
 import Actions from "./Actions/Actions";
-import VoterRegistrationForm from "./VoterRegistration/VoterRegistrationForm";
 import TOS from "./Legal/TOS";
 import PrivacyPolicy from "./Legal/PrivacyPolicy";
+//Voter Registration Pages
+import { Eligibility } from "./VoterRegistration/pages/Eligibility/Eligibility.component";
+import { YourName } from "./VoterRegistration/pages/YourName/YourName.component";
+import { HomeAddress } from "./VoterRegistration/pages/HomeAddress/HomeAddress.component";
+import { OtherInfo } from "./VoterRegistration/pages/OtherInfo/OtherInfo.component";
+import { FormCompleted } from "./VoterRegistration/pages/FormCompleted/FormCompleted.component";
 
 export default function App() {
   return (
@@ -56,9 +61,23 @@ export default function App() {
                 <Route path="/share" component={PlayerWelcome} />
                 <Route path="/actions" component={Actions} />
                 <PrivateRoute
-                  path="/voterreg"
-                  component={VoterRegistrationForm}
+                  path="/voterreg/eligibility"
+                  component={Eligibility}
                 />
+                <PrivateRoute path="/voterreg/yourname" component={YourName} />
+                <PrivateRoute
+                  path="/voterreg/homeaddress"
+                  component={HomeAddress}
+                />
+                <PrivateRoute
+                  path="/voterreg/otherinfo"
+                  component={OtherInfo}
+                />
+                <PrivateRoute
+                  path="/voterreg/completed"
+                  component={FormCompleted}
+                />
+                <PrivateRoute path="/voterreg" component={Eligibility} />
                 <Route path="/termsofservice" component={TOS} />
                 <Route path="/privacypolicy" component={PrivacyPolicy} />
               </Switch>
