@@ -34,7 +34,7 @@ export default function PlayerWelcome({ isShare }) {
             if (query.data()) {
               const info = (({name, avatar}) => ({name, avatar}))(query.data())
               info.challengerID = code;
-              localStorage.setItem('challengerInfo', JSON.stringify(info))
+              isShare === undefined && localStorage.setItem('challengerInfo', JSON.stringify(info))
             } else {
               history.push(`/signin`)
             }
@@ -74,13 +74,13 @@ export default function PlayerWelcome({ isShare }) {
             <h1 className="top-heading">
               <u className="underline">Support</u> {challengerInfo && challengerInfo.name!==null ? `${challengerInfo.name}'s`: 'the'} 8by8 Challenge!
             </h1>
-            <div className="text">
-              <p>
+
+              <p className="text">
                 <b>
                   Help {challengerInfo && challengerInfo.name!==null ? challengerInfo.name: 'your friend'} win their <u>8BY8 Challenge</u> by registering to vote or taking other actions to #stopasianhate!
                 </b>
               </p>
-            </div>
+            
             <Button className="getStarted-button" onClick={() => {isShare === undefined && history.push(`/actions`)}}>Get Started</Button>
             <div align="center">
               <p className="small-text">

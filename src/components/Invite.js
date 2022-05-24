@@ -161,7 +161,7 @@ function Invite({ toggleInvite , isShare}) {
         </div>
 
         <div className="section copy-link">
-          <p className="sub-heading">Copy your unique link</p>
+          <p className="sub-heading">{isShare ? `Copy ${challengerInfo && challengerInfo.name}’s Unique Link` : "Copy your unique link"}</p>
           <div className="link-container">
 
             <div className="unique-link">
