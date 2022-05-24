@@ -18,15 +18,16 @@ import Progress from "./Progress/Progress";
 import ChallengerWelcome from "./ChallengerWelcome/ChallengerWelcome";
 import ElectionReminder from "./ElectionReminders/ElectionReminder";
 import Footer from "./Footer";
-import PlayerWelcome from "./PlayerWelcome";
+import PlayerWelcome from "./PlayerWelcome/PlayerWelcome";
 import Actions from "./Actions/Actions";
+import TOS from "./Legal/TOS";
+import PrivacyPolicy from "./Legal/PrivacyPolicy";
 //Voter Registration Pages
 import { Eligibility } from "./VoterRegistration/pages/Eligibility/Eligibility.component";
 import { YourName } from "./VoterRegistration/pages/YourName/YourName.component";
 import { HomeAddress } from "./VoterRegistration/pages/HomeAddress/HomeAddress.component";
 import { OtherInfo } from "./VoterRegistration/pages/OtherInfo/OtherInfo.component";
 import { FormCompleted } from "./VoterRegistration/pages/FormCompleted/FormCompleted.component";
-import TOS from "./TOS/TOS";
 
 export default function App() {
   return (
@@ -78,6 +79,7 @@ export default function App() {
                 />
                 <PrivateRoute path="/voterreg" component={Eligibility} />
                 <Route path="/termsofservice" component={TOS} />
+                <Route path="/privacypolicy" component={PrivacyPolicy} />
               </Switch>
             </Router>
             <Footer />

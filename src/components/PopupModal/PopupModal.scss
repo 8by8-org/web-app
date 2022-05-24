@@ -14,17 +14,18 @@
   .modalContainer {
     width: 80%;
     max-width: 375px;
-    height: 300px;
+    min-width: 310px;
     background-color: black;
     color: white;
     box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
     display: flex;
     flex-direction: column;
-    padding: 5px 10px;
 
     .titleCloseBtn {
       display: flex;
       justify-content: flex-end;
+      margin-top: 5px;
+      margin-right: 8px;
     }
 
     .titleCloseBtn button {
@@ -36,12 +37,14 @@
     }
 
     .content {
-      padding: 20px 30px;
+      padding: 20px 35px;
       height: 100%;
       text-align: center;
 
       button {
-        margin-top: 55px;
+        margin: auto;
+        margin-top: 35px;
+        margin-bottom: 35px;
         font-size: 25px;
         height: 50px;
       }

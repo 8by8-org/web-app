@@ -27,7 +27,8 @@ export const Eligibility = () => {
   } = useAuth();
   //redirect user to form completed page if they have already completed the flow
   useEffect(() => {
-    if (currentUserData.isRegisteredVoter) history.push("/voterreg/completed");
+    if (currentUserData && currentUserData.isRegisteredVoter)
+      history.push("/voterreg/completed");
     //add invited by
     if (localStorage.getItem("player") && currentUser) addInvitedBy();
   }, []);
