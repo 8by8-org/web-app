@@ -1,30 +1,17 @@
 import React from "react";
 
-export const ProgressBar = ({ page }) => {
-  let percentage;
-  switch (page) {
-    case "eligibility":
-      percentage = 25;
-      break;
-    case "yourName":
-      percentage = 50;
-      break;
-    case "homeAddress":
-      percentage = 75;
-      break;
-    case "otherInfo":
-      percentage = 100;
-      break;
-    case "formCompleted":
-      percentage = 100;
-      break;
-    default:
-      percentage = 25;
-  }
-
+export const ProgressBar = ({ progressPercent }) => {
   return (
-    <div style={{ width: "100%", display: "flex", justifyContent: "center" }}>
-      <svg width="340" height="50">
+    <div
+      style={{
+        width: "100%",
+        display: "flex",
+        justifyContent: "center",
+        marginTop: "30px",
+        marginBottom: "30px",
+      }}
+    >
+      <svg width="242.5" height="25">
         <defs>
           <linearGradient
             id="greenish-yellow-gradient"
@@ -37,8 +24,8 @@ export const ProgressBar = ({ page }) => {
             id="transparent-grey-gradient-25%"
             gradientUnits="userSpaceOnUse"
           >
-            <stop offset="8.75%" stopColor="transparent" />
-            <stop offset="8.75%" stopColor="lightgrey" />
+            <stop offset="12%" stopColor="transparent" />
+            <stop offset="12%" stopColor="lightgrey" />
           </linearGradient>
           <linearGradient
             id="transparent-grey-gradient-50%"
@@ -63,21 +50,21 @@ export const ProgressBar = ({ page }) => {
           </linearGradient>
         </defs>
         <g fill="url(#greenish-yellow-gradient)">
-          <rect x="20" y="22.5" height="5" width="300" />
-          <circle cx="20" cy="25" r="10" />
-          <circle cx="120" cy="25" r="10" />
-          <circle cx="220" cy="25" r="10" />
-          <circle cx="320" cy="25" r="10" />
+          <rect x="20" y="10.5" height="4" width="195" />
+          <circle cx="20" cy="12.5" r="7.5" />
+          <circle cx="85" cy="12.5" r="7.5" />
+          <circle cx="150" cy="12.5" r="7.5" />
+          <circle cx="215" cy="12.5" r="7.5" />
         </g>
         <g
-          fill={`url(#transparent-grey-gradient-${percentage}%)`}
+          fill={`url(#transparent-grey-gradient-${progressPercent}%)`}
           style={{ transition: "fill 500s ease-in" }}
         >
-          <rect x="20" y="22.5" height="5" width="300" />
-          <circle cx="20" cy="25" r="10" />
-          <circle cx="120" cy="25" r="10" />
-          <circle cx="220" cy="25" r="10" />
-          <circle cx="320" cy="25" r="10" />
+          <rect x="20" y="10.5" height="4" width="195" />
+          <circle cx="20" cy="12.5" r="7.5" />
+          <circle cx="85" cy="12.5" r="7.5" />
+          <circle cx="150" cy="12.5" r="7.5" />
+          <circle cx="215" cy="12.5" r="7.5" />
         </g>
       </svg>
     </div>

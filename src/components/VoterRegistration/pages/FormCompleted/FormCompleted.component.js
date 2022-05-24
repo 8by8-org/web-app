@@ -1,16 +1,19 @@
 import React from "react";
 import { useHistory } from "react-router";
 import "../../VoterRegistration.scss";
+import ScrollToTop from "../../../../functions/ScrollToTop";
 
 export const FormCompleted = () => {
   const history = useHistory();
+
+  ScrollToTop();
+
   return (
-    <>
-      {/* <p>
-        To complete the full process with your state, please go to the [Your
-        State Here] Website.
-      </p>
-      <button className="btn">CONTINUE TO STATE WEBSITE</button> */}
+    <form className="voterRegForm">
+      <h1 className="register-form-title">
+        <u className="underline">YOU COMPLETE</u>D<br />
+        THE FORM
+      </h1>
       <p className="register-form-text">
         We've emailed you a PDF of your completed form. You can print it out and
         mail it to your state to complete your voter registration.
@@ -24,6 +27,6 @@ export const FormCompleted = () => {
       >
         GO BACK TO THE CHALLENGE
       </button>
-    </>
+    </form>
   );
 };

@@ -24,21 +24,20 @@
 
 .tooltip-modal-outer-container {
   position: fixed;
-  top: 57px;
+  top: 0;
   left: 0;
   width: 100%;
-  height: calc(100vh - 57px);
   display: flex;
   justify-content: center;
-  align-items: center;
   z-index: 999;
 }
 
 .tooltip-modal-inner-container {
   background-color: rgba(111, 111, 111, 0.5);
-  width: 500px;
-  max-width: 100vw;
-  height: 100%;
+  width: 100%;
+  max-width: 500px;
+  min-width: 375px;
+  height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -53,9 +52,7 @@
   align-items: center;
   font-family: $lato;
   box-sizing: border-box;
-  width: 100%;
-  margin-left: 15%;
-  margin-right: 15%;
+  width: 315px;
 }
 
 .tooltip-toggle-container {
