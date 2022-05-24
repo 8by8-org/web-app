@@ -69,7 +69,6 @@
   .bottom-links {
     display: flex;
     flex-direction: column;
-
     a {
       padding: 0;
       color: white;
@@ -84,11 +83,9 @@
   .popup-modal {
     .buttons {
       width: 100%;
-
       a {
         text-decoration: none;
       }
-
       button {
         margin: auto;
         margin-top: 35px;
