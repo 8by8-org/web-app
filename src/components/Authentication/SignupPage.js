@@ -16,7 +16,7 @@ import { addUserToDB } from "./AddUserToDB";
 import "./SignupPage.scss";
 
 export default function SignupPage() {
-  const { currentUser } = useAuth();
+  const { currentUser, currentUserData } = useAuth();
   const history = useHistory();
 
   const [message, setMessage] = useState(null);
@@ -42,9 +42,13 @@ export default function SignupPage() {
 
   useEffect(() => {
     if (currentUser) {
-      playerStatus
-        ? history.push(`/${playerStatus}`)
-        : history.push("/progress");
+      if (playerStatus) {
+        history.push(`/${playerStatus}`);
+      } else if (currentUserData && !currentUserData.startedChallenge) {
+        history.push("/actions");
+      } else {
+        history.push("/progress");
+      }
     }
 
     // signup logic

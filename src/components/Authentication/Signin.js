@@ -21,7 +21,7 @@ import voteImg from "./../../assets/4-pages/Signin/Vote.png";
 const localStorageEmailKey = "verifyUserEmail";
 
 export default function Login() {
-  const { currentUser } = useAuth();
+  const { currentUser, currentUserData } = useAuth();
   const history = useHistory();
   const [message, setMessage] = useState(null);
   const [emailVisible, setEmailVisible] = useState(true);
@@ -36,9 +36,13 @@ export default function Login() {
 
   useEffect(() => {
     if (currentUser) {
-      playerStatus
-        ? history.push(`/${playerStatus}`)
-        : history.push("/progress");
+      if (playerStatus) {
+        history.push(`/${playerStatus}`);
+      } else if (currentUserData && !currentUserData.startedChallenge) {
+        history.push("/actions");
+      } else {
+        history.push("/progress");
+      }
     }
 
     if (!auth.isSignInWithEmailLink(auth.getAuth(), window.location.href)) {
