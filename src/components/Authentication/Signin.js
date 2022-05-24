@@ -32,7 +32,6 @@ export default function Login() {
 
   const emailRef = useRef();
   const buttonRef = useRef();
-
   const playerStatus = localStorage.getItem("player");
 
   useEffect(() => {

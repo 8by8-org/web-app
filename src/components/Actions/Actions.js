@@ -1,8 +1,5 @@
 import React, { useState, useEffect } from "react";
-import {
-  getChallengerDatabase,
-  getUserDatabase,
-} from "./../../functions/UserData";
+import { getUserDatabase } from "./../../functions/UserData";
 import { Button } from "react-bootstrap";
 import { useHistory } from "react-router";
 import { useAuth } from "../../contexts/AuthContext";
@@ -30,31 +27,19 @@ export default function Actions() {
   const toggleInvite = React.useRef();
 
   useEffect(() => {
-    // if the user is not doing actions for another user then send them to signin page
     if (localStorage.getItem("challengerInfo")) {
       setChallengerInfo(JSON.parse(localStorage.getItem("challengerInfo")));
-      // if the user is signed in then get their data about what actions they completed
       if (currentUser) {
         fetchUserData();
       }
-    } else if (currentUser) {
-      getUserDatabase().then((data) => {
-        if (data.invitedBy.length > 0) {
-          getChallengerDatabase().then((data) => {
-            setChallengerInfo(data);
-            console.log(data);
-            fetchUserData();
-          });
-        } else {
-          history.push(`/signin`);
-        }
-      });
+      setLoading(true);
     } else {
       history.push(`/signin`);
     }
   }, [loading]);
 
   function fetchUserData() {
+    setLoading(false);
     getUserDatabase()
       .then((data) => {
         setRegisteredVoter(data.isRegisteredVoter);
@@ -107,7 +92,7 @@ export default function Actions() {
               <Button
                 className="primary-button"
                 onClick={() => {
-                  history.push(`/signin`);
+                  history.push(`/progress`);
                 }}
               >
                 See Your Challenge
@@ -330,7 +315,7 @@ export default function Actions() {
 
                   {/* this is for when user has started their own challenge */}
                   {startedChallenge && (
-                    <a href="/signin" className="links">
+                    <a href="/progress" className="links">
                       See your challenge
                     </a>
                   )}

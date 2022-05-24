@@ -126,9 +126,10 @@ export default function HomePage() {
           involvement and investment. Our approach involves working with
           community, business, and tech leaders to create voter registration
           solutions that work.
-          <div className="link" onClick={() => history.push("/temp")}>
+          <br />
+          <a href="https://www.8by8.us/" target="_blank" className="link">
             Learn more about 8by8
-          </div>
+          </a>
         </div>
       </div>
     </div>

@@ -64,37 +64,43 @@ function Sidebar({ sidebar, showSidebar }) {
       <div className="container">
         {userType === "none" && (
           <>
-            <a href="/signup">
+            <a onClick={showSidebar} href="/challengerwelcome">
               <button className="small gradient">
                 <span>Take The Challenge</span>
               </button>
             </a>
-            <a href="/actions">Take Action</a>
-            <a href="/homepage#why8by8">Why 8by8?</a>
+            <a onClick={showSidebar} href="/actions">
+              Take Action
+            </a>
           </>
         )}
         {userType === "player" && (
           <>
-            <a href="/challengerwelcome">
+            <a onClick={showSidebar} href="/challengerwelcome">
               <button className="small gradient">
                 <span>Take The Challenge</span>
               </button>
             </a>
-            <a href="/actions">Take Action</a>
-            <a href="/homepage#why8by8">Why 8by8?</a>
+            <a onClick={showSidebar} href="/actions">
+              Take Action
+            </a>
           </>
         )}
         {userType === "challenger" && (
           <>
-            <a href="/progress">My Challenge</a>
-            <a href="/homepage#why8by8">Why 8by8?</a>
+            <a onClick={showSidebar} href="/progress">
+              My Challenge
+            </a>
           </>
         )}
         {userType === "hybrid" && (
           <>
-            <a href="/progress">My Challenge</a>
-            <a href="/actions">Take Action</a>
-            <a href="/homepage#why8by8">Why 8by8?</a>
+            <a onClick={showSidebar} href="/progress">
+              My Challenge
+            </a>
+            <a onClick={showSidebar} href="/actions">
+              Take Action
+            </a>
           </>
         )}
       </div>
@@ -116,11 +122,15 @@ function Sidebar({ sidebar, showSidebar }) {
       </div>
 
       <div className="bottom-links">
-        <a href="/privacypolicy">Privacy Policy</a>
+        <a onClick={showSidebar} href="/privacypolicy">
+          Privacy Policy
+        </a>
         {currentUser ? (
           <a onClick={() => setSignoutModal(true)}>Sign Out</a>
         ) : (
-          <a href="/signup">Sign Up</a>
+          <a onClick={showSidebar} href="/signup">
+            Sign Up
+          </a>
         )}
       </div>
 

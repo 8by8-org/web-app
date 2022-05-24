@@ -10,13 +10,12 @@ import {
   WhatsappShareButton,
   EmailShareButton,
 } from "react-share";
-import { completedAction, delay, getUserDatabase } from "../functions/UserData";
+import { completedAction, getUserDatabase } from "../functions/UserData";
 import CalendarSvg from "../assets/images/Invite/Calendar.svg";
 import FacebookSvg from "../assets/images/Invite/Facebook.svg";
 import TwitterSvg from "../assets/images/Invite/Twitter.svg";
 import InstagramSvg from "../assets/images/Invite/Instagram.svg";
 import FacebookMessengerSvg from "../assets/images/Invite/FacebookMessenger.svg";
-import DiscordSvg from "../assets/images/Invite/Discord.svg";
 import WhatsAppSvg from "../assets/images/Invite/WhatsApp.svg";
 import EmailSvg from "../assets/images/Invite/Email.svg";
 import TextSvg from "../assets/images/Invite/Text.svg";
@@ -35,6 +34,24 @@ function Invite({ toggleInvite, isShare }) {
     }
   }, []);
 
+  const shareUrl = url;
+  const quote = "Help me in my 8by8 Challenge to #stopasianhate!";
+  const hashtag = "#stopasianhate";
+  const appId = "217424673873884";
+  const body = "Use this link to " + quote;
+
+  useEffect(() => {
+    getUserDatabase().then((data) => {
+      if (data.sharedChallenge) {
+        setShared(true);
+      }
+
+      // when challenge is complete
+      if (data.badges.length >= 8) {
+      }
+    });
+  }, []);
+
   function changeShow() {
     setShow(!show);
   }
@@ -42,14 +59,6 @@ function Invite({ toggleInvite, isShare }) {
   function copyToClipboard() {
     navigator.clipboard.writeText(shareUrl);
   }
-
-  useEffect(() => {
-    getUserDatabase().then((data) => {
-      if (data.sharedChallenge) {
-        setShared(true);
-      }
-    });
-  }, []);
 
   function reloadPage() {
     if (!shared) {
@@ -60,15 +69,6 @@ function Invite({ toggleInvite, isShare }) {
   function generateUrl() {
     setUrl(`${window.location.origin}/share/${currentUser.uid}`);
   }
-
-  // shareUrl is currently a temporary placeholder for UID link
-  const shareUrl = url;
-  const quote = "Help me in my 8by8 Challenge to #stopasianhate";
-  const hashtag = "#stopasianhate";
-  // facebook developer app id (for now its from a personal account for testing)
-  const appId = "217424673873884";
-  // temporary email body text
-  const body = "Use this link to " + quote;
 
   const toggleIG = React.useRef();
 
@@ -145,6 +145,7 @@ function Invite({ toggleInvite, isShare }) {
             onShareWindowClose={() => {
               completedAction("share challenge");
             }}
+            redirectUri={"https://challenge.8by8.us/signin"}
           >
             <img className="invite-icon" src={FacebookMessengerSvg} />
             <p className="invite-icon-label">Messenger</p>

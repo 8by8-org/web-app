@@ -7,23 +7,20 @@
   button {
     @include button;
     outline: 4px solid white;
-    margin: 10px;
-    margin-top: 20px;
+    margin-top: 25px;
   }
 
   .top {
     display: flex;
     flex-direction: column;
-    align-items: center;
-    justify-content: space-around;
-    padding: 25px;
+    padding: 30px;
     background-color: $black;
     color: white;
     .top-heading {
       @include heading-text(white, 50px);
       line-height: 57.6px;
       letter-spacing: 0.03em;
-      margin: 20px 0px 20px;
+      margin: 20px 0px;
       .underline {
         @include text-underline;
       }
@@ -43,13 +40,12 @@
   }
 
   .main-content {
-    padding: 20px 40px;
+    padding: 40px 30px;
   }
 
   .heading {
     @include heading-text($black, 36px);
-    margin-top: 25px;
-    margin-bottom: 20px;
+    margin-bottom: 40px;
     line-height: 43.2px;
     letter-spacing: 0.03em;
     text-align: center;
@@ -76,7 +72,7 @@
     font-family: $lato;
     font-size: 15px;
     letter-spacing: 0.02em;
-    padding: 10px;
+    margin-top: 15px;
   }
 
   .curve {
