@@ -24,7 +24,10 @@ function Header({ isShare }) {
             </Navbar.Brand>
             <div id="icons-tray">
               <button
-                onClick={() => !isShare && window.open('https://forms.gle/r33L2NAKT69MrvsZ7','_blank')}
+                onClick={() =>
+                  !isShare &&
+                  window.open("https://forms.gle/r33L2NAKT69MrvsZ7", "_blank")
+                }
                 id="feedback-icon"
               >
                 <img src={feedback} />
@@ -38,14 +41,15 @@ function Header({ isShare }) {
         </div>
 
         {/* Sidebar (don't render when isShare is true, when used in preview) */}
-        {!isShare &&
-        <div className={sidebar ? "nav-container active" : "nav-container"}>
-          <nav className="nav-menu">
-            <ul className="menu-items">
-              <Sidebar sidebar={sidebar} showSidebar={showSidebar} />
-            </ul>
-          </nav>
-        </div>}
+        {!isShare && (
+          <div className={sidebar ? "nav-container active" : "nav-container"}>
+            <nav className="nav-menu">
+              <ul className="menu-items">
+                <Sidebar sidebar={sidebar} showSidebar={showSidebar} />
+              </ul>
+            </nav>
+          </div>
+        )}
       </IconContext.Provider>
     </>
   );

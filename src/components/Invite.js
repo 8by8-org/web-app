@@ -22,7 +22,7 @@ import TextSvg from "../assets/images/Invite/Text.svg";
 import Instagram from "./Instagram";
 import Preview from "./Invite/Components/Preview";
 
-function Invite({ toggleInvite , isShare, won}) {
+function Invite({ toggleInvite, isShare, won }) {
   const { currentUser } = useAuth();
   const [url, setUrl] = useState(null);
   const [show, setShow] = useState(false);
@@ -42,10 +42,13 @@ function Invite({ toggleInvite , isShare, won}) {
   }, []);
 
   const shareUrl = url;
-  const quote = isShare ?
-    "I’m supporting " + JSON.parse(localStorage.getItem("challengerInfo")).name + "'s 8by8 Challeng!"
-  :
-    won ? "I won the 8by8 Challenge!" : "Help me in my 8by8 Challenge to #stopasianhate.";
+  const quote = isShare
+    ? "I’m supporting " +
+      JSON.parse(localStorage.getItem("challengerInfo")).name +
+      "'s 8by8 Challeng!"
+    : won
+    ? "I won the 8by8 Challenge!"
+    : "Help me in my 8by8 Challenge to #stopasianhate.";
   const hashtag = "#stopasianhate";
   const appId = "217424673873884";
   const body = "Use this link to " + quote;
@@ -82,10 +85,13 @@ function Invite({ toggleInvite , isShare, won}) {
 
   function generateUrl() {
     if (isShare) {
-      setUrl(`${window.location.origin}/share/${JSON.parse(localStorage.getItem("challengerInfo")).challengerID}`)
-    }
-    else {
-      setUrl(`${window.location.origin}/share/${currentUser.uid}`)
+      setUrl(
+        `${window.location.origin}/share/${
+          JSON.parse(localStorage.getItem("challengerInfo")).challengerID
+        }`
+      );
+    } else {
+      setUrl(`${window.location.origin}/share/${currentUser.uid}`);
     }
   }
 
@@ -112,18 +118,33 @@ function Invite({ toggleInvite , isShare, won}) {
         <div className="info">
           <img src={CalendarSvg} width="225px" alt="Calender Icon" />
 
-          {isShare ?
+          {isShare ? (
             <p>
-              Share about your action. Invite friends to help {challengerInfo && challengerInfo.name}’s
-              challenge and learn more about the 8by8 cause! If you are curious,
-              <button className="preview-button" onClick={() => togglePreview.current()}>preview</button> what they’ll see.
+              Share about your action. Invite friends to help{" "}
+              {challengerInfo && challengerInfo.name}’s challenge and learn more
+              about the 8by8 cause! If you are curious,
+              <button
+                className="preview-button"
+                onClick={() => togglePreview.current()}
+              >
+                preview
+              </button>{" "}
+              what they’ll see.
             </p>
-          :
+          ) : (
             <p>
-              Invite friends to support your challenge by registering to vote, get election reminders or take the 8by8 challenge themselves.
-              If you are curious, <button className="preview-button" onClick={() => togglePreview.current()}>preview</button> what they’ll see.
+              Invite friends to support your challenge by registering to vote,
+              get election reminders or take the 8by8 challenge themselves. If
+              you are curious,{" "}
+              <button
+                className="preview-button"
+                onClick={() => togglePreview.current()}
+              >
+                preview
+              </button>{" "}
+              what they’ll see.
             </p>
-          }
+          )}
         </div>
 
         <div className="section social-media">
@@ -134,19 +155,31 @@ function Invite({ toggleInvite , isShare, won}) {
             <p className="invite-icon-label">Facebook</p>
           </FacebookShareButton> */}
 
-          <TwitterShareButton url={shareUrl} title={quote}
-            onShareWindowClose={()=>{completedAction("share challenge")}}>
+          <TwitterShareButton
+            url={shareUrl}
+            title={quote}
+            onShareWindowClose={() => {
+              completedAction("share challenge");
+            }}
+          >
             <img className="invite-icon" src={TwitterSvg} alt="Twitter Icon" />
             <p className="invite-icon-label">Twitter</p>
           </TwitterShareButton>
 
-          <button className="instagram-button" onClick={() => {
-            if (navigator.clipboard) {
-              copyToClipboard();
-            }
-            toggleIG.current();
-          }}>
-            <img className="invite-icon" src={InstagramSvg} alt="Instagram Icon" />
+          <button
+            className="instagram-button"
+            onClick={() => {
+              if (navigator.clipboard) {
+                copyToClipboard();
+              }
+              toggleIG.current();
+            }}
+          >
+            <img
+              className="invite-icon"
+              src={InstagramSvg}
+              alt="Instagram Icon"
+            />
             <p className="invite-icon-label">Instagram</p>
           </button>
         </div>
@@ -198,7 +231,11 @@ function Invite({ toggleInvite , isShare, won}) {
         </div>
 
         <div className="section copy-link">
-          <p className="sub-heading">{isShare ? `Copy ${challengerInfo && challengerInfo.name}’s Unique Link` : "Copy your unique link"}</p>
+          <p className="sub-heading">
+            {isShare
+              ? `Copy ${challengerInfo && challengerInfo.name}’s Unique Link`
+              : "Copy your unique link"}
+          </p>
           <div className="link-container">
             <div className="unique-link">
               <p>{shareUrl}</p>
