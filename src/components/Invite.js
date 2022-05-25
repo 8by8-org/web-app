@@ -20,57 +20,83 @@ import WhatsAppSvg from "../assets/images/Invite/WhatsApp.svg";
 import EmailSvg from "../assets/images/Invite/Email.svg";
 import TextSvg from "../assets/images/Invite/Text.svg";
 import Instagram from "./Instagram";
+import Preview from "./Invite/Components/Preview";
 
-function Invite({ toggleInvite, isShare }) {
+function Invite({ toggleInvite, isShare, won }) {
   const { currentUser } = useAuth();
   const [url, setUrl] = useState(null);
   const [show, setShow] = useState(false);
+  const [challengerInfo, setChallengerInfo] = useState(null);
   const [shared, setShared] = useState(false);
 
   React.useEffect(() => {
     toggleInvite.current = changeShow;
+
+    if (localStorage.getItem("challengerInfo")) {
+      setChallengerInfo(JSON.parse(localStorage.getItem("challengerInfo")));
+    }
+
     if (currentUser) {
       generateUrl();
     }
   }, []);
 
   const shareUrl = url;
-  const quote = "Help me in my 8by8 Challenge to #stopasianhate!";
+  const quote = isShare
+    ? "I’m supporting " +
+      JSON.parse(localStorage.getItem("challengerInfo")).name +
+      "'s 8by8 Challeng!"
+    : won
+    ? "I won the 8by8 Challenge!"
+    : "Help me in my 8by8 Challenge to #stopasianhate.";
   const hashtag = "#stopasianhate";
   const appId = "217424673873884";
   const body = "Use this link to " + quote;
 
   useEffect(() => {
-    getUserDatabase().then((data) => {
-      if (data.sharedChallenge) {
-        setShared(true);
-      }
+    if (currentUser) {
+      getUserDatabase().then((data) => {
+        if (data.sharedChallenge) {
+          setShared(true);
+        }
 
-      // when challenge is complete
-      if (data.badges.length >= 8) {
-      }
-    });
+        // when challenge is complete
+        if (data.badges.length >= 8) {
+        }
+      });
+    }
   }, []);
 
   function changeShow() {
     setShow(!show);
   }
 
+  // Copys the url thats to be shared into the clipboard.
   function copyToClipboard() {
     navigator.clipboard.writeText(shareUrl);
   }
 
+  // Reload the current page(only on invite pop-up).
   function reloadPage() {
-    if (!shared) {
+    if (!shared && !isShare) {
       window.location.reload();
     }
   }
 
   function generateUrl() {
-    setUrl(`${window.location.origin}/share/${currentUser.uid}`);
+    if (isShare) {
+      setUrl(
+        `${window.location.origin}/share/${
+          JSON.parse(localStorage.getItem("challengerInfo")).challengerID
+        }`
+      );
+    } else {
+      setUrl(`${window.location.origin}/share/${currentUser.uid}`);
+    }
   }
 
   const toggleIG = React.useRef();
+  const togglePreview = React.useRef();
 
   return (
     <div className="invite-wrapper">
@@ -90,27 +116,44 @@ function Invite({ toggleInvite, isShare }) {
         </li>
 
         <div className="info">
-          <img src={CalendarSvg} width="225px" />
-          <p>
-            Invite friends to support your challenge by taking an action:
-            register to vote, get election reminders or take the 8by8 challenge.
-            If you are curious, preview what they'll see.
-          </p>
+          <img src={CalendarSvg} width="225px" alt="Calender Icon" />
+
+          {isShare ? (
+            <p>
+              Share about your action. Invite friends to help{" "}
+              {challengerInfo && challengerInfo.name}’s challenge and learn more
+              about the 8by8 cause! If you are curious,
+              <button
+                className="preview-button"
+                onClick={() => togglePreview.current()}
+              >
+                preview
+              </button>{" "}
+              what they’ll see.
+            </p>
+          ) : (
+            <p>
+              Invite friends to support your challenge by registering to vote,
+              get election reminders or take the 8by8 challenge themselves. If
+              you are curious,{" "}
+              <button
+                className="preview-button"
+                onClick={() => togglePreview.current()}
+              >
+                preview
+              </button>{" "}
+              what they’ll see.
+            </p>
+          )}
         </div>
 
         <div className="section social-media">
           <p className="sub-heading">Social Media</p>
-          <FacebookShareButton
-            url={shareUrl}
-            quote={quote}
-            hashtag={hashtag}
-            onShareWindowClose={() => {
-              completedAction("share challenge");
-            }}
-          >
-            <img className="invite-icon" src={FacebookSvg} />
+          {/* <FacebookShareButton url={shareUrl} quote={quote} hashtag={hashtag}
+              onShareWindowClose={()=>{completedAction("share challenge")}}>
+            <img className="invite-icon" src={FacebookSvg} alt="Facebook Icon" />
             <p className="invite-icon-label">Facebook</p>
-          </FacebookShareButton>
+          </FacebookShareButton> */}
 
           <TwitterShareButton
             url={shareUrl}
@@ -119,7 +162,7 @@ function Invite({ toggleInvite, isShare }) {
               completedAction("share challenge");
             }}
           >
-            <img className="invite-icon" src={TwitterSvg} />
+            <img className="invite-icon" src={TwitterSvg} alt="Twitter Icon" />
             <p className="invite-icon-label">Twitter</p>
           </TwitterShareButton>
 
@@ -132,13 +175,17 @@ function Invite({ toggleInvite, isShare }) {
               toggleIG.current();
             }}
           >
-            <img className="invite-icon" src={InstagramSvg} />
+            <img
+              className="invite-icon"
+              src={InstagramSvg}
+              alt="Instagram Icon"
+            />
             <p className="invite-icon-label">Instagram</p>
           </button>
         </div>
 
         <div className="section messaging">
-          <p className="sub-heading">Messaging</p>
+          {/*<p className="sub-heading">Messaging</p>
           <FacebookMessengerShareButton
             url={shareUrl}
             appId={appId}
@@ -149,7 +196,7 @@ function Invite({ toggleInvite, isShare }) {
           >
             <img className="invite-icon" src={FacebookMessengerSvg} />
             <p className="invite-icon-label">Messenger</p>
-          </FacebookMessengerShareButton>
+          </FacebookMessengerShareButton> */}
 
           <WhatsappShareButton
             url={shareUrl}
@@ -184,7 +231,11 @@ function Invite({ toggleInvite, isShare }) {
         </div>
 
         <div className="section copy-link">
-          <p className="sub-heading">Copy your unique link</p>
+          <p className="sub-heading">
+            {isShare
+              ? `Copy ${challengerInfo && challengerInfo.name}’s Unique Link`
+              : "Copy your unique link"}
+          </p>
           <div className="link-container">
             <div className="unique-link">
               <p>{shareUrl}</p>
@@ -203,6 +254,8 @@ function Invite({ toggleInvite, isShare }) {
           </div>
         </div>
       </nav>
+
+      <Preview togglePreview={togglePreview} isShare={isShare} />
       <Instagram toggleIG={toggleIG} isShare={isShare} shareUrl={shareUrl} />
     </div>
   );

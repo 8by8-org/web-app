@@ -3,8 +3,10 @@
 .player-welcome {
   background-color: $white;
   color: $black;
+  display: flex;
+  flex-direction: column;
 
-  button {
+  .getStarted-button {
     @include button;
     outline: 4px solid white;
     margin-top: 25px;
@@ -25,22 +27,36 @@
         @include text-underline;
       }
     }
-
-    a:link,
-    a:active,
-    a:visited {
-      color: $blue;
-    }
   }
 
-  a:link,
-  a:active,
-  a:visited {
+  .signin-link {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    text-decoration: underline;
+    display: inline;
+    margin: 0;
+    padding: 0px 0px 10px 0px;
+    font-family: $lato;
+    font-size: 14px;
+    line-height: 22px;
+    letter-spacing: 0.02em;
+    font-weight: 900;
+  }
+
+  .blue {
+    color: $blue;
+  }
+
+  .black {
     color: $black;
   }
 
   .main-content {
     padding: 40px 30px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
   }
 
   .heading {
@@ -65,7 +81,7 @@
     font-size: 18px;
     line-height: 22px;
     letter-spacing: 0.02em;
-    margin: 0;
+    margin: 10px 0px 32px;
   }
 
   .small-text {
@@ -80,7 +96,7 @@
   }
 
   .image {
-    padding: 20px;
+    padding: 20px 0px;
     padding-bottom: 60px;
     text-align: center;
   }

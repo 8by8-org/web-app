@@ -231,11 +231,11 @@ export default function Progress() {
         />
       )}
 
-      {challengeFinished ? (
-        <Invite toggleInvite={toggleInvite} isShare={true} />
-      ) : (
-        <Invite toggleInvite={toggleInvite} isShare={false} />
-      )}
+      <Invite
+        toggleInvite={toggleInvite}
+        isShare={false}
+        won={challengeFinished}
+      />
     </article>
   ) : (
     <LoadingWheel overlay={false} />
