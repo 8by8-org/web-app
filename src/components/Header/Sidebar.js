@@ -34,10 +34,11 @@ function Sidebar({ sidebar, showSidebar }) {
         {userData ? (
           <div className="avatar-greeting">
             <div className="blob">
-              <img src={Blob} />
+              <img src={Blob} alt="player avatar background blob" />
             </div>
             {userData.avatar ? (
               <img
+                alt="player avatar"
                 className="avatar"
                 src={
                   require(`./../../assets/3-avatars/avatar-${userData.avatar}.svg`)
@@ -46,6 +47,7 @@ function Sidebar({ sidebar, showSidebar }) {
               />
             ) : (
               <img
+                alt="player avatar"
                 className="avatar"
                 src={require(`./../../assets/3-avatars/avatar-1.svg`).default}
               />

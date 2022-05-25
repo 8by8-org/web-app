@@ -27,7 +27,7 @@ function Header({ isShare }) {
                 onClick={() => !isShare && window.open('https://forms.gle/r33L2NAKT69MrvsZ7','_blank')}
                 id="feedback-icon"
               >
-                <img src={feedback} />
+                <img src={feedback} alt="feedback icon" />
               </button>
 
               <Nav.Link to="#" id="sidebar-icon">

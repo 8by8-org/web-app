@@ -121,6 +121,7 @@ export default function Progress() {
       <div className="badges">
         <div className="blob">
           <img
+            alt="player badge background blob"
             className={icon ? "blob-img blob-img-" + index : "disable"}
             src={
               require(`./../../assets/4-pages/Progress/Badges/Blob${index}.png`)
@@ -131,6 +132,7 @@ export default function Progress() {
         <div className={"blob-content"}>
           {icon ? (
             <img
+              alt="player badge icon"
               className="icon"
               src={
                 require(`./../../assets/4-pages/Progress/Badges/${icon}.svg`)
@@ -160,10 +162,10 @@ export default function Progress() {
               {daysLeft === 1 ? "Day" : "Days"} left
             </h3>
           </div>
-          <img className="blob" src={BlobDay} />
+          <img className="blob" src={BlobDay} alt="days remaining blob" />
         </div>
       </section>
-      <img className="curve" src={CurveA} />
+      <img className="curve" src={CurveA} alt="black curve" />
 
       <section className="section-2 pt-32px pl-30px pr-30px">
         <h3 className="text-center pb-24px">

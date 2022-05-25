@@ -64,6 +64,8 @@ function Invite({ toggleInvite , isShare, won}) {
     }
   }, []);
 
+  // Creates the url to be shared. If isShare is true(for share on actions page) then use the uid of the challenger info in local storage, else use the
+  // uid of the person logged in(for invite on progress page).
   function changeShow() {
     setShow(!show);
   }
@@ -152,8 +154,8 @@ function Invite({ toggleInvite , isShare, won}) {
         </div>
 
         <div className="section messaging">
-          {/*<p className="sub-heading">Messaging</p>
-          <FacebookMessengerShareButton
+          <p className="sub-heading">Messaging</p>
+          {/*<FacebookMessengerShareButton
             url={shareUrl}
             appId={appId}
             onShareWindowClose={() => {
@@ -161,7 +163,7 @@ function Invite({ toggleInvite , isShare, won}) {
             }}
             redirectUri={"https://challenge.8by8.us/signin"}
           >
-            <img className="invite-icon" src={FacebookMessengerSvg} />
+            <img className="invite-icon" src={FacebookMessengerSvg} alt="Facebook Icon" />
             <p className="invite-icon-label">Messenger</p>
           </FacebookMessengerShareButton> */}
 
@@ -172,7 +174,7 @@ function Invite({ toggleInvite , isShare, won}) {
               completedAction("share challenge");
             }}
           >
-            <img className="invite-icon" src={WhatsAppSvg} />
+            <img className="invite-icon" src={WhatsAppSvg} alt="WhatsApp Icon" />
             <p className="invite-icon-label">WhatsApp</p>
           </WhatsappShareButton>
 
@@ -184,7 +186,7 @@ function Invite({ toggleInvite , isShare, won}) {
               completedAction("share challenge");
             }}
           >
-            <img className="invite-icon" src={EmailSvg} />
+            <img className="invite-icon" src={EmailSvg} alt="Email Icon"/>
             <p className="invite-icon-label">Email</p>
           </EmailShareButton>
 
@@ -192,7 +194,7 @@ function Invite({ toggleInvite , isShare, won}) {
             className="sms-button"
             onClick={() => window.open("sms:&body=" + body + " " + shareUrl)}
           >
-            <img className="invite-icon" src={TextSvg} />
+            <img className="invite-icon" src={TextSvg} alt="Text Icon"/>
             <p className="invite-icon-label">Text</p>
           </button>
         </div>
