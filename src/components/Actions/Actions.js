@@ -3,6 +3,7 @@ import { getUserDatabase } from "./../../functions/UserData";
 import { Button } from "react-bootstrap";
 import { useHistory } from "react-router";
 import { useAuth } from "../../contexts/AuthContext";
+import { getFirestore, getDoc, doc } from 'firebase/firestore'
 import Avatar1 from "./../../assets/avatars/avatar1.svg";
 import Avatar2 from "./../../assets/avatars/avatar2.svg";
 import Avatar3 from "./../../assets/avatars/avatar3.svg";
@@ -36,7 +37,23 @@ export default function Actions() {
       setLoading(false);
     }
     else {
-      history.push(`/signin`);
+      if (currentUser) {
+        getUserDatabase()
+          .then((data) => {
+            if (data.invitedBy) {
+              setRegisteredVoter(data.isRegisteredVoter);
+              setStartedChallenge(data.startedChallenge);
+              setNotifyElectionReminders(data.notifyElectionReminders);
+              getChallengerInfo(data.invitedBy)
+              setLoading(false);
+            } else {
+              history.push(`/signin`);
+            }
+          })
+          .catch((e) => console.log(e));
+      } else {
+        history.push(`/signin`);
+      }
     }
   }, [loading]);
 
@@ -48,6 +65,15 @@ export default function Actions() {
         setNotifyElectionReminders(data.notifyElectionReminders);
       })
       .catch((e) => console.log(e));
+  }
+
+  async function getChallengerInfo(invitedBy) {
+    const db = getFirestore();
+    const docRef = doc(db, "users", invitedBy)
+    const query = await getDoc(docRef)
+    const info = (({name, avatar}) => ({name, avatar}))(query.data())
+    info.challengerID = invitedBy;
+    setChallengerInfo(JSON.stringify(info));
   }
 
   return (

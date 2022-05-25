@@ -289,7 +289,7 @@ export default function Progress() {
         />
       )}
 
-      <Invite toggleInvite={toggleInvite} isShare={false} />
+      <Invite toggleInvite={toggleInvite} isShare={false} won={completedBadges >= 8} />
     </article>
   ) : (
     <LoadingWheel overlay={false} />

@@ -1,4 +1,5 @@
 import React from "react";
+import MetaTags from 'react-meta-tags';
 import { useHistory } from "react-router-dom";
 import "./ChallengerWelcome.scss";
 import Top from "./../../assets/images/ChallengerWelcome/Top.png";
@@ -7,6 +8,7 @@ import StepOne from "./../../assets/images/ChallengerWelcome/StepOne.png";
 import StepTwo from "./../../assets/images/ChallengerWelcome/StepTwo.png";
 import StepThree from "./../../assets/images/ChallengerWelcome/StepThree.png";
 import StepFour from "./../../assets/images/ChallengerWelcome/StepFour.png";
+import ChallengerShareWon from "../../assets/images/Share/ChallengerShareWon.png";
 
 function ChallengerWelcome() {
   const history = useHistory();
@@ -14,6 +16,11 @@ function ChallengerWelcome() {
 
   return (
     <div className="challenger-welcome">
+      <MetaTags>
+        <meta property="og:title" content="I won the 8by8 Challenge to #stopasianhate"/>
+        <meta property="og:image" content={ChallengerShareWon}/>
+        <meta property="og:url" content={"https://challenge.8by8.us/challengerwelcome"}/>
+      </MetaTags>
       <div className="content-1">
         <img className="background" src={Top} alt="background" />
         <div className="container">

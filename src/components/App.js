@@ -22,6 +22,7 @@ import PlayerWelcome from "./PlayerWelcome";
 import Actions from "./Actions/Actions";
 import VoterRegistrationForm from "./VoterRegistration/VoterRegistrationForm";
 import TOS from "./TOS/TOS";
+import Success from "./Success/Success";
 
 export default function App() {
   return (
@@ -59,6 +60,7 @@ export default function App() {
                   component={VoterRegistrationForm}
                 />
                 <Route path="/termsofservice" component={TOS} />
+                <Route path="/success" component={Success} />
               </Switch>
             </Router>
             <Footer />

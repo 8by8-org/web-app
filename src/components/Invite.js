@@ -23,7 +23,7 @@ import TextSvg from "../assets/images/Invite/Text.svg";
 import Instagram from "./Instagram";
 import Preview from "./Invite/Components/Preview";
 
-function Invite({ toggleInvite , isShare}) {
+function Invite({ toggleInvite , isShare, won}) {
   const { currentUser } = useAuth();
   const [ url, setUrl ] = useState(null);
   const [show, setShow] = useState(false);
@@ -74,7 +74,7 @@ function Invite({ toggleInvite , isShare}) {
   const quote = isShare ?
     "Support " + JSON.parse(localStorage.getItem("challengerInfo")).name + "'s 8by8 Challenge to #stopasianhate!"
   :
-    "Help me in my 8by8 Challenge to #stopasianhate";
+    won ? "I won the 8by8 Challenge to #stopasianhate" : "Help me in my 8by8 Challenge to #stopasianhate";
   const hashtag = "#stopasianhate";
   // facebook developer app id (for now its from a personal account for testing)
   const appId = "217424673873884";
