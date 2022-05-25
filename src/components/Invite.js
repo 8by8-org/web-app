@@ -128,11 +128,11 @@ function Invite({ toggleInvite , isShare, won}) {
 
         <div className="section social-media">
           <p className="sub-heading">Social Media</p>
-          <FacebookShareButton url={shareUrl} quote={quote} hashtag={hashtag}
+          {/* <FacebookShareButton url={shareUrl} quote={quote} hashtag={hashtag}
               onShareWindowClose={()=>{completedAction("share challenge")}}>
             <img className="invite-icon" src={FacebookSvg} alt="Facebook Icon" />
             <p className="invite-icon-label">Facebook</p>
-          </FacebookShareButton>
+          </FacebookShareButton> */}
 
           <TwitterShareButton url={shareUrl} title={quote}
             onShareWindowClose={()=>{completedAction("share challenge")}}>
@@ -152,7 +152,7 @@ function Invite({ toggleInvite , isShare, won}) {
         </div>
 
         <div className="section messaging">
-          <p className="sub-heading">Messaging</p>
+          {/*<p className="sub-heading">Messaging</p>
           <FacebookMessengerShareButton
             url={shareUrl}
             appId={appId}
@@ -163,7 +163,7 @@ function Invite({ toggleInvite , isShare, won}) {
           >
             <img className="invite-icon" src={FacebookMessengerSvg} />
             <p className="invite-icon-label">Messenger</p>
-          </FacebookMessengerShareButton>
+          </FacebookMessengerShareButton> */}
 
           <WhatsappShareButton
             url={shareUrl}
