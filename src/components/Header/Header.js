@@ -23,13 +23,12 @@ function Header({ isShare }) {
               <img src={logo} alt="8by8 logo" id="brand-logo" />
             </Navbar.Brand>
             <div id="icons-tray">
-              <a
-                href="https://forms.gle/r33L2NAKT69MrvsZ7"
-                target="_blank"
+              <button
+                onClick={() => !isShare && window.open('https://forms.gle/r33L2NAKT69MrvsZ7','_blank')}
                 id="feedback-icon"
               >
                 <img src={feedback} />
-              </a>
+              </button>
 
               <Nav.Link to="#" id="sidebar-icon">
                 <FaIcons.FaBars onClick={showSidebar} />

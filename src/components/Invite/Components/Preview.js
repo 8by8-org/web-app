@@ -3,7 +3,7 @@ import { Nav } from "react-bootstrap";
 
 import PreviewBordorSvg from "../../../assets/images/Invite/PreviewBordor.svg";
 import Header from "../../Header/Header";
-import PlayerWelcome from "../../PlayerWelcome";
+import PlayerWelcome from "../../PlayerWelcome/PlayerWelcome";
 import Footer from "../../Footer";
 import * as MdIcons from "react-icons/md";
 import "./Preview.scss";

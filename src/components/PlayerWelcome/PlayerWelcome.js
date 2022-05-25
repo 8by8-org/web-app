@@ -2,15 +2,15 @@ import React, { useState, useEffect } from "react";
 import { useHistory } from 'react-router-dom'
 import { Button } from "react-bootstrap";
 import { getFirestore, getDoc, doc } from 'firebase/firestore'
-import SignUp1 from "../assets/images/PlayerWelcome/SignUp1.png"
-import SignUp2 from "../assets/images/PlayerWelcome/SignUp2.png"
-import Vote from "../assets/images/PlayerWelcome/Vote1.png"
-import BlackCurve from '../assets/images/PlayerWelcome/BlackCurve.svg'
+import SignUp1 from "../../assets/images/PlayerWelcome/SignUp1.png"
+import SignUp2 from "../../assets/images/PlayerWelcome/SignUp2.png"
+import Vote from "../../assets/images/PlayerWelcome/Vote1.png"
+import BlackCurve from '../../assets/images/PlayerWelcome/BlackCurve.svg'
 import './PlayerWelcome.scss'
-import { auth } from "../firebase";
-import { dummyPassword } from "../constants";
-import { useAuth } from "../contexts/AuthContext";
-import { LoadingWheel } from "./LoadingWheel/LoadingWheel.component";
+import { auth } from "../../firebase";
+import { dummyPassword } from "../../constants";
+import { useAuth } from "../../contexts/AuthContext";
+import { LoadingWheel } from "../LoadingWheel/LoadingWheel.component";
 
 export default function PlayerWelcome({ isShare }) {
     const history = useHistory();
