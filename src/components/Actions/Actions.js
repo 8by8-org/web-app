@@ -13,6 +13,7 @@ import Crown from "./../../assets/images/Actions/Crown.svg";
 import ConfettiAnimation from "./../ConfettiAnimation";
 import Invite from "../Invite.js";
 import "./Actions.scss";
+import { LoadingWheel } from "../LoadingWheel/LoadingWheel.component";
 
 const avatars = [Avatar1, Avatar2, Avatar3, Avatar4];
 
@@ -263,6 +264,6 @@ export default function Actions() {
 
         <Invite toggleInvite={toggleInvite} isShare={true} />
       </div>
-    : <h1>loading</h1>
+    : <LoadingWheel overlay={false} />
   )
 }

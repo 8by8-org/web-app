@@ -2,8 +2,7 @@ import { useRef, useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
 import { useAuth } from "./../../contexts/AuthContext";
 import { auth } from "./../../firebase";
-import { getFirestore, doc, updateDoc } from "firebase/firestore";
-import errorMessage from "./../../errorMessage";
+import errorMessage from "./../../functions/errorMessage";
 import { dummyPassword } from "../../constants";
 import { Button, Form } from "react-bootstrap";
 import avatar1 from "../../assets/images/SignUpPage/avatar1.png";
@@ -13,19 +12,23 @@ import avatar4 from "../../assets/images/SignUpPage/avatar4.png";
 import ReCAPTCHA from "react-google-recaptcha";
 import { emailUser } from "./../../functions/Email";
 import { getUserType } from "./../../functions/UserType";
+import { addUserToDB } from "./AddUserToDB";
 import "./SignupPage.scss";
 
 export default function SignupPage() {
-  const { currentUser } = useAuth();
+  const { currentUser, currentUserData } = useAuth();
   const history = useHistory();
-  const db = getFirestore();
 
-  const [error, setError] = useState(null);
   const [message, setMessage] = useState(null);
   const [emailVisible] = useState(true);
   const [buttonMessage, setButtonMessage] = useState(" ");
   const [reCaptchaPassed, setReCaptchaPassed] = useState(false);
   const [selectedAvatar, setSelectedAvatar] = useState("avatar1");
+
+  const [error, setError] = useState(null);
+  const [nameError, setNameError] = useState(null);
+  const [emailError, setEmailError] = useState(null);
+  const [duplicateError, setDuplicateError] = useState(null);
 
   const emailRef = useRef();
   const confirmEmailRef = useRef();
@@ -35,18 +38,22 @@ export default function SignupPage() {
 
   const changeAvatar = (event) => {
     setSelectedAvatar(event.target.value);
-  }
+  };
 
   useEffect(() => {
     if (currentUser) {
-      playerStatus
-        ? history.push(`/${playerStatus}`)
-        : history.push("/progress");
+      if (playerStatus) {
+        history.push(`/${playerStatus}`);
+      } else if (currentUserData && !currentUserData.startedChallenge) {
+        history.push("/actions");
+      } else {
+        history.push("/progress");
+      }
     }
 
     // signup logic
     if (!auth.isSignInWithEmailLink(auth.getAuth(), window.location.href)) {
-      setButtonMessage("Submit");
+      setButtonMessage("Sign Up");
       buttonRef.current.onclick = async function () {
         const email = emailRef.current.value;
         const confirmedEmail = confirmEmailRef.current.value;
@@ -69,17 +76,6 @@ export default function SignupPage() {
           }, 3000);
         }
 
-        const addUserToDB = async (name, avatar, endDate, isStarted) => {
-          const user = auth.getAuth().currentUser;
-          const userRef = doc(db, "users", user.uid);
-          updateDoc(userRef, {
-            name: name,
-            avatar: avatar,
-            challengeEndDate: endDate,
-            startedChallenge: isStarted,
-          });
-        };
-
         const createUser = async (email) => {
           try {
             // CryptoRandomString generates a random hash for the password (because it has no use right now)
@@ -89,26 +85,45 @@ export default function SignupPage() {
               dummyPassword
             );
             // waiting a few seconds for user doc to be created before adding data
-            await setTimeout(() => {
-              addUserToDB(
-                username,
-                avatarNumber,
-                challengeEndDate,
-                startedChallenge
-              );
-            }, 3000); // blame this if username, avatar, etc. aren't stored
+            addUserToDB(
+              username,
+              avatarNumber,
+              challengeEndDate,
+              startedChallenge
+            );
           } catch (e) {
-            setError(errorMessage(e));
+            const error = errorMessage(e);
+
+            if (error == "Please enter a correct email address.") {
+              setEmailError(error);
+              setDuplicateError("");
+            } else if (error == "This email is already in use.") {
+              setEmailError(error);
+              setDuplicateError("");
+            } else if (error == "Something went wrong. Please try again.") {
+              setDuplicateError("");
+              setEmailError("");
+              setError(error);
+            }
           }
         };
 
-        if (!email) {
-          setError("Please enter an email address");
-        } else if (confirmedEmail !== email) {
-          setError("Emails do not match");
+        if (!username) {
+          setNameError("Please enter your name.");
         } else {
+          setNameError("");
+        }
+
+        if (!email) {
+          setEmailError("Please enter an email address.");
+        }
+
+        if (confirmedEmail !== email) {
+          setDuplicateError("Emails do not match.");
+        }
+
+        if (username && email && confirmedEmail === email) {
           createUser(email);
-          setMessage("Success");
         }
       };
     }
@@ -121,7 +136,6 @@ export default function SignupPage() {
       <p className="no-underline-title">to start your 8by8 journey</p>
 
       <Form className="form">
-        {error && <p className="error">{error}</p>}
         {message && <p> {message} </p>}
         {emailVisible && (
           <>
@@ -132,26 +146,32 @@ export default function SignupPage() {
               placeholder="Name*"
               ref={nameRef}
             ></Form.Control>
+            {nameError && <p className="error-msg">{nameError}</p>}
+
             <Form.Control
               className="text-input"
               type="email"
               placeholder="Email address*"
               ref={emailRef}
             ></Form.Control>
+            {emailError && <p className="error-msg">{emailError}</p>}
+
             <Form.Control
               className="text-input"
               type="email"
               placeholder="Re-enter Email address*"
               ref={confirmEmailRef}
             ></Form.Control>
+            {duplicateError && <p className="error-msg">{duplicateError}</p>}
+
             <p className="small-title">Which One's you? </p>
             <div className="avatar-container">
               {/* avatar 1 */}
-              <input 
-                checked={selectedAvatar === 'avatar1'} 
+              <input
+                checked={selectedAvatar === "avatar1"}
                 value="avatar1"
                 type="radio"
-                name="avatar"  
+                name="avatar"
                 id={1}
                 onChange={changeAvatar}
               />
@@ -162,7 +182,7 @@ export default function SignupPage() {
               {/* avatar 2 */}
               <input
                 checked={selectedAvatar === "avatar2"}
-                value = "avatar2"
+                value="avatar2"
                 type="radio"
                 name="avatar"
                 id={2}
@@ -176,7 +196,7 @@ export default function SignupPage() {
               {/* avatar 3 */}
               <input
                 checked={selectedAvatar === "avatar3"}
-                value = "avatar3"
+                value="avatar3"
                 type="radio"
                 name="avatar"
                 id={3}
@@ -189,7 +209,7 @@ export default function SignupPage() {
               {/* avatar 4 */}
               <input
                 checked={selectedAvatar === "avatar4"}
-                value = "avatar4"
+                value="avatar4"
                 type="radio"
                 name="avatar"
                 id={4}
@@ -218,7 +238,7 @@ export default function SignupPage() {
         </div>
 
         <p className="tos">
-          By clicking on Continue, I agree to the &#160;
+          By signing up, I agree to the &#160;
           <a onClick={() => history.push("/termsofservice")} className="link">
             Terms of Service
           </a>{" "}
@@ -228,6 +248,7 @@ export default function SignupPage() {
           </a>
         </p>
 
+        {error && <p className="unknown-error">{error}</p>}
         {buttonMessage && (
           <Button
             className="gradient-button"

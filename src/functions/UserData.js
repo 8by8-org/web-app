@@ -38,6 +38,30 @@ export async function getUserDatabase() {
   }
 }
 
+// gets user's data from firebase based on supplied id
+// able to be immediately fired in auth context to update the context with the user's
+// data from the firestore when the auth state changes
+export function getUserDatabaseByUID(uid) {
+  return new Promise(async (resolve, reject) => {
+    let docRef = doc(db, "users", uid);
+    let docSnap = await getDoc(docRef);
+    if (!docSnap.exists() || docSnap.data().avatar === undefined) {
+      // tries to find user doc 5 times
+      for (let i = 0; i < 5; i++) {
+        await delay(3000);
+        docRef = doc(db, "users", uid);
+        docSnap = await getDoc(docRef);
+        if (docSnap.exists() && docSnap.data().avatar !== undefined) {
+          resolve(docSnap.data());
+        }
+      }
+      reject();
+    } else {
+      resolve(docSnap.data());
+    }
+  });
+}
+
 // gets challenger's data from firebase
 export async function getChallengerDatabase() {
   const userData = await getUserDatabase();
@@ -174,4 +198,16 @@ export async function restartChallenge() {
   await updateDoc(doc(db, "users", uid), {
     challengeEndDate: new Date(Date.now() + 8 * 24 * 60 * 60 * 1000),
   });
+}
+
+export async function makePlayerChallenger() {
+  let uid = auth.getAuth().currentUser.uid;
+  const userRef = doc(db, "users", await uid);
+
+  await updateDoc(userRef, {
+    startedChallenge: true,
+    challengeEndDate: new Date(Date.now() + 8 * 24 * 60 * 60 * 1000),
+  });
+
+  localStorage.removeItem("player");
 }

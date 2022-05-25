@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Redirect } from "react-router-dom";
-import errorMessage from "../../errorMessage";
+import errorMessage from "../../functions/errorMessage";
 import { auth } from "../../firebase";
 
 export default function Logout() {

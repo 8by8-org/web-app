@@ -1,20 +1,19 @@
 import React, { useState, useEffect } from "react";
 import {
-  getUserDatabase,
   completedAction,
-  delay,
+  getUserDatabase,
   restartChallenge,
 } from "./../../functions/UserData";
-import { doc, getFirestore, updateDoc } from "firebase/firestore";
 import { useAuth } from "../../contexts/AuthContext";
-import { emailUser } from "../../functions/Email";
 import { addInvitedBy } from "../../functions/AddInvite";
+import { makePlayerChallenger } from "../../functions/UserData";
 import Invite from "../Invite.js";
 import { LoadingWheel } from "../LoadingWheel/LoadingWheel.component";
-import PopupModal from "../PopupModal";
+import PopupModal from "../PopupModal/PopupModal";
 import ConfettiAnimation from "../ConfettiAnimation";
 import CurveA from "./../../assets/2-shapes/curve-a.svg";
 import BlobDay from "./../../assets/4-pages/Progress/BlobDay.svg";
+import "./Progress.scss";
 
 export default function Progress() {
   const { currentUser } = useAuth();
@@ -35,44 +34,40 @@ export default function Progress() {
   const [loading, setLoading] = useState(false);
 
   const toggleInvite = React.useRef();
-  const db = getFirestore();
-  const challengeEndDate = new Date(Date.now() + 8 * 24 * 60 * 60 * 1000);
 
   useEffect(() => {
     if (localStorage.getItem("player") && currentUser) {
       setTimeout(() => {
+        makePlayerChallenger();
+        completedAction("take challenge");
         addInvitedBy();
         fetchUserData();
         setLoading(true);
       }, 3000);
     } else {
       fetchUserData();
-      setLoading(true);
     }
   }, []);
 
   useEffect(() => {
-    // 8 days complete
-    if (challengeVoid) {
-      setOpenModal(true);
-    }
-
     // successfully completes challenge
     if (challengeFinished) {
       setConfettiAnimation(<ConfettiAnimation time={8000} />);
 
       setButton(
-        <button
-          className="inverted"
-          onClick={() => alert("no sharing functionality yet")}
-        >
+        <button className="inverted" onClick={() => toggleInvite.current()}>
           Share
         </button>
       );
     }
+
+    // 8 days complete
+    else if (challengeVoid) {
+      setOpenModal(true);
+    }
   }, [challengeVoid, challengeFinished]);
 
-  function fetchUserData() {
+  async function fetchUserData() {
     getUserDatabase()
       .then((data) => {
         // days left of challenge
@@ -108,61 +103,11 @@ export default function Progress() {
         if (badgesLength === 8) {
           setChallengeFinished(true);
         }
+
+        setLoading(true);
       })
       .catch((e) => console.log(e));
   }
-
-  async function reloadPage() {
-    await delay(500);
-    window.location.reload();
-  }
-
-  const testing = (
-    <section
-      style={{
-        display: "flex",
-        flexDirection: "column",
-        alignItems: "center",
-        border: "4px red solid",
-        margin: "20px 0",
-        textAlign: "center",
-      }}
-    >
-      temporary testing
-      <button
-        onClick={() => {
-          completedAction("test add badge");
-          reloadPage();
-        }}
-      >
-        add player badge
-      </button>
-      <button
-        onClick={() => {
-          completedAction("share challenge");
-          reloadPage();
-        }}
-      >
-        add share badge
-      </button>
-      <button
-        onClick={() => {
-          completedAction("register to vote");
-          reloadPage();
-        }}
-      >
-        add register badge
-      </button>
-      <button
-        onClick={() => {
-          restartChallenge();
-          reloadPage();
-        }}
-      >
-        restart challenge
-      </button>
-    </section>
-  );
 
   function Badge(props) {
     const index = props.index + 1;
@@ -176,14 +121,14 @@ export default function Progress() {
       <div className="badges">
         <div className="blob">
           <img
-            className={icon ? "" : "disable"}
+            className={icon ? "blob-img blob-img-" + index : "disable"}
             src={
-              require(`./../../assets/4-pages/Progress/Badges/Blob${index}.svg`)
+              require(`./../../assets/4-pages/Progress/Badges/Blob${index}.png`)
                 .default
             }
           />
         </div>
-        <div className="blob-content">
+        <div className={"blob-content"}>
           {icon ? (
             <img
               className="icon"
@@ -240,9 +185,6 @@ export default function Progress() {
         )}
       </section>
 
-      {/* remove this setion when done with testing */}
-      {testing}
-
       <section className="section-3 mt-24px">
         {badges.map((value, index) => {
           return <Badge value={value} index={index} key={index} />;
@@ -275,7 +217,7 @@ export default function Progress() {
                 continue!
               </div>
               <button
-                className="gradient"
+                className="gradient small"
                 onClick={() => {
                   restartChallenge();
                   fetchUserData();
@@ -289,7 +231,7 @@ export default function Progress() {
         />
       )}
 
-      <Invite toggleInvite={toggleInvite} isShare={false} won={completedBadges >= 8} />
+      <Invite toggleInvite={toggleInvite} isShare={false} won={challengeFinished} />
     </article>
   ) : (
     <LoadingWheel overlay={false} />

@@ -11,6 +11,6 @@ export async function addInvitedBy() {
       invitedBy: JSON.parse(localStorage.getItem("challengerInfo"))
         .challengerID,
     });
-    
-    localStorage.removeItem("player");
+  
+    localStorage.removeItem("player")
 }
