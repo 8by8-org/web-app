@@ -2,17 +2,17 @@ import React, { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import { Button } from "react-bootstrap";
 import { getFirestore, getDoc, doc } from "firebase/firestore";
-import SignUp1 from "./../../assets/images/PlayerWelcome/SignUp1.png";
-import SignUp2 from "./../../assets/images/PlayerWelcome/SignUp2.png";
-import Vote from "./../../assets/images/PlayerWelcome/Vote1.png";
-import BlackCurve from "./../../assets/images/PlayerWelcome/BlackCurve.svg";
+import SignUp1 from "../../assets/images/PlayerWelcome/SignUp1.png";
+import SignUp2 from "../../assets/images/PlayerWelcome/SignUp2.png";
+import Vote from "../../assets/images/PlayerWelcome/Vote1.png";
+import BlackCurve from "../../assets/images/PlayerWelcome/BlackCurve.svg";
 import "./PlayerWelcome.scss";
-import { auth } from "./../../firebase";
-import { dummyPassword } from "./../../constants";
-import { useAuth } from "./../../contexts/AuthContext";
-import { LoadingWheel } from "./../LoadingWheel/LoadingWheel.component";
+import { auth } from "../../firebase";
+import { dummyPassword } from "../../constants";
+import { useAuth } from "../../contexts/AuthContext";
+import { LoadingWheel } from "../LoadingWheel/LoadingWheel.component";
 
-export default function PlayerWelcome() {
+export default function PlayerWelcome({ isShare }) {
   const history = useHistory();
   const { currentUser } = useAuth();
   const [loading, setLoading] = useState(true);
@@ -23,15 +23,22 @@ export default function PlayerWelcome() {
 
   async function getChallengerInfo() {
     const db = getFirestore();
-    const docRef = doc(db, "users", code);
+    // If isShare is false then use the uid of the current user, else use the code gotten from the url.
+    const docRef = doc(db, "users", isShare === false ? currentUser.uid : code);
 
     //only log in with substitute user if not already authenticated
     //only challenger's name and avatar is stored for security
     if (currentUser) {
       const query = await getDoc(docRef);
-      const info = (({ name, avatar }) => ({ name, avatar }))(query.data());
-      info.challengerID = code;
-      localStorage.setItem("challengerInfo", JSON.stringify(info));
+      // Just in case query.data() does not return anything, then send the user to the signin page.
+      if (query.data()) {
+        const info = (({ name, avatar }) => ({ name, avatar }))(query.data());
+        info.challengerID = code;
+        isShare === undefined &&
+          localStorage.setItem("challengerInfo", JSON.stringify(info));
+      } else {
+        history.push(`/signin`);
+      }
     } else {
       await auth.signInWithEmailAndPassword(
         auth.getAuth(),
@@ -47,53 +54,67 @@ export default function PlayerWelcome() {
     setChallengerInfo(JSON.parse(localStorage.getItem("challengerInfo")));
   }
 
+  // If code that is gotten from the url is playerwelcome or isShare is true then, if there is challengerInfo in
+  // local storage then set it to challengerInfo, else send the user to the signin page. For eveything else run getChallengerInfo.
   useEffect(() => {
-    code
-      ? getChallengerInfo()
-      : setChallengerInfo(JSON.parse(localStorage.getItem("challengerInfo")));
+    code === "playerwelcome" || isShare
+      ? localStorage.getItem("challengerInfo")
+        ? setChallengerInfo(JSON.parse(localStorage.getItem("challengerInfo")))
+        : history.push(`/signin`)
+      : getChallengerInfo();
   }, []);
 
+  // Render page after challengerInfo is gotten.
   useEffect(() => {
     challengerInfo && setLoading(false);
-    console.log(currentUser);
   }, [challengerInfo]);
 
+  // If isShare is undefined, when playerwelcome page is rendered not in invite or share, then the buttons work.
   return loading === false ? (
     <div className="player-welcome">
       <div className="top">
         <h1 className="top-heading">
-          <h1 className="underline">Support</h1>{" "}
+          <u className="underline">Support</u>{" "}
           {challengerInfo && challengerInfo.name !== null
             ? `${challengerInfo.name}'s`
             : "the"}{" "}
           8by8 Challenge!
         </h1>
-        <div className="text">
-          <p>
-            <b>
-              Help{" "}
-              {challengerInfo && challengerInfo.name !== null
-                ? challengerInfo.name
-                : "your friend"}{" "}
-              win their <u>8by8 Challenge</u> by registering to vote or taking
-              other actions to #stopasianhate!
-            </b>
-          </p>
-        </div>
+
+        <p className="text">
+          <b>
+            Help{" "}
+            {challengerInfo && challengerInfo.name !== null
+              ? challengerInfo.name
+              : "your friend"}{" "}
+            win their <u>8BY8 Challenge</u> by registering to vote or taking
+            other actions to #stopasianhate!
+          </b>
+        </p>
+
         <Button
+          className="getStarted-button"
           onClick={() => {
-            history.push(`/actions`);
+            isShare === undefined && history.push(`/actions`);
           }}
         >
           Get Started
         </Button>
         <div align="center">
           <p className="small-text">
-            Already have an account? <a href="/signin">Sign In</a>
+            Already have an account?{" "}
+            <button
+              className="signin-link blue"
+              onClick={() => {
+                isShare === undefined && history.push(`/signin`);
+              }}
+            >
+              Sign In
+            </button>
           </p>
         </div>
       </div>
-      <img src={BlackCurve} className="curve" />
+      <img src={BlackCurve} className="curve" alt="Black Curve" />
       <div className="main-content">
         <div>
           <h3 className="heading">
@@ -127,17 +148,23 @@ export default function PlayerWelcome() {
           <img src={Vote} alt="8by8 Logo" />
         </div>
         <Button
+          className="getStarted-button"
           onClick={() => {
-            history.push(`/actions`);
+            isShare === undefined && history.push(`/actions`);
           }}
         >
           Get Started
         </Button>
         <p align="center" className="small-text">
           Already have an account?{" "}
-          <a href="/signin">
-            <b>Sign In</b>
-          </a>
+          <button
+            className="signin-link black"
+            onClick={() => {
+              isShare === undefined && history.push(`/signin`);
+            }}
+          >
+            Sign In
+          </button>
         </p>
       </div>
     </div>

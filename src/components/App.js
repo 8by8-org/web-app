@@ -28,6 +28,7 @@ import { YourName } from "./VoterRegistration/pages/YourName/YourName.component"
 import { HomeAddress } from "./VoterRegistration/pages/HomeAddress/HomeAddress.component";
 import { OtherInfo } from "./VoterRegistration/pages/OtherInfo/OtherInfo.component";
 import { FormCompleted } from "./VoterRegistration/pages/FormCompleted/FormCompleted.component";
+import Success from "./Success/Success";
 
 export default function App() {
   return (
@@ -80,6 +81,7 @@ export default function App() {
                 <PrivateRoute path="/voterreg" component={Eligibility} />
                 <Route path="/termsofservice" component={TOS} />
                 <Route path="/privacypolicy" component={PrivacyPolicy} />
+                <Route path="/success" component={Success} />
               </Switch>
             </Router>
             <Footer />

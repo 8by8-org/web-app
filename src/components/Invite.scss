@@ -69,6 +69,16 @@
         margin: 0;
         position: relative;
         bottom: 10px;
+
+        .preview-button {
+          background-color: transparent;
+          border: none;
+          cursor: pointer;
+          text-decoration: underline;
+          display: inline;
+          margin: 0;
+          padding: 0px 0px 0px 2px;
+        }
       }
     }
 

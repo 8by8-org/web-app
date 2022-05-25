@@ -3,6 +3,7 @@ import { getUserDatabase } from "./../../functions/UserData";
 import { Button } from "react-bootstrap";
 import { useHistory } from "react-router";
 import { useAuth } from "../../contexts/AuthContext";
+import { getFirestore, getDoc, doc } from "firebase/firestore";
 import Avatar1 from "./../../assets/avatars/avatar1.svg";
 import Avatar2 from "./../../assets/avatars/avatar2.svg";
 import Avatar3 from "./../../assets/avatars/avatar3.svg";
@@ -34,8 +35,25 @@ export default function Actions() {
       } else {
         setLoading(true);
       }
+      setLoading(false);
     } else {
-      history.push(`/signin`);
+      if (currentUser) {
+        getUserDatabase()
+          .then((data) => {
+            if (data.invitedBy) {
+              setRegisteredVoter(data.isRegisteredVoter);
+              setStartedChallenge(data.startedChallenge);
+              setNotifyElectionReminders(data.notifyElectionReminders);
+              getChallengerInfo(data.invitedBy);
+              setLoading(false);
+            } else {
+              history.push(`/signin`);
+            }
+          })
+          .catch((e) => console.log(e));
+      } else {
+        history.push(`/signin`);
+      }
     }
   }, []);
 
@@ -50,7 +68,16 @@ export default function Actions() {
       .catch((e) => console.log(e));
   }
 
-  return loading ? (
+  async function getChallengerInfo(invitedBy) {
+    const db = getFirestore();
+    const docRef = doc(db, "users", invitedBy);
+    const query = await getDoc(docRef);
+    const info = (({ name, avatar }) => ({ name, avatar }))(query.data());
+    info.challengerID = invitedBy;
+    setChallengerInfo(JSON.stringify(info));
+  }
+
+  return loading === false ? (
     <div>
       {/* if all three actions are completed */}
       {registeredVoter && notifyElectionReminders && startedChallenge ? (
@@ -92,7 +119,7 @@ export default function Actions() {
               <Button
                 className="primary-button"
                 onClick={() => {
-                  history.push(`/progress`);
+                  history.push(`/signin`);
                 }}
               >
                 See Your Challenge
@@ -315,7 +342,7 @@ export default function Actions() {
 
                   {/* this is for when user has started their own challenge */}
                   {startedChallenge && (
-                    <a href="/progress" className="links">
+                    <a href="/signin" className="links">
                       See your challenge
                     </a>
                   )}

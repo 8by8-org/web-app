@@ -6,23 +6,24 @@ import {
   AiOutlineInstagram,
 } from "react-icons/ai";
 
-function Footer() {
+function Footer({ isShare }) {
+  // If isShare is not true then the social media buttons work.
   return (
     <div className="footer">
       <div className="icons">
         <AiFillFacebook
           onClick={() =>
-            window.open("https://www.facebook.com/8by8vote/", "_blank")
+            !isShare && window.open("https://www.facebook.com/8by8vote/", "_blank")
           }
         />
         <AiFillLinkedin
           onClick={() =>
-            window.open("https://www.linkedin.com/company/8by8vote/", "_blank")
+            !isShare && window.open("https://www.linkedin.com/company/8by8vote/", "_blank")
           }
         />
         <AiOutlineInstagram
           onClick={() =>
-            window.open("https://www.instagram.com/8by8vote/", "_blank")
+            !isShare && window.open("https://www.instagram.com/8by8vote/", "_blank")
           }
         />
       </div>
