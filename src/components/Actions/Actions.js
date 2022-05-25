@@ -35,7 +35,6 @@ export default function Actions() {
       } else {
         setLoading(true);
       }
-      setLoading(false);
     } else {
       if (currentUser) {
         getUserDatabase()
@@ -77,13 +76,12 @@ export default function Actions() {
     setChallengerInfo(JSON.stringify(info));
   }
 
-  return loading === false ? (
+  return loading === true ? (
     <div>
       {/* if all three actions are completed */}
       {registeredVoter && notifyElectionReminders && startedChallenge ? (
         <div className="actions">
           <ConfettiAnimation time={8000} />
-
           <div className="top">
             <div className="avatar-and-status-finished">
               <div className="action-status-finished">
@@ -116,28 +114,29 @@ export default function Actions() {
 
           <div className="action-items">
             <div className="py-2">
-              <Button
-                className="primary-button"
+              <button
+                className="gradient"
                 onClick={() => {
                   history.push(`/signin`);
                 }}
               >
-                See Your Challenge
-              </Button>
+                <span>See Your Challenge</span>
+              </button>
             </div>
 
             <div className="py-2">
-              <Button
+              <button
                 className="secondary-button"
                 onClick={() => toggleInvite.current()}
               >
                 Share About Your Actions
-              </Button>
+              </button>
             </div>
           </div>
         </div>
       ) : (
         // when there are actions that can still be completed by the user
+
         <div className="actions">
           <div className="top">
             <div className="avatar-and-status">
@@ -209,40 +208,38 @@ export default function Actions() {
             {/* action buttons only displayed when they are not completed */}
             {!registeredVoter && (
               <div className="py-2">
-                <Button
-                  className="primary-button"
+                <button
+                  className="gradient"
                   onClick={() => {
                     history.push(`/voterreg`);
                     localStorage.setItem("player", "voterreg");
                   }}
                 >
-                  Register to vote
-                </Button>
+                  <span>Register to vote</span>
+                </button>
               </div>
             )}
 
             {!notifyElectionReminders && (
               <div className="py-2">
-                <Button
-                  className={
-                    registeredVoter ? "primary-button" : "secondary-button"
-                  }
+                <button
+                  className={registeredVoter ? "gradient" : "secondary-button"}
                   onClick={() => {
                     history.push(`/election-reminders`);
                     localStorage.setItem("player", "election-reminders");
                   }}
                 >
-                  Get election reminders
-                </Button>
+                  <span>Get election reminders</span>
+                </button>
               </div>
             )}
 
             {!startedChallenge && (
               <div className="py-2">
-                <Button
+                <button
                   className={
                     registeredVoter && notifyElectionReminders
-                      ? "primary-button"
+                      ? "gradient"
                       : "secondary-button"
                   }
                   onClick={() => {
@@ -250,8 +247,8 @@ export default function Actions() {
                     localStorage.setItem("player", "progress");
                   }}
                 >
-                  Take the challenge
-                </Button>
+                  <span>Take the challenge</span>
+                </button>
               </div>
             )}
 

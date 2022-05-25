@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
-import { Button } from "react-bootstrap";
 import { getFirestore, getDoc, doc } from "firebase/firestore";
 import SignUp1 from "../../assets/images/PlayerWelcome/SignUp1.png";
 import SignUp2 from "../../assets/images/PlayerWelcome/SignUp2.png";
@@ -74,7 +73,7 @@ export default function PlayerWelcome({ isShare }) {
     <div className="player-welcome">
       <div className="top">
         <h1 className="top-heading">
-          <u className="underline">Support</u>{" "}
+          <span className="underline h1">Support</span>{" "}
           {challengerInfo && challengerInfo.name !== null
             ? `${challengerInfo.name}'s`
             : "the"}{" "}
@@ -87,19 +86,19 @@ export default function PlayerWelcome({ isShare }) {
             {challengerInfo && challengerInfo.name !== null
               ? challengerInfo.name
               : "your friend"}{" "}
-            win their <u>8BY8 Challenge</u> by registering to vote or taking
+            win their <u>8by8 Challenge</u> by registering to vote or taking
             other actions to #stopasianhate!
           </b>
         </p>
 
-        <Button
-          className="getStarted-button"
+        <button
+          className="gradient"
           onClick={() => {
             isShare === undefined && history.push(`/actions`);
           }}
         >
-          Get Started
-        </Button>
+          <span>Get Started</span>
+        </button>
         <div align="center">
           <p className="small-text">
             Already have an account?{" "}
@@ -116,12 +115,8 @@ export default function PlayerWelcome({ isShare }) {
       </div>
       <img src={BlackCurve} className="curve" alt="Black Curve" />
       <div className="main-content">
-        <div>
-          <h3 className="heading">
-            <u className="underline">Here's how it works</u>
-          </h3>
-        </div>
-        <p className="subheading">1. Choose an action to take</p>
+        <h2 className="heading underline">Here's how it works</h2>
+        <h3>1. Choose an action to take</h3>
         <p className="text">
           You can take any number of the available actions: register to vote,
           get election reminders or take the 8by8 challenge yourself. Pick one
@@ -130,7 +125,7 @@ export default function PlayerWelcome({ isShare }) {
         <div className="image">
           <img src={SignUp1} alt="8by8 Logo" />
         </div>
-        <p className="subheading">2. Your friend will earn a badge</p>
+        <h3>2. Your friend will earn a badge</h3>
         <p className="text">
           Any of the 3 actions will help your friend earn a badge and get closer
           to winning the challenge.
@@ -138,7 +133,7 @@ export default function PlayerWelcome({ isShare }) {
         <div className="image">
           <img src={SignUp2} alt="8by8 Logo" />
         </div>
-        <p className="subheading">3. Come back and take more actions</p>
+        <h3>3. Come back and take more actions</h3>
         <p className="text">
           Whether it is to help the same friend or a different one, the more
           actions you take, the better! Note that you can only help earn one
@@ -147,14 +142,14 @@ export default function PlayerWelcome({ isShare }) {
         <div className="image">
           <img src={Vote} alt="8by8 Logo" />
         </div>
-        <Button
-          className="getStarted-button"
+        <button
+          className="gradient"
           onClick={() => {
             isShare === undefined && history.push(`/actions`);
           }}
         >
-          Get Started
-        </Button>
+          <span>Get Started</span>
+        </button>
         <p align="center" className="small-text">
           Already have an account?{" "}
           <button

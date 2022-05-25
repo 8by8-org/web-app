@@ -17,6 +17,7 @@ import "./Signin.scss";
 import ReCAPTCHA from "react-google-recaptcha";
 import { dummyPassword } from "../../constants";
 import voteImg from "./../../assets/4-pages/Signin/Vote.png";
+import { getUserDatabase } from "../../functions/UserData";
 
 const localStorageEmailKey = "verifyUserEmail";
 
@@ -38,10 +39,14 @@ export default function Login() {
     if (currentUser) {
       if (playerStatus) {
         history.push(`/${playerStatus}`);
-      } else if (currentUserData && !currentUserData.startedChallenge) {
-        history.push("/actions");
       } else {
-        history.push("/progress");
+        getUserDatabase().then((data) => {
+          if (data && !data.startedChallenge) {
+            history.push("/actions");
+          } else {
+            history.push("/progress");
+          }
+        });
       }
     }
 

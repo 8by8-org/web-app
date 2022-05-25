@@ -57,6 +57,8 @@
       }
       #challenger-avatar {
         width: 100%;
+        position: relative;
+        top: 15px;
       }
       #challenger-crown {
         background-color: black;
@@ -67,8 +69,8 @@
         align-items: center;
         border-radius: 50%;
         position: absolute;
-        bottom: 0px;
-        right: -5px;
+        bottom: -10px;
+        right: 20px;
       }
       #challenger-name {
         @include heading-text($black, 30px);
@@ -114,11 +116,12 @@
 
     .primary-button {
       @include button;
-      outline: 4px solid white;
+      // outline: 4px solid white;
     }
 
     .secondary-button {
-      @include secondary-button;
+      @include inverted-button;
+      width: 100%;
     }
   }
 
