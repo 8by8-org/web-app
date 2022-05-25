@@ -51,15 +51,17 @@ function Invite({ toggleInvite , isShare, won}) {
   const body = "Use this link to " + quote;
 
   useEffect(() => {
-    getUserDatabase().then((data) => {
-      if (data.sharedChallenge) {
-        setShared(true);
-      }
+    if (currentUser) {
+      getUserDatabase().then((data) => {
+        if (data.sharedChallenge) {
+          setShared(true);
+        }
 
-      // when challenge is complete
-      if (data.badges.length >= 8) {
-      }
-    });
+        // when challenge is complete
+        if (data.badges.length >= 8) {
+        }
+      });
+    }
   }, []);
 
   function changeShow() {

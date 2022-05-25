@@ -28,6 +28,22 @@
       fill: black;
       margin: 25px;
     }
+    
+    #close-icon {
+      position: relative;
+      right: 20px;
+      bottom: 20px;
+      svg {
+        width: 30px;
+        height: 30px;
+      }
+    }
+
+    .invite-title {
+      position: relative;
+      right: 40px;
+      bottom: 5px;
+    }
   }
 
   .invite-title {
