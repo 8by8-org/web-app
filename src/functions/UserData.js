@@ -38,6 +38,44 @@ export async function getUserDatabase() {
   }
 }
 
+// gets user's data from firebase based on supplied id
+// able to be immediately fired in auth context to update the context with the user's
+// data from the firestore when the auth state changes
+export function getUserDatabaseByUID(uid) {
+  return new Promise(async (resolve, reject) => {
+    let docRef = doc(db, "users", uid);
+    let docSnap = await getDoc(docRef);
+    if (!docSnap.exists() || docSnap.data().avatar === undefined) {
+      // tries to find user doc 5 times
+      for (let i = 0; i < 5; i++) {
+        await delay(3000);
+        docRef = doc(db, "users", uid);
+        docSnap = await getDoc(docRef);
+        if (docSnap.exists() && docSnap.data().avatar !== undefined) {
+          resolve(docSnap.data());
+        }
+      }
+      reject();
+    } else {
+      resolve(docSnap.data());
+    }
+  });
+}
+
+// gets challenger's data from firebase
+export async function getChallengerDatabase() {
+  const userData = await getUserDatabase();
+  let uid = userData.invitedBy;
+  let docRef = doc(db, "users", uid);
+  let docSnap = await getDoc(docRef);
+  if (!docSnap.exists()) {
+    throw new Error("challenger doc does not exist");
+  } else {
+    console.log("challenger db", docSnap.data());
+    return docSnap.data();
+  }
+}
+
 // call this function when user completes an action
 // ADD email user after certain completed actions
 export async function completedAction(action) {
@@ -45,6 +83,7 @@ export async function completedAction(action) {
   const uid = auth.getAuth().currentUser.uid;
   // sign up for election reminders
   if (action === "election reminders") {
+    emailUser(userData.email, "electionReminder");
     await updateChallengerBadges(userData);
     await updateDoc(doc(db, "users", uid), {
       notifyElectionReminders: true,
@@ -59,6 +98,7 @@ export async function completedAction(action) {
   }
   // registers to vote
   else if (action === "register to vote") {
+    emailUser(userData.email, "registered");
     await updateChallengerBadges(userData);
     await updateDoc(doc(db, "users", uid), {
       isRegisteredVoter: true,
@@ -72,6 +112,11 @@ export async function completedAction(action) {
           },
         }),
       });
+
+      const userData = await getUserDatabase();
+      if (userData.badges.length === 8) {
+        emailUser(userData.email, "challengeWon");
+      }
     }
   }
   // shares challenge
@@ -88,6 +133,11 @@ export async function completedAction(action) {
           },
         }),
       });
+
+      const userData = await getUserDatabase();
+      if (userData.badges.length === 8) {
+        emailUser(userData.email, "challengeWon");
+      }
     }
     // remove after done testing
   } else if (action === "test add badge") {
@@ -101,6 +151,11 @@ export async function completedAction(action) {
         },
       }),
     });
+
+    const userData = await getUserDatabase();
+    if (userData.badges.length === 8) {
+      emailUser(userData.email, "challengeWon");
+    }
   } else {
     throw new Error("specified action does not exist");
   }
@@ -126,6 +181,14 @@ async function updateChallengerBadges(userData) {
     await updateDoc(doc(db, "users", uid), {
       completedActionForChallenger: true,
     });
+
+    const challengerData = await getChallengerDatabase();
+
+    if (challengerData.badges.length >= 8) {
+      emailUser(challengerData.email, "challengeWon");
+    } else {
+      emailUser(challengerData.email, "badgeEarned");
+    }
   }
 }
 
@@ -135,4 +198,16 @@ export async function restartChallenge() {
   await updateDoc(doc(db, "users", uid), {
     challengeEndDate: new Date(Date.now() + 8 * 24 * 60 * 60 * 1000),
   });
+}
+
+export async function makePlayerChallenger() {
+  let uid = auth.getAuth().currentUser.uid;
+  const userRef = doc(db, "users", await uid);
+
+  await updateDoc(userRef, {
+    startedChallenge: true,
+    challengeEndDate: new Date(Date.now() + 8 * 24 * 60 * 60 * 1000),
+  });
+
+  localStorage.removeItem("player");
 }

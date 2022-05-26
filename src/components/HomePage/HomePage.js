@@ -21,7 +21,7 @@ export default function HomePage() {
         <div className="description">
           <img className="logo" src={Logo} alt="8by8 Logo" />
           <div className="text">
-            GET <u className="underline">8 AAPI FRIENDS</u> TO RESISTER TO VOTE
+            GET <u className="underline">8 AAPI FRIENDS</u> TO REGISTER TO VOTE
             IN <u className="underline">8 DAYS</u>
           </div>
           <button
@@ -34,7 +34,7 @@ export default function HomePage() {
       </div>
 
       <div className="curve-div">
-        <img className="curve curve-1" src={Curve1} />
+        <img className="curve curve-1" id="why8by8" src={Curve1} alt="yellow curve" />
       </div>
 
       <div className="content-2">
@@ -55,7 +55,7 @@ export default function HomePage() {
       </div>
 
       <div className="curve-div">
-        <img className="curve" src={Curve2} />
+        <img className="curve" src={Curve2} alt="teal curve" />
       </div>
 
       <div className="content-4">
@@ -100,7 +100,7 @@ export default function HomePage() {
       </div>
 
       <div className="curve-div">
-        <img className="curve" src={Curve3} />
+        <img className="curve" src={Curve3} alt="black curve" />
       </div>
 
       <div className="content-7">
@@ -126,9 +126,10 @@ export default function HomePage() {
           involvement and investment. Our approach involves working with
           community, business, and tech leaders to create voter registration
           solutions that work.
-          <div className="link" onClick={() => history.push("/temp")}>
+          <br />
+          <a href="https://www.8by8.us/" target="_blank" className="link">
             Learn more about 8by8
-          </div>
+          </a>
         </div>
       </div>
     </div>

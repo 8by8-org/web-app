@@ -10,36 +10,46 @@
 import React, { useEffect, useRef, useState } from "react";
 import { useAuth } from "../../contexts/AuthContext";
 import { auth } from "../../firebase";
-import errorMessage from "./../../errorMessage";
+import errorMessage from "./../../functions/errorMessage";
 import { useHistory } from "react-router-dom";
 import { Button, Form } from "react-bootstrap";
 import "./Signin.scss";
 import ReCAPTCHA from "react-google-recaptcha";
 import { dummyPassword } from "../../constants";
+import voteImg from "./../../assets/4-pages/Signin/Vote.png";
+import { getUserDatabase } from "../../functions/UserData";
 
 const localStorageEmailKey = "verifyUserEmail";
 
 export default function Login() {
-  const { currentUser } = useAuth();
+  const { currentUser, currentUserData } = useAuth();
   const history = useHistory();
-  const [error, setError] = useState(null);
   const [message, setMessage] = useState(null);
   const [emailVisible, setEmailVisible] = useState(true);
   const [buttonMessage, setButtonMessage] = useState(" "); // leave blank to hide button
   const [reCaptchaPassed, setReCaptchaPassed] = useState(false);
 
+  const [emailError, setEmailError] = useState("");
+
   const emailRef = useRef();
   const buttonRef = useRef();
-  
   const playerStatus = localStorage.getItem("player");
 
   useEffect(() => {
-    let isMounted = true;
-    
     if (currentUser) {
-      playerStatus ? history.push(`/${playerStatus}`) : history.push('/progress')
+      if (playerStatus) {
+        history.push(`/${playerStatus}`);
+      } else {
+        getUserDatabase().then((data) => {
+          if (data && !data.startedChallenge) {
+            history.push("/actions");
+          } else {
+            history.push("/progress");
+          }
+        });
+      }
     }
-    
+
     if (!auth.isSignInWithEmailLink(auth.getAuth(), window.location.href)) {
       // login step 1
       setButtonMessage("Sign In");
@@ -57,11 +67,11 @@ export default function Login() {
             setButtonMessage(null);
             setMessage("Logging in...");
           } catch (e) {
-            setError(errorMessage(e));
+            setEmailError(errorMessage(e));
           }
         };
         if (!email) {
-          setMessage("Missing email");
+          setEmailError("Please enter your email.");
         } else {
           login(email);
         }
@@ -77,7 +87,7 @@ export default function Login() {
           );
         } catch (e) {
           console.dir(e);
-          setError(errorMessage(e));
+          setEmailError(errorMessage(e));
         }
       };
 
@@ -94,30 +104,24 @@ export default function Login() {
   }, [currentUser]);
 
   return (
-    <div className="signin p-3">
-      <Form className="d-grid signin-form">
-        <p className="signup-text">
-          <span class="signup-header">Sign in</span>
-          <br />
-          to continue your 8by8 journey
-        </p>
-        {error && <p className="error-col">{error}</p>}
-        {message && <p> {message} </p>}
-        {emailVisible && (
-          <div>
-            <Form.Control
-              className="form-control"
-              type="text"
-              placeholder="Name: "
-            ></Form.Control>
-            <Form.Control
-              className="form-control"
-              type="email"
-              placeholder="Email:"
-              ref={emailRef}
-            ></Form.Control>
-          </div>
-        )}
+    <div className="signin">
+      <p className="no-underline-title">
+        Welcome <br /> back!
+      </p>
+
+      <div className="img">
+        <img className="vote-img" src={voteImg} />
+      </div>
+
+      <Form className="form">
+        <Form.Control
+          className="text-input"
+          type="email"
+          placeholder="Email address*"
+          ref={emailRef}
+        ></Form.Control>
+        {emailError && <p className="error-msg">{emailError}</p>}
+
         <div className="recaptcha">
           <ReCAPTCHA
             sitekey="6LcVtjIeAAAAAEmNoh6l54YbfW8QoPm68aI8VJey"
@@ -132,18 +136,22 @@ export default function Login() {
             }}
           />
         </div>
+
+        {message && <p> {message} </p>}
+
         {buttonMessage && (
           <Button
-            className="button"
+            className="gradient-button"
             ref={buttonRef}
             disabled={!reCaptchaPassed}
           >
             {buttonMessage}
           </Button>
         )}
+
         {buttonMessage && (
           <p class="signup-link">
-            Dont have an account? <> </>
+            New to 8by8? <> </>
             <a href="/signup" style={{ style: "inline" }}>
               Sign Up
             </a>

@@ -33,6 +33,7 @@
   font-family: $bebas-neue;
   font-size: 200%;
   text-align: center;
+  background: black;
   background: linear-gradient(270deg, #ffed10 0%, #02ddc3 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -63,7 +64,7 @@
   text-align: center;
   background-color: #101010;
   border-radius: 40px;
-  border: 4px solid #101010;
+  border: 4px solid $white;
   position: relative;
   padding-top: 5px;
   padding-bottom: 5px;
@@ -94,6 +95,12 @@
 @mixin subheading-text($color: $black, $fontSize: 36px) {
   color: $color;
   font-family: $bebas-neue;
+  font-size: $fontSize;
+}
+
+@mixin text($color: $black, $fontSize: 18px) {
+  color: $color;
+  font-family: $lato;
   font-size: $fontSize;
 }
 
