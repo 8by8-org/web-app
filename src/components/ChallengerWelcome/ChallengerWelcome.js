@@ -1,5 +1,7 @@
 import React from "react";
+import MetaTags from 'react-meta-tags';
 import { useHistory } from "react-router-dom";
+import { useAuth } from "../../contexts/AuthContext";
 import "./ChallengerWelcome.scss";
 import Top from "./../../assets/images/ChallengerWelcome/Top.png";
 import Logo from "./../../assets/logos/white-logo.svg";
@@ -7,13 +9,21 @@ import StepOne from "./../../assets/images/ChallengerWelcome/StepOne.png";
 import StepTwo from "./../../assets/images/ChallengerWelcome/StepTwo.png";
 import StepThree from "./../../assets/images/ChallengerWelcome/StepThree.png";
 import StepFour from "./../../assets/images/ChallengerWelcome/StepFour.png";
+import ChallengerShareWon from "../../assets/images/Share/ChallengerShareWon.png";
 
 function ChallengerWelcome() {
   const history = useHistory();
   sessionStorage.setItem("UserType", "Challenger");
 
+  const { currentUser } = useAuth();
+
   return (
     <div className="challenger-welcome">
+      <MetaTags>
+        <meta property="og:title" content="I won the 8by8 Challenge to #stopasianhate"/>
+        <meta property="og:image" content={ChallengerShareWon}/>
+        <meta property="og:url" content={"https://challenge.8by8.us/challengerwelcome"}/>
+      </MetaTags>
       <div className="content-1">
         <img className="background" src={Top} alt="background" />
         <div className="container">
@@ -34,12 +44,14 @@ function ChallengerWelcome() {
         >
           Get Started
         </button>
-        <p className="small-text">
-          Already have an account?{" "}
-          <span className="link" onClick={() => history.push("/signin")}>
-            Sign in
-          </span>
-        </p>
+        {!currentUser && (
+          <p className="small-text">
+            Already have an account?{" "}
+            <span className="link" onClick={() => history.push("/signin")}>
+              Sign in
+            </span>
+          </p>
+        )}
       </div>
 
       <div className="content-3">
@@ -84,12 +96,14 @@ function ChallengerWelcome() {
         >
           Get Started
         </button>
-        <p className="small-text">
-          Already have an account?{" "}
-          <span className="link" onClick={() => history.push("/signin")}>
-            Sign in
-          </span>
-        </p>
+        {!currentUser && (
+          <p className="small-text">
+            Already have an account?{" "}
+            <span className="link" onClick={() => history.push("/signin")}>
+              Sign in
+            </span>
+          </p>
+        )}
       </div>
     </div>
   );

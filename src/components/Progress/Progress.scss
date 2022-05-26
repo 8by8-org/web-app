@@ -1,3 +1,5 @@
+@import "./../../styles/main.scss";
+
 .progress-page {
   .section-1 {
     .days-blob-container {
@@ -48,20 +50,23 @@
   }
 
   .section-3 {
-    display: grid;
     display: -ms-grid;
-    grid-template-columns: auto auto;
+    display: grid;
     -ms-grid-columns: auto auto;
+    grid-template-columns: auto auto;
     overflow: hidden;
     .badges {
       @include center;
-      flex-direction: row;
-      margin-bottom: 80px;
+      margin-bottom: 32px;
       .blob {
         @include center;
         position: relative;
         z-index: 0;
         width: 0px;
+        img {
+          width: 182px;
+          height: 183px;
+        }
       }
       .disable {
         opacity: 0.2;
@@ -73,8 +78,9 @@
         z-index: 0.1;
         width: 0;
         .icon {
-          width: 120px;
-          height: 120px;
+          width: 100px;
+          height: 100px;
+          margin-bottom: 8px;
         }
         .index {
           color: $white;
@@ -89,20 +95,27 @@
         }
       }
     }
-    @include md-screen {
-      .badges {
-        .blob {
-          img {
-            width: 200px;
-            height: 200px;
-          }
-        }
-        .blob-content {
-          .icon {
-            width: 130px;
-            height: 130px;
-          }
-        }
+
+    .badges {
+      .blob-img {
+        position: relative;
+      }
+
+      .blob-img-1 {
+        right: 16px;
+      }
+
+      .blob-img-3 {
+        right: 16px;
+      }
+
+      .blob-img-7 {
+        bottom: 10px;
+        right: 10px;
+      }
+
+      .blob-img-8 {
+        left: 20px;
       }
     }
   }
