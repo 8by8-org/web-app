@@ -30,7 +30,7 @@ function Header({ isShare }) {
                 }
                 id="feedback-icon"
               >
-                <img src={feedback} />
+                <img src={feedback} alt="feedback icon" />
               </button>
 
               <Nav.Link to="#" id="sidebar-icon">
