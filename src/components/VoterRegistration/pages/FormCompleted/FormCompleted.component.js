@@ -7,14 +7,11 @@ import ScrollToTop from "../../../../functions/ScrollToTop";
 
 export const FormCompleted = () => {
   const history = useHistory();
-<<<<<<< HEAD:src/components/VoterRegistration/pages/FormCompleted/FormCompleted.component.js
-=======
   const { currentUserData } = useAuth();
   let redirect = "/progress";
   if (currentUserData && currentUserData.invitedBy.length > 0) {
     redirect = "/actions";
   }
->>>>>>> upstream/development:src/components/VoterRegistration/components/FormCompleted/FormCompleted.component.js
 
   ScrollToTop();
 

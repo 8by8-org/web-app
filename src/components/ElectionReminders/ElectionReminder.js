@@ -38,9 +38,9 @@ export default function ElectionReminder() {
         /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/
       )
     ) {
-      console.log("Please complete all of the required fields.");
       return;
     } else {
+      console.log("completed action");
       completedAction("election reminders");
     }
   };
