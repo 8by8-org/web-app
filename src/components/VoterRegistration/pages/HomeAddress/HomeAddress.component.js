@@ -30,7 +30,8 @@ export const HomeAddress = () => {
   using the 8x8 app, or to the appropriate previous page if that information is incomplete
   */
   useEffect(() => {
-    if (currentUserData.isRegisteredVoter) history.push("/voterreg/completed");
+    if (currentUserData && currentUserData.isRegisteredVoter)
+      history.push("/voterreg/completed");
     else if (
       voterRegistrationData.zip.length === 0 ||
       voterRegistrationData.dob.length === 0

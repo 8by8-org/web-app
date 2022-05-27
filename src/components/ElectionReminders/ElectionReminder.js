@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { useHistory } from "react-router-dom";
 import { getFirestore, doc, getDoc, updateDoc } from "firebase/firestore";
 import { useAuth } from "../../contexts/AuthContext";
@@ -9,6 +9,9 @@ import "./ElectionReminder.scss";
 const db = getFirestore();
 
 export default function ElectionReminder() {
+  const domChangesTriggered = useRef(false);
+  const thankYouDivChangesTriggered = useRef(false);
+
   const [showContinueButton, setShowContinueButton] = useState(false);
   const [showCompletedMessage, setShowCompletedMessage] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -35,9 +38,9 @@ export default function ElectionReminder() {
         /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/
       )
     ) {
-      console.log("Please complete all of the required fields.");
       return;
     } else {
+      console.log("completed action");
       completedAction("election reminders");
     }
   };
@@ -68,8 +71,6 @@ export default function ElectionReminder() {
         //empty variables to hold input elements
         let title,
           legend,
-          titleUnderlined,
-          titleNotUnderlined,
           prefix,
           fnameLabel,
           firstNameInput,
@@ -86,76 +87,69 @@ export default function ElectionReminder() {
         //when changes to the DOM occur, loop through them and check if the appropriate inputs have been created
         for (const mutation of mutationsList) {
           if (mutation.type === "childList") {
-            //elements to update text content
-            legend = document.getElementsByClassName("at-legend")[0];
-            fnameLabel = document.getElementById(
-              "NVSignupForm61312-ContactInformation-FirstName"
-            );
-            lnameLabel = document.getElementById(
-              "NVSignupForm61312-ContactInformation-LastName"
-            );
-            addressLabel = document.getElementById(
-              "NVSignupForm61312-ContactInformation-AddressLine1"
-            );
-            emailLabel = document.getElementById(
-              "NVSignupForm61312-ContactInformation-EmailAddress"
-            );
-            if (legend)
-              legend.textContent =
-                "8by8 partners with Rock the Vote to help you get reminders for upcoming elections near you, so you'll never miss an election!";
-
-            if (fnameLabel) {
-              if (fnameLabel.childNodes.length)
-                fnameLabel.childNodes[0].textContent = "First Name*";
-            }
-            if (lnameLabel) {
-              if (lnameLabel.childNodes.length)
-                lnameLabel.childNodes[0].textContent = "Last Name*";
-            }
-            if (addressLabel) {
-              if (addressLabel.childNodes.length)
-                addressLabel.childNodes[0].textContent = "Street Address*";
-            }
-            if (emailLabel) {
-              if (emailLabel.childNodes.length)
-                emailLabel.childNodes[0].textContent = "Email*";
-            }
-
-            //elements to hide
-            prefix = document.getElementById(
-              "NVSignupForm61312-ContactInformation-Prefix"
-            );
-            if (prefix) prefix.remove();
-            title = document.getElementsByClassName("at-title")[0];
-            if (title) title.remove();
-
-            //inputs
-            firstNameInput = document.getElementsByName("FirstName")[0];
-            lastNameInput = document.getElementsByName("LastName")[0];
-            addressLine1Input = document.getElementsByName("AddressLine1")[0];
-            zipCodeInput = document.getElementsByName("PostalCode")[0];
-            emailAddressInput = document.getElementsByName("EmailAddress")[0];
-            submitBtn = document.getElementsByClassName("at-submit")[0];
             thankYouDiv = document.getElementsByClassName("thankYou")[0];
 
-            //if all input elements have loaded
-            if (
-              firstNameInput &&
-              lastNameInput &&
-              addressLine1Input &&
-              zipCodeInput &&
-              emailAddressInput &&
-              submitBtn
-            ) {
-              //attach the onsubmit function to the submit button
-              submitBtn.onclick = () =>
-                onSubmit(
-                  firstNameInput,
-                  lastNameInput,
-                  addressLine1Input,
-                  zipCodeInput,
-                  emailAddressInput
-                );
+            if (!domChangesTriggered.current) {
+              //get elements to update
+              legend = document.getElementsByClassName("at-legend")[0];
+              fnameLabel = document.getElementById(
+                "NVSignupForm61312-ContactInformation-FirstName"
+              );
+              lnameLabel = document.getElementById(
+                "NVSignupForm61312-ContactInformation-LastName"
+              );
+              addressLabel = document.getElementById(
+                "NVSignupForm61312-ContactInformation-AddressLine1"
+              );
+              emailLabel = document.getElementById(
+                "NVSignupForm61312-ContactInformation-EmailAddress"
+              );
+              //inputs
+              firstNameInput = document.getElementsByName("FirstName")[0];
+              lastNameInput = document.getElementsByName("LastName")[0];
+              addressLine1Input = document.getElementsByName("AddressLine1")[0];
+              zipCodeInput = document.getElementsByName("PostalCode")[0];
+              emailAddressInput = document.getElementsByName("EmailAddress")[0];
+              submitBtn = document.getElementsByClassName("at-submit")[0];
+              //elements to hide
+              prefix = document.getElementById(
+                "NVSignupForm61312-ContactInformation-Prefix"
+              );
+              title = document.getElementsByClassName("at-title")[0];
+              //if all of the elements have loaded
+              if (
+                legend &&
+                fnameLabel &&
+                lnameLabel &&
+                addressLabel &&
+                emailLabel &&
+                prefix &&
+                title &&
+                firstNameInput &&
+                lastNameInput &&
+                addressLine1Input &&
+                zipCodeInput &&
+                emailAddressInput &&
+                submitBtn
+              ) {
+                domChangesTriggered.current = true;
+                legend.textContent =
+                  "8by8 partners with Rock the Vote to help you get reminders for upcoming elections near you, so you'll never miss an election!";
+                fnameLabel.childNodes[0].textContent = "First Name*";
+                lnameLabel.childNodes[0].textContent = "Last Name*";
+                addressLabel.childNodes[0].textContent = "Street Address*";
+                emailLabel.childNodes[0].textContent = "Email*";
+                prefix.remove();
+                title.remove();
+                submitBtn.onclick = () =>
+                  onSubmit(
+                    firstNameInput,
+                    lastNameInput,
+                    addressLine1Input,
+                    zipCodeInput,
+                    emailAddressInput
+                  );
+              }
             }
 
             //if the thankYouDiv has been created, the user has successfully submitted the form.
@@ -164,16 +158,21 @@ export default function ElectionReminder() {
               const twShareBtn = document.getElementById("twShareBtn");
               const contributionsDiv =
                 document.getElementsByClassName("contributions")[0];
-              if (fbShareBtn) fbShareBtn.remove(); //for now remove these share buttons as they do not share the 8by8 challenge link
-              if (twShareBtn) twShareBtn.remove();
-              //if the contributions div exists and its childNodes exist, the first should be an h1. capitalize the text
-              if (contributionsDiv) {
+              if (
+                !thankYouDivChangesTriggered.current &&
+                fbShareBtn &&
+                twShareBtn &&
+                contributionsDiv
+              ) {
+                thankYouDivChangesTriggered.current = true;
+                fbShareBtn.remove();
+                twShareBtn.remove();
                 if (contributionsDiv.childNodes.length) {
                   contributionsDiv.childNodes[0].textContent =
                     "Thank you for joining us!";
                 }
+                if (!showContinueButton) setShowContinueButton(true);
               }
-              if (!showContinueButton) setShowContinueButton(true);
             }
           }
         }
@@ -188,6 +187,8 @@ export default function ElectionReminder() {
       /*dynamically load the RTV script once the page is rendered and the observer instance is created, 
           so the RTV script can find the ngp-form div and the observer is listening for DOM changes*/
       const rtvScript = document.createElement("script");
+      rtvScript.type = "text/javascript";
+      rtvScript.crossOrigin = "anonymous";
       rtvScript.src = "https://d1aqhv4sn5kxtx.cloudfront.net/actiontag/at.js";
       document.body.appendChild(rtvScript);
 
@@ -195,8 +196,6 @@ export default function ElectionReminder() {
       return () => {
         rtvScript.remove();
       };
-      //   }
-      // };
     }
 
     setTimeout(() => {
@@ -207,7 +206,7 @@ export default function ElectionReminder() {
         setLoading(true);
       }
       initialize();
-    }, 3000)
+    }, 3000);
   }, []);
 
   return loading ? (
@@ -247,7 +246,7 @@ export default function ElectionReminder() {
         )}
       </div>
     </div>
-    ) : (
+  ) : (
     <LoadingWheel overlay={false} />
-    )
+  );
 }
