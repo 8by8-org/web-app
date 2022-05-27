@@ -41,7 +41,7 @@ export default function Login() {
         history.push(`/${playerStatus}`);
       } else {
         getUserDatabase().then((data) => {
-          if (data && !data.startedChallenge) {
+          if (data && !data.startedChallenge && (localStorage.getItem("challengerInfo") || data.invitedBy)) {
             history.push("/actions");
           } else {
             history.push("/progress");
@@ -150,7 +150,7 @@ export default function Login() {
         )}
 
         {buttonMessage && (
-          <p class="signup-link">
+          <p className="signup-link">
             New to 8by8? <> </>
             <a href="/signup" style={{ style: "inline" }}>
               Sign Up
