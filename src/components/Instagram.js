@@ -8,10 +8,12 @@ import igpost2 from "../assets/images/Invite/igpost2.png";
 import igpost3 from "../assets/images/Invite/igpost3.png";
 import igpostchallenger from "../assets/images/Invite/igpostchallenger.png";
 import igpostplayer from "../assets/images/Invite/igpostplayer.png";
-import {completedAction} from "../functions/UserData";
+import { completedAction } from "../functions/UserData";
+import Notification from "./Notification/Notification";
 
 function Instagram({ toggleIG, isShare, shareUrl }) {
   const [show, setShow] = useState(false);
+  const [copyNotif, setCopyNotif] = useState(false);
 
   React.useEffect(() => {
     toggleIG.current = changeShow;
@@ -25,9 +27,13 @@ function Instagram({ toggleIG, isShare, shareUrl }) {
   // Copys the url thats to be shared into the clipboard.
   function copyToClipboard() {
     navigator.clipboard.writeText(shareUrl);
+    setCopyNotif(!copyNotif); //shows notif on change of copyNotif state
   }
 
-  const mobile = /android|webos|iphone|ipad|ipod|blackberry|iemobile|opera mini/i.test(navigator.userAgent.toLowerCase());
+  const mobile =
+    /android|webos|iphone|ipad|ipod|blackberry|iemobile|opera mini/i.test(
+      navigator.userAgent.toLowerCase()
+    );
 
   // const quote = isShare ?
   //   "Support " + JSON.parse(localStorage.getItem("challengerInfo")).name + "'s 8by8 Challenge to #stopasianhate!"
@@ -56,45 +62,58 @@ function Instagram({ toggleIG, isShare, shareUrl }) {
 
         <div className="info">
           <p>
-            <span className="bold-text">{mobile ? 'Long press' : 'Right click'} on sharable 8by8 images below</span> to save them to your device.
-            <span className="bold-text"> Copy the invite link</span> below to include in your Instagram post or story to invite friends!
+            <span className="bold-text">
+              {mobile ? "Long press" : "Right click"} on sharable 8by8 images
+              below
+            </span>{" "}
+            to save them to your device.
+            <span className="bold-text"> Copy the invite link</span> below to
+            include in your Instagram post or story to invite friends!
           </p>
         </div>
 
         <div className="img-container">
-            <img src={igpost1} alt="instagram post 1" />
-            <img src={igpost2} alt="instagram post 2" />
-            <img src={igpost3} alt="instagram post 3" />
-            <img src={isShare ? igpostplayer : igpostchallenger} alt="instagram post 4" />
+          <img src={igpost1} alt="instagram post 1" />
+          <img src={igpost2} alt="instagram post 2" />
+          <img src={igpost3} alt="instagram post 3" />
+          <img
+            src={isShare ? igpostplayer : igpostchallenger}
+            alt="instagram post 4"
+          />
         </div>
 
-        <button className="gradient"
-        onClick={() => {
-          if (mobile) {
-            window.open("https://www.instagram.com/8by8vote/", "_self")
-            completedAction("share challenge");
-          } else {
-            window.open("https://www.instagram.com/8by8vote/", "_blank")
-            completedAction("share challenge");
-          }
-        }}
+        <button
+          className="gradient"
+          onClick={() => {
+            if (mobile) {
+              window.open("https://www.instagram.com/8by8vote/", "_self");
+              completedAction("share challenge");
+            } else {
+              window.open("https://www.instagram.com/8by8vote/", "_blank");
+              completedAction("share challenge");
+            }
+          }}
         >
           GO TO INSTAGRAM
         </button>
 
         <div className="copy-link-again">
-          <span className="link" onClick={() => {
-            if (navigator.clipboard) {
-              copyToClipboard();
-              completedAction("share challenge");
-            }
-          }}>
+          <span
+            className="link"
+            onClick={() => {
+              if (navigator.clipboard) {
+                copyToClipboard();
+                completedAction("share challenge");
+              }
+            }}
+          >
             Copy Invite Link Again
           </span>
         </div>
       </nav>
 
-     </div>
+      <Notification text={"Copied!"} enable={copyNotif} />
+    </div>
   );
 }
 

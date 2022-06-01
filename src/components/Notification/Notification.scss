@@ -1,0 +1,54 @@
+@import "./../../styles/main.scss";
+
+.notif-background {
+  width: 100%;
+  display: flex;
+  justify-content: end;
+  padding-right: 20px;
+}
+
+.Notification {
+  height: 50px;
+  width: 200px;
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  border-radius: 6px;
+  overflow: hidden;
+  border: 2px black solid;
+  position: fixed;
+  bottom: 10px;
+
+  .text {
+    font-size: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-grow: 1;
+  }
+
+  .load {
+    background-color: $teal;
+    height: 4px;
+  }
+
+  .load.none {
+    width: 0%;
+    transition: 0s;
+  }
+
+  .load.full {
+    width: 100%;
+    transition: 2s;
+    transition-timing-function: linear;
+  }
+}
+
+.Notification.show {
+  opacity: 1;
+}
+
+.Notification.none {
+  opacity: 0;
+  transition: 350ms;
+}
