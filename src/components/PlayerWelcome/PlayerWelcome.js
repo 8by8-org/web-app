@@ -99,19 +99,21 @@ export default function PlayerWelcome({ isShare }) {
         >
           <span>Get Started</span>
         </button>
-        <div align="center">
-          <p className="small-text">
-            Already have an account?{" "}
-            <button
-              className="signin-link blue"
-              onClick={() => {
-                isShare === undefined && history.push(`/signin`);
-              }}
-            >
-              Sign In
-            </button>
-          </p>
-        </div>
+        {!currentUser && (
+          <div align="center">
+            <p className="small-text">
+              Already have an account?{" "}
+              <button
+                className="signin-link blue"
+                onClick={() => {
+                  isShare === undefined && history.push(`/signin`);
+                }}
+              >
+                Sign In
+              </button>
+            </p>
+          </div>
+        )}
       </div>
       <img src={BlackCurve} className="curve" alt="Black Curve" />
       <div className="main-content">
@@ -150,17 +152,19 @@ export default function PlayerWelcome({ isShare }) {
         >
           <span>Get Started</span>
         </button>
-        <p align="center" className="small-text">
-          Already have an account?{" "}
-          <button
-            className="signin-link black"
-            onClick={() => {
-              isShare === undefined && history.push(`/signin`);
-            }}
-          >
-            Sign In
-          </button>
-        </p>
+        {!currentUser && (
+          <p align="center" className="small-text">
+            Already have an account?{" "}
+            <button
+              className="signin-link black"
+              onClick={() => {
+                isShare === undefined && history.push(`/signin`);
+              }}
+            >
+              Sign In
+            </button>
+          </p>
+        )}
       </div>
     </div>
   ) : (
