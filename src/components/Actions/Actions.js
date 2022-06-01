@@ -44,7 +44,6 @@ export default function Actions() {
               setStartedChallenge(data.startedChallenge);
               setNotifyElectionReminders(data.notifyElectionReminders);
               getChallengerInfo(data.invitedBy);
-              setLoading(true);
             } else {
               history.push(`/signin`);
             }
@@ -77,6 +76,7 @@ export default function Actions() {
     info.challengerID = invitedBy;
     setChallengerInfo(info);
     localStorage.setItem("challengerInfo", JSON.stringify(info));
+    setLoading(true);
   }
 
   return loading === true ? (
