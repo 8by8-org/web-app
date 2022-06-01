@@ -71,10 +71,10 @@ function Instagram({ toggleIG, isShare, shareUrl }) {
         <button className="gradient"
         onClick={() => {
           if (mobile) {
-            window.open("https://www.instagram.com/8by8vote/", "_self")
+            window.open("https://www.instagram.com/", "_self")
             completedAction("share challenge");
           } else {
-            window.open("https://www.instagram.com/8by8vote/", "_blank")
+            window.open("https://www.instagram.com/", "_blank")
             completedAction("share challenge");
           }
         }}
