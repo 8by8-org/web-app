@@ -35,6 +35,11 @@ export default function PlayerWelcome({ isShare }) {
         info.challengerID = code;
         isShare === undefined &&
           localStorage.setItem("challengerInfo", JSON.stringify(info));
+        if (isShare === false) {
+          setChallengerInfo(info);
+        } else {
+          setChallengerInfo(JSON.parse(localStorage.getItem("challengerInfo")));
+        }
       } else {
         history.push(`/signin`);
       }
@@ -49,8 +54,8 @@ export default function PlayerWelcome({ isShare }) {
       info.challengerID = code;
       localStorage.setItem("challengerInfo", JSON.stringify(info));
       auth.getAuth().signOut();
+      setChallengerInfo(JSON.parse(localStorage.getItem("challengerInfo")));
     }
-    setChallengerInfo(JSON.parse(localStorage.getItem("challengerInfo")));
   }
 
   // If code that is gotten from the url is playerwelcome or isShare is true then, if there is challengerInfo in
