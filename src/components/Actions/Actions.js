@@ -10,8 +10,8 @@ import Avatar3 from "./../../assets/avatars/avatar3.svg";
 import Avatar4 from "./../../assets/avatars/avatar4.svg";
 import WhiteCurve from "./../../assets/images/Actions/Union.svg";
 import Crown from "./../../assets/images/Actions/Crown.svg";
-import ConfettiAnimation from "./../ConfettiAnimation";
-import Invite from "../Invite.js";
+import ConfettiAnimation from "../Utility/ConfettiAnimation";
+import Invite from "../Utility/Invite/Invite.js";
 import "./Actions.scss";
 import { LoadingWheel } from "../LoadingWheel/LoadingWheel.component";
 

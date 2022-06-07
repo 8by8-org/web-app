@@ -17,7 +17,7 @@ import HomePage from "./HomePage/HomePage";
 import Progress from "./Progress/Progress";
 import ChallengerWelcome from "./ChallengerWelcome/ChallengerWelcome";
 import ElectionReminder from "./ElectionReminders/ElectionReminder";
-import Footer from "./Footer";
+import Footer from "./Footer/Footer";
 import PlayerWelcome from "./PlayerWelcome/PlayerWelcome";
 import Actions from "./Actions/Actions";
 import TOS from "./Legal/TOS";

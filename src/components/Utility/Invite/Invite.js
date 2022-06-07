@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useAuth } from "../contexts/AuthContext";
+import { useAuth } from "../../../contexts/AuthContext";
 import { Nav } from "react-bootstrap";
 import "./Invite.scss";
 import * as MdIcons from "react-icons/md";
@@ -10,17 +10,17 @@ import {
   WhatsappShareButton,
   EmailShareButton,
 } from "react-share";
-import { completedAction, getUserDatabase } from "../functions/UserData";
-import CalendarSvg from "../assets/images/Invite/Calendar.svg";
-import FacebookSvg from "../assets/images/Invite/Facebook.svg";
-import TwitterSvg from "../assets/images/Invite/Twitter.svg";
-import InstagramSvg from "../assets/images/Invite/Instagram.svg";
-import FacebookMessengerSvg from "../assets/images/Invite/FacebookMessenger.svg";
-import WhatsAppSvg from "../assets/images/Invite/WhatsApp.svg";
-import EmailSvg from "../assets/images/Invite/Email.svg";
-import TextSvg from "../assets/images/Invite/Text.svg";
-import Instagram from "./Instagram";
-import Preview from "./Invite/Components/Preview";
+import { completedAction, getUserDatabase } from "../../../functions/UserData";
+import CalendarSvg from "../../../assets/images/Invite/Calendar.svg";
+import FacebookSvg from "../../../assets/images/Invite/Facebook.svg";
+import TwitterSvg from "../../../assets/images/Invite/Twitter.svg";
+import InstagramSvg from "../../../assets/images/Invite/Instagram.svg";
+import FacebookMessengerSvg from "../../../assets/images/Invite/FacebookMessenger.svg";
+import WhatsAppSvg from "../../../assets/images/Invite/WhatsApp.svg";
+import EmailSvg from "../../../assets/images/Invite/Email.svg";
+import TextSvg from "../../../assets/images/Invite/Text.svg";
+import Instagram from "../../Instagram/Instagram";
+import Preview from "../../Invite/Components/Preview";
 
 function Invite({ toggleInvite, isShare, won }) {
   const { currentUser } = useAuth();

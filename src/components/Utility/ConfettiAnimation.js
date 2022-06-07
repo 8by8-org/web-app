@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Confetti from "react-confetti";
-import { delay } from "./../functions/UserData";
+import { delay } from "../../functions/UserData";
 
 function ConfettiAnimation(props) {
   // gets the total height of the page content

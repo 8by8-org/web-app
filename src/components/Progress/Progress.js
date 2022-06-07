@@ -7,10 +7,10 @@ import {
 import { useAuth } from "../../contexts/AuthContext";
 import { addInvitedBy } from "../../functions/AddInvite";
 import { makePlayerChallenger } from "../../functions/UserData";
-import Invite from "../Invite.js";
+import Invite from "../Utility/Invite/Invite.js";
 import { LoadingWheel } from "../LoadingWheel/LoadingWheel.component";
 import PopupModal from "../PopupModal/PopupModal";
-import ConfettiAnimation from "../ConfettiAnimation";
+import ConfettiAnimation from "../Utility/ConfettiAnimation";
 import CurveA from "./../../assets/2-shapes/curve-a.svg";
 import BlobDay from "./../../assets/4-pages/Progress/BlobDay.svg";
 import "./Progress.scss";

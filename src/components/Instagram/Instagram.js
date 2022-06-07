@@ -1,14 +1,14 @@
 import React, { useState } from "react";
 import { Nav } from "react-bootstrap";
-import "./Invite.scss";
+import "../Utility/Invite/Invite.scss";
 import "./Instagram.scss";
 import * as MdIcons from "react-icons/md";
-import igpost1 from "../assets/images/Invite/igpost1.png";
-import igpost2 from "../assets/images/Invite/igpost2.png";
-import igpost3 from "../assets/images/Invite/igpost3.png";
-import igpostchallenger from "../assets/images/Invite/igpostchallenger.png";
-import igpostplayer from "../assets/images/Invite/igpostplayer.png";
-import {completedAction} from "../functions/UserData";
+import igpost1 from "../../assets/images/Invite/igpost1.png";
+import igpost2 from "../../assets/images/Invite/igpost2.png";
+import igpost3 from "../../assets/images/Invite/igpost3.png";
+import igpostchallenger from "../../assets/images/Invite/igpostchallenger.png";
+import igpostplayer from "../../assets/images/Invite/igpostplayer.png";
+import {completedAction} from "../../functions/UserData";
 
 function Instagram({ toggleIG, isShare, shareUrl }) {
   const [show, setShow] = useState(false);
