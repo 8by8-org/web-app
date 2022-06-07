@@ -26,4 +26,4 @@ yarn-error.log*
 
 *.code-workspace
 
-/.idea
+.idea/
