@@ -87,6 +87,7 @@ p,
   text-decoration: underline;
   text-decoration-color: $teal;
   text-decoration-thickness: 10px;
+  text-decoration-skip-ink: none;
   // non-iOS devices
   @supports not (-webkit-touch-callout: none) {
     text-decoration: underline $teal 10px;
