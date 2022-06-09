@@ -69,6 +69,11 @@ export default function Progress() {
           onClick={() => {
             restartChallenge();
             fetchUserData();
+            setButton(
+              <button className="gradient" onClick={() => toggleInvite.current()}>
+                Invite friends
+              </button>
+            );
           }}
         >
           Restart Challenge
@@ -234,6 +239,11 @@ export default function Progress() {
                   restartChallenge();
                   fetchUserData();
                   setOpenModal(false);
+                  setButton(
+                    <button className="gradient" onClick={() => toggleInvite.current()}>
+                      Invite friends
+                    </button>
+                  );
                 }}
               >
                 <span>Restart Challenge</span>
