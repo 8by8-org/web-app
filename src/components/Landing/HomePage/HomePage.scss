@@ -10,7 +10,7 @@
   }
 
   @mixin blob-background(
-    $background: url(src/assets/images/HomePage/Blob1.svg)
+    $background: url(../../../assets/images/HomePage/Blob1.svg)
   ) {
     display: flex;
     flex-direction: column;
@@ -42,7 +42,7 @@
   }
 
   .content-1 {
-    background-image: url(src/assets/images/HomePage/Background.png);
+    background-image: url(../../../assets/images/HomePage/Background.png);
     background-repeat: no-repeat;
     background-size: cover;
     padding-bottom: 100px;
@@ -159,10 +159,10 @@
       @include blob-background();
     }
     .stat-2 {
-      @include blob-background(url(src/assets/images/HomePage/Blob2.svg));
+      @include blob-background(url(../../../assets/images/HomePage/Blob2.svg));
     }
     .stat-3 {
-      @include blob-background(url(src/assets/images/HomePage/Blob3.svg));
+      @include blob-background(url(../../../assets/images/HomePage/Blob3.svg));
     }
     .stat {
       max-width: 320px;

@@ -124,7 +124,7 @@ export default function Progress() {
             alt="player badge background blob"
             className={icon ? "blob-img blob-img-" + index : "disable"}
             src={
-              require(`./../../assets/4-pages/Progress/Badges/Blob${index}.png`)
+              require(`../../../assets/4-pages/Progress/Badges/Blob${index}.png`)
                 .default
             }
           />
@@ -135,7 +135,7 @@ export default function Progress() {
               alt="player badge icon"
               className="icon"
               src={
-                require(`./../../assets/4-pages/Progress/Badges/${icon}.svg`)
+                require(`../../../assets/4-pages/Progress/Badges/${icon}.svg`)
                   .default
               }
             />
