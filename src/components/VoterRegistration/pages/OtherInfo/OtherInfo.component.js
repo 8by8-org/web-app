@@ -6,7 +6,7 @@ import axios from "axios";
 import "../../VoterRegistration.scss";
 import { Tooltip } from "../Tooltip/Tooltip.component";
 import { completedAction } from "../../../../functions/UserData";
-import { LoadingWheel } from "../../../LoadingWheel/LoadingWheel.component";
+import { LoadingWheel } from "../../../Utility/LoadingWheel/LoadingWheel.component";
 import ScrollToTop from "../../../../functions/ScrollToTop";
 
 const apiUrl = "https://usvotes-6vsnwycl4q-uw.a.run.app";

@@ -19,8 +19,8 @@ import FacebookMessengerSvg from "../../../assets/images/Invite/FacebookMessenge
 import WhatsAppSvg from "../../../assets/images/Invite/WhatsApp.svg";
 import EmailSvg from "../../../assets/images/Invite/Email.svg";
 import TextSvg from "../../../assets/images/Invite/Text.svg";
-import Instagram from "../../Instagram/Instagram";
-import Preview from "../../Invite/Components/Preview";
+import Instagram from "../../Challenge/Invite/Instagram/Instagram";
+import Preview from "../../Challenge/Invite/Preview";
 
 function Invite({ toggleInvite, isShare, won }) {
   const { currentUser } = useAuth();
