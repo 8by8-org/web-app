@@ -63,6 +63,22 @@ export default function Progress() {
 
     // 8 days complete
     else if (challengeVoid) {
+      setButton(
+        <button
+          className="inverted"
+          onClick={() => {
+            restartChallenge();
+            fetchUserData();
+            setButton(
+              <button className="gradient" onClick={() => toggleInvite.current()}>
+                Invite friends
+              </button>
+            );
+          }}
+        >
+          Restart Challenge
+        </button>
+      );
       setOpenModal(true);
     }
   }, [challengeVoid, challengeFinished]);
@@ -175,10 +191,9 @@ export default function Progress() {
         {button}
         {!registeredVoter ? (
           <div>
-            <p className="text-center mt-24px b6">
+            <p className="text-center mt-24px b2">
               Not registered to vote yet?
-            </p>
-            <p className="text-center b2">
+              <br />
               <a href="/voterreg">Register now</a> and earn a badge!
             </p>
           </div>
@@ -224,6 +239,11 @@ export default function Progress() {
                   restartChallenge();
                   fetchUserData();
                   setOpenModal(false);
+                  setButton(
+                    <button className="gradient" onClick={() => toggleInvite.current()}>
+                      Invite friends
+                    </button>
+                  );
                 }}
               >
                 <span>Restart Challenge</span>
