@@ -14,6 +14,7 @@ import { emailUser } from "./../../functions/Email";
 import { getUserType } from "./../../functions/UserType";
 import { addUserToDB } from "./AddUserToDB";
 import "./SignupPage.scss";
+import MetaTags from 'react-meta-tags';
 
 export default function SignupPage() {
   const { currentUser, currentUserData } = useAuth();
@@ -132,6 +133,13 @@ export default function SignupPage() {
 
   return (
     <div className="signup">
+      <MetaTags>
+        <meta
+          name="description"
+          content="8by8 Challenge App, made by 8by8.us with ❤️ "
+        />
+        <title>8by8</title>
+      </MetaTags>
       <p className="normal-title">Sign up</p>
       <p className="no-underline-title">to start your 8by8 journey</p>
 

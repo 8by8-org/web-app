@@ -4,6 +4,7 @@ import { useAuth } from "../../../../contexts/AuthContext";
 
 import "../../VoterRegistration.scss";
 import ScrollToTop from "../../../../functions/ScrollToTop";
+import MetaTags from 'react-meta-tags';
 
 export const FormCompleted = () => {
   const history = useHistory();
@@ -17,6 +18,13 @@ export const FormCompleted = () => {
 
   return (
     <form className="voterRegForm">
+      <MetaTags>
+        <meta
+          name="description"
+          content="8by8 Challenge App, made by 8by8.us with ❤️ "
+        />
+        <title>8by8</title>
+      </MetaTags>
       <h1 className="register-form-title">
         <u className="underline">YOU COMPLETE</u>D<br />
         THE FORM
