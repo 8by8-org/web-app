@@ -82,6 +82,11 @@
     color: black;
   }
 
+  #NVSignupForm61312-ContactInformation-SmsLegalDisclaimer a {
+    color: black;
+    text-decoration: underline;
+  }
+
   .btn-at-primary {
     @include button;
   }
