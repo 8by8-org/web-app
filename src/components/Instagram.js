@@ -113,7 +113,7 @@ function Instagram({ toggleIG, isShare, shareUrl }) {
         </div>
       </nav>
 
-      <Notification text={"Copied!"} enable={copyNotif} />
+      <Notification text={"Link Copied!"} enable={copyNotif} />
     </div>
   );
 }
