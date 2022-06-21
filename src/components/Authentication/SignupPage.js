@@ -14,6 +14,7 @@ import { emailUser } from "./../../functions/Email";
 import { getUserType } from "./../../functions/UserType";
 import { addUserToDB } from "./AddUserToDB";
 import "./SignupPage.scss";
+import { act } from "react-dom/test-utils";
 
 export default function SignupPage() {
   const { currentUser, currentUserData } = useAuth();
@@ -130,40 +131,101 @@ export default function SignupPage() {
     // eslint-disable-next-line
   }, [currentUser]);
 
+  const [activeFields, setActiveFields] = useState({
+    name: false,
+    email: false,
+    confirmEmail: false
+  })
   return (
     <div className="signup">
-      <p className="normal-title">Sign up</p>
-      <p className="no-underline-title">to start your 8by8 journey</p>
-
-      <Form className="form">
+      <h1 className="normal-title">Sign up</h1>
+      <h1 className="no-underline-title">to start your 8by8 journey</h1>
+      <form className="form">
         {message && <p> {message} </p>}
         {emailVisible && (
           <>
-            <p className="required-text">*Required information</p>
-            <Form.Control
-              className="text-input"
-              type="text"
-              placeholder="Name*"
-              ref={nameRef}
-            ></Form.Control>
-            {nameError && <p className="error-msg">{nameError}</p>}
-
-            <Form.Control
-              className="text-input"
-              type="email"
-              placeholder="Email address*"
-              ref={emailRef}
-            ></Form.Control>
-            {emailError && <p className="error-msg">{emailError}</p>}
-
-            <Form.Control
-              className="text-input"
-              type="email"
-              placeholder="Re-enter Email address*"
-              ref={confirmEmailRef}
-            ></Form.Control>
-            {duplicateError && <p className="error-msg">{duplicateError}</p>}
-
+            <div className="signupInfo">
+              <p className="required-text">*Required information</p>
+              <label
+                htmlFor="name"
+                className={activeFields.name
+                  ? "floating-label-active"
+                  : "floating-label-default"}
+              >
+                Name*
+              </label>
+              <input
+                className="register-input"
+                id = "name"
+                name="name"
+                type="text"
+                ref={nameRef}
+                onChange={() => {
+                  setActiveFields({ ...activeFields, name: true});}
+                }
+                onFocus={() => {
+                  setActiveFields({ ...activeFields, name: true});}
+                }
+                onClick={() => {
+                  setActiveFields({ ...activeFields, name: true});}
+                }
+              ></input>
+              <br></br>
+              {nameError && <p className="error-msg">{nameError}</p>}
+              <label
+                htmlFor="emailAddress"
+                className={activeFields.email
+                  ? "floating-label-active"
+                  : "floating-label-default"}
+              >
+                Email Address*
+              </label>
+              <input
+                className="register-input"
+                id="emailAddress"
+                name="emailAddress"
+                type="email"
+                ref={emailRef}
+                onChange={() => {
+                  setActiveFields({ ...activeFields, email: true});}
+                }
+                onFocus={() => {
+                  setActiveFields({ ...activeFields, email: true});}
+                }
+                onClick={() => {
+                  setActiveFields({ ...activeFields, email: true});}
+                }
+              ></input>
+              <br></br>
+              {emailError && <p className="error-msg">{emailError}</p>}
+            
+              <label
+                htmlFor="confirmEmail"
+                className={activeFields.confirmEmail
+                  ? "floating-label-active"
+                  : "floating-label-default"}
+              >
+                Re-enter Email address*
+              </label>
+              <input
+                className="register-input"
+                id="confirmEmail"
+                name="confirmEmail"
+                type="email"
+                ref={confirmEmailRef}
+                onChange={() => {
+                  setActiveFields({ ...activeFields, confirmEmail: true});}
+                }
+                onFocus={() => {
+                  setActiveFields({ ...activeFields, confirmEmail: true});}
+                }
+                onClick={() => {
+                  setActiveFields({ ...activeFields, confirmEmail: true});}
+                }
+              ></input>
+              <br></br>
+              {duplicateError && <p className="error-msg">{duplicateError}</p>}
+            </div>
             <p className="small-title">Which One's you? </p>
             <div className="avatar-container">
               {/* avatar 1 */}
@@ -267,7 +329,7 @@ export default function SignupPage() {
             </a>
           </p>
         )}
-      </Form>
+    </form>
     </div>
   );
 }
