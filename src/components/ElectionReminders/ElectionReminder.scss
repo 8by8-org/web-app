@@ -9,11 +9,12 @@
   }
 
   .title {
-    margin-left: 20px;
     margin-top: 24px;
+    margin-left: 30px;
+    margin-right: 30px;
     @include heading-text;
     text-align: left !important;
-    width: 100%;
+    width: calc(100% - 60px);
     // float: left !important;
   }
 
@@ -38,15 +39,21 @@
     display: none;
   }
 
+  .ngp-form {
+    width: calc(100% - 20px);
+    margin: 0 10px;
+  }
+
   .at-legend {
     font-family: "Lato", sans-serif !important;
-    padding-right: 18px !important;
+    width: auto;
   }
+
 
   .reminders-completed {
     font-family: "Lato", sans-serif;
     color: black;
-    margin-left: 20px;
+    margin: 0px 30px;
   }
 
   .reminders-completed h3 {
@@ -66,6 +73,7 @@
   }
   .thankYou {
     background-color: white !important;
+    padding: 0 20px;
   }
 
   #NVSignupForm61312-ContactInformation-SmsLegalDisclaimer {
@@ -74,13 +82,18 @@
     color: black;
   }
 
+  #NVSignupForm61312-ContactInformation-SmsLegalDisclaimer a {
+    color: black;
+    text-decoration: underline;
+  }
+
   .btn-at-primary {
     @include button;
   }
 
   .contributions h1 {
     width: 100%;
-    margin-left: 10px;
+    margin-left: 0 !important;
     margin-top: 40px;
     font-family: $bebas-neue !important;
     font-size: 24px !important;
@@ -90,12 +103,12 @@
   .contributions p {
     width: 100%;
     margin-top: 40px;
-    margin-left: 10px;
+    margin-left: 0 !important;
   }
 
   #continue {
     @include button;
-    margin-top: 40px;
-    margin-bottom: 40px;
+    width: auto !important;
+    margin: 40px 30px !important;
   }
 }
