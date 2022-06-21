@@ -44,18 +44,18 @@ export default function Actions() {
               setStartedChallenge(data.startedChallenge);
               setNotifyElectionReminders(data.notifyElectionReminders);
               getChallengerInfo(data.invitedBy);
-              setLoading(false);
             } else {
               history.push(`/signin`);
             }
           })
           .catch((e) => console.log(e));
       } else {
-        history.push(`/signin`);
+        history.push(`/signup`);
       }
     }
   }, []);
 
+  // gets the info about which actions the signed in user has completed or not
   function fetchUserData() {
     getUserDatabase()
       .then((data) => {
@@ -67,13 +67,16 @@ export default function Actions() {
       .catch((e) => console.log(e));
   }
 
+  // if there is no challengerInfo and the user is signed in and has a invitedBy uid then using that uid get that users info and put it in local storage
   async function getChallengerInfo(invitedBy) {
     const db = getFirestore();
     const docRef = doc(db, "users", invitedBy);
     const query = await getDoc(docRef);
     const info = (({ name, avatar }) => ({ name, avatar }))(query.data());
     info.challengerID = invitedBy;
-    setChallengerInfo(JSON.stringify(info));
+    setChallengerInfo(info);
+    localStorage.setItem("challengerInfo", JSON.stringify(info));
+    setLoading(true);
   }
 
   return loading === true ? (

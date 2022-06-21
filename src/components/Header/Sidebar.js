@@ -17,7 +17,7 @@ function Sidebar({ sidebar, showSidebar }) {
       getUserDatabase().then((data) => {
         setUserData(data);
 
-        if (data.startedChallenge && data.invitedBy.length > 0) {
+        if (data.startedChallenge && (localStorage.getItem("challengerInfo") || data.invitedBy.length > 0)) {
           setUserType("hybrid");
         } else if (data.startedChallenge) {
           setUserType("challenger");

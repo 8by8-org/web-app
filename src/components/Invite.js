@@ -225,7 +225,7 @@ function Invite({ toggleInvite, isShare, won }) {
               completedAction("share challenge");
             }}
           >
-            <img className="invite-icon" src={EmailSvg} alt="Email Icon" />
+            <img className="email-icon" src={EmailSvg} alt="Email Icon" />
             <p className="invite-icon-label">Email</p>
           </EmailShareButton>
 
@@ -233,7 +233,7 @@ function Invite({ toggleInvite, isShare, won }) {
             className="sms-button"
             onClick={() => window.open("sms:&body=" + body + " " + shareUrl)}
           >
-            <img className="invite-icon" src={TextSvg} alt="Text Icon" />
+            <img className="text-icon" src={TextSvg} alt="Text Icon" />
             <p className="invite-icon-label">Text</p>
           </button>
         </div>
