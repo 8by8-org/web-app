@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import "./Notification.scss";
 
 function Notification(props) {
-  const [loadWidth, setLoadWidth] = useState("none");
   const [show, setShow] = useState("none");
   const [loaded, setLoaded] = useState(false);
 
@@ -16,13 +15,10 @@ function Notification(props) {
   }
 
   async function showNotification() {
-    if (show === "none" && loadWidth === "none" && loaded) {
+    if (show === "none" && loaded) {
       setShow("show");
-      setLoadWidth("full");
-      await delay(2000);
+      await delay(1500); // how long notif shows
       setShow("none");
-      await delay(350);
-      setLoadWidth("none");
     }
   }
 
@@ -30,7 +26,6 @@ function Notification(props) {
     <div className="notif-background">
       <div className={"Notification " + show}>
         <div className="text">{props.text ? props.text : "Notification"}</div>
-        <div className={"load " + loadWidth}></div>
       </div>
     </div>
   );

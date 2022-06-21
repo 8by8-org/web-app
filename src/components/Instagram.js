@@ -27,7 +27,6 @@ function Instagram({ toggleIG, isShare, shareUrl }) {
   // Copys the url thats to be shared into the clipboard.
   function copyToClipboard() {
     navigator.clipboard.writeText(shareUrl);
-    setCopyNotif(!copyNotif); //shows notif on change of copyNotif state
   }
 
   const mobile =
@@ -101,6 +100,8 @@ function Instagram({ toggleIG, isShare, shareUrl }) {
           <span
             className="link"
             onClick={() => {
+              setCopyNotif(!copyNotif); //shows notif on change of copyNotif state
+
               if (navigator.clipboard) {
                 copyToClipboard();
                 completedAction("share challenge");

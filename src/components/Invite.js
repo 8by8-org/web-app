@@ -78,7 +78,6 @@ function Invite({ toggleInvite, isShare, won }) {
   // Copys the url thats to be shared into the clipboard.
   function copyToClipboard() {
     navigator.clipboard.writeText(shareUrl);
-    setCopyNotif(!copyNotif);
   }
 
   // Reload the current page(only on invite pop-up).
@@ -252,6 +251,8 @@ function Invite({ toggleInvite, isShare, won }) {
             </div>
             <button
               onClick={() => {
+                setCopyNotif(!copyNotif);
+
                 if (navigator.clipboard) {
                   copyToClipboard();
                   completedAction("share challenge");
@@ -267,7 +268,7 @@ function Invite({ toggleInvite, isShare, won }) {
       <Preview togglePreview={togglePreview} isShare={isShare} />
       <Instagram toggleIG={toggleIG} isShare={isShare} shareUrl={shareUrl} />
 
-      <Notification text={"Copied!"} enable={copyNotif} />
+      <Notification text={"Link Copied!"} enable={copyNotif} />
     </div>
   );
 }

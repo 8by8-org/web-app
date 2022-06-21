@@ -120,7 +120,7 @@
     }
 
     .secondary-button {
-      @include inverted-button;
+      @include secondary-button;
       width: 100%;
     }
   }
