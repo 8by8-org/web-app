@@ -100,6 +100,7 @@ function Instagram({ toggleIG, isShare, shareUrl }) {
           <span
             className="link"
             onClick={() => {
+              console.log("ehehe");
               setCopyNotif(!copyNotif); //shows notif on change of copyNotif state
 
               if (navigator.clipboard) {
