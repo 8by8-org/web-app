@@ -35,6 +35,11 @@ export default function PlayerWelcome({ isShare }) {
         info.challengerID = code;
         isShare === undefined &&
           localStorage.setItem("challengerInfo", JSON.stringify(info));
+        if (isShare === false) {
+          setChallengerInfo(info);
+        } else {
+          setChallengerInfo(JSON.parse(localStorage.getItem("challengerInfo")));
+        }
       } else {
         history.push(`/signin`);
       }
@@ -49,8 +54,8 @@ export default function PlayerWelcome({ isShare }) {
       info.challengerID = code;
       localStorage.setItem("challengerInfo", JSON.stringify(info));
       auth.getAuth().signOut();
+      setChallengerInfo(JSON.parse(localStorage.getItem("challengerInfo")));
     }
-    setChallengerInfo(JSON.parse(localStorage.getItem("challengerInfo")));
   }
 
   // If code that is gotten from the url is playerwelcome or isShare is true then, if there is challengerInfo in
@@ -99,19 +104,21 @@ export default function PlayerWelcome({ isShare }) {
         >
           <span>Get Started</span>
         </button>
-        <div align="center">
-          <p className="small-text">
-            Already have an account?{" "}
-            <button
-              className="signin-link blue"
-              onClick={() => {
-                isShare === undefined && history.push(`/signin`);
-              }}
-            >
-              Sign In
-            </button>
-          </p>
-        </div>
+        {!currentUser && (
+          <div align="center">
+            <p className="small-text">
+              Already have an account?{" "}
+              <button
+                className="signin-link blue"
+                onClick={() => {
+                  isShare === undefined && history.push(`/signin`);
+                }}
+              >
+                Sign In
+              </button>
+            </p>
+          </div>
+        )}
       </div>
       <img src={BlackCurve} className="curve" alt="Black Curve" />
       <div className="main-content">
@@ -150,17 +157,19 @@ export default function PlayerWelcome({ isShare }) {
         >
           <span>Get Started</span>
         </button>
-        <p align="center" className="small-text">
-          Already have an account?{" "}
-          <button
-            className="signin-link black"
-            onClick={() => {
-              isShare === undefined && history.push(`/signin`);
-            }}
-          >
-            Sign In
-          </button>
-        </p>
+        {!currentUser && (
+          <p align="center" className="small-text">
+            Already have an account?{" "}
+            <button
+              className="signin-link black"
+              onClick={() => {
+                isShare === undefined && history.push(`/signin`);
+              }}
+            >
+              Sign In
+            </button>
+          </p>
+        )}
       </div>
     </div>
   ) : (

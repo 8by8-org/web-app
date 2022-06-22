@@ -59,6 +59,7 @@
       .text {
         @include heading-text($white);
         width: 100%;
+        line-height: 58px;
         .underline {
           @include text-underline;
         }
@@ -203,7 +204,7 @@
     }
     .text {
       @include heading-text($white, 36px);
-      line-height: 42.3px;
+      line-height: 43px;
       letter-spacing: 0.03em;
       margin: 40px 0;
       .underline {
