@@ -46,7 +46,7 @@ export const Eligibility = () => {
   return (
     <form className="voterRegForm">
       <h1 className="register-form-title">
-        <u className="underline">REGISTE</u>R TO VOTE
+        <u className="underline">REGISTER TO VOTE</u>
       </h1>
       <ProgressBar progressPercent={25} />
       <p>Registering to vote is easy, and only takes a few minutes!</p>

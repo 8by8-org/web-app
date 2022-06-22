@@ -66,7 +66,7 @@ export const OtherInfo = () => {
   return (
     <form className="voterRegForm">
       <h1 className="register-form-title">
-        <u className="underline">REGISTE</u>R TO VOTE
+        <u className="underline">REGISTER TO VOTE</u>
       </h1>
       <ProgressBar progressPercent={100} />
       {isLoading && <LoadingWheel overlay={true} />}
