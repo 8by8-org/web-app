@@ -4,7 +4,7 @@ import { useAuth } from "./../../contexts/AuthContext";
 import { auth } from "./../../firebase";
 import errorMessage from "./../../functions/errorMessage";
 import { dummyPassword } from "../../constants";
-import { Button, Form } from "react-bootstrap";
+import { Button } from "react-bootstrap";
 import avatar1 from "../../assets/images/SignUpPage/avatar1.png";
 import avatar2 from "../../assets/images/SignUpPage/avatar2.png";
 import avatar3 from "../../assets/images/SignUpPage/avatar3.png";
@@ -14,7 +14,7 @@ import { emailUser } from "./../../functions/Email";
 import { getUserType } from "./../../functions/UserType";
 import { addUserToDB } from "./AddUserToDB";
 import "./SignupPage.scss";
-import { act } from "react-dom/test-utils";
+//import { act } from "react-dom/test-utils";
 
 export default function SignupPage() {
   const { currentUser, currentUserData } = useAuth();
@@ -95,13 +95,13 @@ export default function SignupPage() {
           } catch (e) {
             const error = errorMessage(e);
 
-            if (error == "Please enter a correct email address.") {
+            if (error === "Please enter a correct email address.") {
               setEmailError(error);
               setDuplicateError("");
-            } else if (error == "This email is already in use.") {
+            } else if (error === "This email is already in use.") {
               setEmailError(error);
               setDuplicateError("");
-            } else if (error == "Something went wrong. Please try again.") {
+            } else if (error === "Something went wrong. Please try again.") {
               setDuplicateError("");
               setEmailError("");
               setError(error);
