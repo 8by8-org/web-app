@@ -21,6 +21,7 @@ import EmailSvg from "../assets/images/Invite/Email.svg";
 import TextSvg from "../assets/images/Invite/Text.svg";
 import Instagram from "./Instagram";
 import Preview from "./Invite/Components/Preview";
+import Notification from "./Notification/Notification";
 
 function Invite({ toggleInvite, isShare, won }) {
   const { currentUser } = useAuth();
@@ -28,6 +29,7 @@ function Invite({ toggleInvite, isShare, won }) {
   const [show, setShow] = useState(false);
   const [challengerInfo, setChallengerInfo] = useState(null);
   const [shared, setShared] = useState(false);
+  const [copyNotif, setCopyNotif] = useState(false);
 
   React.useEffect(() => {
     toggleInvite.current = changeShow;
@@ -207,7 +209,11 @@ function Invite({ toggleInvite, isShare, won }) {
               completedAction("share challenge");
             }}
           >
-            <img className="invite-icon" src={WhatsAppSvg} alt="WhatsApp Icon" />
+            <img
+              className="invite-icon"
+              src={WhatsAppSvg}
+              alt="WhatsApp Icon"
+            />
             <p className="invite-icon-label">WhatsApp</p>
           </WhatsappShareButton>
 
@@ -219,7 +225,7 @@ function Invite({ toggleInvite, isShare, won }) {
               completedAction("share challenge");
             }}
           >
-            <img className="email-icon" src={EmailSvg} alt="Email Icon"/>
+            <img className="email-icon" src={EmailSvg} alt="Email Icon" />
             <p className="invite-icon-label">Email</p>
           </EmailShareButton>
 
@@ -227,7 +233,7 @@ function Invite({ toggleInvite, isShare, won }) {
             className="sms-button"
             onClick={() => window.open("sms:&body=" + body + " " + shareUrl)}
           >
-            <img className="text-icon" src={TextSvg} alt="Text Icon"/>
+            <img className="text-icon" src={TextSvg} alt="Text Icon" />
             <p className="invite-icon-label">Text</p>
           </button>
         </div>
@@ -245,6 +251,8 @@ function Invite({ toggleInvite, isShare, won }) {
             </div>
             <button
               onClick={() => {
+                setCopyNotif(!copyNotif);
+
                 if (navigator.clipboard) {
                   copyToClipboard();
                   completedAction("share challenge");
@@ -259,6 +267,8 @@ function Invite({ toggleInvite, isShare, won }) {
 
       <Preview togglePreview={togglePreview} isShare={isShare} />
       <Instagram toggleIG={toggleIG} isShare={isShare} shareUrl={shareUrl} />
+
+      <Notification text={"Link Copied!"} enable={copyNotif} />
     </div>
   );
 }
