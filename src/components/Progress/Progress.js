@@ -236,7 +236,7 @@ export default function Progress() {
       <Invite
         toggleInvite={toggleInvite}
         isShare={false}
-        won={challengeFinished}
+        challengeWon={challengeFinished}
       />
     </article>
   ) : (
