@@ -69,11 +69,15 @@
         align-items: center;
         border-radius: 50%;
         position: absolute;
-        bottom: -10px;
-        right: 20px;
+        bottom: -20px;
+        right: 8px;
       }
       #challenger-name {
         @include heading-text($black, 30px);
+        max-width: 160px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
       }
     }
 
@@ -120,7 +124,7 @@
     }
 
     .secondary-button {
-      @include inverted-button;
+      @include secondary-button;
       width: 100%;
     }
   }

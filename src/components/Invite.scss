@@ -4,6 +4,7 @@
   width: 100%;
   display: flex;
   justify-content: center;
+  flex-direction: column;
 
   .invite-menu {
     height: 95%;
@@ -97,6 +98,18 @@
       .invite-icon {
         width: 50px;
         height: 50px;
+        margin: 0 30px 5px 30px;
+      }
+
+      .email-icon {
+        width: 48px;
+        height: 48px;
+        margin: 0 30px 5px 30px;
+      }
+
+      .text-icon {
+        width: 45px;
+        height: 45px;
         margin: 0 30px 5px 30px;
       }
 
