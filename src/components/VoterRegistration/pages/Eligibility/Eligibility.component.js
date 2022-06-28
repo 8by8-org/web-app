@@ -104,7 +104,15 @@ export const Eligibility = () => {
             if (ZipCodeData.lookupZip(zip)) {
               state = ZipCodeData.stateFromZip(zip);
             }
-
+            //set error code field to appear below zip code field
+            if (voterRegistrationData.zip.length === 0)
+            {
+              const zipInput = document.getElementById("zip");
+              zipInput.classList.add("requiredField");
+            }
+            setErrorCode(1);
+            return;
+            
             setVoterRegistrationData({
               ...voterRegistrationData,
               zip: zip,
@@ -146,6 +154,13 @@ export const Eligibility = () => {
             ...voterRegistrationData,
             dob: event.target.value,
           });
+          //set error code field to appear below dob field
+          if (voterRegistrationData.dob.length === 0) {
+            const dobInput = document.getElementById("dob");
+            dobInput.classList.add("requiredField");
+          }
+          setErrorCode(1);
+            return;
         }}
         required
       />
@@ -195,21 +210,6 @@ export const Eligibility = () => {
         className="next-btn"
         onClick={(event) => {
           event.preventDefault();
-          if (
-            voterRegistrationData.dob.length === 0 ||
-            voterRegistrationData.zip.length === 0
-          ) {
-            if (voterRegistrationData.dob.length === 0) {
-              const dobInput = document.getElementById("dob");
-              dobInput.classList.add("requiredField");
-            }
-            if (voterRegistrationData.zip.length === 0) {
-              const zipInput = document.getElementById("zip");
-              zipInput.classList.add("requiredField");
-            }
-            setErrorCode(1);
-            return;
-          }
           if (!voterRegistrationData.citizen) {
             setErrorCode(2);
             return;
