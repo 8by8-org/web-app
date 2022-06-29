@@ -64,19 +64,10 @@ export default function SignupPage() {
         );
         let challengeEndDate = "";
         let startedChallenge = false;
-        // will need to change data if user is not a challenger (is a player)
-        if (getUserType() === "player") {
-          await setTimeout(() => {
-            emailUser(email, "playerWelcome");
-          }, 3000);
-        } else {
+        if(getUserType() !== "player") {
           challengeEndDate = new Date(Date.now() + 8 * 24 * 60 * 60 * 1000); // now + 8 days
           startedChallenge = true;
-          await setTimeout(() => {
-            emailUser(email, "challengerWelcome");
-          }, 3000);
         }
-
         const createUser = async (email) => {
           try {
             // CryptoRandomString generates a random hash for the password (because it has no use right now)
@@ -86,12 +77,24 @@ export default function SignupPage() {
               dummyPassword
             );
             // waiting a few seconds for user doc to be created before adding data
-            addUserToDB(
+            await addUserToDB(
               username,
               avatarNumber,
               challengeEndDate,
               startedChallenge
             );
+
+            // will need to change data if user is not a challenger (is a player)
+            if (getUserType() === "player") {
+              setTimeout(() => {
+                emailUser(email, "playerWelcome");
+              }, 3000);
+            } else {
+              
+              setTimeout(() => {
+                emailUser(email, "challengerWelcome");
+              }, 3000);
+            }
           } catch (e) {
             const error = errorMessage(e);
 
