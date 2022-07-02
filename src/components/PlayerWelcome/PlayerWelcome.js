@@ -75,7 +75,7 @@ export default function PlayerWelcome({ isShare }) {
 
   // If isShare is undefined, when playerwelcome page is rendered not in invite or share, then the buttons work.
   return loading === false ? (
-    <div className="player-welcome">
+    <div className={"player-welcome" + ((isShare || isShare === false) ? " preview" : "")}>
       <div className="top">
         <h1 className="top-heading">
           <span className="underline h1">Support</span>{" "}
