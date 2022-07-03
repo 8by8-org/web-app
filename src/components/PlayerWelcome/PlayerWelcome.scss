@@ -1,5 +1,9 @@
 @import "./../../styles/Components.scss";
 
+.preview {
+  font-size: 12px;
+}
+
 .player-welcome {
   background-color: $white;
   color: $black;
@@ -15,16 +19,19 @@
   .top {
     display: flex;
     flex-direction: column;
-    padding: 30px;
+    padding: 8%;
     background-color: $black;
     color: white;
     .top-heading {
-      @include heading-text(white, 50px);
-      line-height: 57.6px;
+      @include heading-text(white, 312.5%);
+      line-height: 115%;
       letter-spacing: 0.03em;
       margin: 20px 0px;
       .underline {
         @include text-underline;
+        font-size: 100%;
+        line-height: 115%;
+        letter-spacing: 0.03em;
       }
     }
   }
@@ -38,7 +45,7 @@
     margin: 0;
     padding: 0px 0px 10px 0px;
     font-family: $lato;
-    font-size: 14px;
+    font-size: 94%;
     line-height: 22px;
     letter-spacing: 0.02em;
     font-weight: 900;
@@ -53,15 +60,16 @@
   }
 
   .main-content {
-    padding: 40px 30px;
+    padding: 40px 8%;
 
     h3 {
       align-self: flex-start;
+      font-size: 150%;
     }
   }
 
   .heading {
-    @include heading-text($black, 36px);
+    @include heading-text($black, 225%);
     margin-bottom: 40px;
     line-height: 43.2px;
     letter-spacing: 0.03em;
@@ -70,15 +78,15 @@
 
   .text {
     font-family: $lato;
-    font-size: 18px;
-    line-height: 22px;
+    font-size: 113%;
+    line-height: 120%;
     letter-spacing: 0.02em;
     margin-bottom: 32px;
   }
 
   .small-text {
     font-family: $lato;
-    font-size: 15px;
+    font-size: 94%;
     letter-spacing: 0.02em;
     margin-top: 15px;
   }
