@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
-import { useAuth } from "../../../../contexts/AuthContext";
+import { useAuth } from "../../../../../contexts/AuthContext";
 import { Tooltip } from "../Tooltip/Tooltip.component";
 import { ProgressBar } from "../ProgressBar/ProgressBar.component";
-import ScrollToTop from "../../../../functions/ScrollToTop";
+import ScrollToTop from "../../../../../functions/ScrollToTop";
 import "../../VoterRegistration.scss";
 
 export const YourName = () => {
@@ -12,7 +12,7 @@ export const YourName = () => {
     useAuth();
   const [error, setError] = useState("");
 
-  /*redirect user to form completed page if they have already completed the flow, 
+  /*redirect user to form completed page if they have already completed the flow,
   and to eligibility page if that information isn't complete
   */
   useEffect(() => {

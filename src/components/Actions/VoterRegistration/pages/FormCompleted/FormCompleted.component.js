@@ -1,9 +1,9 @@
 import React from "react";
 import { useHistory } from "react-router";
-import { useAuth } from "../../../../contexts/AuthContext";
+import { useAuth } from "../../../../../contexts/AuthContext";
 
 import "../../VoterRegistration.scss";
-import ScrollToTop from "../../../../functions/ScrollToTop";
+import ScrollToTop from "../../../../../functions/ScrollToTop";
 
 export const FormCompleted = () => {
   const history = useHistory();

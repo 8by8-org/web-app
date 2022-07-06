@@ -2,13 +2,13 @@ import React, { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import { IconContext } from "react-icons";
 import * as MdIcons from "react-icons/md";
-import { useAuth } from "../../../../contexts/AuthContext";
+import { useAuth } from "../../../../../contexts/AuthContext";
 import "../../VoterRegistration.scss";
 import ZipCodeData from "zipcode-data";
 import { getEligibility } from "../../utils";
 import { ProgressBar } from "../ProgressBar/ProgressBar.component";
-import { addInvitedBy } from "../../../../functions/AddInvite";
-import ScrollToTop from "../../../../functions/ScrollToTop";
+import { addInvitedBy } from "../../../../../functions/AddInvite";
+import ScrollToTop from "../../../../../functions/ScrollToTop";
 
 const ERROR_MESSAGES = [
   "",

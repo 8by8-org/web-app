@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "../../VoterRegistration.scss";
 import { Tooltip } from "../Tooltip/Tooltip.component";
-import { useAuth } from "../../../../contexts/AuthContext";
+import { useAuth } from "../../../../../contexts/AuthContext";
 
 export const AddressBlock = ({ addressType, title, tooltipText }) => {
   let prefix = "";
@@ -56,7 +56,7 @@ export const AddressBlock = ({ addressType, title, tooltipText }) => {
             ...voterRegistrationData,
             [`${prefix}street`]: event.target.value,
           });
-          /*when the user selects a suggested address, and fields are autocompleted, 
+          /*when the user selects a suggested address, and fields are autocompleted,
           the label should float
           */
           setActiveFields({ ...activeFields, street: true });

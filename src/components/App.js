@@ -16,18 +16,18 @@ import "./App.css";
 import HomePage from "./Landing/HomePage/HomePage";
 import Progress from "./Challenge/Progress/Progress";
 import ChallengerWelcome from "./Challenge/ChallengerWelcome/ChallengerWelcome";
-import ElectionReminder from "./Challenge/ElectionReminders/ElectionReminder";
+import ElectionReminder from "./Actions/ElectionReminders/ElectionReminder";
 import Footer from "./Landing/Footer/Footer";
 import PlayerWelcome from "./Landing/PlayerWelcome/PlayerWelcome";
 import Actions from "./Actions/Actions";
 import TOS from "./Landing/Legal/TOS";
 import PrivacyPolicy from "./Landing/Legal/PrivacyPolicy";
 //Voter Registration Pages
-import { Eligibility } from "./VoterRegistration/pages/Eligibility/Eligibility.component";
-import { YourName } from "./VoterRegistration/pages/YourName/YourName.component";
-import { HomeAddress } from "./VoterRegistration/pages/HomeAddress/HomeAddress.component";
-import { OtherInfo } from "./VoterRegistration/pages/OtherInfo/OtherInfo.component";
-import { FormCompleted } from "./VoterRegistration/pages/FormCompleted/FormCompleted.component";
+import { Eligibility } from "./Actions/VoterRegistration/pages/Eligibility/Eligibility.component";
+import { YourName } from "./Actions/VoterRegistration/pages/YourName/YourName.component";
+import { HomeAddress } from "./Actions/VoterRegistration/pages/HomeAddress/HomeAddress.component";
+import { OtherInfo } from "./Actions/VoterRegistration/pages/OtherInfo/OtherInfo.component";
+import { FormCompleted } from "./Actions/VoterRegistration/pages/FormCompleted/FormCompleted.component";
 
 export default function App() {
   return (

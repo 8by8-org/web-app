@@ -4,11 +4,11 @@ import axios from "axios";
 import {IconContext} from "react-icons";
 import * as MdIcons from "react-icons/md";
 import "../../VoterRegistration.scss";
-import {LoadingWheel} from "../../../Utility/LoadingWheel/LoadingWheel.component";
+import {LoadingWheel} from "../../../../Utility/LoadingWheel/LoadingWheel.component";
 import {AddressBlock} from "./AddressBlock.component";
 import {ProgressBar} from "../ProgressBar/ProgressBar.component";
-import {useAuth} from "../../../../contexts/AuthContext";
-import ScrollToTop from "../../../../functions/ScrollToTop";
+import {useAuth} from "../../../../../contexts/AuthContext";
+import ScrollToTop from "../../../../../functions/ScrollToTop";
 
 const apiUrl = "https://usvotes-6vsnwycl4q-uw.a.run.app";
 
