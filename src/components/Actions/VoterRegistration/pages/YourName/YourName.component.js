@@ -56,7 +56,7 @@ export const YourName = () => {
   return (
     <form className="voterRegForm">
       <h1 className="register-form-title">
-        <u className="underline">REGISTE</u>R TO VOTE
+        <u className="underline">REGISTER TO VOTE</u>
       </h1>
       <ProgressBar progressPercent={50} />
       <div className="horizontalContainer">

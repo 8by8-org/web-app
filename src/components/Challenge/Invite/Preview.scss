@@ -2,7 +2,7 @@
 
 .preview-wrapper {
   width: 0;
-  height: 95%;
+  height: calc(100vh - 57px);
   max-width: 500px;
   position: fixed;
   bottom: -100vh;
@@ -15,13 +15,11 @@
   flex-direction: column;
   align-items: center;
   font-family: $lato;
-  border-top: 2px solid black;
 
   .preview-header {
     width: 100%;
     height: 60px;
     display: flex;
-    margin-top: 50px;
 
     a.nav-link,
     a.nav-link:hover {
@@ -58,22 +56,23 @@
     display: -ms-grid;
     display: grid;
     justify-items: center;
+    aspect-ratio: 35 / 66;
 
     .preview-bordor {
       grid-column: 1;
       grid-row: 1;
-      width: 335px;
+      width: 100%;
     }
 
     .playerwelcome-page {
       overflow: auto;
       grid-column: 1;
       grid-row: 1;
-      width: 255px;
-      height: 500px;
-      margin-top: 93px;
-      margin-left: 7px;
+      width: 75%;
+      margin-top: 27.7%;
+      margin-left: 2%;
       border-radius: 15px 15px 40px 42px;
+      aspect-ratio: 35 / 69.8;
     }
   }
 }

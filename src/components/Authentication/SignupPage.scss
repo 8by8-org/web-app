@@ -110,5 +110,13 @@
       margin-top: 20px;
       margin-bottom: 10px;
     }
+
+    .signupInfo {
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      padding-top: 40px;
+      box-sizing: border-box;
+    }
   }
 }
