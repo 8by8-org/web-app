@@ -26,7 +26,7 @@ export const FormCompleted = () => {
         <title>8by8</title>
       </MetaTags>
       <h1 className="register-form-title">
-        <u className="underline">YOU COMPLETE</u>D<br />
+        <u className="underline">YOU COMPLETED</u><br />
         THE FORM
       </h1>
       <p className="register-form-text">
