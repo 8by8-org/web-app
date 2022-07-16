@@ -1,17 +1,9 @@
 import React from "react";
 import "./Legal.scss";
-import MetaTags from 'react-meta-tags';
 
 function PrivacyPolicy() {
   return (
     <div className="Legal">
-      <MetaTags>
-        <meta
-          name="description"
-          content="8by8 Challenge App, made by 8by8.us with ❤️ "
-        />
-        <title>8by8</title>
-      </MetaTags>
       <h1 className="underline">Privacy Policy</h1>
       <p>
         This website and associated tools, such as subscribing for emails, is

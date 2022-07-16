@@ -1,6 +1,6 @@
 import React from "react";
 import MetaTags from 'react-meta-tags';
-import { useHistory, useLocation } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import { useAuth } from "../../contexts/AuthContext";
 import "./ChallengerWelcome.scss";
 import Top from "./../../assets/images/ChallengerWelcome/Top.png";
@@ -12,8 +12,6 @@ import StepFour from "./../../assets/images/ChallengerWelcome/StepFour.png";
 import ChallengerShareWon from "../../assets/images/Share/ChallengerShareWon.png";
 
 function ChallengerWelcome() {
-  const queryString = window.location.search;
-  const urlParams = new URLSearchParams(queryString);
   const history = useHistory();
   sessionStorage.setItem("UserType", "Challenger");
 
@@ -21,24 +19,11 @@ function ChallengerWelcome() {
 
   return (
     <div className="challenger-welcome">
-    {console.log(urlParams.get("metaTag"))}
-      {urlParams.get("metaTag") == "won" ?
-        <MetaTags>
-          <title>I won the 8by8 Challenge to #stopasianhate</title>
-          <meta property="og:title" content="I won the 8by8 Challenge to #stopasianhate"/>
-          <meta property="og:image" content={ChallengerShareWon}/>
-          <meta property="og:url" content={"https://challenge.8by8.us/challengerwelcome"}/>
-        </MetaTags>
-      :
-        <MetaTags>
-          <meta
-          name="description"
-          content="8by8 Challenge App, made by 8by8.us with ❤️ "
-          />
-          <title>8by8</title>
-        </MetaTags>
-      }
-
+      <MetaTags>
+        <meta property="og:title" content="I won the 8by8 Challenge to #stopasianhate"/>
+        <meta property="og:image" content={ChallengerShareWon}/>
+        <meta property="og:url" content={"https://challenge.8by8.us/challengerwelcome"}/>
+      </MetaTags>
       <div className="content-1">
         <img className="background" src={Top} alt="background" />
         <div className="container">
