@@ -14,6 +14,7 @@ import ConfettiAnimation from "./../ConfettiAnimation";
 import Invite from "../Invite.js";
 import "./Actions.scss";
 import { LoadingWheel } from "../LoadingWheel/LoadingWheel.component";
+import MetaTags from 'react-meta-tags';
 
 const avatars = [Avatar1, Avatar2, Avatar3, Avatar4];
 
@@ -81,6 +82,13 @@ export default function Actions() {
 
   return loading === true ? (
     <div>
+      <MetaTags>
+        <meta
+          name="description"
+          content="8by8 Challenge App, made by 8by8.us with ❤️ "
+        />
+        <title>8by8</title>
+      </MetaTags>
       {/* if all three actions are completed */}
       {registeredVoter && notifyElectionReminders && startedChallenge ? (
         <div className="actions">

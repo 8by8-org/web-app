@@ -5,6 +5,7 @@ import { Tooltip } from "../Tooltip/Tooltip.component";
 import { ProgressBar } from "../ProgressBar/ProgressBar.component";
 import ScrollToTop from "../../../../functions/ScrollToTop";
 import "../../VoterRegistration.scss";
+import MetaTags from 'react-meta-tags';
 
 export const YourName = () => {
   const history = useHistory();
@@ -12,7 +13,7 @@ export const YourName = () => {
     useAuth();
   const [error, setError] = useState("");
 
-  /*redirect user to form completed page if they have already completed the flow, 
+  /*redirect user to form completed page if they have already completed the flow,
   and to eligibility page if that information isn't complete
   */
   useEffect(() => {
@@ -55,6 +56,13 @@ export const YourName = () => {
 
   return (
     <form className="voterRegForm">
+      <MetaTags>
+        <meta
+          name="description"
+          content="8by8 Challenge App, made by 8by8.us with ❤️ "
+        />
+        <title>8by8</title>
+      </MetaTags>
       <h1 className="register-form-title">
         <u className="underline">REGISTER TO VOTE</u>
       </h1>
