@@ -6,6 +6,7 @@ import { completedAction } from "../../../functions/UserData";
 import { LoadingWheel } from "../../Utility/LoadingWheel/LoadingWheel.component";
 import { addInvitedBy } from "../../../functions/AddInvite";
 import "./ElectionReminder.scss";
+import MetaTags from 'react-meta-tags';
 const db = getFirestore();
 
 export default function ElectionReminder() {
@@ -211,6 +212,13 @@ export default function ElectionReminder() {
 
   return loading ? (
     <div className="election-reminder">
+      <MetaTags>
+        <meta
+          name="description"
+          content="8by8 Challenge App, made by 8by8.us with ❤️ "
+        />
+        <title>8by8</title>
+      </MetaTags>
       <div className="electionReminderContainer">
         <header className="title">
           <u className="underline">GET ELECTION ALERTS</u>

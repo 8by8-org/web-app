@@ -6,12 +6,24 @@ import SignUp2 from "../../../assets/images/PlayerWelcome/SignUp2.png";
 import Vote from "../../../assets/images/PlayerWelcome/Vote1.png";
 import BlackCurve from "../../../assets/images/PlayerWelcome/BlackCurve.svg";
 import "./PlayerWelcome.scss";
+<<<<<<< HEAD:src/components/Landing/PlayerWelcome/PlayerWelcome.js
 import { auth } from "../../../firebase";
 import { dummyPassword } from "../../../constants";
 import { useAuth } from "../../../contexts/AuthContext";
 import { LoadingWheel } from "../../Utility/LoadingWheel/LoadingWheel.component";
+=======
+import { auth } from "../../firebase";
+import { dummyPassword } from "../../constants";
+import { useAuth } from "../../contexts/AuthContext";
+import { LoadingWheel } from "../LoadingWheel/LoadingWheel.component";
+import ChallengerShare from "../../assets/images/Share/ChallengerShare.png";
+import PlayerShare from "../../assets/images/Share/PlayerShare.png";
+import MetaTags from 'react-meta-tags';
+>>>>>>> 0ae281d19ec71fc1ea157a19c9ae493d20e1c524:src/components/PlayerWelcome/PlayerWelcome.js
 
 export default function PlayerWelcome({ isShare }) {
+  const queryString = window.location.search;
+  const urlParams = new URLSearchParams(queryString);
   const history = useHistory();
   const { currentUser } = useAuth();
   const [loading, setLoading] = useState(true);
@@ -76,6 +88,29 @@ export default function PlayerWelcome({ isShare }) {
   // If isShare is undefined, when playerwelcome page is rendered not in invite or share, then the buttons work.
   return loading === false ? (
     <div className={"player-welcome" + ((isShare || isShare === false) ? " preview" : "")}>
+      {urlParams.get("metaTag") == "challenger" ?
+        <MetaTags>
+          <title>Help me in my 8by8 Challenge to #stopasianhate.</title>
+          <meta property="og:title" content="Help me in my 8by8 Challenge to #stopasianhate."/>
+          <meta property="og:image" content={ChallengerShare}/>
+          <meta property="og:url" content={"https://challenge.8by8.us/playerwelcome"}/>
+        </MetaTags>
+      : urlParams.get("metaTag") == "player" ?
+          <MetaTags>
+            <title>"I’m supporting the 8by8 Challenge!"</title>
+            <meta property="og:title" content={"I’m supporting the 8by8 Challenge!"}/>
+            <meta property="og:image" content={PlayerShare}/>
+            <meta property="og:url" content={"https://challenge.8by8.us/playerwelcome"}/>
+          </MetaTags>
+        :
+          <MetaTags>
+            <meta
+            name="description"
+            content="8by8 Challenge App, made by 8by8.us with ❤️ "
+            />
+            <title>8by8</title>
+          </MetaTags>
+      }
       <div className="top">
         <h1 className="top-heading">
           <span className="underline h1">Support</span>{" "}
