@@ -12,7 +12,12 @@ import Crown from "./../../assets/images/Actions/Crown.svg";
 import ConfettiAnimation from "../Utility/Helpers/ConfettiAnimation";
 import Invite from "../Utility/Invite/Invite.js";
 import "./Actions.scss";
+<<<<<<< HEAD
 import {LoadingWheel} from "../Utility/LoadingWheel/LoadingWheel.component";
+=======
+import { LoadingWheel } from "../LoadingWheel/LoadingWheel.component";
+import MetaTags from 'react-meta-tags';
+>>>>>>> 0ae281d19ec71fc1ea157a19c9ae493d20e1c524
 
 const avatars = [Avatar1, Avatar2, Avatar3, Avatar4];
 
@@ -78,6 +83,7 @@ export default function Actions() {
 		setLoading(true);
 	}
 
+<<<<<<< HEAD
 	return loading === true ? (
 		<div>
 			{/* if all three actions are completed */}
@@ -93,6 +99,30 @@ export default function Actions() {
 									You Supported:
 								</h1>
 							</div>
+=======
+  return loading === true ? (
+    <div>
+      <MetaTags>
+        <meta
+          name="description"
+          content="8by8 Challenge App, made by 8by8.us with ❤️ "
+        />
+        <title>8by8</title>
+      </MetaTags>
+      {/* if all three actions are completed */}
+      {registeredVoter && notifyElectionReminders && startedChallenge ? (
+        <div className="actions">
+          <ConfettiAnimation time={8000} />
+          <div className="top">
+            <div className="avatar-and-status-finished">
+              <div className="action-status-finished">
+                <h1 className="heading">
+                  You are done!
+                  <br />
+                  You Supported:
+                </h1>
+              </div>
+>>>>>>> 0ae281d19ec71fc1ea157a19c9ae493d20e1c524
 
 							<div className="avatar-container">
 								<div className="images">

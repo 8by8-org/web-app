@@ -1,9 +1,17 @@
 import React from "react";
 import "./Legal.scss";
+import MetaTags from 'react-meta-tags';
 
 export default function TOS() {
   return (
     <div className="Legal">
+      <MetaTags>
+        <meta
+          name="description"
+          content="8by8 Challenge App, made by 8by8.us with ❤️ "
+        />
+        <title>8by8</title>
+      </MetaTags>
       <h1 className="underline">Terms and Conditions</h1>
       <p>Welcome to 8by8 Challenge!</p>
       <p>

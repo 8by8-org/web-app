@@ -18,6 +18,7 @@ import ReCAPTCHA from "react-google-recaptcha";
 import { dummyPassword } from "../../constants";
 import voteImg from "./../../assets/4-pages/Signin/Vote.png";
 import { getUserDatabase } from "../../functions/UserData";
+import MetaTags from 'react-meta-tags';
 
 const localStorageEmailKey = "verifyUserEmail";
 
@@ -105,6 +106,13 @@ export default function Login() {
 
   return (
     <div className="signin">
+      <MetaTags>
+        <meta
+          name="description"
+          content="8by8 Challenge App, made by 8by8.us with ❤️ "
+        />
+        <title>8by8</title>
+      </MetaTags>
       <p className="no-underline-title">
         Welcome <br /> back!
       </p>

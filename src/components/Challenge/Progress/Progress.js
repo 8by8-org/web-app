@@ -3,6 +3,7 @@ import {
   completedAction,
   getUserDatabase,
   restartChallenge,
+<<<<<<< HEAD:src/components/Challenge/Progress/Progress.js
 } from "../../../functions/UserData";
 import { useAuth } from "../../../contexts/AuthContext";
 import { addInvitedBy } from "../../../functions/AddInvite";
@@ -13,6 +14,19 @@ import PopupModal from "../../Utility/PopupModal/PopupModal";
 import ConfettiAnimation from "../../Utility/Helpers/ConfettiAnimation";
 import CurveA from "../../../assets/2-shapes/curve-a.svg";
 import BlobDay from "../../../assets/4-pages/Progress/BlobDay.svg";
+=======
+} from "./../../functions/UserData";
+import { useAuth } from "../../contexts/AuthContext";
+import { addInvitedBy } from "../../functions/AddInvite";
+import { makePlayerChallenger } from "../../functions/UserData";
+import Invite from "../Invite.js";
+import { LoadingWheel } from "../LoadingWheel/LoadingWheel.component";
+import PopupModal from "../PopupModal/PopupModal";
+import ConfettiAnimation from "../ConfettiAnimation";
+import CurveA from "./../../assets/2-shapes/curve-a.svg";
+import BlobDay from "./../../assets/4-pages/Progress/BlobDay.svg";
+import MetaTags from 'react-meta-tags';
+>>>>>>> 0ae281d19ec71fc1ea157a19c9ae493d20e1c524:src/components/Progress/Progress.js
 import "./Progress.scss";
 
 export default function Progress() {
@@ -166,6 +180,13 @@ export default function Progress() {
 
   return loading ? (
     <article className="progress-page">
+      <MetaTags>
+        <meta
+          name="description"
+          content="8by8 Challenge App, made by 8by8.us with ❤️ "
+        />
+        <title>8by8</title>
+      </MetaTags>
       {confettiAnimation}
       <section className="section-1 bg-black pt-32px pl-30px pb-80px">
         <h1>
