@@ -6,23 +6,10 @@ import SignUp2 from "../../../assets/images/PlayerWelcome/SignUp2.png";
 import Vote from "../../../assets/images/PlayerWelcome/Vote1.png";
 import BlackCurve from "../../../assets/images/PlayerWelcome/BlackCurve.svg";
 import "./PlayerWelcome.scss";
-<<<<<<< HEAD:src/components/Landing/PlayerWelcome/PlayerWelcome.js
 import { auth } from "../../../firebase";
 import { dummyPassword } from "../../../constants";
 import { useAuth } from "../../../contexts/AuthContext";
-import { LoadingWheel } from "../../Utility/LoadingWheel/LoadingWheel.component";
-=======
-import { auth } from "../../firebase";
-import { dummyPassword } from "../../constants";
-import { useAuth } from "../../contexts/AuthContext";
-import { LoadingWheel } from "../LoadingWheel/LoadingWheel.component";
-<<<<<<< HEAD:src/components/Landing/PlayerWelcome/PlayerWelcome.js
-import ChallengerShare from "../../assets/images/Share/ChallengerShare.png";
-import PlayerShare from "../../assets/images/Share/PlayerShare.png";
-import MetaTags from 'react-meta-tags';
->>>>>>> 0ae281d19ec71fc1ea157a19c9ae493d20e1c524:src/components/PlayerWelcome/PlayerWelcome.js
-=======
->>>>>>> 727c2459e1716e24fc6fc79647edab9e1a855591:src/components/PlayerWelcome/PlayerWelcome.js
+import { LoadingWheel } from "./../../Utility/LoadingWheel/LoadingWheel.component";
 
 export default function PlayerWelcome({ isShare }) {
   const history = useHistory();

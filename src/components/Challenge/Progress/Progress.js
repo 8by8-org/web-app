@@ -3,33 +3,16 @@ import {
   completedAction,
   getUserDatabase,
   restartChallenge,
-<<<<<<< HEAD:src/components/Challenge/Progress/Progress.js
-} from "../../../functions/UserData";
+} from "./../../../functions/UserData";
 import { useAuth } from "../../../contexts/AuthContext";
 import { addInvitedBy } from "../../../functions/AddInvite";
 import { makePlayerChallenger } from "../../../functions/UserData";
-import Invite from "../../Utility/Invite/Invite.js";
-import { LoadingWheel } from "../../Utility/LoadingWheel/LoadingWheel.component";
-import PopupModal from "../../Utility/PopupModal/PopupModal";
+import Invite from "./../../Utility/Invite/Invite";
+import { LoadingWheel } from "./../../Utility/LoadingWheel/LoadingWheel.component";
+import PopupModal from "./../../Utility/PopupModal/PopupModal";
 import ConfettiAnimation from "../../Utility/Helpers/ConfettiAnimation";
-import CurveA from "../../../assets/2-shapes/curve-a.svg";
-import BlobDay from "../../../assets/4-pages/Progress/BlobDay.svg";
-=======
-} from "./../../functions/UserData";
-import { useAuth } from "../../contexts/AuthContext";
-import { addInvitedBy } from "../../functions/AddInvite";
-import { makePlayerChallenger } from "../../functions/UserData";
-import Invite from "../Invite.js";
-import { LoadingWheel } from "../LoadingWheel/LoadingWheel.component";
-import PopupModal from "../PopupModal/PopupModal";
-import ConfettiAnimation from "../ConfettiAnimation";
-import CurveA from "./../../assets/2-shapes/curve-a.svg";
-import BlobDay from "./../../assets/4-pages/Progress/BlobDay.svg";
-<<<<<<< HEAD:src/components/Challenge/Progress/Progress.js
-import MetaTags from 'react-meta-tags';
->>>>>>> 0ae281d19ec71fc1ea157a19c9ae493d20e1c524:src/components/Progress/Progress.js
-=======
->>>>>>> 727c2459e1716e24fc6fc79647edab9e1a855591:src/components/Progress/Progress.js
+import CurveA from "./../../../assets/2-shapes/curve-a.svg";
+import BlobDay from "./../../../assets/4-pages/Progress/BlobDay.svg";
 import "./Progress.scss";
 
 export default function Progress() {
@@ -157,7 +140,7 @@ export default function Progress() {
             alt="player badge background blob"
             className={icon ? "blob-img blob-img-" + index : "disable"}
             src={
-              require(`../../../assets/4-pages/Progress/Badges/Blob${index}.png`)
+              require(`./../../../assets/4-pages/Progress/Badges/Blob${index}.png`)
                 .default
             }
           />
@@ -168,7 +151,7 @@ export default function Progress() {
               alt="player badge icon"
               className="icon"
               src={
-                require(`../../../assets/4-pages/Progress/Badges/${icon}.svg`)
+                require(`./../../../assets/4-pages/Progress/Badges/${icon}.svg`)
                   .default
               }
             />

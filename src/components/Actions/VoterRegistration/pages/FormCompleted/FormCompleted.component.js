@@ -1,17 +1,8 @@
 import React from "react";
 import { useHistory } from "react-router";
 import { useAuth } from "../../../../../contexts/AuthContext";
-
 import "../../VoterRegistration.scss";
-<<<<<<< HEAD:src/components/Actions/VoterRegistration/pages/FormCompleted/FormCompleted.component.js
 import ScrollToTop from "../../../../../functions/ScrollToTop";
-=======
-import ScrollToTop from "../../../../functions/ScrollToTop";
-<<<<<<< HEAD:src/components/Actions/VoterRegistration/pages/FormCompleted/FormCompleted.component.js
-import MetaTags from 'react-meta-tags';
->>>>>>> 0ae281d19ec71fc1ea157a19c9ae493d20e1c524:src/components/VoterRegistration/pages/FormCompleted/FormCompleted.component.js
-=======
->>>>>>> 727c2459e1716e24fc6fc79647edab9e1a855591:src/components/VoterRegistration/pages/FormCompleted/FormCompleted.component.js
 
 export const FormCompleted = () => {
   const history = useHistory();

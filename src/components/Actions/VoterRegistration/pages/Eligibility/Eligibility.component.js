@@ -7,17 +7,8 @@ import "../../VoterRegistration.scss";
 import ZipCodeData from "zipcode-data";
 import { getEligibility } from "../../utils";
 import { ProgressBar } from "../ProgressBar/ProgressBar.component";
-<<<<<<< HEAD:src/components/Actions/VoterRegistration/pages/Eligibility/Eligibility.component.js
 import { addInvitedBy } from "../../../../../functions/AddInvite";
 import ScrollToTop from "../../../../../functions/ScrollToTop";
-=======
-import { addInvitedBy } from "../../../../functions/AddInvite";
-import ScrollToTop from "../../../../functions/ScrollToTop";
-<<<<<<< HEAD:src/components/Actions/VoterRegistration/pages/Eligibility/Eligibility.component.js
-import MetaTags from 'react-meta-tags';
->>>>>>> 0ae281d19ec71fc1ea157a19c9ae493d20e1c524:src/components/VoterRegistration/pages/Eligibility/Eligibility.component.js
-=======
->>>>>>> 727c2459e1716e24fc6fc79647edab9e1a855591:src/components/VoterRegistration/pages/Eligibility/Eligibility.component.js
 
 const ERROR_MESSAGES = [
   "",

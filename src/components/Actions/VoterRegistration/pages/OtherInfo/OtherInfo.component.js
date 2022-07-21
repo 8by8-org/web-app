@@ -5,19 +5,9 @@ import { ProgressBar } from "../ProgressBar/ProgressBar.component";
 import axios from "axios";
 import "../../VoterRegistration.scss";
 import { Tooltip } from "../Tooltip/Tooltip.component";
-<<<<<<< HEAD:src/components/Actions/VoterRegistration/pages/OtherInfo/OtherInfo.component.js
 import { completedAction } from "../../../../../functions/UserData";
 import { LoadingWheel } from "../../../../Utility/LoadingWheel/LoadingWheel.component";
 import ScrollToTop from "../../../../../functions/ScrollToTop";
-=======
-import { completedAction } from "../../../../functions/UserData";
-import { LoadingWheel } from "../../../LoadingWheel/LoadingWheel.component";
-import ScrollToTop from "../../../../functions/ScrollToTop";
-<<<<<<< HEAD:src/components/Actions/VoterRegistration/pages/OtherInfo/OtherInfo.component.js
-import MetaTags from 'react-meta-tags';
->>>>>>> 0ae281d19ec71fc1ea157a19c9ae493d20e1c524:src/components/VoterRegistration/pages/OtherInfo/OtherInfo.component.js
-=======
->>>>>>> 727c2459e1716e24fc6fc79647edab9e1a855591:src/components/VoterRegistration/pages/OtherInfo/OtherInfo.component.js
 
 const apiUrl = "https://usvotes-6vsnwycl4q-uw.a.run.app";
 
