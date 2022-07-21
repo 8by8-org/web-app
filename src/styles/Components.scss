@@ -109,6 +109,7 @@
   text-decoration: underline;
   text-decoration-color: $blue;
   text-decoration-thickness: 10px;
+  text-decoration-skip-ink: none;
 
   // non-iOS devices (code breaks on iOS)
   @supports not (-webkit-touch-callout: none) {
