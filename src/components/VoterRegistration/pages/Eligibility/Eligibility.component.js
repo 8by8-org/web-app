@@ -110,14 +110,14 @@ export const Eligibility = () => {
               const zipInput = document.getElementById("zip");
               zipInput.classList.add("requiredField");
             }
-            setErrorCode(1);
-            return;
             
             setVoterRegistrationData({
               ...voterRegistrationData,
               zip: zip,
               state: state,
             });
+
+            setErrorCode(1);
           }
         }}
         required
