@@ -1,5 +1,4 @@
 import React from "react";
-import MetaTags from 'react-meta-tags';
 import { useHistory } from "react-router-dom";
 import "react-bootstrap";
 import "./HomePage.scss";
@@ -18,13 +17,6 @@ export default function HomePage() {
 
   return (
     <div className="homepage">
-      <MetaTags>
-        <meta
-          name="description"
-          content="8by8 Challenge App, made by 8by8.us with ❤️ "
-        />
-        <title>8by8</title>
-      </MetaTags>
       <div className="content-1">
         <div className="description">
           <img className="logo" src={Logo} alt="8by8 Logo" />

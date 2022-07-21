@@ -9,7 +9,6 @@ import { AddressBlock } from "./AddressBlock.component";
 import { ProgressBar } from "../ProgressBar/ProgressBar.component";
 import { useAuth } from "../../../../contexts/AuthContext";
 import ScrollToTop from "../../../../functions/ScrollToTop";
-import MetaTags from 'react-meta-tags';
 
 const apiUrl = "https://usvotes-6vsnwycl4q-uw.a.run.app";
 
@@ -51,13 +50,6 @@ export const HomeAddress = () => {
 
   return (
     <form className="voterRegForm">
-      <MetaTags>
-        <meta
-          name="description"
-          content="8by8 Challenge App, made by 8by8.us with ❤️ "
-        />
-        <title>8by8</title>
-      </MetaTags>
       <h1 className="register-form-title">
         <u className="underline">REGISTER TO VOTE</u>
       </h1>

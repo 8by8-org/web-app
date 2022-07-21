@@ -91,13 +91,13 @@ function Invite({ toggleInvite, isShare, challengeWon }) {
       setUrl(
         `${window.location.origin}/share/${
           JSON.parse(localStorage.getItem("challengerInfo")).challengerID
-        }?metaTag=player`
+        }`
       );
     } else {
       if (challengeWon) {
-        setUrl(`${window.location.origin}/challengerwelcome?metaTag=won`);
+        setUrl(`${window.location.origin}/challengerwelcome`);
       } else {
-        setUrl(`${window.location.origin}/share/${currentUser.uid}?metaTag=challenger`);
+        setUrl(`${window.location.origin}/share/${currentUser.uid}`);
       }
     }
   }

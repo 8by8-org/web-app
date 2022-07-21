@@ -14,7 +14,6 @@ import { emailUser } from "./../../functions/Email";
 import { getUserType } from "./../../functions/UserType";
 import { addUserToDB } from "./AddUserToDB";
 import "./SignupPage.scss";
-import MetaTags from 'react-meta-tags';
 //import { act } from "react-dom/test-utils";
 
 export default function SignupPage() {
@@ -91,7 +90,7 @@ export default function SignupPage() {
                 emailUser(email, "playerWelcome");
               }, 3000);
             } else {
-
+              
               setTimeout(() => {
                 emailUser(email, "challengerWelcome");
               }, 3000);
@@ -142,13 +141,6 @@ export default function SignupPage() {
   })
   return (
     <div className="signup">
-      <MetaTags>
-        <meta
-          name="description"
-          content="8by8 Challenge App, made by 8by8.us with ❤️ "
-        />
-        <title>8by8</title>
-      </MetaTags>
       <h1 className="normal-title">Sign up</h1>
       <h1 className="no-underline-title">to start your 8by8 journey</h1>
       <form className="form">
@@ -209,7 +201,7 @@ export default function SignupPage() {
               ></input>
               <br></br>
               {emailError && <p className="error-msg">{emailError}</p>}
-
+            
               <label
                 htmlFor="confirmEmail"
                 className={activeFields.confirmEmail
