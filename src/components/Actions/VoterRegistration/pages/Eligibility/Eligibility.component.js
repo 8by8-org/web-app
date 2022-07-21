@@ -13,8 +13,11 @@ import ScrollToTop from "../../../../../functions/ScrollToTop";
 =======
 import { addInvitedBy } from "../../../../functions/AddInvite";
 import ScrollToTop from "../../../../functions/ScrollToTop";
+<<<<<<< HEAD:src/components/Actions/VoterRegistration/pages/Eligibility/Eligibility.component.js
 import MetaTags from 'react-meta-tags';
 >>>>>>> 0ae281d19ec71fc1ea157a19c9ae493d20e1c524:src/components/VoterRegistration/pages/Eligibility/Eligibility.component.js
+=======
+>>>>>>> 727c2459e1716e24fc6fc79647edab9e1a855591:src/components/VoterRegistration/pages/Eligibility/Eligibility.component.js
 
 const ERROR_MESSAGES = [
   "",
@@ -51,13 +54,6 @@ export const Eligibility = () => {
 
   return (
     <form className="voterRegForm">
-      <MetaTags>
-        <meta
-          name="description"
-          content="8by8 Challenge App, made by 8by8.us with ❤️ "
-        />
-        <title>8by8</title>
-      </MetaTags>
       <h1 className="register-form-title">
         <u className="underline">REGISTER TO VOTE</u>
       </h1>

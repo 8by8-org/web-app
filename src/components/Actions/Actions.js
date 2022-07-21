@@ -16,8 +16,11 @@ import "./Actions.scss";
 import {LoadingWheel} from "../Utility/LoadingWheel/LoadingWheel.component";
 =======
 import { LoadingWheel } from "../LoadingWheel/LoadingWheel.component";
+<<<<<<< HEAD
 import MetaTags from 'react-meta-tags';
 >>>>>>> 0ae281d19ec71fc1ea157a19c9ae493d20e1c524
+=======
+>>>>>>> 727c2459e1716e24fc6fc79647edab9e1a855591
 
 const avatars = [Avatar1, Avatar2, Avatar3, Avatar4];
 
@@ -102,13 +105,6 @@ export default function Actions() {
 =======
   return loading === true ? (
     <div>
-      <MetaTags>
-        <meta
-          name="description"
-          content="8by8 Challenge App, made by 8by8.us with ❤️ "
-        />
-        <title>8by8</title>
-      </MetaTags>
       {/* if all three actions are completed */}
       {registeredVoter && notifyElectionReminders && startedChallenge ? (
         <div className="actions">

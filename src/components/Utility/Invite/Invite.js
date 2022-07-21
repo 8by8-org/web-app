@@ -90,16 +90,16 @@ function Invite({ toggleInvite, isShare, won }) {
       setUrl(
         `${window.location.origin}/share/${
           JSON.parse(localStorage.getItem("challengerInfo")).challengerID
-        }?metaTag=player`
+        }`
       );
     } else {
 <<<<<<< HEAD:src/components/Utility/Invite/Invite.js
       setUrl(`${window.location.origin}/share/${currentUser.uid}`);
 =======
       if (challengeWon) {
-        setUrl(`${window.location.origin}/challengerwelcome?metaTag=won`);
+        setUrl(`${window.location.origin}/challengerwelcome`);
       } else {
-        setUrl(`${window.location.origin}/share/${currentUser.uid}?metaTag=challenger`);
+        setUrl(`${window.location.origin}/share/${currentUser.uid}`);
       }
 >>>>>>> 0ae281d19ec71fc1ea157a19c9ae493d20e1c524:src/components/Invite.js
     }
