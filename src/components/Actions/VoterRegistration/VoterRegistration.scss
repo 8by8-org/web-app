@@ -1,0 +1,225 @@
+@import "src/styles/Components";
+@import "src/styles/Fonts";
+@import "src/styles/Variables";
+
+.voterRegForm {
+  width: 100%;
+  max-width: 500px;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  padding-left: 30px;
+  padding-right: 30px;
+  padding-top: 40px;
+  box-sizing: border-box;
+}
+
+.verticalContainer {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.horizontalContainer {
+  display: flex;
+  align-items: center;
+}
+
+.register-form-title {
+  @include heading-text;
+  text-align: left !important;
+  float: left !important;
+}
+
+.register-form-title-small {
+  @include subheading-text;
+  text-align: left;
+  float: left;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.register-form-text {
+  font-family: $lato;
+  margin-top: 40px;
+  margin-bottom: 40px;
+}
+
+.underline {
+  @include text-underline;
+}
+
+.register-label {
+  font-family: $lato;
+  font-weight: bold;
+}
+.floating-label-default {
+  font-family: $lato;
+  font-weight: bold;
+  transform: translate(0px, 24px);
+}
+
+.floating-label-active {
+  font-family: $lato;
+  font-weight: bold;
+  transition: transform 250ms ease-in-out;
+}
+
+.register-input {
+  border-top: none;
+  border-right: none;
+  border-left: none;
+  border-width: 3px;
+  border-color: black;
+  border-radius: 0px;
+}
+
+.register-input:focus {
+  outline: none;
+}
+
+.requiredField {
+  animation: required 250ms linear 1 forwards;
+}
+
+.register-checkbox {
+  border-radius: 0;
+  border: 2px solid black;
+  margin-right: 4px;
+}
+
+.reminders-completed {
+  font-family: $lato;
+  color: black;
+  margin-left: 20px;
+}
+
+.reminders-completed h3 {
+  font-weight: bold;
+  font-size: 18px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.next-btn {
+  @include button;
+  margin-top: 40px;
+  margin-bottom: 40px;
+}
+
+.contributions h1 {
+  width: 100%;
+  margin-left: 10px;
+  margin-top: 40px;
+  font-family: $bebas-neue !important;
+  font-size: 24px !important;
+  text-align: left !important;
+}
+
+.contributions p {
+  width: 100%;
+  margin-top: 40px;
+  margin-left: 10px;
+}
+
+.voter-reg-modal-outer-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.voter-reg-modal-container {
+  background-color: rgba(111, 111, 111, 0.5);
+  width: 100%;
+  max-width: 500px;
+  min-width: 375px;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  animation: fadeIn 250ms ease-in-out 1 forwards;
+}
+
+.voter-reg-modal {
+  background-color: white;
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-family: $lato;
+  box-sizing: border-box;
+  width: 315px;
+}
+
+.voter-reg-toggle-container {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+}
+
+.voter-reg-modal-toggle {
+  height: 24px;
+  background-color: transparent;
+  border: none;
+  outline: none;
+}
+
+.voter-reg-modal-toggle:hover {
+  cursor: pointer;
+}
+
+.voter-reg-modal-heading {
+  font-weight: bold;
+  margin-left: 4px;
+  margin-right: 4px;
+  margin-bottom: 12px;
+  text-align: center;
+  font-family: $lato;
+}
+
+.voter-reg-modal-text {
+  margin-left: 4px;
+  margin-right: 4px;
+  text-align: center;
+}
+
+.voter-reg-modal-btn {
+  @include inverted-button;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.voterRegForm input[type="checkbox"] {
+  margin-right: 12px;
+}
+
+.error-message {
+  color: red;
+  font-style: italic;
+  font-family: $lato;
+  margin-top: 12px;
+  margin-bottom: 18px;
+  animation: fadeIn 250ms ease-in-out 1 forwards;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes required {
+  from {
+    border-color: black;
+  }
+  to {
+    border-color: red;
+  }
+}
