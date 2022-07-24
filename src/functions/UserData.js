@@ -202,7 +202,7 @@ export async function restartChallenge() {
 
 export async function makePlayerChallenger() {
   let uid = auth.getAuth().currentUser.uid;
-  const userRef = doc(db, "users", await uid);
+  const userRef = doc(db, "users", uid);
 
   await updateDoc(userRef, {
     startedChallenge: true,
