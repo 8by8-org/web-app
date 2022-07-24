@@ -28,20 +28,30 @@ export default function PlayerWelcome({ isShare }) {
     //only log in with substitute user if not already authenticated
     //only challenger's name and avatar is stored for security
     if (currentUser) {
-      const query = await getDoc(docRef);
-      // Just in case query.data() does not return anything, then send the user to the signin page.
-      if (query.data()) {
-        const info = (({ name, avatar }) => ({ name, avatar }))(query.data());
-        info.challengerID = code;
-        isShare === undefined &&
-          localStorage.setItem("challengerInfo", JSON.stringify(info));
-        if (isShare === false) {
-          setChallengerInfo(info);
-        } else {
-          setChallengerInfo(JSON.parse(localStorage.getItem("challengerInfo")));
-        }
+
+
+      let uidString = currentUser.uid
+      let result = uidString.includes(code)
+
+      if(result == true){
+          history.push(`/progress`);
       } else {
-        history.push(`/signin`);
+
+        const query = await getDoc(docRef);
+        // Just in case query.data() does not return anything, then send the user to the signin page.
+        if (query.data()) {
+          const info = (({ name, avatar }) => ({ name, avatar }))(query.data());
+          info.challengerID = code;
+          isShare === undefined &&
+            localStorage.setItem("challengerInfo", JSON.stringify(info));
+          if (isShare === false) {
+            setChallengerInfo(info);
+          } else {
+            setChallengerInfo(JSON.parse(localStorage.getItem("challengerInfo")));
+          }
+        } else {
+          history.push(`/signin`);
+        }
       }
     } else {
       await auth.signInWithEmailAndPassword(
@@ -61,11 +71,17 @@ export default function PlayerWelcome({ isShare }) {
   // If code that is gotten from the url is playerwelcome or isShare is true then, if there is challengerInfo in
   // local storage then set it to challengerInfo, else send the user to the signin page. For eveything else run getChallengerInfo.
   useEffect(() => {
-    code === "playerwelcome" || isShare
-      ? localStorage.getItem("challengerInfo")
-        ? setChallengerInfo(JSON.parse(localStorage.getItem("challengerInfo")))
-        : history.push(`/signin`)
-      : getChallengerInfo();
+    let uidString = currentUser.uid
+    let result = uidString.includes(code)
+
+    if(result == true){
+
+      code === "playerwelcome" || isShare
+        ? localStorage.getItem("challengerInfo")
+          ? setChallengerInfo(JSON.parse(localStorage.getItem("challengerInfo")))
+          : history.push(`/signin`)
+        : getChallengerInfo();
+    }
   }, []);
 
   // Render page after challengerInfo is gotten.
