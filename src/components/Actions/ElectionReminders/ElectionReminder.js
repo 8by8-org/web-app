@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useRef } from "react";
 import { useHistory } from "react-router-dom";
-import { getFirestore, doc, getDoc, updateDoc } from "firebase/firestore";
+import { getFirestore, doc, getDoc } from "firebase/firestore";
 import { useAuth } from "../../../contexts/AuthContext";
 import { completedAction } from "../../../functions/UserData";
 import { LoadingWheel } from "../../Utility/LoadingWheel/LoadingWheel.component";
@@ -184,7 +184,7 @@ export default function ElectionReminder() {
       // Start observing the target node for configured mutations
       observer.observe(targetNode, config);
 
-      /*dynamically load the RTV script once the page is rendered and the observer instance is created, 
+      /*dynamically load the RTV script once the page is rendered and the observer instance is created,
           so the RTV script can find the ngp-form div and the observer is listening for DOM changes*/
       const rtvScript = document.createElement("script");
       rtvScript.type = "text/javascript";
@@ -207,7 +207,7 @@ export default function ElectionReminder() {
       }
       initialize();
     }, 3000);
-  }, []);
+  }, [currentUser, showContinueButton]);
 
   return loading ? (
     <div className="election-reminder">

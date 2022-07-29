@@ -15,6 +15,7 @@ function Instagram({ toggleIG, isShare, shareUrl }) {
 
   React.useEffect(() => {
     toggleIG.current = changeShow;
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   // Open and closses the instagram pop-up.

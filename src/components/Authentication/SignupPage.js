@@ -20,7 +20,6 @@ export default function SignupPage() {
   const { currentUser, currentUserData } = useAuth();
   const history = useHistory();
 
-  const [message, setMessage] = useState(null);
   const [emailVisible] = useState(true);
   const [buttonMessage, setButtonMessage] = useState(" ");
   const [reCaptchaPassed, setReCaptchaPassed] = useState(false);
@@ -90,7 +89,7 @@ export default function SignupPage() {
                 emailUser(email, "playerWelcome");
               }, 3000);
             } else {
-              
+
               setTimeout(() => {
                 emailUser(email, "challengerWelcome");
               }, 3000);
@@ -144,7 +143,6 @@ export default function SignupPage() {
       <h1 className="normal-title">Sign up</h1>
       <h1 className="no-underline-title">to start your 8by8 journey</h1>
       <form className="form">
-        {message && <p> {message} </p>}
         {emailVisible && (
           <>
             <div className="signupInfo">
@@ -201,7 +199,7 @@ export default function SignupPage() {
               ></input>
               <br></br>
               {emailError && <p className="error-msg">{emailError}</p>}
-            
+
               <label
                 htmlFor="confirmEmail"
                 className={activeFields.confirmEmail
@@ -304,7 +302,7 @@ export default function SignupPage() {
 
         <p className="tos">
           By signing up, I agree to the &#160;
-          <a onClick={() => history.push("/termsofservice")} className="link">
+          <a href="/termsofservice" className="link">
             Terms of Service
           </a>{" "}
           and the{" "}

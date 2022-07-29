@@ -17,7 +17,6 @@ import "./Progress.scss";
 
 export default function Progress() {
   const { currentUser } = useAuth();
-  const [userData, setUserData] = useState();
   const [challengeVoid, setChallengeVoid] = useState(false);
   const [challengeFinished, setChallengeFinished] = useState(false);
   const [daysLeft, setDaysLeft] = useState(0);
@@ -47,7 +46,7 @@ export default function Progress() {
     } else {
       fetchUserData();
     }
-  }, []);
+  }, [currentUser]);
 
   useEffect(() => {
     // successfully completes challenge
@@ -105,7 +104,6 @@ export default function Progress() {
           badgeArr.push(0);
         }
 
-        setUserData(data);
         setDaysLeft(days);
         setRegisteredVoter(data.isRegisteredVoter);
         setBadges(badgeArr);

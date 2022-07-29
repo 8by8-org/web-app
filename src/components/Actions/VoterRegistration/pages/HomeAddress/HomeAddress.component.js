@@ -15,7 +15,6 @@ const apiUrl = "https://usvotes-6vsnwycl4q-uw.a.run.app";
 export const HomeAddress = () => {
     const history = useHistory();
     const {
-        currentUser,
         currentUserData,
         voterRegistrationData,
         setVoterRegistrationData,
@@ -44,7 +43,7 @@ export const HomeAddress = () => {
         ) {
             history.push("/voterreg/yourname");
         }
-    }, []);
+    }, [currentUserData, history, voterRegistrationData]);
 
     ScrollToTop();
 
@@ -103,6 +102,10 @@ export const HomeAddress = () => {
                     I've changed my address since the last time I registered to vote
                 </label>
             </div>
+            <br />
+            <p style={{ color: "red", fontStyle: "italic", textAlign: "center" }}>
+              {error}
+            </p>
             <button
                 className="next-btn"
                 onClick={async (event) => {
