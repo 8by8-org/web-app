@@ -127,7 +127,7 @@ export default function HomePage() {
           community, business, and tech leaders to create voter registration
           solutions that work.
           <br />
-          <a href="src/components/Landing/HomePage/HomePage" target="_blank" rel="noreferrer" className="link">
+          <a href="https://www.8by8.us/" target="_blank" rel="noreferrer" className="link">
             Learn more about 8by8
           </a>
         </div>
