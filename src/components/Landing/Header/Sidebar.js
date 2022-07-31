@@ -105,6 +105,11 @@ function Sidebar({ sidebar, showSidebar }) {
             </a>
           </>
         )}
+        <>
+            <a onClick={showSidebar} href="/why8by8">
+              Why 8BY8
+            </a>
+        </>
       </div>
     );
   }

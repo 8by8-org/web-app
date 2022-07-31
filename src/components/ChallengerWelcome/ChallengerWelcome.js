@@ -34,9 +34,7 @@ function ChallengerWelcome() {
       <div className="content-2">
         <div className="normal-title">Welcome!</div>
         <p className="normal-text">
-          Closing the voter registration gap has to be a community effort, so
-          we're asking everyone to join us in taking the #8by8Challenge—register
-          8 friends to register to vote in 8 days!
+        Closing the voter registration gap has to be a community effort. Join us in the #8by8Challenge and win a reward today!
         </p>
         <button
           onClick={() => history.push("/signup")}
@@ -52,6 +50,7 @@ function ChallengerWelcome() {
             </span>
           </p>
         )}
+        <a href="/why8by8" className="link" style={{paddingTop : "2em", zIndex: "1"}}> See why others are doing it</a>
       </div>
 
       <div className="content-3">
@@ -70,19 +69,18 @@ function ChallengerWelcome() {
         </p>
         <img src={StepTwo} alt="invite your friends" className="center-img" />
 
-        <div className="normal-heading">3. Friends take action</div>
+        <div className="normal-heading">3. Get 8 friends to Act in 8 days</div>
         <p className="normal-text">
-          Your friends can support your challenge by taking 1 of 3 actions:
-          register to vote, set up election reminders, or take the challenge
-          themselves. You’ll earn 1 badge per friend who takes action!
+        Your friends can support your challenge by taking 1 of 3 actions: 
+        register to vote, set up election reminders, or take the challenge themselves. 
+        Get them to act in 8 days!
         </p>
         <img src={StepThree} alt="friends take action" className="center-img" />
 
-        <div className="normal-heading">4. Earn 8 badges in 8 days</div>
+        <div className="normal-heading">4. Win the challenge, get a reward!</div>
         <p className="normal-text">
-          When you get 8 badges in 8 days, you win the challenge! Most
-          importantly, you helped the community move closer to greater AAPI
-          representation!
+        When all 8 of your friends took action in your challenge within 8 days, 
+        and you win! Then select and enjoy a reward from one of our amazing partners.
         </p>
         <img
           src={StepFour}
