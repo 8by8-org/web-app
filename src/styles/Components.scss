@@ -114,6 +114,6 @@
   // non-iOS devices (code breaks on iOS)
   @supports not (-webkit-touch-callout: none) {
     text-decoration: underline $blue 10px !important;
-    text-underline-offset: -5px !important;
+    text-underline-offset: -10px !important;
   }
 }
