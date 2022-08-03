@@ -71,6 +71,22 @@
   .bottom-links {
     display: flex;
     flex-direction: column;
+    button {
+      background-color: transparent;
+      border: none;
+      cursor: pointer;
+      text-decoration: none;
+      display: inline;
+      margin: 5px 0px;
+      padding: 0;
+      color: white;
+      font-weight: 700;
+      font-size: 18px;
+      line-height: 21.6px;
+      text-align: left;
+      right: 0px;
+    }
+    
     a {
       padding: 0;
       color: white;

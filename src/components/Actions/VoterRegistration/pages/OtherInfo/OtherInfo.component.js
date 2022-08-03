@@ -15,7 +15,6 @@ export const OtherInfo = () => {
   const history = useHistory();
   const {
     currentUserData,
-    setCurrentUserData,
     voterRegistrationData,
     setVoterRegistrationData,
   } = useAuth();
@@ -59,7 +58,7 @@ export const OtherInfo = () => {
     ) {
       history.push("/voterreg/homeaddress");
     }
-  }, []);
+  }, [currentUserData, history, voterRegistrationData]);
 
   ScrollToTop();
 
