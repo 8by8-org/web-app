@@ -61,11 +61,17 @@ export default function PlayerWelcome({ isShare }) {
   // If code that is gotten from the url is playerwelcome or isShare is true then, if there is challengerInfo in
   // local storage then set it to challengerInfo, else send the user to the signin page. For eveything else run getChallengerInfo.
   useEffect(() => {
-    code === "playerwelcome" || isShare
-      ? localStorage.getItem("challengerInfo")
-        ? setChallengerInfo(JSON.parse(localStorage.getItem("challengerInfo")))
-        : history.push(`/signin`)
-      : getChallengerInfo();
+    if (currentUser?.uid === code) {
+      history.push(`/signin`);
+    } else {
+      code === "playerwelcome" || isShare
+        ? localStorage.getItem("challengerInfo")
+          ? setChallengerInfo(
+              JSON.parse(localStorage.getItem("challengerInfo"))
+            )
+          : history.push(`/signin`)
+        : getChallengerInfo();
+    }
   }, []);
 
   // Render page after challengerInfo is gotten.
