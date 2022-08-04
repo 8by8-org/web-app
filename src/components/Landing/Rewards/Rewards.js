@@ -46,7 +46,7 @@ const Rewards = () => {
             </div>
             <img className="curve" src={CurveA} alt="black curve" />
             <div className="sponsor-section">
-                {partners.map((partner) => {
+                {partners.length > 0 && partners.map((partner) => {
                     return (
                         <div className="sponsor" key={partner.id}>
                             <img src={partner.img} alt={`${partner.name} image`} />
