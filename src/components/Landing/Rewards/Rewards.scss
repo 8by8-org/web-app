@@ -1,0 +1,42 @@
+@import "../../../styles/Components.scss";
+@import "../../../styles/Fonts.scss";
+@import "../../../styles/Variables.scss";
+@import "../../../styles/Classes.scss";
+
+.Rewards {
+    h1 {
+        @include text-underline;
+        color: white;
+        font-size: 4rem;
+        text-transform: capitalize;
+    }
+
+    .description-text {
+        color: white;
+    }
+
+    .sponsor-section {
+        margin: 20px 0px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        
+        img {
+            margin: 10px 0px;
+            height: 20vh;
+            width: 30vh;
+        }
+
+        .sponsor {
+            margin: 20px 0px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            h5 {
+                font-size: 2rem;
+                font-family: $bebas-neue;
+                text-transform: uppercase;
+            }
+        }
+    }
+}

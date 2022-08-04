@@ -28,6 +28,7 @@ import { YourName } from "./Actions/VoterRegistration/pages/YourName/YourName.co
 import { HomeAddress } from "./Actions/VoterRegistration/pages/HomeAddress/HomeAddress.component";
 import { OtherInfo } from "./Actions/VoterRegistration/pages/OtherInfo/OtherInfo.component";
 import { FormCompleted } from "./Actions/VoterRegistration/pages/FormCompleted/FormCompleted.component";
+import Rewards from './Landing/Rewards/Rewards';
 
 export default function App() {
   return (
@@ -51,6 +52,7 @@ export default function App() {
                 />
                 <Route path="/signup" component={SignupPage} />
                 <Route path="/signin" component={Signin} />
+                <Route path="/rewards" component={Rewards} />
                 <PrivateRoute
                   path="/election-reminders"
                   component={ElectionReminder}
