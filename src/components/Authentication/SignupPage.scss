@@ -5,13 +5,16 @@
 
 .signup {
   padding: 30px;
+  .red {
+    color: red;
+    border-color: red;
+  }
 
   .error-msg {
     color: red;
     font-weight: bold;
     position: relative;
-    bottom: 32px;
-    border-top: 3px solid red;
+    top: 0px;
     height: 0;
   }
 
@@ -48,6 +51,7 @@
       line-height: 22px;
       letter-spacing: 0.02em;
     }
+
     .small-title {
       text-align: left;
       margin-top: 40px;
