@@ -120,7 +120,9 @@ export default function PlayerWelcome({ isShare }) {
             </p>
           </div>
         )}
-        <a href="/why8by8" className="link" style={{paddingTop : "2em", color : "#02DDC3", zIndex: "1"}}> See why others are doing it</a>
+        <p>
+          <a href="/why8by8" className="link" style={{ color : "#02DDC3", zIndex: "1"}}> See why others are doing it</a>
+          </p>
       </div>
       <img src={BlackCurve} className="curve" alt="Black Curve" />
       <div className="main-content">

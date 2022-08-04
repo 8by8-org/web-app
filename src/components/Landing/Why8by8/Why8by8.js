@@ -1,5 +1,5 @@
 import React from "react";
-import "./Why8by8.scss";
+import "./why8by8.scss";
 import TealCurve from "../../../assets/images/HomePage/Curve2.svg";
 import TealBottom from "../../../assets/images/Why8by8/tealBottom.png";
 import VoteBubble from "../../../assets/images/Why8by8/voteBubble.png";
@@ -15,7 +15,7 @@ import TealWave from "../../../assets/images/Why8by8/tealWave.png";
 
 export default function Why8by8() {
   return (
-    <div style={{ overflow: "hidden", maxWidth: "100vw" }}>
+    <div style={{ overflow: "hidden", maxWidth: "100vw" }} className="why8by8">
       <div className="whyHero">
         <h1 className="underline">Why 8by8</h1>
         <q>
