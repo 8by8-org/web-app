@@ -13,6 +13,7 @@ function Preview({ togglePreview , isShare}) {
 
   React.useEffect(() => {
     togglePreview.current = changeShow;
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   // Open and closes the preview pop-up.

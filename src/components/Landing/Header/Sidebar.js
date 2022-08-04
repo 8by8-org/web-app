@@ -26,7 +26,7 @@ function Sidebar({ sidebar, showSidebar }) {
         }
       });
     }
-  }, [sidebar]);
+  }, [sidebar, currentUser]);
 
   function Greeting() {
     return (
@@ -133,7 +133,7 @@ function Sidebar({ sidebar, showSidebar }) {
           Privacy Policy
         </a>
         {currentUser ? (
-          <a onClick={() => setSignoutModal(true)}>Sign Out</a>
+          <button onClick={() => setSignoutModal(true)}>Sign Out</button>
         ) : (
           <a onClick={showSidebar} href="/signup">
             Sign Up

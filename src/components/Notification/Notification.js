@@ -8,6 +8,7 @@ function Notification(props) {
   useEffect(() => {
     showNotification();
     setLoaded(true); // prevents showing notif on component mounting
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [props.enable]);
 
   function delay(ms) {

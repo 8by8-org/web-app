@@ -4,18 +4,16 @@ import { Nav } from "react-bootstrap";
 import "./Invite.scss";
 import * as MdIcons from "react-icons/md";
 import {
-  FacebookShareButton,
   TwitterShareButton,
-  FacebookMessengerShareButton,
   WhatsappShareButton,
   EmailShareButton,
-} from "react-share";
+} from "react-share"; //FacebookShareButton, FacebookMessengerShareButton
 import { completedAction, getUserDatabase } from "./../../../functions/UserData";
 import CalendarSvg from "../../../assets/images/Invite/Calendar.svg";
-import FacebookSvg from "../../../assets/images/Invite/Facebook.svg";
+// import FacebookSvg from "../../../assets/images/Invite/Facebook.svg";
 import TwitterSvg from "../../../assets/images/Invite/Twitter.svg";
 import InstagramSvg from "../../../assets/images/Invite/Instagram.svg";
-import FacebookMessengerSvg from "../../../assets/images/Invite/FacebookMessenger.svg";
+// import FacebookMessengerSvg from "../../../assets/images/Invite/FacebookMessenger.svg";
 import WhatsAppSvg from "../../../assets/images/Invite/WhatsApp.svg";
 import EmailSvg from "../../../assets/images/Invite/Email.svg";
 import TextSvg from "../../../assets/images/Invite/Text.svg";
@@ -31,8 +29,23 @@ function Invite({ toggleInvite, isShare, challengeWon }) {
   const [shared, setShared] = useState(false);
   const [copyNotif, setCopyNotif] = useState(false);
 
-  React.useEffect(() => {
+  useEffect(() => {
     toggleInvite.current = changeShow;
+    function generateUrl() {
+      if (isShare) {
+        setUrl(
+          `${window.location.origin}/share/${
+            JSON.parse(localStorage.getItem("challengerInfo")).challengerID
+          }`
+        );
+      } else {
+        if (challengeWon) {
+          setUrl(`${window.location.origin}/challengerwelcome`);
+        } else {
+          setUrl(`${window.location.origin}/share/${currentUser.uid}`);
+        }
+      }
+    }
 
     if (localStorage.getItem("challengerInfo")) {
       setChallengerInfo(JSON.parse(localStorage.getItem("challengerInfo")));
@@ -41,7 +54,8 @@ function Invite({ toggleInvite, isShare, challengeWon }) {
     if (currentUser) {
       generateUrl();
     }
-  }, []);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isShare, currentUser]);
 
   const shareUrl = url;
   const body = isShare
@@ -51,8 +65,8 @@ function Invite({ toggleInvite, isShare, challengeWon }) {
     : challengeWon
     ? "I won the 8by8 Challenge!"
     : "Help me in my 8by8 Challenge to #stopasianhate.";
-  const hashtag = "#stopasianhate";
-  const appId = "217424673873884";
+  // const hashtag = "#stopasianhate";
+  // const appId = "217424673873884";
 
   useEffect(() => {
     if (currentUser) {
@@ -66,7 +80,7 @@ function Invite({ toggleInvite, isShare, challengeWon }) {
         }
       });
     }
-  }, []);
+  }, [currentUser]);
 
   // Creates the url to be shared. If isShare is true(for share on actions page) then use the uid of the challenger info in local storage, else use the
   // uid of the person logged in(for invite on progress page).
@@ -83,22 +97,6 @@ function Invite({ toggleInvite, isShare, challengeWon }) {
   function reloadPage() {
     if (!shared && !isShare) {
       window.location.reload();
-    }
-  }
-
-  function generateUrl() {
-    if (isShare) {
-      setUrl(
-        `${window.location.origin}/share/${
-          JSON.parse(localStorage.getItem("challengerInfo")).challengerID
-        }`
-      );
-    } else {
-      if (challengeWon) {
-        setUrl(`${window.location.origin}/challengerwelcome`);
-      } else {
-        setUrl(`${window.location.origin}/share/${currentUser.uid}`);
-      }
     }
   }
 
