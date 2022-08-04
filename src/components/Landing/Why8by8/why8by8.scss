@@ -14,10 +14,15 @@ img{
     -ms-user-select: none;
     max-width: 500px;
 }
+q{
+    font-family: $lato;
+    font-weight: 400;
+    font-size: 18px
+}
 .whyHero{
     background-color: #000000;
     height: auto;
-    padding: 1em 2.5em;
+    padding: 1em 30px;
     color: white;
     h1{
         padding: 0.7em 0em;
@@ -56,7 +61,7 @@ aside{
 .tealStats{
     background-color: $blue;
     position: relative;
-    padding: 200px 4em 50px 4em;
+    padding: 200px 30px 50px 30px;
     overflow: hidden;
     h1{
         font-size: 64px;
@@ -78,7 +83,7 @@ u{@include text-underline;}
 .whiteMidsection{
     height: fit-content;
     background-color: white;
-    padding: 180px 2em 80px 2em;
+    padding: 180px 30px 80px 30px;
     h1{
         font-family: $bebas-neue;
         font-size: 36px;
@@ -193,11 +198,12 @@ u{@include text-underline;}
 }
 .closingQuotes{
     
-    padding: calc(min(38.33vw, 147px)) 2em 0 2em;
-    q{
-        font-family: $lato;
-        font-weight: 300;
-        font-size: 18px
+    padding: calc(min(38.33vw, 147px)) 30px 0 30px;
+    .img1 {
+       margin-top: -40px;
+    }
+    .quote-gap {
+        margin-top: 125px;
     }
     .chefusQuote{
         padding: 150px 2em;
@@ -215,7 +221,7 @@ u{@include text-underline;}
         }
     }
     .tealBottom{
-        top: -30px;
+        top: -15px;
     }
 
 }
