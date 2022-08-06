@@ -30,6 +30,7 @@ export default function HomePage() {
           >
             <span>Take the Challenge</span>
           </button>
+          <a href="/why8by8" className="link" style={{paddingBottom : "2em", color : "#02DDC3", zIndex: "1", position: "relative", top: "-1.8em"}}> See why others are doing it</a>
         </div>
       </div>
 
