@@ -32,8 +32,8 @@ export const HomeAddress = () => {
   });
 
   /*redirect the user to the form completed page if they've already register to vote
-    using the 8x8 app, or to the appropriate previous page if that information is incomplete
-    */
+  using the 8x8 app, or to the appropriate previous page if that information is incomplete
+  */
   useEffect(() => {
     if (currentUserData && currentUserData.isRegisteredVoter)
       history.push("/voterreg/completed");
@@ -55,9 +55,8 @@ export const HomeAddress = () => {
 
   return (
     <form className="voterRegForm">
-      <span style={{ color: "red" }}>{error}</span>
       <h1 className="register-form-title">
-        <u className="underline">REGISTE</u>R TO VOTE
+        <u className="underline">REGISTER TO VOTE</u>
       </h1>
       <ProgressBar progressPercent={75} />
       {isLoading && <LoadingWheel overlay={true} />}
@@ -216,7 +215,6 @@ export const HomeAddress = () => {
               checksPassed = false;
             }
           }
-
           if (!checksPassed) {
             setError("Please complete all of the required fields");
             return;

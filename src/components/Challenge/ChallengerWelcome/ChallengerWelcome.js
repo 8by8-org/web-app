@@ -1,7 +1,6 @@
 import React from "react";
-import MetaTags from 'react-meta-tags';
-import {useHistory} from "react-router-dom";
-import {useAuth} from "../../../contexts/AuthContext";
+import { useHistory } from "react-router-dom";
+import { useAuth } from "../../../contexts/AuthContext";
 import "./ChallengerWelcome.scss";
 import Top from "../../../assets/images/ChallengerWelcome/Top.png";
 import Logo from "../../../assets/logos/white-logo.svg";
@@ -9,21 +8,15 @@ import StepOne from "../../../assets/images/ChallengerWelcome/StepOne.png";
 import StepTwo from "../../../assets/images/ChallengerWelcome/StepTwo.png";
 import StepThree from "../../../assets/images/ChallengerWelcome/StepThree.png";
 import StepFour from "../../../assets/images/ChallengerWelcome/StepFour.png";
-import ChallengerShareWon from "../../../assets/images/Share/ChallengerShareWon.png";
 
 function ChallengerWelcome() {
 	const history = useHistory();
 	sessionStorage.setItem("UserType", "Challenger");
 
-	const {currentUser} = useAuth();
+	const { currentUser } = useAuth();
 
 	return (
 		<div className="challenger-welcome">
-			<MetaTags>
-				<meta property="og:title" content="I won the 8by8 Challenge to #stopasianhate"/>
-				<meta property="og:image" content={ChallengerShareWon}/>
-				<meta property="og:url" content={"https://challenge.8by8.us/challengerwelcome"}/>
-			</MetaTags>
 			<div className="content-1">
 				<img className="background" src={Top} alt="background"/>
 				<div className="container">
@@ -48,8 +41,8 @@ function ChallengerWelcome() {
 					<p className="small-text">
 						Already have an account?{" "}
 						<span className="link" onClick={() => history.push("/signin")}>
-                            Sign in
-                        </span>
+              Sign in
+            </span>
 					</p>
 				)}
 			</div>
@@ -61,14 +54,14 @@ function ChallengerWelcome() {
 				<p className="normal-text">
 					Sign up with your name and email address to get started.
 				</p>
-				<img src={StepOne} alt="sign up" className="center-img"/>
+				<img src={StepOne} alt="sign up" className="center-img" />
 
 				<div className="normal-heading">2. Invite your friends</div>
 				<p className="normal-text">
 					Get 8 friends via social media or messaging apps to join your
 					challenge.
 				</p>
-				<img src={StepTwo} alt="invite your friends" className="center-img"/>
+				<img src={StepTwo} alt="invite your friends" className="center-img" />
 
 				<div className="normal-heading">3. Friends take action</div>
 				<p className="normal-text">
@@ -76,7 +69,7 @@ function ChallengerWelcome() {
 					register to vote, set up election reminders, or take the challenge
 					themselves. You’ll earn 1 badge per friend who takes action!
 				</p>
-				<img src={StepThree} alt="friends take action" className="center-img"/>
+				<img src={StepThree} alt="friends take action" className="center-img" />
 
 				<div className="normal-heading">4. Earn 8 badges in 8 days</div>
 				<p className="normal-text">

@@ -12,7 +12,7 @@ export const YourName = () => {
     useAuth();
   const [error, setError] = useState("");
 
-  /*redirect user to form completed page if they have already completed the flow, 
+  /*redirect user to form completed page if they have already completed the flow,
   and to eligibility page if that information isn't complete
   */
   useEffect(() => {
@@ -22,7 +22,7 @@ export const YourName = () => {
       voterRegistrationData.dob.length === 0
     )
       history.push("/voterreg/eligibility");
-  }, []);
+  }, [currentUserData, history, voterRegistrationData]);
 
   ScrollToTop();
 

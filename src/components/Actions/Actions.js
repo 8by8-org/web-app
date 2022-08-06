@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { getUserDatabase } from "./../../functions/UserData";
-import { Button } from "react-bootstrap";
 import { useHistory } from "react-router";
 import { useAuth } from "../../contexts/AuthContext";
 import { getFirestore, getDoc, doc } from "firebase/firestore";
@@ -53,7 +52,7 @@ export default function Actions() {
         history.push(`/signup`);
       }
     }
-  }, []);
+  }, [currentUser, history]);
 
   // gets the info about which actions the signed in user has completed or not
   function fetchUserData() {

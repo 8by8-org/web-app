@@ -22,10 +22,10 @@ import { getUserDatabase } from "../../functions/UserData";
 const localStorageEmailKey = "verifyUserEmail";
 
 export default function Login() {
-  const { currentUser, currentUserData } = useAuth();
+  const { currentUser } = useAuth();
   const history = useHistory();
   const [message, setMessage] = useState(null);
-  const [emailVisible, setEmailVisible] = useState(true);
+  // const [emailVisible, setEmailVisible] = useState(true);
   const [buttonMessage, setButtonMessage] = useState(" "); // leave blank to hide button
   const [reCaptchaPassed, setReCaptchaPassed] = useState(false);
 
@@ -63,7 +63,7 @@ export default function Login() {
               dummyPassword
             );
             window.localStorage.setItem(localStorageEmailKey, email);
-            setEmailVisible(false);
+            // setEmailVisible(false);
             setButtonMessage(null);
             setMessage("Logging in...");
           } catch (e) {
@@ -110,7 +110,7 @@ export default function Login() {
       </p>
 
       <div className="img">
-        <img className="vote-img" src={voteImg} />
+        <img className="vote-img" src={voteImg} alt="Signin Vote" />
       </div>
 
       <Form className="form">
