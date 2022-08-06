@@ -82,8 +82,12 @@ export default function PlayerWelcome({ isShare }) {
 
   // If isShare is undefined, when playerwelcome page is rendered not in invite or share, then the buttons work.
   return loading === false ? (
-    <div className={"player-welcome" + ((isShare || isShare === false) ? " preview" : "")}>
-      <div className="top" style={{textAlign : "center"}}>
+    <div
+      className={
+        "player-welcome" + (isShare || isShare === false ? " preview" : "")
+      }
+    >
+      <div className="top" style={{ textAlign: "center" }}>
         <h1 className="top-heading">
           <span className="underline h1">Support</span>{" "}
           {challengerInfo && challengerInfo.name !== null
@@ -126,9 +130,15 @@ export default function PlayerWelcome({ isShare }) {
             </p>
           </div>
         )}
-        <p>
-          <a href="/why8by8" className="link" style={{ color : "#02DDC3", zIndex: "1"}}> See why others are doing it</a>
-          </p>
+        <p
+          onClick={() => {
+            history.push(`/why8by8`);
+          }}
+          className="link"
+          style={{ color: "#02DDC3", zIndex: "1", marginTop: "0.7em" }}
+        >
+          See why others are doing it
+        </p>
       </div>
       <img src={BlackCurve} className="curve" alt="Black Curve" />
       <div className="main-content">
@@ -161,9 +171,8 @@ export default function PlayerWelcome({ isShare }) {
         </div>
         <h3>4. Get a Reward!</h3>
         <p className="text">
-        When your friend wins the challenge within 8 days, 
-        you win as well! Then select and enjoy a reward 
-        from one of our amazing partners.
+          When your friend wins the challenge within 8 days, you win as well!
+          Then select and enjoy a reward from one of our amazing partners.
         </p>
         <img
           src={StepFour}
