@@ -1,5 +1,5 @@
 import React from "react";
-import "./why8by8.scss";
+import "./Why8by8.scss";
 import TealCurve from "../../../assets/images/HomePage/Curve2.svg";
 import TealBottom from "../../../assets/images/Why8by8/tealBottom.png";
 import VoteBubble from "../../../assets/images/Why8by8/voteBubble.png";
@@ -17,18 +17,22 @@ export default function Why8by8() {
   return (
     <div style={{ overflow: "hidden", maxWidth: "100vw" }} className="why8by8">
       <div className="whyHero">
-        <h1 className="underline">Why 8by8</h1>
-        <q>
-          AAPI hate crimes have shot through the roof during the pandemic, yet
-          there's limited media coverage. 8by8 gives me the opportunity to use
-          my skills to advance political and social equality for the AAPI
-          community and help increase voter turnout. The AAPI community deserves
-          a future where we're treated the same and our culture is respected.
-        </q>
-        <aside>
-          <span>—Arnab, High School Student</span>
-          <img src={Arnab} alt="Arnab Image"></img>
-        </aside>
+        <div className="padding">
+          <h1 className="underline">Why 8by8</h1>
+          <q>
+            AAPI hate crimes have shot through the roof during the pandemic, yet
+            there's limited media coverage. 8by8 gives me the opportunity to use
+            my skills to advance political and social equality for the AAPI
+            community and help increase voter turnout. The AAPI community
+            deserves a future where we're treated the same and our culture is
+            respected.
+          </q>
+          <aside>
+            <span>—Arnab, High School Student</span>
+            <img src={Arnab} alt="Arnab Image"></img>
+          </aside>
+        </div>
+
         <div class="custom-shape-divider-top-1659139317">
           <svg
             data-name="Layer 1"
@@ -64,10 +68,7 @@ export default function Why8by8() {
           <span>—Agustina, College Student</span>
           <img src={Agustina} alt="Agustina Image"></img>
         </aside>
-        <img
-          src={BlurDivider}
-          style={{ width: "100vw", transform: "translateX(-2em)" }}
-        ></img>
+        <img src={BlurDivider} className="blur-divider"></img>
         <h1> Types of Hate Crimes Against AAPI</h1>
         <div className="chart">
           <img src={PieChart} />
@@ -91,7 +92,7 @@ export default function Why8by8() {
         </div>
       </div>
       <div className="finalTealStats">
-        <img src={TealTop} />
+        <img className="top-curve" src={TealTop} />
         <h2>Asians Have Historically Low Election Turnout</h2>
         <h1 className="bold-shadow">Below 60%</h1>
         <div className="stat">
@@ -162,7 +163,7 @@ export default function Why8by8() {
             style={{
               position: "absolute",
               transform: "rotateX(180deg)",
-              width: "100vw",
+              width: "100%",
               left: "0",
               zIndex: "9",
             }}
@@ -195,7 +196,7 @@ export default function Why8by8() {
         <span>
           Source: &nbsp;
           <a href="https://stopaapihate.org/national-report-through-september-2021/">
-            Stop AAPI Hate Report(2020-2021)
+            Stop AAPI Hate Report (2020-2021)
           </a>
         </span>
       </div>
