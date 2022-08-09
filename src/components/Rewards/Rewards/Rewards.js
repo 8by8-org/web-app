@@ -1,7 +1,7 @@
-import CurveA from "./../../../assets/2-shapes/curve-a.svg";
+import CurveA from "../../../assets/2-shapes/curve-a.svg";
 import './Rewards.scss';
 import { useHistory } from "react-router-dom";
-import placeholderImage from "./../../../assets/images/placeholder-image.jpg"
+import placeholderImage from "../../../assets/images/placeholder-image.jpg"
 
 const Rewards = () => {
     const history = useHistory();
@@ -58,7 +58,7 @@ const Rewards = () => {
                     return (
                         <div className="sponsor" key={partner.id}>
                             <a href={partner.link}>
-                                <img src={partner.img === "" ? placeholderImage: partner.img} alt={`${partner.name} image`} />
+                                <img src={partner.img === "" ? placeholderImage : partner.img} alt={`${partner.name} image`} />
                                 <h5>{partner.name}</h5>
                                 <p>{partner.type} {partner.location}</p>
                             </a>

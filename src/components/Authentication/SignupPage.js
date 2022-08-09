@@ -179,10 +179,10 @@ export default function SignupPage() {
                 }
                 }
               ></input>
-              
+
               {nameError && <p className="error-msg">{nameError}</p>}
               <br></br>
-              
+
 
               <label
                 htmlFor="emailAddress"
@@ -244,7 +244,7 @@ export default function SignupPage() {
               ></input>
               {duplicateError && <p className="error-msg">{duplicateError}</p>}
               <br></br>
-              
+
             </div>
             <p className="small-title">Which One's you? </p>
             <div className="avatar-container">
