@@ -6,12 +6,17 @@
 .signup {
   padding: 30px;
 
+  .register-input {
+    width: 100%;
+    margin-bottom: 30px;
+  }
+
   .error-msg {
     color: red;
     font-weight: bold;
     position: relative;
-    bottom: 32px;
-    border-top: 3px solid red;
+    bottom: 34px;
+    border-top: 4px solid red;
     height: 0;
   }
 

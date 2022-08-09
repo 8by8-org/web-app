@@ -9,7 +9,7 @@ import ScrollToTop from "../functions/ScrollToTop";
 import { AuthProvider } from "../contexts/AuthContext";
 import Signin from "./Authentication/Signin";
 import Signout from "./Authentication/Signout";
-import SignupPage from "./Authentication/SignupPage";
+import Signup from "./Authentication/Signup";
 import PrivateRoute from "./Utility/Helpers/PrivateRoute";
 import Header from "./Landing/Header/Header";
 import "./App.css";
@@ -51,7 +51,7 @@ export default function App() {
                   component={ChallengerWelcome}
                 />
                 <Route path="/why8by8" component={Why8by8} />
-                <Route path="/signup" component={SignupPage} />
+                <Route path="/signup" component={Signup} />
                 <Route path="/signin" component={Signin} />
                 <PrivateRoute
                   path="/election-reminders"
