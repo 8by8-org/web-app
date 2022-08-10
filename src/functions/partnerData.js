@@ -45,8 +45,8 @@ export function wOuPartnerData(
   name,
   logoUrl,
   bDesc,
-  bLink,
   bType,
+  bLink,
   rewType,
   locType,
   locDes,
@@ -58,6 +58,8 @@ export function wOuPartnerData(
   rewAva
 ) {
   const reference = ref(db, 'partners/' + name);
+  const rewSDate = rewSD ? new Date(rewSD) : new Date();
+  const rewEDate = rewED ? new Date(rewED) : "";
 
   set(reference, {
     name: name,
@@ -71,8 +73,8 @@ export function wOuPartnerData(
     rewardLink: rewLink,
     rewardDescription: rewDes,
     rewardConditions: rewCon,
-    rewardStartDate: new Date(rewSD),
-    rewardEndDate: new Date(rewED),
+    rewardStartDate: rewSDate.toDateString(),
+    rewardEndDate: rewEDate ? rewEDate.toDateString() : rewEDate,
     rewardAvailable: rewAva
   });
 };
