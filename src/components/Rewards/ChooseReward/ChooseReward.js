@@ -91,6 +91,7 @@ const ChooseReward = () => {
                                         <p> {partner.businessDescription}</p>
                                     </div>
                                     <div className="image-container col-3">
+                                        { /* We need to keep that part commented out until we stop using Google Drive links for images*/ }
                                         <img src={ /* partner.logo ? partner.logo : placeholderImage */ placeholderImage} alt={'Partner image'}/>
                                     </div>
                                 </div>
