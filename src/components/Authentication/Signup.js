@@ -12,7 +12,7 @@ import { emailUser } from "./../../functions/Email";
 import { getUserType } from "./../../functions/UserType";
 import { addUserToDB } from "./AddUserToDB";
 import { useHistory } from "react-router-dom";
-import "./SignupPage.scss";
+import "./Signup.scss";
 
 function Signup() {
   const { currentUser, currentUserData } = useAuth();
@@ -21,7 +21,9 @@ function Signup() {
 
   useEffect(() => {
     if (currentUser) {
-      if (playerStatus) {
+      if (!currentUser.emailVerified) {
+        history.push(`/verify`);
+      } else if (playerStatus) {
         history.push(`/${playerStatus}`);
       } else if (currentUserData && !currentUserData.startedChallenge) {
         history.push("/actions");
@@ -87,14 +89,16 @@ function Signup() {
   }
 
   async function createUser() {
-    if (!checkErrors()) {
+    if (
+      !auth.isSignInWithEmailLink(auth.getAuth(), window.location.href) &&
+      !checkErrors()
+    ) {
       let challengeEndDate = "";
       let startedChallenge = false;
       if (getUserType() !== "player") {
         challengeEndDate = new Date(Date.now() + 8 * 24 * 60 * 60 * 1000); // now + 8 days
         startedChallenge = true;
       }
-
       try {
         // adding user data to database
         await auth.createUserWithEmailAndPassword(
@@ -109,7 +113,6 @@ function Signup() {
           startedChallenge
         );
 
-        // emailing new user
         if (getUserType() === "player") {
           setTimeout(() => {
             emailUser(formData.email, "playerWelcome");
@@ -181,7 +184,7 @@ function Signup() {
         <label
           htmlFor="email"
           className={
-            activeFields.name
+            activeFields.email
               ? "floating-label-active"
               : "floating-label-default"
           }
@@ -209,7 +212,7 @@ function Signup() {
         <label
           htmlFor="re-email"
           className={
-            activeFields.name
+            activeFields.confirmEmail
               ? "floating-label-active"
               : "floating-label-default"
           }

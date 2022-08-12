@@ -1,59 +1,21 @@
 const functions = require("firebase-functions");
 const admin = require("firebase-admin");
+const fetch = require("node-fetch");
+const FormData = require("form-data");
 
 admin.initializeApp();
 const db = admin.firestore();
 
 // signup function
 exports.onSignup = functions.auth.user().onCreate(async (user) => {
-  async function generateUniqueInviteCode() {
-    const length = 8;
-    const dictionary = "234579abcdefghjkmnpqrstwxyz"; // unambiguous characters
-
-    const generateRandom = () => {
-      let out = "";
-      for (let i = 0; i < length; i++) {
-        out += dictionary.charAt(Math.floor(Math.random() * dictionary.length));
-      }
-      return out;
-    };
-    const checkIsRandom = (allegedRandom) => {
-      // dumbest way of guaranteeing uniqueness but this will have to do for now
-      return new Promise((resolve, reject) => {
-        db.collection("users")
-          .where("inviteCode", "==", allegedRandom)
-          .get()
-          .then((querySnapshot) => resolve(querySnapshot.empty))
-          .catch(reject);
-      });
-    };
-
-    let currentRandom = generateRandom();
-    let timesRegenerated = 0;
-    while (!(await checkIsRandom(currentRandom))) {
-      currentRandom = generateRandom();
-      if (++timesRegenerated >= 20) {
-        // terminate before we drain away our resources
-        throw new Error(
-          "either by chance or something really bad happened, but 20 generated invite codes and still yielded no unique code"
-        );
-      }
-    }
-    if (timesRegenerated) {
-      functions.logger.warn(`encountered ${timesRegenerated} collisions`);
-    }
-    return currentRandom;
-  }
-
   const userRef = db.collection("users").doc(user.uid);
   if (!(await userRef.get().exists)) {
     userRef.set({
       email: user.email,
-      name: user.displayName,
+      name: "",
       avatar: "",
-      inviteCode: await generateUniqueInviteCode(),
       invitedBy: "",
-      lastActive: admin.firestore.FieldValue.serverTimestamp(),
+      accountCreated: admin.firestore.FieldValue.serverTimestamp(),
       notifyElectionReminders: false,
       isRegisteredVoter: false,
       startedChallenge: false,
@@ -64,3 +26,61 @@ exports.onSignup = functions.auth.user().onCreate(async (user) => {
     });
   }
 });
+
+// verificaition email
+exports.sendVerification = functions.auth.user().onCreate((user) => {
+  const email = user.email;
+  sendVerificationEmail(email, "verification");
+});
+
+// resend verification email
+exports.resendVerification = functions.https.onRequest((req, res) => {
+  const email = req.query.email;
+  sendVerificationEmail(email, "verification");
+  res.json({ result: "resending verification email" });
+});
+
+// sign in email
+exports.sendSignin = functions.https.onRequest((req, res) => {
+  const email = req.query.email;
+  sendVerificationEmail(email, "sign in");
+  res.json({ result: "sending signin email" });
+});
+
+function sendVerificationEmail(email, type) {
+  const actionCodeSettings = {
+    url: "http://localhost:3000/verify",
+    handleCodeInApp: true,
+  };
+  if (type === "verification") {
+    admin
+      .auth()
+      .generateEmailVerificationLink(email, actionCodeSettings)
+      .then((link) => {
+        const URL = "https://usvotes-6vsnwycl4q-uw.a.run.app/email/";
+        let formData = new FormData();
+        formData.append("email", email);
+        formData.append("type", "verifyEmail");
+        formData.append("verifyLink", link);
+        fetch(URL, {
+          method: "POST",
+          body: formData,
+        });
+      });
+  } else if (type === "sign in") {
+    admin
+      .auth()
+      .generateSignInWithEmailLink(email, actionCodeSettings)
+      .then((link) => {
+        const URL = "https://usvotes-6vsnwycl4q-uw.a.run.app/email/";
+        let formData = new FormData();
+        formData.append("email", email);
+        formData.append("type", "verifyEmail");
+        formData.append("verifyLink", link);
+        fetch(URL, {
+          method: "POST",
+          body: formData,
+        });
+      });
+  }
+}

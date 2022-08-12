@@ -10,6 +10,9 @@ import { AuthProvider } from "../contexts/AuthContext";
 import Signin from "./Authentication/Signin";
 import Signout from "./Authentication/Signout";
 import Signup from "./Authentication/Signup";
+import Verify from "./Authentication/Verification/Verify";
+import SigninVerify from "./Authentication/Verification/SigninVerify";
+import VerifySuccess from "./Authentication/Verification/VerifySuccess";
 import PrivateRoute from "./Utility/Helpers/PrivateRoute";
 import Header from "./Landing/Header/Header";
 import "./App.css";
@@ -52,13 +55,16 @@ export default function App() {
                 />
                 <Route path="/why8by8" component={Why8by8} />
                 <Route path="/signup" component={Signup} />
+                <Route path="/verify" component={Verify} />
+                <Route path="/verifysuccess" component={VerifySuccess} />
                 <Route path="/signin" component={Signin} />
+                <Route path="/signinverify" component={SigninVerify} />
                 <PrivateRoute
                   path="/election-reminders"
                   component={ElectionReminder}
                 />
                 <PrivateRoute path="/progress" component={Progress} />
-                <PrivateRoute path="/signout" component={Signout} />
+                <Route path="/signout" component={Signout} />
                 <Route path="/playerwelcome" component={PlayerWelcome} />
                 <Route path="/share" component={PlayerWelcome} />
                 <Route path="/actions" component={Actions} />
