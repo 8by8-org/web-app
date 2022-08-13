@@ -1,4 +1,4 @@
-import { auth } from "../../../firebase";
+import { auth } from "../../../../firebase";
 import { getFirestore, doc, updateDoc } from "firebase/firestore";
 const db = getFirestore();
 

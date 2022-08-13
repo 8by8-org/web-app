@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { useHistory } from "react-router";
-import { useAuth } from "../../../../contexts/AuthContext";
+import { useAuth } from "../../../../../contexts/AuthContext";
 import axios from "axios";
 import "../../VoterRegistration.scss";
-import ScrollToTop from "../../../../functions/ScrollToTop";
+import ScrollToTop from "../../../../../functions/ScrollToTop";
 import { clearVoterRegInfo } from "../../utils/UpdateRegInfo";
-import { getUserDatabase } from "../../../../functions/UserData";
-import { LoadingWheel } from "../../../LoadingWheel/LoadingWheel.component";
+import { getUserDatabase } from "../../../../../functions/UserData";
+import { LoadingWheel } from "../../../../Utility/LoadingWheel/LoadingWheel.component";
 const apiUrl = "https://usvotes-6vsnwycl4q-uw.a.run.app";
 
 export const FormCompleted = () => {

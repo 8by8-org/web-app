@@ -5,10 +5,10 @@ import { ProgressBar } from "../ProgressBar/ProgressBar.component";
 import axios from "axios";
 import "../../VoterRegistration.scss";
 import { Tooltip } from "../Tooltip/Tooltip.component";
-import { completedAction } from "../../../../functions/UserData";
+import { completedAction } from "../../../../../functions/UserData";
 import { addRegInfoToDB } from "../../utils/UpdateRegInfo";
-import { LoadingWheel } from "../../../LoadingWheel/LoadingWheel.component";
-import ScrollToTop from "../../../../functions/ScrollToTop";
+import { LoadingWheel } from "../../../../Utility/LoadingWheel/LoadingWheel.component";
+import ScrollToTop from "../../../../../functions/ScrollToTop";
 
 const apiUrl = "https://usvotes-6vsnwycl4q-uw.a.run.app";
 
