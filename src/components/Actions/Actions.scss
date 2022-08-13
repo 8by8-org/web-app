@@ -26,7 +26,7 @@
     .avatar-and-status {
       display: flex;
       position: relative;
-      padding: 0px 50px;
+      padding: 0px 30px;
     }
 
     .action-status {
@@ -124,7 +124,7 @@
     }
 
     .secondary-button {
-      @include inverted-button;
+      @include secondary-button;
       width: 100%;
     }
   }

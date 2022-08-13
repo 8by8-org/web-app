@@ -10,24 +10,25 @@ import { AuthProvider } from "../contexts/AuthContext";
 import Signin from "./Authentication/Signin";
 import Signout from "./Authentication/Signout";
 import SignupPage from "./Authentication/SignupPage";
-import PrivateRoute from "./Helpers/PrivateRoute";
-import Header from "./Header/Header";
+import PrivateRoute from "./Utility/Helpers/PrivateRoute";
+import Header from "./Landing/Header/Header";
 import "./App.css";
-import HomePage from "./HomePage/HomePage";
-import Progress from "./Progress/Progress";
-import ChallengerWelcome from "./ChallengerWelcome/ChallengerWelcome";
-import ElectionReminder from "./ElectionReminders/ElectionReminder";
-import Footer from "./Footer";
-import PlayerWelcome from "./PlayerWelcome/PlayerWelcome";
+import HomePage from "./Landing/HomePage/HomePage";
+import Progress from "./Challenge/Progress/Progress";
+import Why8by8 from "./Landing/Why8by8/Why8by8";
+import ChallengerWelcome from "./Challenge/ChallengerWelcome/ChallengerWelcome";
+import ElectionReminder from "./Actions/ElectionReminders/ElectionReminder";
+import Footer from "./Landing/Footer/Footer";
+import PlayerWelcome from "./Landing/PlayerWelcome/PlayerWelcome";
 import Actions from "./Actions/Actions";
-import TOS from "./Legal/TOS";
-import PrivacyPolicy from "./Legal/PrivacyPolicy";
+import TOS from "./Landing/Legal/TOS";
+import PrivacyPolicy from "./Landing/Legal/PrivacyPolicy";
 //Voter Registration Pages
-import { Eligibility } from "./VoterRegistration/pages/Eligibility/Eligibility.component";
-import { YourName } from "./VoterRegistration/pages/YourName/YourName.component";
-import { HomeAddress } from "./VoterRegistration/pages/HomeAddress/HomeAddress.component";
-import { OtherInfo } from "./VoterRegistration/pages/OtherInfo/OtherInfo.component";
-import { FormCompleted } from "./VoterRegistration/pages/FormCompleted/FormCompleted.component";
+import { Eligibility } from "./Actions/VoterRegistration/pages/Eligibility/Eligibility.component";
+import { YourName } from "./Actions/VoterRegistration/pages/YourName/YourName.component";
+import { HomeAddress } from "./Actions/VoterRegistration/pages/HomeAddress/HomeAddress.component";
+import { OtherInfo } from "./Actions/VoterRegistration/pages/OtherInfo/OtherInfo.component";
+import { FormCompleted } from "./Actions/VoterRegistration/pages/FormCompleted/FormCompleted.component";
 
 export default function App() {
   return (
@@ -49,6 +50,7 @@ export default function App() {
                   path="/challengerwelcome"
                   component={ChallengerWelcome}
                 />
+                <Route path="/why8by8" component={Why8by8} />
                 <Route path="/signup" component={SignupPage} />
                 <Route path="/signin" component={Signin} />
                 <PrivateRoute

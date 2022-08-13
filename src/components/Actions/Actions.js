@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { getUserDatabase } from "./../../functions/UserData";
-import { Button } from "react-bootstrap";
 import { useHistory } from "react-router";
 import { useAuth } from "../../contexts/AuthContext";
 import { getFirestore, getDoc, doc } from "firebase/firestore";
@@ -10,10 +9,10 @@ import Avatar3 from "./../../assets/avatars/avatar3.svg";
 import Avatar4 from "./../../assets/avatars/avatar4.svg";
 import WhiteCurve from "./../../assets/images/Actions/Union.svg";
 import Crown from "./../../assets/images/Actions/Crown.svg";
-import ConfettiAnimation from "./../ConfettiAnimation";
-import Invite from "../Invite.js";
+import ConfettiAnimation from "./../Utility/Helpers/ConfettiAnimation";
+import Invite from "./../Utility/Invite/Invite";
 import "./Actions.scss";
-import { LoadingWheel } from "../LoadingWheel/LoadingWheel.component";
+import { LoadingWheel } from "./../Utility/LoadingWheel/LoadingWheel.component";
 
 const avatars = [Avatar1, Avatar2, Avatar3, Avatar4];
 
@@ -53,7 +52,7 @@ export default function Actions() {
         history.push(`/signup`);
       }
     }
-  }, []);
+  }, [currentUser, history]);
 
   // gets the info about which actions the signed in user has completed or not
   function fetchUserData() {
