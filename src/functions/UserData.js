@@ -33,7 +33,7 @@ export async function getUserDatabase() {
     }
     throw new Error("user doc does not exist");
   } else {
-    console.log(docSnap.data());
+    //console.log(docSnap.data());
     return docSnap.data();
   }
 }
@@ -71,7 +71,7 @@ export async function getChallengerDatabase() {
   if (!docSnap.exists()) {
     throw new Error("challenger doc does not exist");
   } else {
-    console.log("challenger db", docSnap.data());
+    //console.log("challenger db", docSnap.data());
     return docSnap.data();
   }
 }
