@@ -21,6 +21,23 @@ export const FormCompleted = () => {
         THE FORM
       </h1>
       <p className="register-form-text">
+        To complete the full process with your state, please go to the **Insert**
+        website to complete your voter registration!
+      </p>
+      <button 
+        className="tight-btn"
+      >
+        CONTINUE TO STATE WEBSITE
+      </button>
+      <p className="register-form-text-label">
+        Or register by mail!
+      </p>
+      <p className="register-form-text-tight">
+        We can email you a PDF file of your completed form. Print it out and 
+        mail it to your state to complete your voter registration. 
+        <a className="link">Get email with PDF file</a>
+      </p>
+      <p className="register-form-text">
         We've emailed you a PDF of your completed form. You can print it out and
         mail it to your state to complete your voter registration.
       </p>
