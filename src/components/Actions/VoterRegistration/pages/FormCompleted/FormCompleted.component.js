@@ -15,6 +15,7 @@ export const FormCompleted = () => {
   ScrollToTop();
 
   return (
+    <>
     <form className="voterRegForm">
       <h1 className="register-form-title">
         <u className="underline">YOU COMPLETED</u><br />
@@ -51,5 +52,12 @@ export const FormCompleted = () => {
         GO BACK TO THE CHALLENGE
       </button>
     </form>
+    <div className="reg-more-infoContainer">
+        <p className="register-form-text-label">More information</p>
+        <a className="info-link">How to register to vote by mail</a><br />
+        <a className="info-link">How to register to vote online</a><br />
+        <a className="info-link">Voter registration resources</a>
+    </div>
+    </>
   );
 };
