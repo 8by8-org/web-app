@@ -22,6 +22,7 @@ import PlayerWelcome from "./Landing/PlayerWelcome/PlayerWelcome";
 import Actions from "./Actions/Actions";
 import TOS from "./Landing/Legal/TOS";
 import PrivacyPolicy from "./Landing/Legal/PrivacyPolicy";
+import Partners from "./Landing/Partners/Partners";
 //Voter Registration Pages
 import { Eligibility } from "./Actions/VoterRegistration/pages/Eligibility/Eligibility.component";
 import { YourName } from "./Actions/VoterRegistration/pages/YourName/YourName.component";
@@ -80,6 +81,7 @@ export default function App() {
                 <PrivateRoute path="/voterreg" component={Eligibility} />
                 <Route path="/termsofservice" component={TOS} />
                 <Route path="/privacypolicy" component={PrivacyPolicy} />
+                <PrivateRoute path="/partners" component={Partners} />
               </Switch>
             </Router>
             <Footer />

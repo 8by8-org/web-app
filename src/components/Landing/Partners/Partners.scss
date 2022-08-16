@@ -1,0 +1,20 @@
+.partnersPage {
+  padding: 0px 45px;
+  display: flex;
+  flex-direction: column
+}
+
+.tabs {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.partnerData {
+  overflow-wrap: break-word;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+}
