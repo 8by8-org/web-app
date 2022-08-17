@@ -30,8 +30,8 @@ export function getAllPartnerData (callbackFunc) {
 // - name: partner name (string)
 // - logoUrl: Logo url (string)
 // - bDesc: business description (string)
-// - bType: business type (string)
 // - bLink: business link (string)
+// - bType: business type (string)
 // - rewType: reward type (string)
 // - locType: location type (string)
 // - locDes: location description (string)
@@ -45,8 +45,8 @@ export function wOuPartnerData(
   name,
   logoUrl,
   bDesc,
-  bType,
   bLink,
+  bType,
   rewType,
   locType,
   locDes,
@@ -65,8 +65,8 @@ export function wOuPartnerData(
     name: name,
     logo: logoUrl,
     businessDescription: bDesc,
-    businessType: bType,
     businessLink: bLink,
+    businessType: bType,
     rewardType: rewType,
     locationType: locType,
     locationDescription: locDes,

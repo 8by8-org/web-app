@@ -14,8 +14,8 @@ export default function Partners() {
     name: "",
     logoUrl: "",
     bDesc: "",
-    bType: "",
     bLink: "",
+    bType: "",
     rewType: "",
     locType: "",
     locDes: "",
@@ -27,133 +27,191 @@ export default function Partners() {
     rewAva: true
   });
   const [partners, setPartners] = useState();
+  const [editing, setEditing] = useState(false);
 
   useEffect(() => {
     getAllPartnerData((data) => setPartners(data))
   }, []);
 
   function editPartnerData(partnerName) {
+    setEditing(true)
+    let startDateString = ""
+    if (partners[partnerName].rewardStartDate) {
+      const startDate = new Date(partners[partnerName].rewardStartDate)
+      startDateString =
+      startDate.getFullYear() + "-" +
+      ((startDate.getMonth() + 1) < 10 ? "0" + (startDate.getMonth() + 1) : startDate.getMonth() + 1) + "-" +
+      (startDate.getDate() < 10 ? "0" + startDate.getDate() : startDate.getDate())
+    }
+
+    let endDateString = ""
+    if (partners[partnerName].rewardEndDate) {
+      const endDate = new Date(partners[partnerName].rewardEndDate)
+      endDateString =
+      endDate.getFullYear() + "-" +
+      ((endDate.getMonth() + 1) < 10 ? "0" + (endDate.getMonth() + 1) : endDate.getMonth() + 1) + "-" +
+      (endDate.getDate() < 10 ? "0" + endDate.getDate() : endDate.getDate())
+    }
+
     setFields({
       name: partners[partnerName].name,
       logoUrl: partners[partnerName].logo,
       bDesc: partners[partnerName].businessDescription,
-      bType: partners[partnerName].businessType,
       bLink: partners[partnerName].businessLink,
+      bType: partners[partnerName].businessType,
       rewType: partners[partnerName].rewardType,
       locType: partners[partnerName].locationType,
       locDes: partners[partnerName].locationDescription,
       rewLink: partners[partnerName].rewardLink,
       rewDes: partners[partnerName].rewardDescription,
       rewCon: partners[partnerName].rewardConditions,
-      rewSD: partners[partnerName].rewardStartDate,
-      rewED: partners[partnerName].rewardEndDate,
+      rewSD: startDateString,
+      rewED: endDateString,
       rewAva: partners[partnerName].rewardAvailable
     })
     setView("New/Edit")
   }
 
-  function onFormSubmit() {
-    wOuPartnerData(
-      fields.name,
-      fields.logoUrl,
-      fields.bDesc,
-      fields.bType,
-      fields.bLink,
-      fields.rewType,
-      fields.locType,
-      fields.locDes,
-      fields.rewLink,
-      fields.rewDes,
-      fields.rewCon,
-      fields.rewSD,
-      fields.rewED,
-      fields.rewAva
-    )
-    setView("View")
-    setFields({
-      name: "",
-      logoUrl: "",
-      bDesc: "",
-      bType: "",
-      bLink: "",
-      rewType: "",
-      locType: "",
-      locDes: "",
-      rewLink: "",
-      rewDes: "",
-      rewCon: "",
-      rewSD: "",
-      rewED: "",
-      rewAva: true
-    })
+  function onFormSubmit(e) {
+    if (fields.name) {
+      let rewSDate = new Date()
+      if (fields.rewSD) {
+        rewSDate.setFullYear(fields.rewSD.slice(0, 4))
+        rewSDate.setMonth(fields.rewSD.slice(5, 7) - 1)
+        rewSDate.setDate(fields.rewSD.slice(8, 10))
+        rewSDate.setHours(0)
+        rewSDate.setMinutes(0)
+        rewSDate.setSeconds(0)
+      }
+      let rewEDate = fields.rewED ? new Date() : ""
+      if (rewEDate) {
+        rewEDate.setFullYear(fields.rewED.slice(0, 4))
+        rewEDate.setMonth(fields.rewED.slice(5, 7) - 1)
+        rewEDate.setDate(fields.rewED.slice(8, 10))
+        rewEDate.setHours(0)
+        rewEDate.setMinutes(0)
+        rewEDate.setSeconds(0)
+      }
+      e.preventDefault()
+      wOuPartnerData(
+        fields.name,
+        fields.logoUrl,
+        fields.bDesc,
+        fields.bLink,
+        fields.bType,
+        fields.rewType,
+        fields.locType,
+        fields.locDes,
+        fields.rewLink,
+        fields.rewDes,
+        fields.rewCon,
+        rewSDate,
+        rewEDate,
+        fields.rewAva
+      )
+      setView("View")
+      setEditing(false)
+      setFields({
+        name: "",
+        logoUrl: "",
+        bDesc: "",
+        bLink: "",
+        bType: "",
+        rewType: "",
+        locType: "",
+        locDes: "",
+        rewLink: "",
+        rewDes: "",
+        rewCon: "",
+        rewSD: "",
+        rewED: "",
+        rewAva: true
+      })
+    }
   }
 
   return (
     <div className="partnersPage">
-      <br/>
-      <br/>
       <div className="tabs">
-        <button onClick={() => setView("View")}>View</button>
-        <button onClick={() => setView("New/Edit")}>New/Edit</button>
+        <button
+          className={"viewTab" + (view === "View" ? " tabSelected" : "")}
+          onClick={() => setView("View")}
+        >
+          View
+        </button>
+        <button
+          className={"newEditTab" + (view === "New/Edit" ? " tabSelected" : "")}
+          onClick={() => setView("New/Edit")}
+        >
+          New/Edit
+        </button>
       </div>
+      {!partners && <p className="noPartners">There is no partners in the database add one in the New/Edit tab.</p>}
       {view === "View" ?
         <div>
           {partners && Object.keys(partners).map(function(key) {
             return (
               <div key={partners[key].name}>
                 <h3>{partners[key].name}</h3>
-                <br/>
                 <p className="partnerData">
-                  Logo Url: {partners[key].logo}
+                  <b>Logo Url:</b> {partners[key].logo}
                   <br/><br/>
-                  Business Description: {partners[key].businessDescription}
+                  <b>Business Description:</b> {partners[key].businessDescription}
                   <br/><br/>
-                  Business Type: {partners[key].businessType}
+                  <b>Business Link:</b> {partners[key].businessLink}
                   <br/><br/>
-                  Business Link: {partners[key].businessLink}
+                  <b>Business Type:</b> {partners[key].businessType}
                   <br/><br/>
-                  Reward Type: {partners[key].rewardType}
+                  <b>Reward Type:</b> {partners[key].rewardType}
                   <br/><br/>
-                  Location Type: {partners[key].locationType}
+                  <b>Location Type:</b> {partners[key].locationType}
                   <br/><br/>
-                  Location Description: {partners[key].locationDescription}
+                  <b>Location Description:</b> {partners[key].locationDescription}
                   <br/><br/>
-                  Reward Link: {partners[key].rewardLink}
+                  <b>Reward Link:</b> {partners[key].rewardLink}
                   <br/><br/>
-                  Reward Description: {partners[key].rewardDescription}
+                  <b>Reward Description:</b> {partners[key].rewardDescription}
                   <br/><br/>
-                  Reward Conditions: {partners[key].rewardConditions}
+                  <b>Reward Conditions:</b> {partners[key].rewardConditions}
                   <br/><br/>
-                  Reward Start Date: {partners[key].rewardStartDate}
+                  <b>Reward Start Date:</b> {partners[key].rewardStartDate}
                   <br/><br/>
-                  Reward End Date: {partners[key].rewardEndDate}
+                  <b>Reward End Date:</b> {partners[key].rewardEndDate}
                   <br/><br/>
-                  Reward Available: {partners[key].rewardAvailable}
-                  <br/><br/>
+                  <b>Reward Available:</b> {partners[key].rewardAvailable.toString()}
                 </p>
-                <button onClick={() => deletePartnerData(partners[key].name)}>Delete</button>
-                <button onClick={() => editPartnerData(partners[key].name)}>Edit</button>
-                <br/><br/>
+                <div className="partnerButtons">
+                  <button onClick={() => deletePartnerData(partners[key].name)}>Delete</button>
+                  <button className="editButton" onClick={() => editPartnerData(partners[key].name)}>Edit</button>
+                </div>
               </div>
             )
           })}
         </div>
       :
         <form className="form">
-          <label>Name:</label>
+          <label className="nameInput">Name*:</label>
           <input
             type="text"
             id="name"
             name="name"
             value={fields.name}
             onChange={(event) => {
+              if (editing) {
+                setEditing(false)
+              }
               setFields({
                 ...fields,
                 name: event.target.value,
               });
             }}
+            required
           />
-          <br/><br/>
+          {editing &&
+            <p className="editNameText">
+              If you change this name then the database will create a new entry instead of modifying the existing one.
+            </p>
+          }
           <label>Logo Url:</label>
           <input
             type="text"
@@ -167,7 +225,6 @@ export default function Partners() {
               });
             }}
           />
-          <br/><br/>
           <label>Business Description:</label>
           <input
             type="text"
@@ -181,21 +238,6 @@ export default function Partners() {
               });
             }}
           />
-          <br/><br/>
-          <label>Business Type:</label>
-          <input
-            type="text"
-            id="bType"
-            name="bType"
-            value={fields.bType}
-            onChange={(event) => {
-              setFields({
-                ...fields,
-                bType: event.target.value,
-              });
-            }}
-          />
-          <br/><br/>
           <label>Business Link:</label>
           <input
             type="text"
@@ -209,7 +251,19 @@ export default function Partners() {
               });
             }}
           />
-          <br/><br/>
+          <label>Business Type:</label>
+          <input
+            type="text"
+            id="bType"
+            name="bType"
+            value={fields.bType}
+            onChange={(event) => {
+              setFields({
+                ...fields,
+                bType: event.target.value,
+              });
+            }}
+          />
           <label>Reward Type:</label>
           <input
             type="text"
@@ -223,7 +277,6 @@ export default function Partners() {
               });
             }}
           />
-          <br/><br/>
           <label>Location Type:</label>
           <input
             type="text"
@@ -237,7 +290,6 @@ export default function Partners() {
               });
             }}
           />
-          <br/><br/>
           <label>Location Description:</label>
           <input
             type="text"
@@ -251,7 +303,6 @@ export default function Partners() {
               });
             }}
           />
-          <br/><br/>
           <label>Reward Link:</label>
           <input
             type="text"
@@ -265,7 +316,6 @@ export default function Partners() {
               });
             }}
           />
-          <br/><br/>
           <label>Reward Description:</label>
           <input
             type="text"
@@ -279,7 +329,6 @@ export default function Partners() {
               });
             }}
           />
-          <br/><br/>
           <label>Reward Conditions:</label>
           <input
             type="text"
@@ -293,10 +342,9 @@ export default function Partners() {
               });
             }}
           />
-          <br/><br/>
           <label>Reward Redemption Start Date:</label>
           <input
-            type="text"
+            type="date"
             id="rewSD"
             name="rewSD"
             value={fields.rewSD}
@@ -307,10 +355,9 @@ export default function Partners() {
               });
             }}
           />
-          <br/><br/>
           <label>Reward Redemption End Date:</label>
           <input
-            type="text"
+            type="date"
             id="rewED"
             name="rewED"
             value={fields.rewED}
@@ -321,23 +368,39 @@ export default function Partners() {
               });
             }}
           />
-          <br/><br/>
           <label>Reward Available:</label>
-          <input
-            type="text"
-            id="rewAva"
-            name="rewAva"
-            value={fields.rewAva}
-            onChange={(event) => {
-              setFields({
-                ...fields,
-                rewAva: event.target.value,
-              });
-            }}
-          />
-          <br/><br/>
-          <button onClick={onFormSubmit}>New/Edit</button>
-          <br/><br/>
+          <div>
+            <input
+              type="radio"
+              id="True"
+              name="rewAva"
+              checked={fields.rewAva}
+              onChange={() => {}}
+              onClick={() => {
+                setFields({
+                  ...fields,
+                  rewAva: true,
+                });
+              }}
+            />
+            <label className="rAvaLabel">True</label>
+            <br/>
+            <input
+              type="radio"
+              id="False"
+              name="rewAva"
+              checked={!fields.rewAva}
+              onChange={() => {}}
+              onClick={() => {
+                setFields({
+                  ...fields,
+                  rewAva: false,
+                });
+              }}
+            />
+            <label className="rAvaLabel">False</label>
+          </div>
+          <button onClick={(event) => onFormSubmit(event)}>New/Edit</button>
         </form>
       }
     </div>

@@ -1,20 +1,77 @@
 .partnersPage {
   padding: 0px 45px;
   display: flex;
-  flex-direction: column
-}
-
-.tabs {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-}
-
-.partnerData {
-  overflow-wrap: break-word;
-}
-
-.form {
-  display: flex;
   flex-direction: column;
+
+  button {
+    background-color: white
+  }
+
+  .tabs {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    margin: 40px 0px;
+
+    .viewTab {
+      border-radius: 10px 0px 0px 10px;
+    }
+
+    .newEditTab {
+      border-left: none;
+      border-radius: 0px 10px 10px 0px;
+    }
+
+    .tabSelected {
+      background-color: #ffed10;
+    }
+  }
+
+  .noPartners {
+    text-align: center;
+    margin: 20px 0px;
+  }
+
+  .partnerData {
+    overflow-wrap: break-word;
+    margin: 20px 0px;
+  }
+
+  .partnerButtons {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    margin-bottom: 40px;
+
+    .editButton {
+      border-left: none;
+    }
+  }
+
+  .form {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px;
+
+    label {
+      margin-top: 40px;
+    }
+
+    .nameInput {
+      margin-top: 0px
+    }
+
+    .editNameText {
+      color: red;
+    }
+
+    .rAvaLabel {
+      margin-top: 0px;
+    }
+
+    button {
+      margin: 20px 0px;
+    }
+  }
+
 }
