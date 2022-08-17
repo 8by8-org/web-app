@@ -49,5 +49,15 @@
         height: 50px;
       }
     }
+
+    &--light {
+      @extend .modalContainer;
+      background-color: white;
+      color: black;
+      .titleCloseBtn button {
+        @extend .titleCloseBtn;
+        color: black;
+      }
+    }
   }
 }

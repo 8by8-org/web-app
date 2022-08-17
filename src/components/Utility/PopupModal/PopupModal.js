@@ -6,7 +6,7 @@ function PopupModal(props) {
   return (
     <div className="popup-modal">
       <div className="modalBackground">
-        <div className="modalContainer">
+        <div className={props.theme}>
           <div className="titleCloseBtn">
             <button
               onClick={() => {

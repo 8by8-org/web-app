@@ -68,6 +68,7 @@ export const FormCompleted = () => {
     {showReminderModal && (
     <PopupModal
       setOpenModal={setShowReminderModal}
+      theme = {"modalContainer--light"}
       content = {
         <>
           <div>
