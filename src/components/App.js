@@ -15,6 +15,7 @@ import Header from "./Landing/Header/Header";
 import "./App.css";
 import HomePage from "./Landing/HomePage/HomePage";
 import Progress from "./Challenge/Progress/Progress";
+import Why8by8 from "./Landing/Why8by8/Why8by8";
 import ChallengerWelcome from "./Challenge/ChallengerWelcome/ChallengerWelcome";
 import ElectionReminder from "./Actions/ElectionReminders/ElectionReminder";
 import Footer from "./Landing/Footer/Footer";
@@ -50,6 +51,7 @@ export default function App() {
                   path="/challengerwelcome"
                   component={ChallengerWelcome}
                 />
+                <Route path="/why8by8" component={Why8by8} />
                 <Route path="/signup" component={SignupPage} />
                 <Route path="/signin" component={Signin} />
                 <PrivateRoute

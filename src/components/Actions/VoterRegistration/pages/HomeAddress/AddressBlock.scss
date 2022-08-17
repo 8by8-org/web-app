@@ -1,0 +1,19 @@
+.isValid {
+  color: green;
+  flex: 1;
+  text-align: end;
+}
+
+.validating {
+  color: gray;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  flex: 1;
+}
+
+.invalid {
+  color: red;
+  flex: 1;
+  text-align: end;
+}

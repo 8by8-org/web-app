@@ -46,7 +46,7 @@ export const OtherInfo = () => {
     ) {
       history.push("/voterreg/eligibility");
     } else if (
-      voterRegistrationData.name_title.length === 0 ||
+      voterRegistrationData.title.length === 0 ||
       voterRegistrationData.name_first.length === 0 ||
       voterRegistrationData.name_last.length === 0
     ) {
@@ -289,22 +289,51 @@ export const OtherInfo = () => {
             street,
             streetLine2,
             unit,
+            title,
             name_first,
+            name_middle,
             name_last,
+            suffix,
+            change_of_name,
+            prev_title,
+            prev_name_first,
+            prev_name_middle,
+            prev_name_last,
+            prev_suffix,
+            change_of_address,
+            prev_state,
+            prev_city,
+            prev_street,
+            prev_streetLine2,
+            prev_unit,
+            prev_zip,
+            diff_mail_address,
+            mail_state,
+            mail_city,
+            mail_street,
+            mail_streetLine2,
+            mail_zip,
+            mail_unit,
             dob,
             zip,
             email,
             citizen,
             eighteenPlus,
             party,
+            race,
             idNumber,
           } = voterRegistrationData;
-          let formattedAddress = street;
+          let full_street = street;
           if (streetLine2) {
-            formattedAddress += ` ${streetLine2}`;
+            full_street += `, ${streetLine2}`;
           }
-          if (unit) {
-            formattedAddress += ` ${unit}`;
+          let prev_full_street = prev_street;
+          if (prev_streetLine2) {
+            prev_full_street += `, ${prev_streetLine2}`;
+          }
+          let mail_full_street = mail_street;
+          if (mail_streetLine2) {
+            mail_full_street += `, ${mail_streetLine2}`;
           }
           const ymd = dob.split("-");
           const year = ymd[0];
@@ -314,15 +343,38 @@ export const OtherInfo = () => {
           const postBody = {
             state,
             city,
-            street: formattedAddress,
+            street: full_street,
+            unit,
+            change_of_name,
+            prev_title,
+            prev_name_first,
+            prev_name_middle,
+            prev_name_last,
+            prev_suffix,
+            change_of_address,
+            prev_state,
+            prev_city,
+            prev_street: prev_full_street,
+            prev_unit,
+            prev_zip,
+            diff_mail_address,
+            mail_state,
+            mail_city,
+            mail_street: mail_full_street,
+            mail_zip,
+            mail_unit,
+            title,
             name_first,
+            name_middle,
             name_last,
+            suffix,
             dob: formattedDob,
             zip,
             email,
             citizen: citizen ? "yes" : "no",
             eighteenPlus: eighteenPlus ? "yes" : "no",
             party,
+            race,
             idNumber,
           };
           axios
