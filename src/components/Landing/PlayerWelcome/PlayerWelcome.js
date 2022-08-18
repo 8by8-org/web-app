@@ -73,7 +73,8 @@ export default function PlayerWelcome({ isShare }) {
           : history.push(`/signin`)
         : getChallengerInfo();
     }
-  }, []);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [history, code, isShare]);
 
   // Render page after challengerInfo is gotten.
   useEffect(() => {
