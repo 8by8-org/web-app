@@ -1,10 +1,11 @@
-import {getUserDatabase} from "../../../functions/UserData";
+import {getChallengerDatabase, getUserDatabase} from "../../../functions/UserData";
 import {useHistory} from "react-router-dom";
 import './ChooseReward.scss';
 import {useEffect, useState} from "react";
 import placeholderImage from "../../../assets/images/placeholder-image.jpg"
 import {database} from '../../../firebase';
 import {ref, child, get} from 'firebase/database';
+import {getAllPartnerData} from "../../../functions/partnerData";
 
 const ChooseReward = () => {
     // Get the current player
@@ -15,29 +16,23 @@ const ChooseReward = () => {
      */
     const [partners, setPartners] = useState([]);
 
-    useEffect(() => {
-        // Get the partner data from the database
-        const getDataFromDB = async () => {
-            const dbRef = ref(database);
-            get(child(dbRef, `partners`)).then((snapshot) => {
-                const data = snapshot.val();
-                setPartners(Object.values(data));
-            });
-        }
-
-        getDataFromDB().then();
-    }, [])
+    getAllPartnerData((data) => {
+        setPartners(Object.values(data));
+    })
 
     const [selected, setSelected] = useState(null);
 
     // Calculate if the user is eligible for the challenge
     const isEligible = (user) => {
         if (!user.badges) return false;
-        return user.completedActionForChallenger || user.badges.length >= 8;
+        // Get the challenger data
+        const challenger = getChallengerDatabase();
+        if(!challenger.badges) return false;
+        return challenger.badges.length >= 8 || user.badges.length >= 8;
     }
 
     if (!isEligible(currentUser)) {
-        history.push('/progress');
+        history.push('/signup');
     }
 
     // Handle Form Submission
