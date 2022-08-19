@@ -15,15 +15,20 @@ const ChooseReward = () => {
      Sample data, once again we need to make this empty once we get the partners in the database
      */
     const [partners, setPartners] = useState([]);
+    const [loaded, setLoaded] = useState(false);
 
-    getAllPartnerData((data) => {
-        setPartners(Object.values(data));
-    })
+    if(!loaded) {
+        getAllPartnerData((data) => {
+            setPartners(Object.values(data));
+        })
+        setLoaded(true);
+    }
 
     const [selected, setSelected] = useState(null);
 
     // Calculate if the user is eligible for the challenge
     const isEligible = (user) => {
+        return true;
         if (!user.badges) return false;
         // Get the challenger data
         const challenger = getChallengerDatabase();
