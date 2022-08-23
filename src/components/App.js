@@ -29,6 +29,8 @@ import { YourName } from "./Actions/VoterRegistration/pages/YourName/YourName.co
 import { HomeAddress } from "./Actions/VoterRegistration/pages/HomeAddress/HomeAddress.component";
 import { OtherInfo } from "./Actions/VoterRegistration/pages/OtherInfo/OtherInfo.component";
 import { FormCompleted } from "./Actions/VoterRegistration/pages/FormCompleted/FormCompleted.component";
+import Rewards from './Rewards/Rewards/Rewards';
+import ChooseReward from "./Rewards/ChooseReward/ChooseReward";
 
 export default function App() {
   return (
@@ -53,6 +55,7 @@ export default function App() {
                 <Route path="/why8by8" component={Why8by8} />
                 <Route path="/signup" component={SignupPage} />
                 <Route path="/signin" component={Signin} />
+                <Route path="/rewards" component={Rewards} />
                 <PrivateRoute
                   path="/election-reminders"
                   component={ElectionReminder}
@@ -80,6 +83,7 @@ export default function App() {
                   component={FormCompleted}
                 />
                 <PrivateRoute path="/voterreg" component={Eligibility} />
+                <PrivateRoute path="/choosereward" component={ChooseReward} />
                 <Route path="/termsofservice" component={TOS} />
                 <Route path="/privacypolicy" component={PrivacyPolicy} />
               </Switch>
