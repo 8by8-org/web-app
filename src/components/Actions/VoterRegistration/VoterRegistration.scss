@@ -11,6 +11,7 @@
   padding-left: 30px;
   padding-right: 30px;
   padding-top: 40px;
+  padding-bottom: 40px;
   box-sizing: border-box;
 }
 
@@ -208,6 +209,25 @@
   margin-top: 12px;
   margin-bottom: 18px;
   animation: fadeIn 250ms ease-in-out 1 forwards;
+}
+
+.register-by-mail-title {
+  font-family: $lato;
+  font-weight: bold;
+  font-size: 18px;
+  letter-spacing: 0.02em;
+}
+
+.register-by-mail-text {
+  font-family: $lato;
+  font-weight: normal;
+  margin-bottom: 20px;
+}
+
+.register-by-mail-text > a {
+  font-family: $lato;
+  font-weight: bold;
+  text-decoration-line: underline !important;
 }
 
 @keyframes fadeIn {

@@ -87,7 +87,7 @@ export function AuthProvider({ children }) {
         unit: "",
         city: "",
         state: "AL",
-        diff_mailing_address: false,
+        diff_mail_address: false,
         mail_street: "",
         mail_streetLine2: "",
         mail_unit: "",
