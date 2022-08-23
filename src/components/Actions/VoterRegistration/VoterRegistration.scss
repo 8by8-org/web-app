@@ -50,6 +50,7 @@
   margin-bottom: 40px;
   &-tight {
     margin-top: 0px;
+    margin-bottom: 40px;
   }
 }
 
@@ -119,6 +120,16 @@
   @include button;
   margin-top: 0px;
   margin-bottom: 40px;
+}
+
+.a-btn {
+  @include button;
+  font-weight: 400;
+  text-decoration: unset;
+  font-size: 24px !important;
+  padding: 9px 20px;
+  display: flex;
+  justify-content: center;
 }
 
 .next-btn {
@@ -235,6 +246,35 @@
   font-weight: 400;
   line-height: 28px;
   letter-spacing: 2%;
+}
+
+.reminder-modal {
+  
+  h3 {
+    text-align: left;
+    margin-bottom: 16px;
+  }
+  p{
+    text-align: left;
+  }
+
+  button {
+    font-family: $lato;
+    font-weight: 700;
+    font-size: 16px !important;
+    text-decoration-line: underline;
+    margin-top: 24px !important;
+    border: none;
+    color: $black;
+    height: unset !important;
+  }
+  .bold {
+    font-weight: 700 !important;
+    &-undrln {
+      font-weight: 700 !important;
+      text-decoration-line: underline;
+    }
+  }
 }
 
 @keyframes fadeIn {

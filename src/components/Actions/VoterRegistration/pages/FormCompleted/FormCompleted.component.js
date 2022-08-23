@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useHistory } from "react-router";
 import { useAuth } from "../../../../../contexts/AuthContext";
 import "../../VoterRegistration.scss";
@@ -8,9 +8,13 @@ import PopupModal from "../../../../Utility/PopupModal/PopupModal"
 
 export const FormCompleted = () => {
   const history = useHistory();
-  const { currentUserData } = useAuth();
+  const { currentUserData, voterRegistrationData } = useAuth();
+  
   const [showReminderModal, setShowReminderModal] = useState(false);
   const [showExpectModal, setShowExpectModal] = useState(false);
+  const [allowOnlineReg, setAllowOnlineReg] = useState(true);
+  const [userState, setUserState] = useState();
+  const [onlineRegLink, setOnlineRegLink] = useState();
   const ToggleReminderModal = (e) => setShowReminderModal(!showReminderModal);
   const ToggleExpectModal = (e) => setShowExpectModal(!showExpectModal);
   let redirect = "/progress";
@@ -20,6 +24,29 @@ export const FormCompleted = () => {
 
   ScrollToTop();
 
+  const getStateRegData = () => {
+    fetch('../../../../../../state_vote_info.json'
+    ,{
+      headers : {
+        'Content-Type' : 'application/json',
+        'accept' : 'application.json'
+      }
+    })
+    .then(function(response) {
+      return response.json();
+    })
+    .then(function(stateJson) {
+      const userState = voterRegistrationData.state;
+      setUserState(stateJson.states[userState].name);
+      setAllowOnlineReg(stateJson.states[userState].onlinereg);
+      setOnlineRegLink(stateJson.states[userState].voteregsite);
+    })
+  }
+
+  useEffect(() => {
+    getStateRegData()
+  }, [])
+
   return (
     <>
     <form className="voterRegForm">
@@ -27,43 +54,50 @@ export const FormCompleted = () => {
         <u className="underline">YOU COMPLETED</u><br />
         THE FORM!
       </h1>
-      <p className="register-form-text">
-        To complete the full process with your state, please go to the **Insert**
-        website to complete your voter registration!
-      </p>
-      <button 
-        className="tight-btn"
-        onClick={(e) => {
-          e.preventDefault();
-          ToggleReminderModal(e);
-        }}
-      >
-        CONTINUE TO STATE WEBSITE
-      </button>
-      <p className="register-form-text-label">
-        Or register by mail!
-      </p>
-      <p className="register-form-text-tight">
-        We can email you a PDF file of your completed form. Print it out and 
-        mail it to your state to complete your voter registration.{' '} 
-        <Link className="link" to={redirect}>Get email with PDF file</Link>
-      </p>
-      <Link className="link register-form-text" to={redirect}>
-        Back to 8by8 Challenge
-      </Link>
-      {/*<p className="register-form-text">
-        We've emailed you a PDF of your completed form. You can print it out and
-        mail it to your state to complete your voter registration.
-      </p>
-      <button
-        className="next-btn"
-        onClick={(e) => {
-          e.preventDefault();
-          history.push(redirect);
-        }}
-      >
-        GO BACK TO THE CHALLENGE
-      </button>*/}
+      {allowOnlineReg ? (
+      <div>
+        <p className="register-form-text">
+          To complete the full process with your state, please go to the 
+          {' '}{userState} website to complete your voter registration!
+        </p>
+        <button 
+          className="tight-btn"
+          onClick={(e) => {
+            e.preventDefault();
+            ToggleReminderModal(e);
+          }}
+        >
+          CONTINUE TO STATE WEBSITE
+        </button>
+        <p className="register-form-text-label">
+          Or register by mail!
+        </p>
+        <p className="register-form-text-tight">
+          We can email you a PDF file of your completed form. Print it out and 
+          mail it to your state to complete your voter registration.{' '} 
+          <Link className="link" to={redirect}>Get email with PDF file</Link>
+        </p>
+        <Link className="link register-form-text" to={redirect}>
+          Back to 8by8 Challenge
+        </Link>
+      </div>
+      ):(
+      <div>
+        <p className="register-form-text">
+          We've emailed you a PDF of your completed form. You can print it out and
+          mail it to your state to complete your voter registration.
+        </p>
+        <button
+          className="next-btn"
+          onClick={(e) => {
+            e.preventDefault();
+            history.push(redirect);
+          }}
+        >
+          GO BACK TO THE CHALLENGE
+        </button>
+      </div>
+    )}
     </form>
     {showReminderModal && (
     <PopupModal
@@ -71,23 +105,21 @@ export const FormCompleted = () => {
       theme = {"modalContainer--light"}
       content = {
         <>
-          <div>
-            <h3>COMPLETE REGISTRATION ONLINE WITH YOUR STATE</h3>
-            <p>Make sure to have your <span>State ID</span> or 
-              <span> driver's license</span> ready. If you do not have either of
-              of these, you can <span>register by mail.</span>
+          <div className="reminder-modal">
+            <h3>COMPLETE REGISTRATION <br />ONLINE WITH YOUR STATE</h3>
+            <p className="register-form-text-tight">Make sure to have your 
+            <span className="bold"> State ID</span> or <span className="bold"> 
+            driver's license</span> ready. If you do not have either of
+            these, you can <span className="bold-undrln">register by mail.</span>
             </p>
-            <button
-              className="next-btn"
-              onClick={(e) => {
-                e.preventDefault();
-                ToggleReminderModal(e);
-              }}
+            <a
+              className="a-btn"
+              target = "_blank"
+              href = {onlineRegLink}
             >
               GO TO STATE WEBSITE
-            </button>
-            <button 
-              className="link"
+            </a>
+            <button
               onClick={(e) => {
                 e.preventDefault();
                 ToggleExpectModal(e);
