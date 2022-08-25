@@ -56,7 +56,7 @@ export default function App() {
                 <Route path="/why8by8" component={Why8by8} />
                 <Route path="/signup" component={Signup} />
                 <Route path="/verify" component={Verify} />
-                <Route path="/verifysuccess" component={VerifySuccess} />
+                <PrivateRoute path="/verifysuccess" component={VerifySuccess} />
                 <Route path="/signin" component={Signin} />
                 <Route path="/signinverify" component={SigninVerify} />
                 <PrivateRoute

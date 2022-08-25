@@ -18,6 +18,7 @@ import ReCAPTCHA from "react-google-recaptcha";
 import { dummyPassword } from "../../constants";
 import voteImg from "./../../assets/4-pages/Signin/Vote.png";
 import { getUserDatabase } from "../../functions/UserData";
+import { getFunctions, httpsCallable } from "firebase/functions";
 
 const localStorageEmailKey = "verifyUserEmail";
 
@@ -25,7 +26,6 @@ export default function Login() {
   const { currentUser } = useAuth();
   const history = useHistory();
   const [message, setMessage] = useState(null);
-  // const [emailVisible, setEmailVisible] = useState(true);
   const [buttonMessage, setButtonMessage] = useState(" "); // leave blank to hide button
   const [reCaptchaPassed, setReCaptchaPassed] = useState(false);
 
@@ -41,7 +41,11 @@ export default function Login() {
         history.push(`/${playerStatus}`);
       } else {
         getUserDatabase().then((data) => {
-          if (data && !data.startedChallenge && (localStorage.getItem("challengerInfo") || data.invitedBy)) {
+          if (
+            data &&
+            !data.startedChallenge &&
+            (localStorage.getItem("challengerInfo") || data.invitedBy)
+          ) {
             history.push("/actions");
           } else {
             history.push("/progress");
@@ -63,7 +67,6 @@ export default function Login() {
               dummyPassword
             );
             window.localStorage.setItem(localStorageEmailKey, email);
-            // setEmailVisible(false);
             setButtonMessage(null);
             setMessage("Logging in...");
           } catch (e) {
