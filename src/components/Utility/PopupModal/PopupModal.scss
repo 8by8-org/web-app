@@ -9,6 +9,10 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    &-scroll {
+      @extend .modalBackground;
+      overflow-y: scroll;
+    }
   }
 
   .modalContainer {
@@ -58,6 +62,12 @@
         @extend .titleCloseBtn;
         color: black;
       }
+      &-expect {
+        @extend .modalContainer--light;
+        position: absolute;
+        top: 65px;
+      }  
     }
+    
   }
 }

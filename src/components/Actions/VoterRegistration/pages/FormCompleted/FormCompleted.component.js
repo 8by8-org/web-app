@@ -58,7 +58,7 @@ export const FormCompleted = () => {
       </h1>
       {allowOnlineReg ? (
       <div>
-        <p className="register-form-text">
+        <p className="register-form-text-completed">
           To complete the full process with your state, please go to the 
           {' '}{userState} website to complete your voter registration!
         </p>
@@ -77,9 +77,9 @@ export const FormCompleted = () => {
         <p className="register-form-text-tight">
           We can email you a PDF file of your completed form. Print it out and 
           mail it to your state to complete your voter registration.{' '} 
-          <Link className="link" to={redirect}>Get email with PDF file</Link>
+          <Link className="link--light" to={redirect}>Get email with PDF file</Link>
         </p>
-        <Link className="link register-form-text" to={redirect}>
+        <Link className="link--light register-form-text" to={redirect}>
           Back to 8by8 Challenge
         </Link>
       </div>
@@ -139,20 +139,21 @@ export const FormCompleted = () => {
     {showExpectModal && (
       <PopupModal
         setOpenModal = {setShowExpectModal}
-        theme = {"modalContainer--light"}
+        theme = {"modalContainer--light-expect"}
+        scroll = {true}
         content = {
         <>
         <div className="reminder-modal">
           <h3>WHAT TO EXPECT AT YOUR STATE WEBSITE</h3>
           <div>
-            <h3>1. FINISH YOUR STATE'S VOTER REGISTRATION ONLINE</h3>
+            <h3 className="MargTop">1. FINISH YOUR STATE'S VOTER REGISTRATION ONLINE</h3>
             <p>
               To complete the full process with your state, you will be asked a
               few additional questions online. Make sure to have your State ID 
               or driver's license ready. If you do not have either of these, 
-              you can {' '} <a className="link">register by mail.</a>
+              you can {' '} <a className="link--light">register by mail.</a>
             </p>
-            <h3>2. WAIT FOR THE STATE TO CONFIRM YOUR APPLICATION</h3>
+            <h3 className="MargTop">2. WAIT FOR THE STATE TO CONFIRM YOUR APPLICATION</h3>
             <p>
               Depending on your state, it could take 3-5 days to process your 
               application. You will receive a Voter Notification Card from your 
@@ -208,15 +209,25 @@ export const FormCompleted = () => {
     <div className="reg-more-infoContainer">
         <p className="register-form-text-label">More information</p>
         <button 
-          className="link-btn"
+          className="info-link"
           onClick={(e) => {
             e.preventDefault();
             ToggleMailRegModal(e);
           }}
         >
           How to register to vote by mail</button><br />
-        <a className="info-link">How to register to vote online</a><br />
-        <a className="info-link">Voter registration resources</a>
+        {allowOnlineReg && (
+          <>
+          <a className="info-link">How to register online to vote</a><br />
+          </>
+        )}
+        <a className="info-link" 
+          href={"https://vote.gov/register/" + 
+          voterRegistrationData.state.toLowerCase()}
+          target = "_blank"
+        >
+          Voter registration resources
+        </a>
     </div>
     </>
   );

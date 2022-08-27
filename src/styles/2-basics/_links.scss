@@ -13,4 +13,9 @@ a,
     color: $black;
     cursor: pointer;
   }
+
+  &--light{
+    @extend .link;
+    font-weight: 700;
+  }
 }

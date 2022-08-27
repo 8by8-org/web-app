@@ -5,7 +5,7 @@ import { AiOutlineClose } from "react-icons/ai";
 function PopupModal(props) {
   return (
     <div className="popup-modal">
-      <div className="modalBackground">
+      <div className={props.scroll ? "modalBackground-scroll":"modalBackground"}>
         <div className={props.theme}>
           <div className="titleCloseBtn">
             <button

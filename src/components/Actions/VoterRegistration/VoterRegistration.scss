@@ -52,6 +52,12 @@
     margin-top: 0px;
     margin-bottom: 40px;
   }
+  &-completed {
+    @extend .register-form-text;
+    margin-top: 29px;
+    line-height: 19px;
+    letter-spacing: 0.02em;
+  }
 }
 
 .register-form-text-label {
@@ -120,6 +126,8 @@
   @include button;
   margin-top: 0px;
   margin-bottom: 40px;
+  font-size: 24px !important;
+  letter-spacing: 0.03em !important;
 }
 
 .a-btn {
@@ -246,15 +254,23 @@
   font-weight: 400;
   line-height: 28px;
   letter-spacing: 2%;
+  padding: 0;
+  border: none;
+  text-decoration-line: underline;
+  font: $lato;
 }
 
 .reminder-modal {
-  
+
   h3 {
     text-align: left;
     margin-bottom: 16px;
-    
+    letter-spacing: 0.03em;
+    &.MargTop {
+      margin-top: 30px;
+    }
   }
+
   p{
     text-align: left;
     margin-bottom: 40px;
