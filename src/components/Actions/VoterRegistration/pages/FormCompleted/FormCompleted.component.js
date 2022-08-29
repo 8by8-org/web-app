@@ -16,9 +16,11 @@ export const FormCompleted = () => {
   const [allowOnlineReg, setAllowOnlineReg] = useState(true);
   const [userState, setUserState] = useState();
   const [onlineRegLink, setOnlineRegLink] = useState();
+  const [showGetEmail, setShowGetEmail] = useState(false);
   const ToggleReminderModal = (e) => setShowReminderModal(!showReminderModal);
   const ToggleExpectModal = (e) => setShowExpectModal(!showExpectModal);
   const ToggleMailRegModal = (e) => setShowMailRegModal(!showMailRegModal);
+  const ToggleShowGetEmail = (e) => setShowGetEmail(true);
   let redirect = "/progress";
   if (currentUserData && currentUserData.invitedBy.length > 0) {
     redirect = "/actions";
@@ -56,7 +58,7 @@ export const FormCompleted = () => {
         <u className="underline">YOU COMPLETED</u><br />
         THE FORM!
       </h1>
-      {allowOnlineReg ? (
+      {allowOnlineReg && !showGetEmail ? (
       <div>
         <p className="register-form-text-completed">
           To complete the full process with your state, please go to the 
@@ -77,7 +79,14 @@ export const FormCompleted = () => {
         <p className="register-form-text-tight">
           We can email you a PDF file of your completed form. Print it out and 
           mail it to your state to complete your voter registration.{' '} 
-          <Link className="link--light" to={redirect}>Get email with PDF file</Link>
+          <a 
+            className="link--light" 
+            onClick={(e)=>{
+              e.preventDefault();
+              ToggleShowGetEmail(e);}}
+          >
+             Get email with PDF file.
+          </a>
         </p>
         <Link className="link--light register-form-text" to={redirect}>
           Back to 8by8 Challenge
@@ -90,13 +99,13 @@ export const FormCompleted = () => {
           mail it to your state to complete your voter registration.
         </p>
         <button
-          className="next-btn"
+          className="tight-btn"
           onClick={(e) => {
             e.preventDefault();
             history.push(redirect);
           }}
         >
-          GO BACK TO THE CHALLENGE
+          GO TO 8BY8 CHALLENGE
         </button>
       </div>
     )}
@@ -112,16 +121,29 @@ export const FormCompleted = () => {
             <p className="register-form-text-tight">Make sure to have your 
             <span className="bold"> State ID</span> or <span className="bold"> 
             driver's license</span> ready. If you do not have either of
-            these, you can <span className="bold-undrln">register by mail.</span>
+            these, you can {' '} 
+              <a 
+                className="link--light" 
+                onClick={(e)=>{
+                  e.preventDefault();
+                  ToggleExpectModal(e);
+                  ToggleMailRegModal(e);}}
+              >
+                register by mail.
+              </a>
             </p>
             <a
               className="a-btn"
               target = "_blank"
+              onClick={(e)=>{
+                ToggleReminderModal(e);
+              }}
               href = {onlineRegLink}
             >
               GO TO STATE WEBSITE
             </a>
             <button
+              className="btnlink"
               onClick={(e) => {
                 e.preventDefault();
                 ToggleExpectModal(e);
@@ -151,7 +173,16 @@ export const FormCompleted = () => {
               To complete the full process with your state, you will be asked a
               few additional questions online. Make sure to have your State ID 
               or driver's license ready. If you do not have either of these, 
-              you can {' '} <a className="link--light">register by mail.</a>
+              you can {' '} 
+              <a 
+                className="link--light" 
+                onClick={(e)=>{
+                  e.preventDefault();
+                  ToggleExpectModal(e);
+                  ToggleMailRegModal(e);}}
+              >
+                register by mail.
+              </a>
             </p>
             <h3 className="MargTop">2. WAIT FOR THE STATE TO CONFIRM YOUR APPLICATION</h3>
             <p>
@@ -159,9 +190,16 @@ export const FormCompleted = () => {
               application. You will receive a Voter Notification Card from your 
               county elections office.
             </p>
-            <a className="link">Voter registration resources</a>
+            <a 
+              className="link-left"
+              href={"https://vote.gov/register/" + 
+              voterRegistrationData.state.toLowerCase()}
+              target="_blank"
+            >
+              Voter registration resources
+            </a>
             <a
-              className="a-btn"
+              className="a-btn--tm40"
               target = "_blank"
               href = {onlineRegLink}
             >
@@ -176,13 +214,13 @@ export const FormCompleted = () => {
     {showMailRegModal && (
       <PopupModal
         setOpenModal = {setShowMailRegModal}
-        theme = {"modalContainer--light"}
+        theme = {"modalContainer--light-expect"}
         content = {
         <>
         <div className="reminder-modal">
           <h3>COMPLETE VOTER REGISTRATION BY MAIL</h3>
           <div>
-            <h3>1. CHECK YOUR EMAIL</h3>
+            <h3 className="MargTop">1. CHECK YOUR EMAIL</h3>
             <p>
               We emailed you a PDF of your completed form. You can print it out
               and mail it to your state to complete your voter registration.
@@ -218,7 +256,13 @@ export const FormCompleted = () => {
           How to register to vote by mail</button><br />
         {allowOnlineReg && (
           <>
-          <a className="info-link">How to register online to vote</a><br />
+          <a 
+            className="info-link"
+            href={onlineRegLink}
+            target="_blank"
+          >
+            How to register online to vote
+          </a><br />
           </>
         )}
         <a className="info-link" 

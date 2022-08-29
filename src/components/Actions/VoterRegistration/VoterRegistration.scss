@@ -28,6 +28,7 @@
 .reg-more-infoContainer {
   background-color: #eeeeee;
   padding: 20px 30px 25px;
+  margin-top: 40px;
 }
 
 .register-form-title {
@@ -124,7 +125,7 @@
 
 .tight-btn {
   @include button;
-  margin-top: 0px;
+  margin-top: 0px !important;
   margin-bottom: 40px;
   font-size: 24px !important;
   letter-spacing: 0.03em !important;
@@ -138,6 +139,12 @@
   padding: 9px 20px;
   display: flex;
   justify-content: center;
+  letter-spacing: 0.03em;
+
+  &--tm40 {
+    @extend .a-btn;
+    margin-top: 40px;
+  }
 }
 
 .next-btn {
@@ -278,7 +285,7 @@
     letter-spacing: 0.02em;
   }
 
-  button {
+  .btnlink {
     font-family: $lato;
     font-weight: 700;
     font-size: 16px !important;
@@ -289,6 +296,7 @@
     height: unset !important;
     background: none !important;
   }
+
   .bold {
     font-weight: 700 !important;
     &-undrln {
