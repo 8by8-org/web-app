@@ -1,15 +1,23 @@
 import React, { useEffect, useState } from "react";
 import { useHistory } from "react-router";
 import { useAuth } from "../../../../../contexts/AuthContext";
+import axios from "axios";
 import "../../VoterRegistration.scss";
 import ScrollToTop from "../../../../../functions/ScrollToTop";
+
 import { Link } from "react-router-dom";
 import PopupModal from "../../../../Utility/PopupModal/PopupModal"
+import { clearVoterRegInfo } from "../../utils/UpdateRegInfo";
+import { getUserDatabase } from "../../../../../functions/UserData";
+import { LoadingWheel } from "../../../../Utility/LoadingWheel/LoadingWheel.component";
+const apiUrl = "https://usvotes-6vsnwycl4q-uw.a.run.app";
 
 export const FormCompleted = () => {
   const history = useHistory();
   const { currentUserData, voterRegistrationData } = useAuth();
-  
+  const [isLoading, setIsLoading] = useState(true);
+  const [userData, setUserData] = useState(currentUserData);
+  const [error, setError] = useState("");
   const [showReminderModal, setShowReminderModal] = useState(false);
   const [showExpectModal, setShowExpectModal] = useState(false);
   const [showMailRegModal, setShowMailRegModal] = useState(false);
@@ -21,11 +29,23 @@ export const FormCompleted = () => {
   const ToggleExpectModal = (e) => setShowExpectModal(!showExpectModal);
   const ToggleMailRegModal = (e) => setShowMailRegModal(!showMailRegModal);
   const ToggleShowGetEmail = (e) => setShowGetEmail(true);
+
   let redirect = "/progress";
   if (currentUserData && currentUserData.invitedBy.length > 0) {
     redirect = "/actions";
   }
-
+  
+  useEffect(() => {
+    setTimeout(() => {
+      getUserDatabase()
+      .then((data) => {
+        setUserData(data);
+      });
+      setIsLoading(false);
+    }, 1000);
+  }, []);
+  
+  
   ScrollToTop();
 
   const getStateRegData = () => {
@@ -58,6 +78,8 @@ export const FormCompleted = () => {
         <u className="underline">YOU COMPLETED</u><br />
         THE FORM!
       </h1>
+      
+      {isLoading && <LoadingWheel overlay={true} />}
       {allowOnlineReg && !showGetEmail ? (
       <div>
         <p className="register-form-text-completed">
@@ -73,21 +95,48 @@ export const FormCompleted = () => {
         >
           CONTINUE TO STATE WEBSITE
         </button>
-        <p className="register-form-text-label">
-          Or register by mail!
-        </p>
-        <p className="register-form-text-tight">
-          We can email you a PDF file of your completed form. Print it out and 
-          mail it to your state to complete your voter registration.{' '} 
-          <a 
-            className="link--light" 
-            onClick={(e)=>{
-              e.preventDefault();
-              ToggleShowGetEmail(e);}}
-          >
-             Get email with PDF file.
-          </a>
-        </p>
+        {userData.isRegisteredVoter && userData.voteInfo && Object.keys(userData.voteInfo).length > 0 && (
+        <div>
+          <p className="register-form-text-label">
+            Or register by mail!
+          </p>
+          <p className="register-form-text-tight">
+            We can email you a PDF file of your completed form. Print it out and 
+            mail it to your state to complete your voter registration.{' '} 
+            <a 
+              className="link--light" 
+              onClick={async (e)=>{
+                e.preventDefault();
+                setIsLoading(true);
+                ToggleShowGetEmail(e);
+                axios
+                  .post(`${apiUrl}/registertovote/`, userData.voteInfo)
+                  .then((res) => {
+                    setIsLoading(false);
+                    setError(
+                      ``
+                    );
+                  })
+                  .catch((e) => {
+                    setIsLoading(false);
+                    setError(
+                      `There was a problem creating your paperwork. ${e.response.data.error}. `
+                    );
+                  });
+                }}
+            >
+               Get email with PDF file.
+            </a>
+          </p>
+          {error && <p className="error-message">{error}</p>}
+        </div> )}
+        {/* <a
+          onClick={() => {
+            clearVoterRegInfo();
+            history.push("/voterreg");
+          }}>
+            Clear voter registration info
+          </a> */}
         <Link className="link--light register-form-text" to={redirect}>
           Back to 8by8 Challenge
         </Link>
@@ -110,6 +159,7 @@ export const FormCompleted = () => {
       </div>
     )}
     </form>
+    
     {showReminderModal && (
     <PopupModal
       setOpenModal={setShowReminderModal}

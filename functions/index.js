@@ -61,6 +61,7 @@ exports.onSignup = functions.auth.user().onCreate(async (user) => {
       completedActionForChallenger: false,
       challengeEndDate: "",
       badges: [],
+      voteInfo: {}
     });
   }
 });

@@ -1,0 +1,73 @@
+@import "../../../styles/Components";
+@import "../../../styles/Fonts";
+@import "../../../styles/Variables";
+@import "../../../styles/Classes";
+
+.choose-reward {
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    h1 {
+        text-align: left;
+    }
+
+    .about-text {
+        margin-top: 2rem;
+        margin-bottom: 2rem;
+    }
+
+    .image-container {
+        img {
+            max-width: 100%;
+            max-height: 100%;
+        }
+    }
+
+    .text-underline {
+        @include text-underline;
+    }
+
+    .radio-label {
+        width: 100%;
+    }
+
+    label {
+        .circle-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .circle {
+            height: 1.75rem;
+            width: 1.75rem;
+            outline: 0.25rem solid black;
+            border: 0.25rem solid white;
+            border-radius: 20rem;
+        }
+    }
+
+    .reward-button {
+        @include button;
+    }
+
+    .reward-button:disabled {
+        opacity: 50%;
+    }
+
+    .button-container {
+        display: flex;
+        align-items: center;
+        justify-items: center;
+    }
+
+    input[type='radio'] {
+        display: none;
+    }
+
+    input[type='radio']:checked + label{
+        .circle {
+            background-color: black;
+        }
+    }
+
+}
