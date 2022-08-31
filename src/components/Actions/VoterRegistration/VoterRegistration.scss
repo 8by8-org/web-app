@@ -29,7 +29,7 @@
 .reg-more-infoContainer {
   background-color: #eeeeee;
   padding: 20px 30px 25px;
-  margin-top: 40px;
+  // margin-top: 40px;
 }
 
 .register-form-title {
@@ -269,7 +269,6 @@
 }
 
 .reminder-modal {
-
   h3 {
     text-align: left;
     margin-bottom: 16px;
@@ -279,7 +278,7 @@
     }
   }
 
-  p{
+  p {
     text-align: left;
     margin-bottom: 40px;
     line-height: 19px;
@@ -306,39 +305,40 @@
     }
   }
 
-.register-by-mail-title {
-  font-family: $lato;
-  font-weight: bold;
-  font-size: 18px;
-  letter-spacing: 0.02em;
-}
-
-.register-by-mail-text {
-  font-family: $lato;
-  font-weight: normal;
-  margin-bottom: 20px;
-}
-
-.register-by-mail-text > a {
-  font-family: $lato;
-  font-weight: bold;
-  text-decoration-line: underline !important;
-}
-
-@keyframes fadeIn {
-  from {
-    opacity: 0;
+  .register-by-mail-title {
+    font-family: $lato;
+    font-weight: bold;
+    font-size: 18px;
+    letter-spacing: 0.02em;
   }
-  to {
-    opacity: 1;
-  }
-}
 
-@keyframes required {
-  from {
-    border-color: black;
+  .register-by-mail-text {
+    font-family: $lato;
+    font-weight: normal;
+    margin-bottom: 20px;
   }
-  to {
-    border-color: red;
+
+  .register-by-mail-text > a {
+    font-family: $lato;
+    font-weight: bold;
+    text-decoration-line: underline !important;
+  }
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+
+  @keyframes required {
+    from {
+      border-color: black;
+    }
+    to {
+      border-color: red;
+    }
   }
 }
