@@ -40,6 +40,10 @@ export default function SignupPage() {
     setSelectedAvatar(event.target.value);
   };
 
+  const clearEmailError = () => {
+    setEmailError("");
+  }
+
   useEffect(() => {
     if (currentUser) {
       if (playerStatus) {
@@ -50,6 +54,7 @@ export default function SignupPage() {
         history.push("/progress");
       }
     }
+
 
     // signup logic
     if (!auth.isSignInWithEmailLink(auth.getAuth(), window.location.href)) {
@@ -63,7 +68,7 @@ export default function SignupPage() {
         );
         let challengeEndDate = "";
         let startedChallenge = false;
-        if(getUserType() !== "player") {
+        if (getUserType() !== "player") {
           challengeEndDate = new Date(Date.now() + 8 * 24 * 60 * 60 * 1000); // now + 8 days
           startedChallenge = true;
         }
@@ -113,15 +118,14 @@ export default function SignupPage() {
 
         if (!username) {
           setNameError("Please enter your name.");
-        } else {
-          setNameError("");
         }
 
         if (!email) {
           setEmailError("Please enter an email address.");
+
         }
 
-        if (confirmedEmail !== email) {
+        if (confirmedEmail !== email || confirmedEmail === "") {
           setDuplicateError("Emails do not match.");
         }
 
@@ -156,23 +160,30 @@ export default function SignupPage() {
                 Name*
               </label>
               <input
-                className="register-input"
-                id = "name"
+                className={`register-input ${nameError && 'red'}`}
+                id="name"
                 name="name"
                 type="text"
                 ref={nameRef}
                 onChange={() => {
-                  setActiveFields({ ...activeFields, name: true});}
+                  setNameError("");
+                  setActiveFields({ ...activeFields, name: true });
+                }
                 }
                 onFocus={() => {
-                  setActiveFields({ ...activeFields, name: true});}
+                  setActiveFields({ ...activeFields, name: true });
+                }
                 }
                 onClick={() => {
-                  setActiveFields({ ...activeFields, name: true});}
+                  setActiveFields({ ...activeFields, name: true });
+                }
                 }
               ></input>
-              <br></br>
+
               {nameError && <p className="error-msg">{nameError}</p>}
+              <br></br>
+
+
               <label
                 htmlFor="emailAddress"
                 className={activeFields.email
@@ -182,24 +193,27 @@ export default function SignupPage() {
                 Email Address*
               </label>
               <input
-                className="register-input"
+                className={`register-input ${emailError && 'red'}`}
                 id="emailAddress"
                 name="emailAddress"
                 type="email"
                 ref={emailRef}
                 onChange={() => {
-                  setActiveFields({ ...activeFields, email: true});}
+                  setEmailError("");
+                  setActiveFields({ ...activeFields, email: true });
+                }
                 }
                 onFocus={() => {
-                  setActiveFields({ ...activeFields, email: true});}
+                  setActiveFields({ ...activeFields, email: true });
+                }
                 }
                 onClick={() => {
-                  setActiveFields({ ...activeFields, email: true});}
+                  setActiveFields({ ...activeFields, email: true });
+                }
                 }
               ></input>
-              <br></br>
               {emailError && <p className="error-msg">{emailError}</p>}
-
+              <br></br>
               <label
                 htmlFor="confirmEmail"
                 className={activeFields.confirmEmail
@@ -209,23 +223,28 @@ export default function SignupPage() {
                 Re-enter Email address*
               </label>
               <input
-                className="register-input"
+                className={`register-input ${duplicateError && 'red'}`}
                 id="confirmEmail"
                 name="confirmEmail"
                 type="email"
                 ref={confirmEmailRef}
                 onChange={() => {
-                  setActiveFields({ ...activeFields, confirmEmail: true});}
+                  setDuplicateError("");
+                  setActiveFields({ ...activeFields, confirmEmail: true });
+                }
                 }
                 onFocus={() => {
-                  setActiveFields({ ...activeFields, confirmEmail: true});}
+                  setActiveFields({ ...activeFields, confirmEmail: true });
+                }
                 }
                 onClick={() => {
-                  setActiveFields({ ...activeFields, confirmEmail: true});}
+                  setActiveFields({ ...activeFields, confirmEmail: true });
+                }
                 }
               ></input>
-              <br></br>
               {duplicateError && <p className="error-msg">{duplicateError}</p>}
+              <br></br>
+
             </div>
             <p className="small-title">Which One's you? </p>
             <div className="avatar-container">
@@ -330,7 +349,7 @@ export default function SignupPage() {
             </a>
           </p>
         )}
-    </form>
+      </form>
     </div>
   );
 }

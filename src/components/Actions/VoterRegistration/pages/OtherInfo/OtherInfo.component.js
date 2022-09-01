@@ -6,6 +6,7 @@ import axios from "axios";
 import "../../VoterRegistration.scss";
 import { Tooltip } from "../Tooltip/Tooltip.component";
 import { completedAction } from "../../../../../functions/UserData";
+import { addRegInfoToDB } from "../../utils/UpdateRegInfo";
 import { LoadingWheel } from "../../../../Utility/LoadingWheel/LoadingWheel.component";
 import ScrollToTop from "../../../../../functions/ScrollToTop";
 
@@ -381,6 +382,7 @@ export const OtherInfo = () => {
             .post(`${apiUrl}/registertovote/`, postBody)
             .then((res) => {
               setIsLoading(false);
+              addRegInfoToDB(postBody);
               completedAction("register to vote");
               history.push("/voterreg/completed");
             })
