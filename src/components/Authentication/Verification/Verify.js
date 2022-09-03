@@ -17,11 +17,12 @@ function Verify() {
   useEffect(() => {
     if (currentUser?.emailVerified) {
       history.push(`/verifysuccess`);
-    }
-    if (currentUser?.email) {
+    } else if (currentUser?.email) {
       setEmail(currentUserData?.email);
-    } else {
+    } else if (localStorage.getItem("emailForSignIn")) {
       setEmail(localStorage.getItem("emailForSignIn"));
+    } else {
+      history.push(`/`);
     }
     window.localStorage.setItem("verifying", "true");
   }, [currentUser]);
