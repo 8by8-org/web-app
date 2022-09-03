@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from "react";
+import { IconContext } from "react-icons";
+import * as MdIcons from "react-icons/md";
 import { getUserDatabase } from "./../../functions/UserData";
 import { useHistory } from "react-router";
 import { useAuth } from "../../contexts/AuthContext";
@@ -11,20 +13,30 @@ import WhiteCurve from "./../../assets/images/Actions/Union.svg";
 import Crown from "./../../assets/images/Actions/Crown.svg";
 import ConfettiAnimation from "./../Utility/Helpers/ConfettiAnimation";
 import Invite from "./../Utility/Invite/Invite";
+import { ErrorModal } from "../Utility/ErrorModal/ErrorModal";
 import "./Actions.scss";
 import { LoadingWheel } from "./../Utility/LoadingWheel/LoadingWheel.component";
+import PopupModal from "../Utility/PopupModal/PopupModal";
+import stateVoteInfo from "../../data/state_vote_info.json";
+import axios from "axios";
 
 const avatars = [Avatar1, Avatar2, Avatar3, Avatar4];
+const apiUrl = "https://usvotes-6vsnwycl4q-uw.a.run.app";
 
 export default function Actions() {
   const history = useHistory();
   const { currentUser } = useAuth();
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
   const [challengerInfo, setChallengerInfo] = useState(null);
   const [registeredVoter, setRegisteredVoter] = useState(false);
   const [notifyElectionReminders, setNotifyElectionReminders] = useState(false);
   const [startedChallenge, setStartedChallenge] = useState(false);
+  const [voteInfo, setVoteInfo] = useState(null);
   const toggleInvite = React.useRef();
+  //for resending voter registration form's to the user's email address
+  const [showTransparentLoadingWheel, setShowTransparentLoadingWheel] = useState(false);
+  const [showSuccessModal, setShowSuccessModal] = useState(false);
+  const [showErrorModal, setShowErrorModal] = useState(false);
 
   useEffect(() => {
     if (localStorage.getItem("challengerInfo")) {
@@ -32,7 +44,7 @@ export default function Actions() {
       if (currentUser) {
         fetchUserData();
       } else {
-        setLoading(true);
+        setLoading(false);
       }
     } else {
       if (currentUser) {
@@ -40,6 +52,8 @@ export default function Actions() {
           .then((data) => {
             if (data.invitedBy) {
               setRegisteredVoter(data.isRegisteredVoter);
+              setVoteInfo(data.voteInfo);
+              console.log(data.voteInfo);
               setStartedChallenge(data.startedChallenge);
               setNotifyElectionReminders(data.notifyElectionReminders);
               getChallengerInfo(data.invitedBy);
@@ -59,9 +73,11 @@ export default function Actions() {
     getUserDatabase()
       .then((data) => {
         setRegisteredVoter(data.isRegisteredVoter);
+        setVoteInfo(data.voteInfo);
+        console.log(data.voteInfo)
         setStartedChallenge(data.startedChallenge);
         setNotifyElectionReminders(data.notifyElectionReminders);
-        setLoading(true);
+        setLoading(false);
       })
       .catch((e) => console.log(e));
   }
@@ -75,10 +91,10 @@ export default function Actions() {
     info.challengerID = invitedBy;
     setChallengerInfo(info);
     localStorage.setItem("challengerInfo", JSON.stringify(info));
-    setLoading(true);
+    setLoading(false);
   }
 
-  return loading === true ? (
+  return !loading ? (
     <div>
       {/* if all three actions are completed */}
       {registeredVoter && notifyElectionReminders && startedChallenge ? (
@@ -312,6 +328,43 @@ export default function Actions() {
 
                 <div className="links-container">
                   {/* this is for when registered to vote or election reminders are turned on */}
+                  {(() => {
+                    if(!registeredVoter || !voteInfo) return;
+                    const stateInfo = stateVoteInfo.states[voteInfo.state];
+                    return (
+                      <>
+                        {stateInfo.onlinereg &&
+                          <a
+                            href={stateInfo.voteregsite}
+                            target="_blank"
+                            rel="noreferrer"
+                            className="link-share"
+                          >
+                            Go to state website
+                          </a>
+                        }
+                        <button
+                          type="button"
+                          className="link-share"
+                          onClick={() => {
+                            setShowTransparentLoadingWheel(true);
+                            axios
+                             .post(`${apiUrl}/registertovote/`, voteInfo)
+                             .then((res) => {
+                               setShowTransparentLoadingWheel(false);
+                               setShowSuccessModal(true);
+                             })
+                             .catch((e) => {
+                               setShowTransparentLoadingWheel(false);
+                               setShowErrorModal(true);
+                             });
+                          }}
+                        >
+                          Get your registration form again
+                        </button>
+                      </>
+                    );
+                  })()}
                   {((registeredVoter &&
                     !notifyElectionReminders &&
                     !startedChallenge) ||
@@ -326,7 +379,6 @@ export default function Actions() {
                       Share about your action
                     </button>
                   )}
-
                   {/* this is for when registered to vote or election reminders are turned on and challenge has been started */}
                   {(registeredVoter || notifyElectionReminders) &&
                     startedChallenge && (
@@ -353,6 +405,43 @@ export default function Actions() {
       )}
 
       <Invite toggleInvite={toggleInvite} isShare={true} />
+      {showTransparentLoadingWheel && <LoadingWheel overlay={true} />}
+      {showSuccessModal && 
+        <div className="actions-modal-outer-container">
+        <div className="actions-modal-container">
+          <IconContext.Provider value={{ color: "black" }}>
+            <div className="actions-modal">
+              <div className="actions-modal-toggle-container">
+                <button
+                  className="actions-modal-toggle"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    setShowSuccessModal(false);
+                  }}
+                >
+                  <MdIcons.MdClose size={"1x"} />
+                </button>
+              </div>
+              <strong className="actions-modal-heading">We emailed you!</strong>
+              <p className="actions-modal-text">
+                Check your email to get your voter registration PDF form.
+              </p>
+              <button
+                className="actions-modal-btn"
+                onClick={() => {
+                  setShowSuccessModal(false);
+                }}
+              >
+                OK
+              </button>
+            </div>
+          </IconContext.Provider>
+        </div>
+      </div>
+      }
+      {showErrorModal && 
+        <ErrorModal setShowSelf={setShowErrorModal} />
+      }
     </div>
   ) : (
     <LoadingWheel overlay={false} />
