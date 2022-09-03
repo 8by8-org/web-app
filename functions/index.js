@@ -40,7 +40,7 @@ exports.resendVerification = functions.https.onCall((email) => {
 });
 
 // sign in email
-exports.sendSignin = functions.https.onCall((email) => {
+exports.sendSigninEmail = functions.https.onCall((email) => {
   sendVerificationEmail(email, "sign in");
 });
 
@@ -48,7 +48,7 @@ function sendVerificationEmail(email, type) {
   let test = false;
   let actionUrl = "https://app.8by8.us/signin";
   // uncomment when testing
-  test = true;
+  // test = true;
   if (test) {
     actionUrl = "http://localhost:3000/signin";
   }

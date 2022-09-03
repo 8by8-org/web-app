@@ -42,7 +42,7 @@ export default function Login() {
   const functions = getFunctions();
   // this is for testing functions locally
   // connectFunctionsEmulator(functions, "localhost", 5001);
-  const sendSignin = httpsCallable(functions, "sendSignin");
+  const sendSignin = httpsCallable(functions, "sendSigninEmail");
 
   useEffect(() => {
     if (currentUser) {

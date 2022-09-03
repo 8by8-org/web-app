@@ -28,7 +28,7 @@ function Verify() {
   }, [currentUser]);
 
   const resendVerification = httpsCallable(functions, "resendVerification");
-  const sendSignin = httpsCallable(functions, "sendSignin");
+  const sendSignin = httpsCallable(functions, "sendSigninEmail");
 
   const resendEmailVerification = () => {
     if (currentUser) {
