@@ -9,12 +9,14 @@ import { AddressBlock } from "./AddressBlock.component";
 import { ProgressBar } from "../ProgressBar/ProgressBar.component";
 import { useAuth } from "../../../../../contexts/AuthContext";
 import ScrollToTop from "../../../../../functions/ScrollToTop";
+import { checkAddressValidity } from "./utils";
 
 const apiUrl = "https://usvotes-6vsnwycl4q-uw.a.run.app";
 
 export const HomeAddress = () => {
   const history = useHistory();
   const {
+    currentUser,
     currentUserData,
     voterRegistrationData,
     setVoterRegistrationData,
@@ -37,13 +39,13 @@ export const HomeAddress = () => {
     ) {
       history.push("/voterreg/eligibility");
     } else if (
-      voterRegistrationData.name_title.length === 0 ||
+      voterRegistrationData.title.length === 0 ||
       voterRegistrationData.name_first.length === 0 ||
       voterRegistrationData.name_last.length === 0
     ) {
       history.push("/voterreg/yourname");
     }
-  }, [currentUserData, history, voterRegistrationData]);
+  }, []);
 
   ScrollToTop();
 
@@ -56,26 +58,33 @@ export const HomeAddress = () => {
       {isLoading && <LoadingWheel overlay={true} />}
       <AddressBlock
         addressType={"home"}
+        error={error}
         title="HOME ADDRESS"
         tooltipText="Provide your home address. Do not put your mailing address here if it’s different from your home address. Do not use a PO Box or rural route without a box number. If you live in a rural area but don’t have a street address or have no address, you can show where you live on a map later on the printed form."
       />
       {hasMailingAddress && (
-        <AddressBlock addressType={"mailing"} title="MAILING ADDRESS" />
+        <AddressBlock
+          addressType={"mailing"}
+          title="MAILING ADDRESS"
+        />
       )}
       {hasChangeOfAddress && (
-        <AddressBlock addressType={"previous"} title="PREVIOUS ADDRESS" />
+        <AddressBlock
+          addressType={"previous"}
+          title="PREVIOUS ADDRESS"
+        />
       )}
       <div>
-        <label htmlFor="has_mailing_address" className="register-label">
+        <label htmlFor="diff_mail_address" className="register-label">
           <input
             className="register-checkbox"
             type="checkbox"
-            id="has_mailing_address"
-            name="has_mailing_address"
+            id="diff_mail_address"
+            name="diff_mail_address"
             onChange={(event) => {
               setVoterRegistrationData({
                 ...voterRegistrationData,
-                has_mailing_address: event.target.checked,
+                diff_mail_address: event.target.checked,
               });
               setHasMailingAddress(event.target.checked);
             }}
@@ -101,10 +110,6 @@ export const HomeAddress = () => {
           I've changed my address since the last time I registered to vote
         </label>
       </div>
-      <br />
-      <p style={{ color: "red", fontStyle: "italic", textAlign: "center" }}>
-        {error}
-      </p>
       <button
         className="next-btn"
         onClick={async (event) => {
@@ -119,16 +124,20 @@ export const HomeAddress = () => {
             name_last,
             dob,
             zip,
-            has_mailing_address,
-            mailing_state,
-            mailing_city,
-            mailing_zip,
-            mailing_street,
+            diff_mail_address,
+            mail_state,
+            mail_city,
+            mail_zip,
+            mail_street,
+            mail_streetLine2,
+            mail_unit,
             change_of_address,
             prev_state,
             prev_city,
             prev_zip,
             prev_street,
+            prev_streetLine2,
+            prev_unit
           } = voterRegistrationData;
           let checksPassed = true;
           if (state.length === 0) {
@@ -151,26 +160,24 @@ export const HomeAddress = () => {
             zipInput.classList.add("requiredField");
             checksPassed = false;
           }
-          if (has_mailing_address) {
-            if (mailing_state.length === 0) {
-              const mailingStateInput =
-                document.getElementById("mailing_state");
+          if (diff_mail_address) {
+            if (mail_state.length === 0) {
+              const mailingStateInput = document.getElementById("mail_state");
               mailingStateInput.classList.add("requiredField");
               checksPassed = false;
             }
-            if (mailing_city.length === 0) {
-              const mailingCityInput = document.getElementById("mailing_city");
+            if (mail_city.length === 0) {
+              const mailingCityInput = document.getElementById("mail_city");
               mailingCityInput.classList.add("requiredField");
               checksPassed = false;
             }
-            if (mailing_street.length === 0) {
-              const mailingStreetInput =
-                document.getElementById("mailing_street");
+            if (mail_street.length === 0) {
+              const mailingStreetInput = document.getElementById("mail_street");
               mailingStreetInput.classList.add("requiredField");
               checksPassed = false;
             }
-            if (mailing_zip.length === 0) {
-              const mailingZipInput = document.getElementById("mailing_zip");
+            if (mail_zip.length === 0) {
+              const mailingZipInput = document.getElementById("mail_zip");
               mailingZipInput.classList.add("requiredField");
               checksPassed = false;
             }
@@ -199,9 +206,26 @@ export const HomeAddress = () => {
           }
           if (!checksPassed) {
             setError("Please complete all of the required fields");
+            window.scrollTo(0,0);
             return;
           }
-          setIsLoading(true);
+          //now check the addresses
+          let addressesAreValid = true;
+          try {
+            setIsLoading(true);
+            await checkAddressValidity(street, streetLine2, unit, city, state, zip);
+            if(diff_mail_address) await checkAddressValidity(mail_street, mail_streetLine2, mail_unit, mail_city, mail_state, mail_zip);
+            if(change_of_address) await checkAddressValidity(prev_street, prev_streetLine2, prev_unit, prev_city, prev_state, prev_zip);
+          } catch(e) {
+            console.log(e)
+            addressesAreValid = false;
+          }
+          if(!addressesAreValid) {
+            setError("You entered an invalid address. Try again.");
+            setIsLoading(false);
+            window.scrollTo(0,0);
+            return;
+          }
           const ymd = dob.split("-");
           const year = ymd[0];
           const month = ymd[1];
@@ -225,6 +249,7 @@ export const HomeAddress = () => {
           };
           try {
             const res = await axios.post(`${apiUrl}/registered/`, postBody);
+            console.log(res)
             setIsLoading(false);
             const { registered } = res.data;
             if (registered) {

@@ -1,12 +1,19 @@
-import React, { useState } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import "../../VoterRegistration.scss";
+import "./AddressBlock.scss";
 import { Tooltip } from "../Tooltip/Tooltip.component";
 import { useAuth } from "../../../../../contexts/AuthContext";
 
-export const AddressBlock = ({ addressType, title, tooltipText }) => {
+export const AddressBlock = ({
+  addressType,
+  title,
+  tooltipText,
+  error
+}) => {
+  //set the parent validity to false when a new, blank address block is rendered
   let prefix = "";
   if (addressType === "previous") prefix = "prev_";
-  else if (addressType === "mailing") prefix = "mailing_";
+  else if (addressType === "mailing") prefix = "mail_";
 
   const { voterRegistrationData, setVoterRegistrationData } = useAuth();
 
@@ -25,6 +32,7 @@ export const AddressBlock = ({ addressType, title, tooltipText }) => {
         <h2 className="register-form-title-small">{title}</h2>
         {tooltipText && <Tooltip text={tooltipText} />}
       </div>
+      {addressType === "home" && <span className="addressError">{error}</span>}
       <label
         htmlFor={`${prefix}street`}
         className={

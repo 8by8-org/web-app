@@ -4,6 +4,7 @@ import { useHistory } from "react-router-dom";
 import { getFunctions, httpsCallable } from "firebase/functions";
 import Plane from "./../../../assets/4-pages/Verify/Plane.png";
 import "./Verify.scss";
+import PopupModal from "../../Utility/PopupModal/PopupModal";
 
 function Verify() {
   const { currentUser, currentUserData } = useAuth();
@@ -15,6 +16,7 @@ function Verify() {
     if (currentUser?.emailVerified) {
       history.push(`/verifysuccess`);
     }
+    window.localStorage.setItem("verifying", "true");
     setEmail(currentUserData?.email);
   }, [currentUser]);
 
@@ -38,6 +40,7 @@ function Verify() {
           Get another email
         </span>
       </p>
+      {/* <PopupModal setOpenModal={}></PopupModal> */}
     </div>
   );
 }

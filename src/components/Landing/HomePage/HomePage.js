@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import "react-bootstrap";
 import "./HomePage.scss";
@@ -15,6 +15,13 @@ import Curve3 from "../../../assets/images/HomePage/Curve3.svg";
 export default function HomePage() {
   const history = useHistory();
 
+  useEffect(() => {
+    const result = window.localStorage.getItem("verifying");
+    if (result) {
+      history.push("/verifysuccess");
+    }
+  }, []);
+
   return (
     <div className="homepage">
       <div className="content-1">
@@ -30,12 +37,30 @@ export default function HomePage() {
           >
             <span>Take the Challenge</span>
           </button>
-          <a href="/why8by8" className="link" style={{paddingBottom : "2em", color : "#02DDC3", zIndex: "1", position: "relative", top: "-1.8em"}}> See why others are doing it</a>
+          <a
+            href="/why8by8"
+            className="link"
+            style={{
+              paddingBottom: "2em",
+              color: "#02DDC3",
+              zIndex: "1",
+              position: "relative",
+              top: "-1.8em",
+            }}
+          >
+            {" "}
+            See why others are doing it
+          </a>
         </div>
       </div>
 
       <div className="curve-div">
-        <img className="curve curve-1" id="why8by8" src={Curve1} alt="yellow curve" />
+        <img
+          className="curve curve-1"
+          id="why8by8"
+          src={Curve1}
+          alt="yellow curve"
+        />
       </div>
 
       <div className="content-2">
@@ -128,7 +153,12 @@ export default function HomePage() {
           community, business, and tech leaders to create voter registration
           solutions that work.
           <br />
-          <a href="https://www.8by8.us/" target="_blank" rel="noreferrer" className="link">
+          <a
+            href="https://www.8by8.us/"
+            target="_blank"
+            rel="noreferrer"
+            className="link"
+          >
             Learn more about 8by8
           </a>
         </div>

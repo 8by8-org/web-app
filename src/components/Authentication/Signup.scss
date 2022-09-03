@@ -5,6 +5,10 @@
 
 .signup {
   padding: 30px;
+  .red {
+    color: red;
+    border-color: red;
+  }
 
   .register-input {
     width: 100%;
@@ -17,6 +21,7 @@
     position: relative;
     bottom: 34px;
     border-top: 4px solid red;
+    top: 0px;
     height: 0;
   }
 
@@ -53,6 +58,7 @@
       line-height: 22px;
       letter-spacing: 0.02em;
     }
+
     .small-title {
       text-align: left;
       margin-top: 40px;
