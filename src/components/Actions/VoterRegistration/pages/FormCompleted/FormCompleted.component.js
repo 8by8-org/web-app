@@ -4,7 +4,7 @@ import { useAuth } from "../../../../../contexts/AuthContext";
 import axios from "axios";
 import "../../VoterRegistration.scss";
 import ScrollToTop from "../../../../../functions/ScrollToTop";
-
+import stateJson from "../../../../../data/state_vote_info.json";
 import { Link } from "react-router-dom";
 import PopupModal from "../../../../Utility/PopupModal/PopupModal";
 import { clearVoterRegInfo } from "../../utils/UpdateRegInfo";
@@ -49,26 +49,15 @@ export const FormCompleted = () => {
   ScrollToTop();
 
   const getStateRegData = () => {
-    fetch("../../../../../../state_vote_info.json", {
-      headers: {
-        "Content-Type": "application/json",
-        accept: "application.json",
-      },
-    })
-      .then(function (response) {
-        return response.json();
-      })
-      .then(function (stateJson) {
-        let userState = voterRegistrationData.state;
-        if (userData?.voteInfo) {
-          userState = userData.voteInfo.state;
-        }
-
-        setUserState(stateJson.states[userState].name);
-        setAllowOnlineReg(stateJson.states[userState].onlinereg);
-        setOnlineRegLink(stateJson.states[userState].voteregsite);
-        setUserStateShort(userState.toLowerCase());
-      });
+    let userState = voterRegistrationData.state;
+    if (userData?.voteInfo) {
+      userState = userData.voteInfo.state;
+    }
+    //stateJson is now imported directly into this file, so there is no need to make a fetch call
+    setUserState(stateJson.states[userState].name);
+    setAllowOnlineReg(stateJson.states[userState].onlinereg);
+    setOnlineRegLink(stateJson.states[userState].voteregsite);
+    setUserStateShort(userState.toLowerCase());
   };
 
   return (
