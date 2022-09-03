@@ -35,6 +35,13 @@ export default function Login() {
   const buttonRef = useRef();
   const playerStatus = localStorage.getItem("player");
 
+  const functions = getFunctions();
+
+  const sendSignin = httpsCallable(functions, "sendSignin");
+  const sendSigninEmail = (userEmail) => {
+    sendSignin({ email: userEmail });
+  };
+
   useEffect(() => {
     if (currentUser) {
       if (playerStatus) {
@@ -59,24 +66,26 @@ export default function Login() {
       setButtonMessage("Sign In");
       buttonRef.current.onclick = async function () {
         const email = emailRef.current.value;
-        const login = async (email) => {
-          try {
-            await auth.signInWithEmailAndPassword(
-              auth.getAuth(),
-              email,
-              dummyPassword
-            );
-            window.localStorage.setItem(localStorageEmailKey, email);
-            setButtonMessage(null);
-            setMessage("Logging in...");
-          } catch (e) {
-            setEmailError(errorMessage(e));
-          }
-        };
+        // const login = async (email) => {
+        //   try {
+        //     await auth.signInWithEmailAndPassword(
+        //       auth.getAuth(),
+        //       email,
+        //       dummyPassword
+        //     );
+        //     window.localStorage.setItem(localStorageEmailKey, email);
+        //     setButtonMessage(null);
+        //     setMessage("Logging in...");
+        //   } catch (e) {
+        //     setEmailError(errorMessage(e));
+        //   }
+        // };
         if (!email) {
           setEmailError("Please enter your email.");
         } else {
-          login(email);
+          // login(email);
+          sendSigninEmail(email);
+          history.push(`/verify`);
         }
       };
     } else {

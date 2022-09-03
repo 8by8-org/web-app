@@ -10,14 +10,18 @@ function Verify() {
   const { currentUser, currentUserData } = useAuth();
   const history = useHistory();
   const functions = getFunctions();
-  const [email, setEmail] = useState("");
+  const [email, setEmail] = useState(" your email");
+
+  const [openModal, setOpenModal] = useState(false);
 
   useEffect(() => {
     if (currentUser?.emailVerified) {
       history.push(`/verifysuccess`);
     }
+    if (currentUser?.email) {
+      setEmail(currentUserData?.email);
+    }
     window.localStorage.setItem("verifying", "true");
-    setEmail(currentUserData?.email);
   }, [currentUser]);
 
   const resendVerification = httpsCallable(functions, "resendVerification");
@@ -36,11 +40,30 @@ function Verify() {
       <p>The email may take a few moments to arrive.</p>
       <p className="resend b6">
         Didn't receive the email?{" "}
-        <span className="button b5" onClick={() => resendEmailVerification()}>
+        <span
+          className="button b5"
+          onClick={() => {
+            resendEmailVerification();
+            setOpenModal(true);
+          }}
+        >
           Get another email
         </span>
       </p>
-      {/* <PopupModal setOpenModal={}></PopupModal> */}
+      {openModal && (
+        <PopupModal
+          setOpenModal={setOpenModal}
+          theme={"modalContainer--light"}
+          content={
+            <>
+              <div>We sent you another email at {email}!</div>
+              <button className="gradient" onClick={() => setOpenModal(false)}>
+                OK
+              </button>
+            </>
+          }
+        ></PopupModal>
+      )}
     </div>
   );
 }

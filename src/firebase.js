@@ -1,10 +1,7 @@
 import * as firebase from "firebase/app";
 import * as authObject from "firebase/auth";
-<<<<<<< HEAD
 import { getFunctions } from "firebase/functions";
-=======
 import { getDatabase } from "firebase/database";
->>>>>>> 33f99b4a1542830a640a38b944f20da8b828d725
 
 const app = firebase.initializeApp({
   apiKey: process.env.REACT_APP_FIREBASE,
@@ -18,4 +15,5 @@ const app = firebase.initializeApp({
 
 export const auth = authObject;
 export const database = getDatabase(app);
+export const functions = getFunctions(app);
 export default app;

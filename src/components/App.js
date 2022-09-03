@@ -32,7 +32,7 @@ import { YourName } from "./Actions/VoterRegistration/pages/YourName/YourName.co
 import { HomeAddress } from "./Actions/VoterRegistration/pages/HomeAddress/HomeAddress.component";
 import { OtherInfo } from "./Actions/VoterRegistration/pages/OtherInfo/OtherInfo.component";
 import { FormCompleted } from "./Actions/VoterRegistration/pages/FormCompleted/FormCompleted.component";
-import Rewards from './Rewards/Rewards/Rewards';
+import Rewards from "./Rewards/Rewards/Rewards";
 import ChooseReward from "./Rewards/ChooseReward/ChooseReward";
 
 export default function App() {
@@ -60,11 +60,8 @@ export default function App() {
                 <Route path="/verify" component={Verify} />
                 <PrivateRoute path="/verifysuccess" component={VerifySuccess} />
                 <Route path="/signin" component={Signin} />
-<<<<<<< HEAD
                 <Route path="/signinverify" component={SigninVerify} />
-=======
                 <Route path="/rewards" component={Rewards} />
->>>>>>> 33f99b4a1542830a640a38b944f20da8b828d725
                 <PrivateRoute
                   path="/election-reminders"
                   component={ElectionReminder}
