@@ -18,9 +18,13 @@ import ReCAPTCHA from "react-google-recaptcha";
 import { dummyPassword } from "../../constants";
 import voteImg from "./../../assets/4-pages/Signin/Vote.png";
 import { getUserDatabase } from "../../functions/UserData";
-import { getFunctions, httpsCallable } from "firebase/functions";
+import { signInWithEmailLink } from "firebase/auth";
 
-const localStorageEmailKey = "verifyUserEmail";
+import {
+  getFunctions,
+  httpsCallable,
+  connectFunctionsEmulator,
+} from "firebase/functions";
 
 export default function Login() {
   const { currentUser } = useAuth();
@@ -36,11 +40,9 @@ export default function Login() {
   const playerStatus = localStorage.getItem("player");
 
   const functions = getFunctions();
-
+  // this is for testing functions locally
+  // connectFunctionsEmulator(functions, "localhost", 5001);
   const sendSignin = httpsCallable(functions, "sendSignin");
-  const sendSigninEmail = (userEmail) => {
-    sendSignin({ email: userEmail });
-  };
 
   useEffect(() => {
     if (currentUser) {
@@ -66,51 +68,26 @@ export default function Login() {
       setButtonMessage("Sign In");
       buttonRef.current.onclick = async function () {
         const email = emailRef.current.value;
-        // const login = async (email) => {
-        //   try {
-        //     await auth.signInWithEmailAndPassword(
-        //       auth.getAuth(),
-        //       email,
-        //       dummyPassword
-        //     );
-        //     window.localStorage.setItem(localStorageEmailKey, email);
-        //     setButtonMessage(null);
-        //     setMessage("Logging in...");
-        //   } catch (e) {
-        //     setEmailError(errorMessage(e));
-        //   }
-        // };
+        console.log(email);
         if (!email) {
           setEmailError("Please enter your email.");
         } else {
-          // login(email);
-          sendSigninEmail(email);
+          window.localStorage.setItem("emailForSignIn", email);
+          sendSignin(email);
           history.push(`/verify`);
         }
       };
     } else {
       // login step 2
-      const verifyEmail = async (email) => {
-        try {
-          await auth.signInWithEmailLink(
-            auth.getAuth(),
-            email,
-            window.location.href
-          );
-        } catch (e) {
-          console.dir(e);
-          setEmailError(errorMessage(e));
-        }
-      };
-
-      const storedEmail = window.localStorage.getItem(localStorageEmailKey);
-      if (!storedEmail) {
-        setMessage("Please re-enter your email");
-        setButtonMessage("Verify email");
-        buttonRef.current.onclick = () => verifyEmail(emailRef.current.value);
-      } else {
-        verifyEmail(storedEmail);
-      }
+      const userEmail = window.localStorage.getItem("emailForSignIn");
+      signInWithEmailLink(auth.getAuth(), userEmail, window.location.href)
+        .then(() => {
+          window.localStorage.removeItem("emailForSignIn");
+          history.push(`/verifysuccess`);
+        })
+        .catch((e) => {
+          console.log(e);
+        });
     }
     // eslint-disable-next-line
   }, [currentUser]);

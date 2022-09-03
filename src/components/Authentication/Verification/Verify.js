@@ -10,7 +10,7 @@ function Verify() {
   const { currentUser, currentUserData } = useAuth();
   const history = useHistory();
   const functions = getFunctions();
-  const [email, setEmail] = useState(" your email");
+  const [email, setEmail] = useState();
 
   const [openModal, setOpenModal] = useState(false);
 
@@ -20,13 +20,21 @@ function Verify() {
     }
     if (currentUser?.email) {
       setEmail(currentUserData?.email);
+    } else {
+      setEmail(localStorage.getItem("emailForSignIn"));
     }
     window.localStorage.setItem("verifying", "true");
   }, [currentUser]);
 
   const resendVerification = httpsCallable(functions, "resendVerification");
+  const sendSignin = httpsCallable(functions, "sendSignin");
+
   const resendEmailVerification = () => {
-    resendVerification({ email: email });
+    if (currentUser) {
+      resendVerification(currentUser.email);
+    } else {
+      sendSignin(email);
+    }
   };
 
   return (

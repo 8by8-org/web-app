@@ -113,6 +113,8 @@ function Signup() {
           startedChallenge
         );
 
+        window.localStorage.setItem("emailForSignIn", formData.email);
+
         if (getUserType() === "player") {
           setTimeout(() => {
             emailUser(formData.email, "playerWelcome");

@@ -16,6 +16,7 @@ function VerifySuccess() {
 
   async function sendToPage() {
     window.localStorage.removeItem("verifying");
+    window.localStorage.removeItem("emailForSignIn");
 
     await delay(3000);
     if (playerStatus) {

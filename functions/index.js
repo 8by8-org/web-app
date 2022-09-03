@@ -23,7 +23,7 @@ exports.onSignup = functions.auth.user().onCreate(async (user) => {
       completedActionForChallenger: false,
       challengeEndDate: "",
       badges: [],
-      voteInfo: {}
+      voteInfo: {},
     });
   }
 });
@@ -35,22 +35,26 @@ exports.sendVerification = functions.auth.user().onCreate((user) => {
 });
 
 // resend verification email
-exports.resendVerification = functions.https.onRequest((req, res) => {
-  const email = req.query.email;
+exports.resendVerification = functions.https.onCall((email) => {
   sendVerificationEmail(email, "verification");
-  res.json({ result: "resending verification email" });
 });
 
 // sign in email
-exports.sendSignin = functions.https.onRequest((req, res) => {
-  const email = req.query.email;
+exports.sendSignin = functions.https.onCall((email) => {
   sendVerificationEmail(email, "sign in");
-  res.json({ result: "sending signin email" });
 });
 
 function sendVerificationEmail(email, type) {
+  let test = false;
+  let actionUrl = "https://app.8by8.us/signin";
+  // uncomment when testing
+  test = true;
+  if (test) {
+    actionUrl = "http://localhost:3000/signin";
+  }
+
   const actionCodeSettings = {
-    url: "http://localhost:3000/verify",
+    url: actionUrl,
     handleCodeInApp: true,
   };
   if (type === "verification") {
