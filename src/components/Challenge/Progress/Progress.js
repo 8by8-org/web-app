@@ -266,6 +266,7 @@ export default function Progress() {
       {openModal && (
         <PopupModal
           setOpenModal={setOpenModal}
+          theme={"modalContainer"}
           content={
             <>
               <div className="b1">

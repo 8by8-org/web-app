@@ -1,6 +1,6 @@
-@import "src/styles/Components";
-@import "src/styles/Fonts";
-@import "src/styles/Variables";
+@import "../../../styles/Components.scss";
+@import "../../../styles/Fonts.scss";
+@import "../../../styles/Variables.scss";
 
 .voterRegForm {
   width: 100%;
@@ -26,6 +26,12 @@
   align-items: center;
 }
 
+.reg-more-infoContainer {
+  background-color: #eeeeee;
+  padding: 20px 30px 25px;
+  // margin-top: 40px;
+}
+
 .register-form-title {
   @include heading-text;
   text-align: left !important;
@@ -44,6 +50,22 @@
   font-family: $lato;
   margin-top: 40px;
   margin-bottom: 40px;
+  &-tight {
+    margin-top: 0px;
+    margin-bottom: 40px;
+  }
+  &-completed {
+    @extend .register-form-text;
+    margin-top: 29px;
+    line-height: 19px;
+    letter-spacing: 0.02em;
+  }
+}
+
+.register-form-text-label {
+  @include text;
+  font-weight: bold;
+  margin-bottom: 20px;
 }
 
 .underline {
@@ -100,6 +122,30 @@
   font-size: 18px;
   margin-top: 20px;
   margin-bottom: 20px;
+}
+
+.tight-btn {
+  @include button;
+  margin-top: 0px !important;
+  margin-bottom: 40px;
+  font-size: 24px !important;
+  letter-spacing: 0.03em !important;
+}
+
+.a-btn {
+  @include button;
+  font-weight: 400;
+  text-decoration: unset;
+  font-size: 24px !important;
+  padding: 9px 20px;
+  display: flex;
+  justify-content: center;
+  letter-spacing: 0.03em;
+
+  &--tm40 {
+    @extend .a-btn;
+    margin-top: 40px;
+  }
 }
 
 .next-btn {
@@ -211,39 +257,88 @@
   animation: fadeIn 250ms ease-in-out 1 forwards;
 }
 
-.register-by-mail-title {
-  font-family: $lato;
-  font-weight: bold;
-  font-size: 18px;
-  letter-spacing: 0.02em;
+.info-link {
+  font-size: 13px;
+  font-weight: 400;
+  line-height: 28px;
+  letter-spacing: 2%;
+  padding: 0;
+  border: none;
+  text-decoration-line: underline;
+  font: $lato;
 }
 
-.register-by-mail-text {
-  font-family: $lato;
-  font-weight: normal;
-  margin-bottom: 20px;
-}
-
-.register-by-mail-text > a {
-  font-family: $lato;
-  font-weight: bold;
-  text-decoration-line: underline !important;
-}
-
-@keyframes fadeIn {
-  from {
-    opacity: 0;
+.reminder-modal {
+  h3 {
+    text-align: left;
+    margin-bottom: 16px;
+    letter-spacing: 0.03em;
+    &.MargTop {
+      margin-top: 30px;
+    }
   }
-  to {
-    opacity: 1;
-  }
-}
 
-@keyframes required {
-  from {
-    border-color: black;
+  p {
+    text-align: left;
+    margin-bottom: 40px;
+    line-height: 19px;
+    letter-spacing: 0.02em;
   }
-  to {
-    border-color: red;
+
+  .btnlink {
+    font-family: $lato;
+    font-weight: 700;
+    font-size: 16px !important;
+    text-decoration-line: underline;
+    margin-top: 24px !important;
+    border: none;
+    color: $black;
+    height: unset !important;
+    background: none !important;
+  }
+
+  .bold {
+    font-weight: 700 !important;
+    &-undrln {
+      font-weight: 700 !important;
+      text-decoration-line: underline;
+    }
+  }
+
+  .register-by-mail-title {
+    font-family: $lato;
+    font-weight: bold;
+    font-size: 18px;
+    letter-spacing: 0.02em;
+  }
+
+  .register-by-mail-text {
+    font-family: $lato;
+    font-weight: normal;
+    margin-bottom: 20px;
+  }
+
+  .register-by-mail-text > a {
+    font-family: $lato;
+    font-weight: bold;
+    text-decoration-line: underline !important;
+  }
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+
+  @keyframes required {
+    from {
+      border-color: black;
+    }
+    to {
+      border-color: red;
+    }
   }
 }
