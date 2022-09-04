@@ -123,3 +123,31 @@
     }
   }
 }
+
+.couponContainer{
+  max-width: 80%;
+  background-color: $cream;
+  position: relative;
+  margin: 24px auto 40px;
+  border-radius: 12px;  
+  transform: translate(-15px, 0%);
+  padding: 20px;
+  *{
+    margin: 0.5em auto !important;
+  }
+  p{
+    color: black;
+    text-align: center;
+    &:nth-of-type(2){
+      color: $graphite;
+      font-size: 9px;
+    }
+  }
+  img{
+    max-height: 94px;
+    width: auto;
+    max-width: 60%;
+    margin-left: 50% !important;
+    transform: translateX(-50%);
+  }
+}

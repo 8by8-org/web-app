@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { getUserDatabase } from "./../../functions/UserData";
+import { getChallengerDatabase, getUserDatabase } from "./../../functions/UserData";
 import { useHistory } from "react-router";
 import { useAuth } from "../../contexts/AuthContext";
 import { getFirestore, getDoc, doc } from "firebase/firestore";
@@ -13,6 +13,7 @@ import ConfettiAnimation from "./../Utility/Helpers/ConfettiAnimation";
 import Invite from "./../Utility/Invite/Invite";
 import "./Actions.scss";
 import { LoadingWheel } from "./../Utility/LoadingWheel/LoadingWheel.component";
+import { getPartnerData } from "../../functions/partnerData";
 
 const avatars = [Avatar1, Avatar2, Avatar3, Avatar4];
 
@@ -24,9 +25,39 @@ export default function Actions() {
   const [registeredVoter, setRegisteredVoter] = useState(false);
   const [notifyElectionReminders, setNotifyElectionReminders] = useState(false);
   const [startedChallenge, setStartedChallenge] = useState(false);
+  const [challengerFinishedChallenge, setChallengerFinishedChallenge] = useState()
+  const [alreadyRedeemed, setAlreadyRedeemed] = useState()
+  const[couponData, setCouponData] = useState()
+
   const toggleInvite = React.useRef();
 
   useEffect(() => {
+
+    getUserDatabase().then(
+      (data) => {
+
+        if(data.playerReward === undefined){
+          setAlreadyRedeemed(false)
+        } else{
+          setAlreadyRedeemed(true)
+          getPartnerData(data.playerReward, setCouponData)
+        }
+        
+        getChallengerDatabase().then(
+          (result) => {
+            if(
+              result.badges.length >= 8
+            ){
+              setChallengerFinishedChallenge(true)
+            }
+            else{
+              setChallengerFinishedChallenge(false)
+            }
+          }
+        )
+      }
+    )
+
     if (localStorage.getItem("challengerInfo")) {
       setChallengerInfo(JSON.parse(localStorage.getItem("challengerInfo")));
       if (currentUser) {
@@ -38,6 +69,7 @@ export default function Actions() {
       if (currentUser) {
         getUserDatabase()
           .then((data) => {
+
             if (data.invitedBy) {
               setRegisteredVoter(data.isRegisteredVoter);
               setStartedChallenge(data.startedChallenge);
@@ -88,9 +120,12 @@ export default function Actions() {
             <div className="avatar-and-status-finished">
               <div className="action-status-finished">
                 <h1 className="heading">
-                  You are done!
+                {challengerFinishedChallenge ? 
+                  (alreadyRedeemed ? "here’s your reward!" : "Challenge Won!") 
+                  : <>You are done!
                   <br />
-                  You Supported:
+                  You Supported:</>}
+                  
                 </h1>
               </div>
 
@@ -110,11 +145,31 @@ export default function Actions() {
                 <p id="challenger-name">{challengerInfo.name}</p>
               </div>
             </div>
+            
+            {alreadyRedeemed && couponData &&
+        <div className="couponContainer">
+          {
+          <div>
+            <img src={couponData.logo} alt="Partner Logo" />
+            <p>{couponData.rewardConditions}</p>
+            <p>{couponData.rewardConditions} Expires {couponData.rewardEndDate === "" ? " never" : couponData.rewardEndDate}. Availability and terms subject to change.</p>
+          </div>}
+        </div>}
+
           </div>
 
           <img alt="White Curve" src={WhiteCurve} className="curve" />
 
           <div className="action-items">
+            {challengerFinishedChallenge && !alreadyRedeemed ?
+            <div className="py-2">
+            <button className="gradient" onClick={() => window.location.href = "/choosereward?ref=player"}>
+              <span>Choose a Reward</span>
+            </button>
+            </div>
+            :
+            <></>
+            }
             <div className="py-2">
               <button
                 className="gradient"
@@ -146,7 +201,11 @@ export default function Actions() {
                 {registeredVoter ||
                 notifyElectionReminders ||
                 startedChallenge ? (
-                  <h1 className="heading">You Took Action!</h1>
+                  <h1 className="heading">
+                  {challengerFinishedChallenge ? 
+                  (alreadyRedeemed ? "here’s your reward!" : "Challenge Won!") 
+                  : "You Took Action!"}
+                  </h1>
                 ) : (
                   <h1 className="heading">Take Action For:</h1>
                 )}
@@ -179,12 +238,24 @@ export default function Actions() {
                 <p id="challenger-name">{challengerInfo.name}</p>
               </div>
             </div>
+
+            {alreadyRedeemed && couponData &&
+        <div className="couponContainer">
+          {
+          <div>
+            <img src={couponData.logo} alt="Partner Logo" />
+            <p>{couponData.rewardConditions}</p>
+            <p>{couponData.rewardConditions} Expires {couponData.rewardEndDate === "" ? " never" : couponData.rewardEndDate}. Availability and terms subject to change.</p>
+          </div>}
+        </div>}
+
           </div>
 
           <img alt="White Curve" src={WhiteCurve} className="curve" />
 
           <div className="action-items">
             {/* when only Take the challenge action is left */}
+            
             {registeredVoter && notifyElectionReminders && !startedChallenge ? (
               <h6 className="subheading">
                 OTHER ACTIONS YOU CAN TAKE TO
@@ -197,16 +268,38 @@ export default function Actions() {
                 notifyElectionReminders ||
                 startedChallenge) && (
                 <h6 className="subheading">
-                  {challengerInfo.name} GOT A BADGE!
-                  <br />
-                  HERE ARE OTHER ACTIONS TO HELP
-                  <br />
-                  THE AAPI COMMUNITY
-                  <br />
+                  {challengerFinishedChallenge ?
+                  (alreadyRedeemed ?
+                  <>
+                    {challengerInfo.name} won the 8by8 challenge! <br/> 
+                    here are Other actions to help <br/> the aapi community.
+                  </>
+                  :
+                  <>
+                    {challengerInfo.name} won the 8by8 challenge, <br/> 
+                    and you get a reward!
+                  </>
+                  ) :
+                  <>
+                    {challengerInfo.name} GOT A BADGE!
+                    <br />
+                    HERE ARE OTHER ACTIONS TO HELP
+                    <br />
+                    THE AAPI COMMUNITY
+                    <br />  
+                  </>}
                 </h6>
               )
             )}
-
+            {challengerFinishedChallenge && !alreadyRedeemed ?
+            <div className="py-2">
+            <button className="gradient" onClick={() => window.location.href = "/choosereward?ref=player"}>
+              <span>Choose a Reward</span>
+            </button>
+            </div>
+            :
+            <></>
+            }
             {/* action buttons only displayed when they are not completed */}
             {!registeredVoter && (
               <div className="py-2">
