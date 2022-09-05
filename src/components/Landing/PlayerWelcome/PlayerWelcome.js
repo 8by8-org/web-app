@@ -83,6 +83,7 @@ export default function PlayerWelcome({ isShare }) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [history, code, isShare]);
 
+
   // Render page after challengerInfo is gotten.
   useEffect(() => {
     challengerInfo && setLoading(false);
