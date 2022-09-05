@@ -1,5 +1,6 @@
 import * as firebase from "firebase/app";
 import * as authObject from "firebase/auth";
+import { getFunctions } from "firebase/functions";
 import { getDatabase } from "firebase/database";
 
 const app = firebase.initializeApp({
@@ -14,4 +15,5 @@ const app = firebase.initializeApp({
 
 export const auth = authObject;
 export const database = getDatabase(app);
+export const functions = getFunctions(app);
 export default app;
