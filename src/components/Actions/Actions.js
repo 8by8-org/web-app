@@ -1,5 +1,10 @@
 import React, { useState, useEffect } from "react";
-import { getUserDatabase } from "./../../functions/UserData";
+import {
+  getChallengerDatabase,
+  getUserDatabase,
+} from "./../../functions/UserData";
+import { IconContext } from "react-icons";
+import * as MdIcons from "react-icons/md";
 import { useHistory } from "react-router";
 import { useAuth } from "../../contexts/AuthContext";
 import { getFirestore, getDoc, doc } from "firebase/firestore";
@@ -11,28 +16,62 @@ import WhiteCurve from "./../../assets/images/Actions/Union.svg";
 import Crown from "./../../assets/images/Actions/Crown.svg";
 import ConfettiAnimation from "./../Utility/Helpers/ConfettiAnimation";
 import Invite from "./../Utility/Invite/Invite";
+import { ErrorModal } from "../Utility/ErrorModal/ErrorModal";
 import "./Actions.scss";
 import { LoadingWheel } from "./../Utility/LoadingWheel/LoadingWheel.component";
+import { getPartnerData } from "../../functions/partnerData";
+import PopupModal from "../Utility/PopupModal/PopupModal";
+import stateVoteInfo from "../../data/state_vote_info.json";
+import axios from "axios";
 
 const avatars = [Avatar1, Avatar2, Avatar3, Avatar4];
+const apiUrl = "https://usvotes-6vsnwycl4q-uw.a.run.app";
 
 export default function Actions() {
   const history = useHistory();
   const { currentUser } = useAuth();
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
   const [challengerInfo, setChallengerInfo] = useState(null);
   const [registeredVoter, setRegisteredVoter] = useState(false);
   const [notifyElectionReminders, setNotifyElectionReminders] = useState(false);
   const [startedChallenge, setStartedChallenge] = useState(false);
+  const [challengerFinishedChallenge, setChallengerFinishedChallenge] =
+    useState();
+  const [alreadyRedeemed, setAlreadyRedeemed] = useState();
+  const [couponData, setCouponData] = useState();
+
+  const [voteInfo, setVoteInfo] = useState(null);
   const toggleInvite = React.useRef();
+  //for resending voter registration form's to the user's email address
+  const [showTransparentLoadingWheel, setShowTransparentLoadingWheel] =
+    useState(false);
+  const [showSuccessModal, setShowSuccessModal] = useState(false);
+  const [showErrorModal, setShowErrorModal] = useState(false);
 
   useEffect(() => {
+    getUserDatabase().then((data) => {
+      if (data.playerReward === undefined) {
+        setAlreadyRedeemed(false);
+      } else {
+        setAlreadyRedeemed(true);
+        getPartnerData(data.playerReward, setCouponData);
+      }
+
+      getChallengerDatabase().then((result) => {
+        if (result.badges.length >= 8) {
+          setChallengerFinishedChallenge(true);
+        } else {
+          setChallengerFinishedChallenge(false);
+        }
+      });
+    });
+
     if (localStorage.getItem("challengerInfo")) {
       setChallengerInfo(JSON.parse(localStorage.getItem("challengerInfo")));
       if (currentUser) {
         fetchUserData();
       } else {
-        setLoading(true);
+        setLoading(false);
       }
     } else {
       if (currentUser) {
@@ -40,6 +79,8 @@ export default function Actions() {
           .then((data) => {
             if (data.invitedBy) {
               setRegisteredVoter(data.isRegisteredVoter);
+              setVoteInfo(data.voteInfo);
+              console.log(data.voteInfo);
               setStartedChallenge(data.startedChallenge);
               setNotifyElectionReminders(data.notifyElectionReminders);
               getChallengerInfo(data.invitedBy);
@@ -59,9 +100,11 @@ export default function Actions() {
     getUserDatabase()
       .then((data) => {
         setRegisteredVoter(data.isRegisteredVoter);
+        setVoteInfo(data.voteInfo);
+        console.log(data.voteInfo);
         setStartedChallenge(data.startedChallenge);
         setNotifyElectionReminders(data.notifyElectionReminders);
-        setLoading(true);
+        setLoading(false);
       })
       .catch((e) => console.log(e));
   }
@@ -75,10 +118,10 @@ export default function Actions() {
     info.challengerID = invitedBy;
     setChallengerInfo(info);
     localStorage.setItem("challengerInfo", JSON.stringify(info));
-    setLoading(true);
+    setLoading(false);
   }
 
-  return loading === true ? (
+  return !loading ? (
     <div>
       {/* if all three actions are completed */}
       {registeredVoter && notifyElectionReminders && startedChallenge ? (
@@ -88,9 +131,19 @@ export default function Actions() {
             <div className="avatar-and-status-finished">
               <div className="action-status-finished">
                 <h1 className="heading">
-                  You are done!
-                  <br />
-                  You Supported:
+                  {challengerFinishedChallenge ? (
+                    alreadyRedeemed ? (
+                      "here’s your reward!"
+                    ) : (
+                      "Challenge Won!"
+                    )
+                  ) : (
+                    <>
+                      You are done!
+                      <br />
+                      You Supported:
+                    </>
+                  )}
                 </h1>
               </div>
 
@@ -110,11 +163,43 @@ export default function Actions() {
                 <p id="challenger-name">{challengerInfo.name}</p>
               </div>
             </div>
+
+            {alreadyRedeemed && couponData && (
+              <div className="couponContainer">
+                {
+                  <div>
+                    <img src={couponData.logo} alt="Partner Logo" />
+                    <p>{couponData.rewardConditions}</p>
+                    <p>
+                      {couponData.rewardConditions} Expires{" "}
+                      {couponData.rewardEndDate === ""
+                        ? " never"
+                        : couponData.rewardEndDate}
+                      . Availability and terms subject to change.
+                    </p>
+                  </div>
+                }
+              </div>
+            )}
           </div>
 
           <img alt="White Curve" src={WhiteCurve} className="curve" />
 
           <div className="action-items">
+            {challengerFinishedChallenge && !alreadyRedeemed ? (
+              <div className="py-2">
+                <button
+                  className="gradient"
+                  onClick={() =>
+                    (window.location.href = "/choosereward?ref=player")
+                  }
+                >
+                  <span>Choose a Reward</span>
+                </button>
+              </div>
+            ) : (
+              <></>
+            )}
             <div className="py-2">
               <button
                 className="gradient"
@@ -146,7 +231,13 @@ export default function Actions() {
                 {registeredVoter ||
                 notifyElectionReminders ||
                 startedChallenge ? (
-                  <h1 className="heading">You Took Action!</h1>
+                  <h1 className="heading">
+                    {challengerFinishedChallenge
+                      ? alreadyRedeemed
+                        ? "here’s your reward!"
+                        : "Challenge Won!"
+                      : "You Took Action!"}
+                  </h1>
                 ) : (
                   <h1 className="heading">Take Action For:</h1>
                 )}
@@ -179,12 +270,31 @@ export default function Actions() {
                 <p id="challenger-name">{challengerInfo.name}</p>
               </div>
             </div>
+
+            {alreadyRedeemed && couponData && (
+              <div className="couponContainer">
+                {
+                  <div>
+                    <img src={couponData.logo} alt="Partner Logo" />
+                    <p>{couponData.rewardConditions}</p>
+                    <p>
+                      {couponData.rewardConditions} Expires{" "}
+                      {couponData.rewardEndDate === ""
+                        ? " never"
+                        : couponData.rewardEndDate}
+                      . Availability and terms subject to change.
+                    </p>
+                  </div>
+                }
+              </div>
+            )}
           </div>
 
           <img alt="White Curve" src={WhiteCurve} className="curve" />
 
           <div className="action-items">
             {/* when only Take the challenge action is left */}
+
             {registeredVoter && notifyElectionReminders && !startedChallenge ? (
               <h6 className="subheading">
                 OTHER ACTIONS YOU CAN TAKE TO
@@ -197,16 +307,46 @@ export default function Actions() {
                 notifyElectionReminders ||
                 startedChallenge) && (
                 <h6 className="subheading">
-                  {challengerInfo.name} GOT A BADGE!
-                  <br />
-                  HERE ARE OTHER ACTIONS TO HELP
-                  <br />
-                  THE AAPI COMMUNITY
-                  <br />
+                  {challengerFinishedChallenge ? (
+                    alreadyRedeemed ? (
+                      <>
+                        {challengerInfo.name} won the 8by8 challenge! <br />
+                        here are Other actions to help <br /> the aapi
+                        community.
+                      </>
+                    ) : (
+                      <>
+                        {challengerInfo.name} won the 8by8 challenge, <br />
+                        and you get a reward!
+                      </>
+                    )
+                  ) : (
+                    <>
+                      {challengerInfo.name} GOT A BADGE!
+                      <br />
+                      HERE ARE OTHER ACTIONS TO HELP
+                      <br />
+                      THE AAPI COMMUNITY
+                      <br />
+                    </>
+                  )}
                 </h6>
               )
             )}
-
+            {challengerFinishedChallenge && !alreadyRedeemed ? (
+              <div className="py-2">
+                <button
+                  className="gradient"
+                  onClick={() =>
+                    (window.location.href = "/choosereward?ref=player")
+                  }
+                >
+                  <span>Choose a Reward</span>
+                </button>
+              </div>
+            ) : (
+              <></>
+            )}
             {/* action buttons only displayed when they are not completed */}
             {!registeredVoter && (
               <div className="py-2">
@@ -312,6 +452,43 @@ export default function Actions() {
 
                 <div className="links-container">
                   {/* this is for when registered to vote or election reminders are turned on */}
+                  {(() => {
+                    if (!registeredVoter || !voteInfo) return;
+                    const stateInfo = stateVoteInfo.states[voteInfo.state];
+                    return (
+                      <>
+                        {stateInfo.onlinereg && (
+                          <a
+                            href={stateInfo.voteregsite}
+                            target="_blank"
+                            rel="noreferrer"
+                            className="link-share"
+                          >
+                            Go to state website
+                          </a>
+                        )}
+                        <button
+                          type="button"
+                          className="link-share"
+                          onClick={() => {
+                            setShowTransparentLoadingWheel(true);
+                            axios
+                              .post(`${apiUrl}/registertovote/`, voteInfo)
+                              .then((res) => {
+                                setShowTransparentLoadingWheel(false);
+                                setShowSuccessModal(true);
+                              })
+                              .catch((e) => {
+                                setShowTransparentLoadingWheel(false);
+                                setShowErrorModal(true);
+                              });
+                          }}
+                        >
+                          Get your registration form again
+                        </button>
+                      </>
+                    );
+                  })()}
                   {((registeredVoter &&
                     !notifyElectionReminders &&
                     !startedChallenge) ||
@@ -326,7 +503,6 @@ export default function Actions() {
                       Share about your action
                     </button>
                   )}
-
                   {/* this is for when registered to vote or election reminders are turned on and challenge has been started */}
                   {(registeredVoter || notifyElectionReminders) &&
                     startedChallenge && (
@@ -353,6 +529,43 @@ export default function Actions() {
       )}
 
       <Invite toggleInvite={toggleInvite} isShare={true} />
+      {showTransparentLoadingWheel && <LoadingWheel overlay={true} />}
+      {showSuccessModal && (
+        <div className="actions-modal-outer-container">
+          <div className="actions-modal-container">
+            <IconContext.Provider value={{ color: "black" }}>
+              <div className="actions-modal">
+                <div className="actions-modal-toggle-container">
+                  <button
+                    className="actions-modal-toggle"
+                    onClick={(e) => {
+                      e.preventDefault();
+                      setShowSuccessModal(false);
+                    }}
+                  >
+                    <MdIcons.MdClose size={"1x"} />
+                  </button>
+                </div>
+                <strong className="actions-modal-heading">
+                  We emailed you!
+                </strong>
+                <p className="actions-modal-text">
+                  Check your email to get your voter registration PDF form.
+                </p>
+                <button
+                  className="actions-modal-btn"
+                  onClick={() => {
+                    setShowSuccessModal(false);
+                  }}
+                >
+                  OK
+                </button>
+              </div>
+            </IconContext.Provider>
+          </div>
+        </div>
+      )}
+      {showErrorModal && <ErrorModal setShowSelf={setShowErrorModal} />}
     </div>
   ) : (
     <LoadingWheel overlay={false} />
