@@ -81,6 +81,13 @@
       }
     }
 
+    .couponContainer {
+      margin: auto;
+      position: relative;
+      left: 10px;
+      top: -15px;
+    }
+
     #action-no-challenger {
       @include heading-text($black, 36px);
       padding: 30px;

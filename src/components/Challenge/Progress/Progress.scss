@@ -23,6 +23,9 @@
       .blob {
         width: 180px;
         height: 220px;
+        position: relative;
+        bottom: 50px;
+        right: 30px;
       }
     }
     @include xs-screen {
@@ -121,5 +124,40 @@
         left: 20px;
       }
     }
+  }
+}
+
+.couponContainer {
+  max-width: 80%;
+  background-color: $cream;
+  position: relative;
+  margin: 24px auto 40px;
+  border-radius: 12px;
+  transform: translate(-15px, 0%);
+  padding: 20px;
+  top: 100px;
+  * {
+    margin: 0.5em auto !important;
+  }
+  p {
+    color: black;
+    text-align: center;
+    &:nth-of-type(2) {
+      color: $graphite;
+      font-size: 9px;
+    }
+  }
+  img {
+    max-height: 94px;
+    width: auto;
+    max-width: 60%;
+    margin-left: 50% !important;
+    transform: translateX(-50%);
+  }
+  .img-bg {
+    background-color: white;
+    padding: 20px;
+    min-height: 94px;
+    width: fit-content;
   }
 }
