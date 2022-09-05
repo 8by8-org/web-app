@@ -20,6 +20,7 @@ export function getAllPartnerData (callbackFunc) {
   const partnerRef = ref(db, 'partners/');
 
   onValue(partnerRef, (snapshot) => {
+    console.log(snapshot.val());
     callbackFunc(snapshot.val());
   });
 };

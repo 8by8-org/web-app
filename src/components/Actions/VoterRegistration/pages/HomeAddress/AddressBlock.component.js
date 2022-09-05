@@ -40,6 +40,9 @@ export const AddressBlock = ({
             ? "floating-label-active"
             : "floating-label-default"
         }
+        onClick={() => {
+          document.getElementById(`${prefix}street`).focus();
+        }}
       >
         Street Address*
       </label>
@@ -78,6 +81,9 @@ export const AddressBlock = ({
             ? "floating-label-active"
             : "floating-label-default"
         }
+        onClick={() => {
+          document.getElementById(`${prefix}street_line_2`).focus()
+        }}
       >
         Address Line 2
       </label>
@@ -107,6 +113,9 @@ export const AddressBlock = ({
         className={
           activeFields.unit ? "floating-label-active" : "floating-label-default"
         }
+        onClick={() => {
+          document.getElementById(`${prefix}home_unit`);
+        }}
       >
         Unit #
       </label>
@@ -136,6 +145,9 @@ export const AddressBlock = ({
         className={
           activeFields.city ? "floating-label-active" : "floating-label-default"
         }
+        onClick={() => {
+          document.getElementById(`${prefix}city`);
+        }}
       >
         City*
       </label>
@@ -171,6 +183,9 @@ export const AddressBlock = ({
             ? "floating-label-active"
             : "floating-label-default"
         }
+        onClick={() => {
+          document.getElementById(`${prefix}state`).focus();
+        }}
       >
         State
       </label>
@@ -257,6 +272,9 @@ export const AddressBlock = ({
         className={
           activeFields.zip ? "floating-label-active" : "floating-label-default"
         }
+        onClick={() => {
+          document.getElementById(`${prefix}zip`).focus();
+        }}
       >
         Zip Code*
       </label>

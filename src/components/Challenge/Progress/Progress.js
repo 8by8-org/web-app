@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect,  } from "react";
 import {
   completedAction,
   getChallengerDatabase,
@@ -6,6 +6,7 @@ import {
   restartChallenge,
 } from "./../../../functions/UserData";
 import { useAuth } from "../../../contexts/AuthContext";
+import { usePartners } from "../../../contexts/PartnersContext";
 import { addInvitedBy } from "../../../functions/AddInvite";
 import { makePlayerChallenger } from "../../../functions/UserData";
 import Invite from "./../../Utility/Invite/Invite";
@@ -16,11 +17,11 @@ import CurveA from "./../../../assets/2-shapes/curve-a.svg";
 import BlobDay from "./../../../assets/4-pages/Progress/BlobDay.svg";
 import rewardsIllustration from "./../../../assets/images/rewardsIllustration.svg";
 import "./Progress.scss";
-import { set } from "firebase/database";
 import { getPartnerData } from "../../../functions/partnerData";
 
 export default function Progress() {
   const { currentUser } = useAuth();
+  const { partnersExist } = usePartners();
   const [challengeVoid, setChallengeVoid] = useState(false);
   const [challengeFinished, setChallengeFinished] = useState(false);
   const [daysLeft, setDaysLeft] = useState(0);
@@ -31,7 +32,6 @@ export default function Progress() {
   const [canRedeem, setCanRedeem] = useState();
   const [alreadyRedeemed, setAlreadyRedeemed] = useState();
   const [couponData, setCouponData] = useState();
-
   const [button, setButton] = useState(
     <button className="gradient" onClick={() => toggleInvite.current()}>
       Invite friends
@@ -62,7 +62,7 @@ export default function Progress() {
 
       setButton(
         <button className="inverted" onClick={() => toggleInvite.current()}>
-          Share
+          <span>Share</span>
         </button>
       );
     }
@@ -207,6 +207,11 @@ export default function Progress() {
           )}
         </h1>
         <div className="days-blob-container">
+          <img
+            className="blob"
+            src={challengeFinished ? rewardsIllustration : BlobDay}
+            alt="days remaining blob"
+          />
           {!challengeFinished && (
             <div className="days-label">
               <p className="number-shadow">{daysLeft}</p>
@@ -215,11 +220,6 @@ export default function Progress() {
               </h3>
             </div>
           )}
-          <img
-            className="blob"
-            src={challengeFinished ? rewardsIllustration : BlobDay}
-            alt="days remaining blob"
-          />
         </div>
         {alreadyRedeemed && couponData && (
           <div className="couponContainer">
@@ -248,7 +248,7 @@ export default function Progress() {
           You completed {completedBadges === 8 ? " all " : " "}
           <span className="underline">{completedBadges}</span> badges
         </h3>
-        {challengeFinished & !alreadyRedeemed ? (
+        {challengeFinished && !alreadyRedeemed && partnersExist && (
           <button
             className="gradient"
             onClick={() => {
@@ -257,8 +257,6 @@ export default function Progress() {
           >
             Choose A Reward
           </button>
-        ) : (
-          <></>
         )}
         {button}
         {!registeredVoter ? (

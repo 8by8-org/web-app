@@ -1,6 +1,7 @@
 import React from "react";
 import { useHistory } from "react-router-dom";
 import { useAuth } from "../../../contexts/AuthContext";
+import { usePartners } from "../../../contexts/PartnersContext";
 import "./ChallengerWelcome.scss";
 import Top from "../../../assets/images/ChallengerWelcome/Top.png";
 import Logo from "../../../assets/logos/white-logo.svg";
@@ -14,6 +15,7 @@ function ChallengerWelcome() {
   sessionStorage.setItem("UserType", "Challenger");
 
   const { currentUser } = useAuth();
+  const {partnersExist} = usePartners();
 
   return (
     <div className="challenger-welcome">
@@ -78,9 +80,9 @@ function ChallengerWelcome() {
           4. Win the challenge, get a reward!
         </div>
         <p className="normal-text">
-          When all 8 of your friends took action in your challenge within 8
-          days, and you win! Then select and enjoy a reward from one of our
-          amazing partners.
+          {partnersExist ?
+          "When all 8 of your friends took action in your challenge within 8 days, and you win! Then select and enjoy a reward from one of our amazing partners." :
+          "When you get 8 badges in 8 days, you win the challenge! Most importantly, you helped the community move closer to greater AAPI representation!"}
         </p>
         <img
           src={StepFour}

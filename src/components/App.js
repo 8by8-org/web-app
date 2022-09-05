@@ -7,6 +7,7 @@ import {
 } from "react-router-dom";
 import ScrollToTop from "../functions/ScrollToTop";
 import { AuthProvider } from "../contexts/AuthContext";
+import { PartnersContextProvider } from "../contexts/PartnersContext";
 import Signin from "./Authentication/Signin";
 import Signout from "./Authentication/Signout";
 import Signup from "./Authentication/Signup";
@@ -39,6 +40,7 @@ export default function App() {
   return (
     <>
       <AuthProvider>
+        <PartnersContextProvider>
         <div id="header">
           <Header />
         </div>
@@ -97,6 +99,7 @@ export default function App() {
             <Footer />
           </div>
         </div>
+        </PartnersContextProvider>
       </AuthProvider>
     </>
   );
