@@ -63,7 +63,6 @@ export default function PlayerWelcome({ isShare }) {
   // If code that is gotten from the url is playerwelcome or isShare is true then, if there is challengerInfo in
   // local storage then set it to challengerInfo, else send the user to the signin page. For eveything else run getChallengerInfo.
   useEffect(() => {
-    console.log(code)
     if (currentUser?.uid === code) {
       history.push(`/signin`);
     } else {
@@ -144,7 +143,7 @@ export default function PlayerWelcome({ isShare }) {
             history.push(`/why8by8`);
           }}
           className="link"
-          style={{ color: "#02DDC3", marginTop: "0.7em" }}
+          style={{ color: "#02DDC3", zIndex: "1", marginTop: "0.7em" }}
         >
           See why others are doing it
         </p>
