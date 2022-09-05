@@ -76,6 +76,18 @@ export async function getChallengerDatabase() {
   }
 }
 
+export async function choseReward(reward, typeOfReward){
+  const uid = auth.getAuth().currentUser.uid;
+  typeOfReward === "player" ?
+  await updateDoc(doc(db, "users", uid), {
+    playerReward : reward
+  })
+  :
+  await updateDoc(doc(db, "users", uid), {
+    challengeReward : reward
+  });
+}
+
 // call this function when user completes an action
 // ADD email user after certain completed actions
 export async function completedAction(action) {
@@ -156,7 +168,8 @@ export async function completedAction(action) {
     if (userData.badges.length === 8) {
       emailUser(userData.email, "challengeWon");
     }
-  } else {
+  }
+  else {
     throw new Error("specified action does not exist");
   }
 }
