@@ -10,10 +10,17 @@
     border-color: red;
   }
 
+  .register-input {
+    width: 100%;
+    margin-bottom: 30px;
+  }
+
   .error-msg {
     color: red;
     font-weight: bold;
     position: relative;
+    bottom: 34px;
+    border-top: 4px solid red;
     top: 0px;
     height: 0;
   }

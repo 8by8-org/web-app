@@ -9,7 +9,10 @@ import ScrollToTop from "../functions/ScrollToTop";
 import { AuthProvider } from "../contexts/AuthContext";
 import Signin from "./Authentication/Signin";
 import Signout from "./Authentication/Signout";
-import SignupPage from "./Authentication/SignupPage";
+import Signup from "./Authentication/Signup";
+import Verify from "./Authentication/Verification/Verify";
+import SigninVerify from "./Authentication/Verification/SigninVerify";
+import VerifySuccess from "./Authentication/Verification/VerifySuccess";
 import PrivateRoute from "./Utility/Helpers/PrivateRoute";
 import Header from "./Landing/Header/Header";
 import "./App.css";
@@ -29,7 +32,7 @@ import { YourName } from "./Actions/VoterRegistration/pages/YourName/YourName.co
 import { HomeAddress } from "./Actions/VoterRegistration/pages/HomeAddress/HomeAddress.component";
 import { OtherInfo } from "./Actions/VoterRegistration/pages/OtherInfo/OtherInfo.component";
 import { FormCompleted } from "./Actions/VoterRegistration/pages/FormCompleted/FormCompleted.component";
-import Rewards from './Rewards/Rewards/Rewards';
+import Rewards from "./Rewards/Rewards/Rewards";
 import ChooseReward from "./Rewards/ChooseReward/ChooseReward";
 
 export default function App() {
@@ -53,15 +56,18 @@ export default function App() {
                   component={ChallengerWelcome}
                 />
                 <Route path="/why8by8" component={Why8by8} />
-                <Route path="/signup" component={SignupPage} />
+                <Route path="/signup" component={Signup} />
+                <Route path="/verify" component={Verify} />
+                <PrivateRoute path="/verifysuccess" component={VerifySuccess} />
                 <Route path="/signin" component={Signin} />
+                <Route path="/signinverify" component={SigninVerify} />
                 <Route path="/rewards" component={Rewards} />
                 <PrivateRoute
                   path="/election-reminders"
                   component={ElectionReminder}
                 />
                 <PrivateRoute path="/progress" component={Progress} />
-                <PrivateRoute path="/signout" component={Signout} />
+                <Route path="/signout" component={Signout} />
                 <Route path="/playerwelcome" component={PlayerWelcome} />
                 <Route path="/share" component={PlayerWelcome} />
                 <Route path="/actions" component={Actions} />
