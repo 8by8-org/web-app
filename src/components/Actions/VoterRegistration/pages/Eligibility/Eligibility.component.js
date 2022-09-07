@@ -31,7 +31,7 @@ export const Eligibility = () => {
       history.push("/voterreg/completed");
     //add invited by
     if (localStorage.getItem("player") && currentUser) addInvitedBy();
-  }, []);
+  }, [currentUserData, currentUser, history]);
 
   ScrollToTop();
 

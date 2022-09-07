@@ -12,7 +12,7 @@ export const YourName = () => {
     useAuth();
   const [error, setError] = useState("");
 
-  /*redirect user to form completed page if they have already completed the flow, 
+  /*redirect user to form completed page if they have already completed the flow,
   and to eligibility page if that information isn't complete
   */
   useEffect(() => {
@@ -22,7 +22,7 @@ export const YourName = () => {
       voterRegistrationData.dob.length === 0
     )
       history.push("/voterreg/eligibility");
-  }, []);
+  }, [currentUserData, history, voterRegistrationData]);
 
   ScrollToTop();
 
@@ -48,9 +48,9 @@ export const YourName = () => {
     prev_name_last:
       voterRegistrationData.prev_name_last &&
       voterRegistrationData.prev_name_last.length > 0,
-    prev_name_suffix:
-      voterRegistrationData.prev_name_suffix &&
-      voterRegistrationData.prev_name_suffix.length > 0,
+    prev_suffix:
+      voterRegistrationData.prev_suffix &&
+      voterRegistrationData.prev_suffix.length > 0,
   });
 
   return (
@@ -67,16 +67,16 @@ export const YourName = () => {
         Title*
       </label>
       <select
-        name="name_title"
-        id="name_title"
-        value={voterRegistrationData.name_title}
+        name="title"
+        id="title"
+        value={voterRegistrationData.title}
         className="register-input"
         onChange={(event) => {
-          const titleInput = document.getElementById("name_title");
+          const titleInput = document.getElementById("title");
           titleInput.classList.remove("requiredField");
           setVoterRegistrationData({
             ...voterRegistrationData,
-            name_title: event.target.value,
+            title: event.target.value,
           });
         }}
         required
@@ -153,7 +153,7 @@ export const YourName = () => {
           setActiveFields({ ...activeFields, name_middle: true });
           setVoterRegistrationData({
             ...voterRegistrationData,
-            name_middle: event.target.name_middle,
+            name_middle: event.target.value,
           });
         }}
       />
@@ -245,20 +245,20 @@ export const YourName = () => {
       {voterRegistrationData.change_of_name && (
         <>
           <h2 className="register-form-title-small">PREVIOUS NAME</h2>
-          <label htmlFor="prev_name_title" className="floating-label-active">
+          <label htmlFor="prev_title" className="floating-label-active">
             Title*
           </label>
           <select
-            name="prev_name_title"
-            id="prev_name_title"
+            name="prev_title"
+            id="prev_title"
             className="register-input"
-            value={voterRegistrationData.prev_name_title}
+            value={voterRegistrationData.prev_title}
             onChange={(event) => {
-              const prevTitleInput = document.getElementById("prev_name_title");
+              const prevTitleInput = document.getElementById("prev_title");
               prevTitleInput.classList.remove("requiredField");
               setVoterRegistrationData({
                 ...voterRegistrationData,
-                prev_name_title: event.target.value,
+                prev_title: event.target.value,
               });
             }}
             required
@@ -372,9 +372,9 @@ export const YourName = () => {
           />
           <br />
           <label
-            htmlFor="prev_name_suffix"
+            htmlFor="prev_suffix"
             className={
-              activeFields.prev_name_suffix
+              activeFields.prev_suffix
                 ? "floating-label-active"
                 : "floating-label-default"
             }
@@ -383,21 +383,21 @@ export const YourName = () => {
           </label>
           <input
             type="text"
-            id="prev_name_suffix"
-            name="prev_name_suffix"
-            value={voterRegistrationData.prev_name_suffix}
+            id="prev_suffix"
+            name="prev_suffix"
+            value={voterRegistrationData.prev_suffix}
             className="register-input"
             onClick={() => {
-              setActiveFields({ ...activeFields, prev_name_suffix: true });
+              setActiveFields({ ...activeFields, prev_suffix: true });
             }}
             onFocus={() => {
-              setActiveFields({ ...activeFields, prev_name_suffix: true });
+              setActiveFields({ ...activeFields, prev_suffix: true });
             }}
             onChange={(event) => {
-              setActiveFields({ ...activeFields, prev_name_suffix: true });
+              setActiveFields({ ...activeFields, prev_suffix: true });
               setVoterRegistrationData({
                 ...voterRegistrationData,
-                prev_name_suffix: event.target.value,
+                prev_suffix: event.target.value,
               });
             }}
           />
@@ -412,8 +412,8 @@ export const YourName = () => {
         onClick={(event) => {
           event.preventDefault();
           let checksPassed = true;
-          if (voterRegistrationData.name_title.length === 0) {
-            const titleInput = document.getElementById("name_title");
+          if (voterRegistrationData.title.length === 0) {
+            const titleInput = document.getElementById("title");
             titleInput.classList.add("requiredField");
             checksPassed = false;
           }
@@ -428,8 +428,8 @@ export const YourName = () => {
             checksPassed = false;
           }
           if (voterRegistrationData.change_of_name) {
-            if (voterRegistrationData.prev_name_title.length === 0) {
-              const prevTitleInput = document.getElementById("prev_name_title");
+            if (voterRegistrationData.prev_title.length === 0) {
+              const prevTitleInput = document.getElementById("prev_title");
               prevTitleInput.classList.add("requiredField");
               checksPassed = false;
             }

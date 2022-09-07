@@ -13,4 +13,15 @@ a,
     color: $black;
     cursor: pointer;
   }
+
+  &--light{
+    @extend .link;
+    font-weight: 700;
+  }
+
+  &-left {
+    @extend .link;
+    display: block;
+    text-align: left;
+  }
 }

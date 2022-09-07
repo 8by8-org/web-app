@@ -9,12 +9,16 @@ import ScrollToTop from "../functions/ScrollToTop";
 import { AuthProvider } from "../contexts/AuthContext";
 import Signin from "./Authentication/Signin";
 import Signout from "./Authentication/Signout";
-import SignupPage from "./Authentication/SignupPage";
+import Signup from "./Authentication/Signup";
+import Verify from "./Authentication/Verification/Verify";
+import SigninVerify from "./Authentication/Verification/SigninVerify";
+import VerifySuccess from "./Authentication/Verification/VerifySuccess";
 import PrivateRoute from "./Utility/Helpers/PrivateRoute";
 import Header from "./Landing/Header/Header";
 import "./App.css";
 import HomePage from "./Landing/HomePage/HomePage";
 import Progress from "./Challenge/Progress/Progress";
+import Why8by8 from "./Landing/Why8by8/Why8by8";
 import ChallengerWelcome from "./Challenge/ChallengerWelcome/ChallengerWelcome";
 import ElectionReminder from "./Actions/ElectionReminders/ElectionReminder";
 import Footer from "./Landing/Footer/Footer";
@@ -28,6 +32,8 @@ import { YourName } from "./Actions/VoterRegistration/pages/YourName/YourName.co
 import { HomeAddress } from "./Actions/VoterRegistration/pages/HomeAddress/HomeAddress.component";
 import { OtherInfo } from "./Actions/VoterRegistration/pages/OtherInfo/OtherInfo.component";
 import { FormCompleted } from "./Actions/VoterRegistration/pages/FormCompleted/FormCompleted.component";
+import Rewards from "./Rewards/Rewards/Rewards";
+import ChooseReward from "./Rewards/ChooseReward/ChooseReward";
 
 export default function App() {
   return (
@@ -49,14 +55,19 @@ export default function App() {
                   path="/challengerwelcome"
                   component={ChallengerWelcome}
                 />
-                <Route path="/signup" component={SignupPage} />
+                <Route path="/why8by8" component={Why8by8} />
+                <Route path="/signup" component={Signup} />
+                <Route path="/verify" component={Verify} />
+                <PrivateRoute path="/verifysuccess" component={VerifySuccess} />
                 <Route path="/signin" component={Signin} />
+                <Route path="/signinverify" component={SigninVerify} />
+                <Route path="/rewards" component={Rewards} />
                 <PrivateRoute
                   path="/election-reminders"
                   component={ElectionReminder}
                 />
                 <PrivateRoute path="/progress" component={Progress} />
-                <PrivateRoute path="/signout" component={Signout} />
+                <Route path="/signout" component={Signout} />
                 <Route path="/playerwelcome" component={PlayerWelcome} />
                 <Route path="/share" component={PlayerWelcome} />
                 <Route path="/actions" component={Actions} />
@@ -78,6 +89,7 @@ export default function App() {
                   component={FormCompleted}
                 />
                 <PrivateRoute path="/voterreg" component={Eligibility} />
+                <PrivateRoute path="/choosereward" component={ChooseReward} />
                 <Route path="/termsofservice" component={TOS} />
                 <Route path="/privacypolicy" component={PrivacyPolicy} />
               </Switch>

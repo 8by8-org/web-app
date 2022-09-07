@@ -5,13 +5,23 @@
 
 .signup {
   padding: 30px;
+  .red {
+    color: red;
+    border-color: red;
+  }
+
+  .register-input {
+    width: 100%;
+    margin-bottom: 30px;
+  }
 
   .error-msg {
     color: red;
     font-weight: bold;
     position: relative;
-    bottom: 32px;
-    border-top: 3px solid red;
+    bottom: 34px;
+    border-top: 4px solid red;
+    top: 0px;
     height: 0;
   }
 
@@ -48,6 +58,7 @@
       line-height: 22px;
       letter-spacing: 0.02em;
     }
+
     .small-title {
       text-align: left;
       margin-top: 40px;

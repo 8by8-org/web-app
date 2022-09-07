@@ -18,14 +18,18 @@ import ReCAPTCHA from "react-google-recaptcha";
 import { dummyPassword } from "../../constants";
 import voteImg from "./../../assets/4-pages/Signin/Vote.png";
 import { getUserDatabase } from "../../functions/UserData";
+import { signInWithEmailLink } from "firebase/auth";
 
-const localStorageEmailKey = "verifyUserEmail";
+import {
+  getFunctions,
+  httpsCallable,
+  connectFunctionsEmulator,
+} from "firebase/functions";
 
 export default function Login() {
-  const { currentUser, currentUserData } = useAuth();
+  const { currentUser } = useAuth();
   const history = useHistory();
   const [message, setMessage] = useState(null);
-  const [emailVisible, setEmailVisible] = useState(true);
   const [buttonMessage, setButtonMessage] = useState(" "); // leave blank to hide button
   const [reCaptchaPassed, setReCaptchaPassed] = useState(false);
 
@@ -35,13 +39,22 @@ export default function Login() {
   const buttonRef = useRef();
   const playerStatus = localStorage.getItem("player");
 
+  const functions = getFunctions();
+  // this is for testing functions locally
+  // connectFunctionsEmulator(functions, "localhost", 5001);
+  const sendSignin = httpsCallable(functions, "sendSigninEmail");
+
   useEffect(() => {
     if (currentUser) {
       if (playerStatus) {
         history.push(`/${playerStatus}`);
       } else {
         getUserDatabase().then((data) => {
-          if (data && !data.startedChallenge && (localStorage.getItem("challengerInfo") || data.invitedBy)) {
+          if (
+            data &&
+            !data.startedChallenge &&
+            (localStorage.getItem("challengerInfo") || data.invitedBy)
+          ) {
             history.push("/actions");
           } else {
             history.push("/progress");
@@ -55,50 +68,26 @@ export default function Login() {
       setButtonMessage("Sign In");
       buttonRef.current.onclick = async function () {
         const email = emailRef.current.value;
-        const login = async (email) => {
-          try {
-            await auth.signInWithEmailAndPassword(
-              auth.getAuth(),
-              email,
-              dummyPassword
-            );
-            window.localStorage.setItem(localStorageEmailKey, email);
-            setEmailVisible(false);
-            setButtonMessage(null);
-            setMessage("Logging in...");
-          } catch (e) {
-            setEmailError(errorMessage(e));
-          }
-        };
+        console.log(email);
         if (!email) {
           setEmailError("Please enter your email.");
         } else {
-          login(email);
+          window.localStorage.setItem("emailForSignIn", email);
+          sendSignin(email);
+          history.push(`/verify`);
         }
       };
     } else {
       // login step 2
-      const verifyEmail = async (email) => {
-        try {
-          await auth.signInWithEmailLink(
-            auth.getAuth(),
-            email,
-            window.location.href
-          );
-        } catch (e) {
-          console.dir(e);
-          setEmailError(errorMessage(e));
-        }
-      };
-
-      const storedEmail = window.localStorage.getItem(localStorageEmailKey);
-      if (!storedEmail) {
-        setMessage("Please re-enter your email");
-        setButtonMessage("Verify email");
-        buttonRef.current.onclick = () => verifyEmail(emailRef.current.value);
-      } else {
-        verifyEmail(storedEmail);
-      }
+      const userEmail = window.localStorage.getItem("emailForSignIn");
+      signInWithEmailLink(auth.getAuth(), userEmail, window.location.href)
+        .then(() => {
+          window.localStorage.removeItem("emailForSignIn");
+          history.push(`/verifysuccess`);
+        })
+        .catch((e) => {
+          console.log(e);
+        });
     }
     // eslint-disable-next-line
   }, [currentUser]);
@@ -110,7 +99,7 @@ export default function Login() {
       </p>
 
       <div className="img">
-        <img className="vote-img" src={voteImg} />
+        <img className="vote-img" src={voteImg} alt="Signin Vote" />
       </div>
 
       <Form className="form">

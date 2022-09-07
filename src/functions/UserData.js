@@ -33,7 +33,7 @@ export async function getUserDatabase() {
     }
     throw new Error("user doc does not exist");
   } else {
-    console.log(docSnap.data());
+    //console.log(docSnap.data());
     return docSnap.data();
   }
 }
@@ -71,9 +71,21 @@ export async function getChallengerDatabase() {
   if (!docSnap.exists()) {
     throw new Error("challenger doc does not exist");
   } else {
-    console.log("challenger db", docSnap.data());
+    //console.log("challenger db", docSnap.data());
     return docSnap.data();
   }
+}
+
+export async function choseReward(reward, typeOfReward){
+  const uid = auth.getAuth().currentUser.uid;
+  typeOfReward === "player" ?
+  await updateDoc(doc(db, "users", uid), {
+    playerReward : reward
+  })
+  :
+  await updateDoc(doc(db, "users", uid), {
+    challengeReward : reward
+  });
 }
 
 // call this function when user completes an action
@@ -156,7 +168,8 @@ export async function completedAction(action) {
     if (userData.badges.length === 8) {
       emailUser(userData.email, "challengeWon");
     }
-  } else {
+  }
+  else {
     throw new Error("specified action does not exist");
   }
 }

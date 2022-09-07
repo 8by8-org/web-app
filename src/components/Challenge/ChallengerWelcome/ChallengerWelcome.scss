@@ -36,12 +36,17 @@
 
   .content-2 {
     padding: 30px;
+    text-align: center;
     .normal-text {
       margin: 30px 0;
+      text-align: left;
     }
     .small-text {
-      margin-top: 24px;
+      margin-top: 16px;
       text-align: center;
+    }
+    .link-2 {
+      margin-top: 0.7em;
     }
   }
 
