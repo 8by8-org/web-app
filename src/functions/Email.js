@@ -41,6 +41,12 @@ export async function emailUser(email, emailType) {
   // emails challenger when 8 badges earned
   else if (emailType === "challengeWon") {
     formData.append("partnerLinks", partnerLinks);
+    // if user is a challenger
+    if (userData.startedChallenge) {
+      formData.append("isChallenger", true);
+    } else {
+      formData.append("isChallenger", false);
+    }
   }
 
   // emails for action completion
