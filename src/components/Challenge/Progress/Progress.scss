@@ -11,8 +11,8 @@
         @include horizontal-center;
         flex-direction: column;
         position: absolute;
-        left: 45%;
-        top: 40px;
+        left: 40%;
+        top: -8px;
         p {
           font-size: 122px;
           font-family: $bebas-neue;
@@ -25,14 +25,14 @@
         height: 220px;
         position: relative;
         bottom: 50px;
-        right: 30px;
+        right: 1px;
       }
     }
     @include xs-screen {
       .days-blob-container {
         .days-label {
-          left: 45%;
-          top: 40px;
+          left: 40%;
+          top: -8px;
           p {
             font-size: 132px;
             line-height: 120px;

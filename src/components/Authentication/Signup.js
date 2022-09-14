@@ -155,91 +155,103 @@ function Signup() {
 
       <form className="form" onSubmit={handleSubmit}>
         {/* name */}
-        <label
-          htmlFor="name"
-          className={
-            activeFields.name
-              ? "floating-label-active"
-              : "floating-label-default"
-          }
-        >
-          Name*
-        </label>
-        <input
-          type="text"
-          name="name"
-          className="register-input"
-          value={formData.name}
-          onChange={(e) => {
-            setFormData({ ...formData, name: e.target.value });
-            setActiveFields({ ...activeFields, name: true });
-          }}
-          onFocus={() => {
-            setActiveFields({ ...activeFields, name: true });
-          }}
-          onClick={() => {
-            setActiveFields({ ...activeFields, name: true });
-          }}
-        />
-        {error.name && <p className="error-msg">{error.name}</p>}
+          <label
+            htmlFor="name"
+            className={
+              activeFields.name
+                ? "floating-label-active"
+                : "floating-label-default"
+            }
+            onClick={() => {
+              document.getElementById("name").focus();
+            }}
+          >
+            Name*
+          </label>
+          <input
+            type="text"
+            name="name"
+            className="register-input"
+            id="name"
+            value={formData.name}
+            onChange={(e) => {
+              setFormData({ ...formData, name: e.target.value });
+              setActiveFields({ ...activeFields, name: true });
+            }}
+            onFocus={() => {
+              setActiveFields({ ...activeFields, name: true });
+            }}
+            onClick={() => {
+              setActiveFields({ ...activeFields, name: true });
+            }}
+          />
+          {error.name && <p className="error-msg">{error.name}</p>}
         {/* email */}
-        <label
-          htmlFor="email"
-          className={
-            activeFields.email
-              ? "floating-label-active"
-              : "floating-label-default"
-          }
-        >
-          Email*
-        </label>
-        <input
-          type="email"
-          name="email"
-          className="register-input"
-          value={formData.email}
-          onChange={(e) => {
-            setFormData({ ...formData, email: e.target.value });
-            setActiveFields({ ...activeFields, email: true });
-          }}
-          onFocus={() => {
-            setActiveFields({ ...activeFields, email: true });
-          }}
-          onClick={() => {
-            setActiveFields({ ...activeFields, email: true });
-          }}
-        />
-        {error.email && <p className="error-msg">{error.email}</p>}
+          <label
+            htmlFor="email"
+            className={
+              activeFields.email
+                ? "floating-label-active"
+                : "floating-label-default"
+            }
+            onClick={() => {
+              document.getElementById("email").focus();
+            }}
+          >
+            Email*
+          </label>
+          <input
+            type="email"
+            name="email"
+            id="email"
+            className="register-input"
+            value={formData.email}
+            onChange={(e) => {
+              setFormData({ ...formData, email: e.target.value });
+              setActiveFields({ ...activeFields, email: true });
+            }}
+            onFocus={() => {
+              setActiveFields({ ...activeFields, email: true });
+            }}
+            onClick={() => {
+              setActiveFields({ ...activeFields, email: true });
+            }}
+          />
+          {error.email && <p className="error-msg">{error.email}</p>}
         {/* confirmation email */}
-        <label
-          htmlFor="re-email"
-          className={
-            activeFields.confirmEmail
-              ? "floating-label-active"
-              : "floating-label-default"
-          }
-        >
-          Re-enter Email Address*
-        </label>
-        <input
-          type="email"
-          name="re-email"
-          className="register-input"
-          value={formData.confirmEmail}
-          onChange={(e) => {
-            setFormData({ ...formData, confirmEmail: e.target.value });
-            setActiveFields({ ...activeFields, confirmEmail: true });
-          }}
-          onFocus={() => {
-            setActiveFields({ ...activeFields, confirmEmail: true });
-          }}
-          onClick={() => {
-            setActiveFields({ ...activeFields, confirmEmail: true });
-          }}
-        />
-        {error.confirmEmail && (
-          <p className="error-msg">{error.confirmEmail}</p>
-        )}
+          <label
+            htmlFor="re-email"
+            className={
+              activeFields.confirmEmail
+                ? "floating-label-active"
+                : "floating-label-default"
+            }
+            onClick={() => {
+              document.getElementById("re-email").focus()
+            }}
+          >
+            Re-enter Email Address*
+          </label>
+          <input
+            type="email"
+            name="re-email"
+            id="re-email"
+            className="register-input"
+            value={formData.confirmEmail}
+            onChange={(e) => {
+              setFormData({ ...formData, confirmEmail: e.target.value });
+              setActiveFields({ ...activeFields, confirmEmail: true });
+            }}
+            onFocus={() => {
+              setActiveFields({ ...activeFields, confirmEmail: true });
+            }}
+            onClick={() => {
+              setActiveFields({ ...activeFields, confirmEmail: true });
+            }}
+          />
+          {error.confirmEmail && (
+            <p className="error-msg">{error.confirmEmail}</p>
+          )}
         {/* avatars */}
         <p className="small-title">Which One's you? </p>
         <div className="avatar-container">

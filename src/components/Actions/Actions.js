@@ -7,6 +7,7 @@ import { IconContext } from "react-icons";
 import * as MdIcons from "react-icons/md";
 import { useHistory } from "react-router";
 import { useAuth } from "../../contexts/AuthContext";
+import { usePartners } from "../../contexts/PartnersContext";
 import { getFirestore, getDoc, doc } from "firebase/firestore";
 import Avatar1 from "./../../assets/avatars/avatar1.svg";
 import Avatar2 from "./../../assets/avatars/avatar2.svg";
@@ -30,6 +31,7 @@ const apiUrl = "https://usvotes-6vsnwycl4q-uw.a.run.app";
 export default function Actions() {
   const history = useHistory();
   const { currentUser } = useAuth();
+  const {partnersExist } = usePartners();
   const [loading, setLoading] = useState(true);
   const [challengerInfo, setChallengerInfo] = useState(null);
   const [registeredVoter, setRegisteredVoter] = useState(false);
@@ -101,7 +103,6 @@ export default function Actions() {
       .then((data) => {
         setRegisteredVoter(data.isRegisteredVoter);
         setVoteInfo(data.voteInfo);
-        console.log(data.voteInfo);
         setStartedChallenge(data.startedChallenge);
         setNotifyElectionReminders(data.notifyElectionReminders);
         setLoading(false);
@@ -186,7 +187,7 @@ export default function Actions() {
           <img alt="White Curve" src={WhiteCurve} className="curve" />
 
           <div className="action-items">
-            {challengerFinishedChallenge && !alreadyRedeemed ? (
+            {challengerFinishedChallenge && !alreadyRedeemed && partnersExist && (
               <div className="py-2">
                 <button
                   className="gradient"
@@ -197,8 +198,6 @@ export default function Actions() {
                   <span>Choose a Reward</span>
                 </button>
               </div>
-            ) : (
-              <></>
             )}
             <div className="py-2">
               <button
@@ -333,7 +332,7 @@ export default function Actions() {
                 </h6>
               )
             )}
-            {challengerFinishedChallenge && !alreadyRedeemed ? (
+            {challengerFinishedChallenge && !alreadyRedeemed && partnersExist && (
               <div className="py-2">
                 <button
                   className="gradient"
@@ -344,8 +343,6 @@ export default function Actions() {
                   <span>Choose a Reward</span>
                 </button>
               </div>
-            ) : (
-              <></>
             )}
             {/* action buttons only displayed when they are not completed */}
             {!registeredVoter && (
