@@ -50,7 +50,7 @@ export const FormCompleted = () => {
 
   const getStateRegData = () => {
     let userState = voterRegistrationData.state;
-    if (userData?.voteInfo) {
+    if (userData && userData.voteInfo && userData.voteInfo.state) {
       userState = userData.voteInfo.state;
     }
     //stateJson is now imported directly into this file, so there is no need to make a fetch call
