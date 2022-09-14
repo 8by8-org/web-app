@@ -41,7 +41,7 @@ export default function Login() {
 
   const functions = getFunctions();
   // this is for testing functions locally
-  // connectFunctionsEmulator(functions, "localhost", 5001);
+  //connectFunctionsEmulator(functions, "localhost", 5001);
   const sendSignin = httpsCallable(functions, "sendSigninEmail");
 
   useEffect(() => {
@@ -67,11 +67,12 @@ export default function Login() {
       // login step 1
       setButtonMessage("Sign In");
       buttonRef.current.onclick = async function () {
-        const email = emailRef.current.value;
+        let email = emailRef.current.value;
         console.log(email);
         if (!email) {
           setEmailError("Please enter your email.");
         } else {
+          email = email.trim();
           window.localStorage.setItem("emailForSignIn", email);
           sendSignin(email);
           history.push(`/verify`);
