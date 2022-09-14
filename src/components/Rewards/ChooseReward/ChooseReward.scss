@@ -1,0 +1,151 @@
+@import "../../../styles/Components.scss";
+@import "../../../styles/Fonts.scss";
+@import "../../../styles/Variables.scss";
+@import "../../../styles/Classes.scss";
+
+.choose-reward {
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    h1 {
+        text-align: left;
+    }
+
+    .about-text {
+        margin-top: 2rem;
+        margin-bottom: 2rem;
+    }
+
+    .image-container {
+        img {
+            max-width: 100%;
+            max-height: 100%;
+        }
+    }
+
+    .text-underline {
+        @include text-underline;
+    }
+
+    .radio-label {
+        width: 100%;
+    }
+
+    .partner-content{
+        p{
+           padding-top: 0.5em; 
+        }
+    }
+
+    label {
+        .circle-container {
+            display: flex;
+            align-items: flex-start;
+            justify-content: center;
+            padding: 0;
+            transform: translateX(-20%);
+        }
+        .circle {
+            height: 1.75rem;
+            width: 1.75rem;
+            outline: 0.25rem solid black;
+            border: 0.25rem solid white;
+            border-radius: 20rem;
+        }
+    }
+
+    .reward-button {
+        @include button;
+    }
+
+    .reward-button:disabled {
+        opacity: 50%;
+        cursor: not-allowed;
+    }
+
+    .button-container {
+        display: flex;
+        align-items: center;
+        justify-items: center;
+    }
+
+    input[type='radio'] {
+        display: none;
+    }
+
+    input[type='radio']:checked + label{
+        .circle {
+            background-color: black;
+        }
+    }
+    label + img{
+        margin: 0 25% !important;
+        padding-top: 0.5em; 
+    }
+    .light-modal-container{
+        width: 80%;
+        max-width: 375px;
+        min-width: 310px;
+        background-color: white;
+        color: black;
+        box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+        display: flex;
+        flex-direction: column;
+        .titleCloseBtn {
+            display: flex;
+            justify-content: flex-end;
+            margin-top: 5px;
+            margin-right: 8px;
+          }
+      
+          .titleCloseBtn button {
+            background-color: transparent;
+            border: none;
+            font-size: 25px;
+            cursor: pointer;
+            color: white;
+
+            svg{
+                fill: black;
+                stroke: black;
+            }
+          }
+      
+          .content {
+            padding: 0 35px 20px 35px;
+            height: 100%;
+            text-align: center;
+            
+            button {
+              margin: auto;
+              margin-top: 35px;
+              margin-bottom: 35px;
+              font-size: 25px;
+              height: 50px;
+            }
+
+            h3{
+                text-decoration: underline;
+                margin: 0.5em 0;
+            }
+            p{
+                margin-bottom: 0.5em;
+            }
+            img {
+                max-height: 76px !important;
+                max-width: 50%; 
+            }
+            span{
+                color: $graphite;
+                svg{
+                    transform: scale(0.8);
+                }
+            }
+          }
+    }
+
+}
+.reward-type-header{
+    color: $graphite;
+    border-bottom: $graphite 1px solid;
+}

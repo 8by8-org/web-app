@@ -1,0 +1,62 @@
+@import "src/styles/Components";
+
+.modal {
+    margin-top: 10rem;
+}
+
+@media (min-width: 500px) {
+    .modal .modal-dialog {
+        max-width: 400px;
+        margin: 1.75rem auto;
+    }
+}
+
+@media (max-width: 500px) {
+    .modal .modal-dialog {
+        max-width: 330px;
+        margin: 1.75rem auto;
+    }
+}
+
+.modal .modal-dialog {
+}
+
+.modal .modal-content {
+    border-radius: 0;
+    border: none;
+    text-align: center;
+}
+
+.modal .modal-header {
+    border-bottom: none;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+
+}
+
+.modal p {
+    margin-left: 12%;
+    margin-right: 12%;
+}
+
+.modal .modal-footer {
+    border-top: none;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+}
+
+.challenge-button {
+    @include button;
+}
+
+.close {
+    width: 32px;
+    height: 32px;
+    margin-left: auto;
+}
+
+.close:hover {
+    cursor: pointer;
+}

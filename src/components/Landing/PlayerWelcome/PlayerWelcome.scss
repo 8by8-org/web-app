@@ -1,0 +1,101 @@
+@import "src/styles/Components";
+
+.preview {
+  font-size: 12px;
+}
+
+.player-welcome {
+  background-color: $white;
+  color: $black;
+  display: flex;
+  flex-direction: column;
+
+  .getStarted-button {
+    @include button;
+    outline: 4px solid white;
+    margin-top: 25px;
+  }
+
+  .top {
+    display: flex;
+    flex-direction: column;
+    padding: 8%;
+    background-color: $black;
+    color: white;
+    .top-heading {
+      @include heading-text(white, 312.5%);
+      line-height: 115%;
+      letter-spacing: 0.03em;
+      margin: 20px 0px;
+      .underline {
+        @include text-underline;
+        font-size: 100%;
+        line-height: 115%;
+        letter-spacing: 0.03em;
+      }
+    }
+  }
+
+  .signin-link {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    text-decoration: underline;
+    display: inline;
+    margin: 0;
+    padding: 0px;
+    font-family: $lato;
+    letter-spacing: 0.02em;
+    font-weight: 900;
+  }
+
+  .blue {
+    color: $blue;
+  }
+
+  .black {
+    color: $black;
+  }
+
+  .main-content {
+    padding: 40px 8%;
+
+    h3 {
+      align-self: flex-start;
+      font-size: 150%;
+    }
+  }
+
+  .heading {
+    @include heading-text($black, 225%);
+    margin-bottom: 40px;
+    line-height: 43.2px;
+    letter-spacing: 0.03em;
+    text-align: center;
+  }
+
+  .text {
+    font-family: $lato;
+    font-size: 113%;
+    line-height: 120%;
+    letter-spacing: 0.02em;
+    margin-bottom: 32px;
+  }
+
+  .small-text {
+    font-family: $lato;
+    font-size: 94%;
+    letter-spacing: 0.02em;
+    margin-top: 16px;
+  }
+
+  .curve {
+    width: 100%;
+  }
+
+  .image {
+    padding: 20px 0px;
+    padding-bottom: 60px;
+    text-align: center;
+  }
+}

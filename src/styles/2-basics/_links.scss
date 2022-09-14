@@ -1,0 +1,27 @@
+a,
+.link {
+  font-family: $lato;
+  font-weight: 900;
+  font-size: 16px;
+  line-height: 19px;
+  letter-spacing: 0.02em;
+  text-decoration: underline;
+  text-underline-offset: 0.5px;
+  color: $black;
+
+  &:hover {
+    color: $black;
+    cursor: pointer;
+  }
+
+  &--light{
+    @extend .link;
+    font-weight: 700;
+  }
+
+  &-left {
+    @extend .link;
+    display: block;
+    text-align: left;
+  }
+}
