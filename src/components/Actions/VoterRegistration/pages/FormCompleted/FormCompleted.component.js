@@ -7,7 +7,6 @@ import ScrollToTop from "../../../../../functions/ScrollToTop";
 import stateJson from "../../../../../data/state_vote_info.json";
 import { Link } from "react-router-dom";
 import PopupModal from "../../../../Utility/PopupModal/PopupModal";
-import { clearVoterRegInfo } from "../../utils/UpdateRegInfo";
 import { getUserDatabase } from "../../../../../functions/UserData";
 import { LoadingWheel } from "../../../../Utility/LoadingWheel/LoadingWheel.component";
 const apiUrl = "https://usvotes-6vsnwycl4q-uw.a.run.app";
@@ -122,13 +121,6 @@ export const FormCompleted = () => {
                   {error && <p className="error-message">{error}</p>}
                 </div>
               )}
-            {/* <a
-          onClick={() => {
-            clearVoterRegInfo();
-            history.push("/voterreg");
-          }}>
-            Clear voter registration info
-          </a> */}
             <Link className="link--light register-form-text" to={redirect}>
               Back to 8by8 Challenge
             </Link>
