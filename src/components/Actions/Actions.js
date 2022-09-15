@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import {
   getChallengerDatabase,
   getUserDatabase,
+  getUserVoterRegistrationData
 } from "./../../functions/UserData";
 import { IconContext } from "react-icons";
 import * as MdIcons from "react-icons/md";
@@ -42,7 +43,7 @@ export default function Actions() {
   const [alreadyRedeemed, setAlreadyRedeemed] = useState();
   const [couponData, setCouponData] = useState();
 
-  const [voteInfo, setVoteInfo] = useState(null);
+  const [USState, setUSState] = useState(null);
   const toggleInvite = React.useRef();
   //for resending voter registration form's to the user's email address
   const [showTransparentLoadingWheel, setShowTransparentLoadingWheel] =
@@ -81,8 +82,7 @@ export default function Actions() {
           .then((data) => {
             if (data.invitedBy) {
               setRegisteredVoter(data.isRegisteredVoter);
-              setVoteInfo(data.voteInfo);
-              console.log(data.voteInfo);
+              setUSState(data.voteInfo && data.voteInfo.state ? data.voteInfo.state : null);
               setStartedChallenge(data.startedChallenge);
               setNotifyElectionReminders(data.notifyElectionReminders);
               getChallengerInfo(data.invitedBy);
@@ -102,7 +102,7 @@ export default function Actions() {
     getUserDatabase()
       .then((data) => {
         setRegisteredVoter(data.isRegisteredVoter);
-        setVoteInfo(data.voteInfo);
+        setUSState(data.voteInfo && data.voteInfo.state ? data.voteInfo.state : null);
         setStartedChallenge(data.startedChallenge);
         setNotifyElectionReminders(data.notifyElectionReminders);
         setLoading(false);
@@ -450,8 +450,8 @@ export default function Actions() {
                 <div className="links-container">
                   {/* this is for when registered to vote or election reminders are turned on */}
                   {(() => {
-                    if (!registeredVoter || !voteInfo) return;
-                    const stateInfo = stateVoteInfo.states[voteInfo.state];
+                    if (!registeredVoter || !USState) return;
+                    const stateInfo = stateVoteInfo.states[USState];
                     return (
                       <>
                         {stateInfo.onlinereg && (
@@ -469,16 +469,27 @@ export default function Actions() {
                           className="link-share"
                           onClick={() => {
                             setShowTransparentLoadingWheel(true);
-                            axios
-                              .post(`${apiUrl}/registertovote/`, voteInfo)
-                              .then((res) => {
-                                setShowTransparentLoadingWheel(false);
-                                setShowSuccessModal(true);
-                              })
-                              .catch((e) => {
+                            if(currentUser && currentUser.uid) {
+                              getUserVoterRegistrationData(currentUser.uid).then((data) => {
+                                console.log(data);
+                                axios
+                                  .post(`${apiUrl}/registertovote/`, data)
+                                  .then((res) => {
+                                    setShowTransparentLoadingWheel(false);
+                                    setShowSuccessModal(true);
+                                  })
+                                  .catch((e) => {
+                                    setShowTransparentLoadingWheel(false);
+                                    setShowErrorModal(true);
+                                  });
+                              }).catch(() => {
                                 setShowTransparentLoadingWheel(false);
                                 setShowErrorModal(true);
                               });
+                            } else {
+                              setShowTransparentLoadingWheel(false);
+                              setShowErrorModal(true);
+                            }
                           }}
                         >
                           Get your registration form again
