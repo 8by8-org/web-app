@@ -74,7 +74,13 @@ export default function Login() {
         } else {
           email = email.trim();
           window.localStorage.setItem("emailForSignIn", email);
-          sendSignin(email);
+          sendSignin(email).catch((error) => {
+            if(error) {
+              console.log("problem sending sign in email");
+              console.log(error);
+              console.log(error.message);
+            }
+          });
           history.push(`/verify`);
         }
       };
