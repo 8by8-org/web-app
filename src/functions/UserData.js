@@ -62,6 +62,17 @@ export function getUserDatabaseByUID(uid) {
   });
 }
 
+export function getUserVoterRegistrationData(uid) {
+  return new Promise(async (resolve, reject) => {
+    let docRef = doc(db, "voter-registration-data", uid);
+    let docSnap = await getDoc(docRef);
+    if(docSnap.exists()) {
+      resolve(docSnap.data());
+    }
+    else reject();
+  });
+}
+
 // gets challenger's data from firebase
 export async function getChallengerDatabase() {
   const userData = await getUserDatabase();

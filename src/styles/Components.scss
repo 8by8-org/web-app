@@ -60,7 +60,6 @@
   height: 40%;
   width: fit-content;
   font-family: $bebas-neue;
-  font-size: 200%;
   text-align: center;
   background-color: #101010;
   border-radius: 40px;
@@ -82,6 +81,7 @@
     -webkit-text-fill-color: transparent;
     -moz-text-fill-color: transparent;
     color: transparent;
+    font-size: 32px;
   }
 }
 

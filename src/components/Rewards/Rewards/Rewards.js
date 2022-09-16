@@ -1,7 +1,11 @@
 import CurveA from "../../../assets/2-shapes/curve-a.svg";
 import './Rewards.scss';
 import { useHistory } from "react-router-dom";
-import placeholderImage from "../../../assets/images/placeholder-image.jpg"
+import placeholderImage from "../../../assets/images/placeholder-image.jpg";
+import chefusLogo from "../../../assets/partner-logos/chefus.png";
+import purelyLogo from "../../../assets/partner-logos/purely.png";
+import saltalkLogo from "../../../assets/partner-logos/saltalk.png";
+import tippsyLogo from "../../../assets/partner-logos/tippsy.png";
 
 const Rewards = () => {
     const history = useHistory();
@@ -28,16 +32,46 @@ const Rewards = () => {
         "",
         "Restaurant",
         "San Jose, CA"
+    );
+
+    const Chefus = new Partner(
+        "Chefus",
+        "https://www.chefus.com/",
+        chefusLogo,
+        "Online deliveries",
+        "",
+       )
+
+    const Purely = new Partner(
+        "Purely Drinks",
+        "https://purelydrinks.com/",
+        purelyLogo,
+        "Online deliveries",
+        "",
     )
+
+    const Saltalk = new Partner(
+        "Saltalk",
+        "https://www.saltalk.com/",
+        saltalkLogo,
+        "Online deliveries",
+        "",
+    )
+
+    const Tippsy = new Partner(
+        "Tippsy",
+        "https://www.tippsysake.com/",
+        tippsyLogo,
+        "Online deliveries",
+        "",
+    )
+
 
     // Store the list of partners here
     // Generate them with the constructor
     // That way there is a key
     const partners = [
-        samplePartner(),
-        samplePartner(),
-        samplePartner(),
-        samplePartner()
+       Chefus, Purely, Saltalk, Tippsy
     ]
 
 

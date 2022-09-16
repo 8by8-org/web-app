@@ -98,6 +98,9 @@ export const YourName = () => {
             ? "floating-label-active"
             : "floating-label-default"
         }
+        onClick={() => {
+          document.getElementById("name_first").focus();
+        }}
       >
         First Name*
       </label>
@@ -134,6 +137,9 @@ export const YourName = () => {
             ? "floating-label-active"
             : "floating-label-default"
         }
+        onClick={() => {
+          document.getElementById("name_middle").focus();
+        }}
       >
         Middle Name
       </label>
@@ -165,6 +171,9 @@ export const YourName = () => {
             ? "floating-label-active"
             : "floating-label-default"
         }
+        onClick={() => {
+          document.getElementById("name_last").focus();
+        }}
       >
         Last name*
       </label>
@@ -199,6 +208,9 @@ export const YourName = () => {
             ? "floating-label-active"
             : "floating-label-default"
         }
+        onClick={() => {
+          document.getElementById("suffix").focus();
+        }}
       >
         Suffix
       </label>
@@ -280,6 +292,9 @@ export const YourName = () => {
                 ? "floating-label-active"
                 : "floating-label-default"
             }
+            onClick={() => {
+              document.getElementById("prev_name_first").focus();
+            }}
           >
             First Name*
           </label>
@@ -313,6 +328,9 @@ export const YourName = () => {
                 ? "floating-label-active"
                 : "floating-label-default"
             }
+            onClick={() => {
+              document.getElementById("prev_name_middle").focus();
+            }}
           >
             Middle Name
           </label>
@@ -344,6 +362,9 @@ export const YourName = () => {
                 ? "floating-label-active"
                 : "floating-label-default"
             }
+            onClick={() => {
+              document.getElementById("prev_name_last").focus();
+            }}
           >
             Last name*
           </label>
@@ -378,6 +399,9 @@ export const YourName = () => {
                 ? "floating-label-active"
                 : "floating-label-default"
             }
+            onClick={() => {
+              document.getElementById("prev_suffix").focus();
+            }}
           >
             Suffix
           </label>

@@ -7,7 +7,6 @@ import ScrollToTop from "../../../../../functions/ScrollToTop";
 import stateJson from "../../../../../data/state_vote_info.json";
 import { Link } from "react-router-dom";
 import PopupModal from "../../../../Utility/PopupModal/PopupModal";
-import { clearVoterRegInfo } from "../../utils/UpdateRegInfo";
 import { getUserDatabase } from "../../../../../functions/UserData";
 import { LoadingWheel } from "../../../../Utility/LoadingWheel/LoadingWheel.component";
 const apiUrl = "https://usvotes-6vsnwycl4q-uw.a.run.app";
@@ -50,7 +49,7 @@ export const FormCompleted = () => {
 
   const getStateRegData = () => {
     let userState = voterRegistrationData.state;
-    if (userData?.voteInfo) {
+    if (userData && userData.voteInfo && userData.voteInfo.state) {
       userState = userData.voteInfo.state;
     }
     //stateJson is now imported directly into this file, so there is no need to make a fetch call
@@ -122,13 +121,6 @@ export const FormCompleted = () => {
                   {error && <p className="error-message">{error}</p>}
                 </div>
               )}
-            {/* <a
-          onClick={() => {
-            clearVoterRegInfo();
-            history.push("/voterreg");
-          }}>
-            Clear voter registration info
-          </a> */}
             <Link className="link--light register-form-text" to={redirect}>
               Back to 8by8 Challenge
             </Link>
