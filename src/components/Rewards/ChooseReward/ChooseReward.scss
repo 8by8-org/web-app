@@ -35,6 +35,11 @@
         p{
            padding-top: 0.5em; 
         }
+        h3{
+            font-family: $lato;
+            font-size: 18px;
+            font-weight: 600;
+        }
     }
 
     label {
@@ -59,7 +64,7 @@
     }
 
     .reward-button:disabled {
-        opacity: 50%;
+        opacity: 30%;
         cursor: not-allowed;
     }
 
@@ -104,7 +109,6 @@
             font-size: 25px;
             cursor: pointer;
             color: white;
-
             svg{
                 fill: black;
                 stroke: black;
@@ -126,7 +130,7 @@
 
             h3{
                 text-decoration: underline;
-                margin: 0.5em 0;
+                margin: 0.75em 0;
             }
             p{
                 margin-bottom: 0.5em;
@@ -146,6 +150,7 @@
 
 }
 .reward-type-header{
-    color: $graphite;
-    border-bottom: $graphite 1px solid;
+    color: #000;
+    font-family: $bebas-neue;
+    font-size: 36pt;
 }

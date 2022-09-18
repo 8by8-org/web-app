@@ -6,7 +6,6 @@ import placeholderImage from "../../../assets/images/placeholder-image.jpg"
 import {database} from '../../../firebase';
 import {ref, child, get} from 'firebase/database';
 import {getAllPartnerData} from "../../../functions/partnerData";
-import {default as infoIcon} from "../../../assets/images/info.svg"
 import { AiOutlineClose } from "react-icons/ai";
 import {MdLocationPin} from "react-icons/md"
 
@@ -96,9 +95,9 @@ const ChooseReward = () => {
             <h1><span className="text-underline">Choose</span> a Reward</h1>
             <p className='about-text'>You've won the 8by8 Challenge! Now choose your reward, you've earned it!</p>
             <form>
-                <h2 className='reward-type-header small-text' style={{display : partners.filter(partner => partner.rewardType === 'In-store').length === 0 ? "none" : "inherit"}}>In Store</h2>
+                <h2 className='reward-type-header' style={{display : partners.filter(partner => partner.rewardType === 'In-store' && partner.rewardAvailable).length === 0 ? "none" : "inherit"}}>In Store</h2>
                 { /* We have some code duplication here - splitting into a component is more complicated than its worth */}
-                {partners.filter(partner => (partner.rewardType === 'In-store')).map((partner) => {
+                {partners.filter(partner => (partner.rewardType === 'In-store'  && partner.rewardAvailable)).map((partner) => {
                     return (
                         <div key={partner.name} className='my-3'>
                             <input type="radio" name="sample" onChange={() => setSelected(partner.name)}
@@ -114,11 +113,10 @@ const ChooseReward = () => {
                                         
                                     </div>
                                     <div className="image-container col-3">
-                                       <a href={partner.businessLink} target="blank"> <img src={ partner.logo ? partner.logo : placeholderImage} alt={'Partner image'}/></a>
+                                       <a onClick={() => handleModal(partner.name)} > <img src={ partner.logo ? partner.logo : placeholderImage} alt={'Partner image'}/></a>
                                     </div>
                                 </div>
                             </label>
-                            <img src={infoIcon} onClick={() => handleModal(partner.name)} />
                             {
                                     [...openModal].filter(p => p === partner.name).length === 1 
                                         && 
@@ -156,8 +154,8 @@ const ChooseReward = () => {
                         </div>
                     );
                 })}
-                <h2 className='reward-type-header small-text' style={{display : partners.filter(partner => partner.rewardType === 'Online').length === 0 ? "none" : "inherit"}}>Online</h2>
-                {partners.filter(partner => partner.rewardType === 'Online').map((partner) => {
+                <h2 className='reward-type-header' style={{display : partners.filter(partner => partner.rewardType === 'Online' && partner.rewardAvailable).length === 0 ? "none" : "inherit"}}>Online</h2>
+                {partners.filter(partner => partner.rewardType === 'Online' && partner.rewardAvailable).map((partner) => {
                     return (
                         <div key={partner.name} className='my-3'>
                             <input type="radio" name="sample" onChange={() => setSelected(partner.name)}
@@ -170,14 +168,12 @@ const ChooseReward = () => {
                                     <div className="partner-content col-6">
                                         <h3>{partner.name}</h3>
                                         <p> {partner.rewardDescription}</p>
-                                        
                                     </div>
                                     <div className="image-container col-3">
-                                        <a href={partner.businessLink} target="blank"><img src={partner.logo ? partner.logo : placeholderImage } alt={'Partner image'}/></a>
+                                        <a onClick={() => handleModal(partner.name)} ><img src={partner.logo ? partner.logo : placeholderImage } alt={'Partner image'}/></a>
                                     </div>
                                 </div>
                             </label>
-                            <img src={infoIcon} onClick={() => handleModal(partner.name)} />
                             { 
                                         [...openModal].filter(p => p === partner.name).length === 1 
                                         &&

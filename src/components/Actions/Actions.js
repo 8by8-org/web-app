@@ -170,13 +170,9 @@ export default function Actions() {
                 {
                   <div>
                     <img src={couponData.logo} alt="Partner Logo" />
-                    <p>{couponData.rewardConditions}</p>
+                    <p>{couponData.rewardDescription} {couponData.redemptionDescription}</p>
                     <p>
-                      {couponData.rewardConditions} Expires{" "}
-                      {couponData.rewardEndDate === ""
-                        ? " never"
-                        : couponData.rewardEndDate}
-                      . Availability and terms subject to change.
+                     Availability and terms subject to change.
                     </p>
                   </div>
                 }
