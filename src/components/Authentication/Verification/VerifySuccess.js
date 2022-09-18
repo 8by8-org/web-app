@@ -4,6 +4,7 @@ import { useHistory } from "react-router-dom";
 import HighFive from "./../../../assets/4-pages/VerifySuccess/HighFive.png";
 import Loading from "./../../../assets/4-pages/VerifySuccess/Loading.gif";
 import "./VerifySuccess.scss";
+import { emailUser } from "./../../../functions/Email";
 
 function VerifySuccess() {
   const { currentUser, currentUserData } = useAuth();
@@ -20,10 +21,19 @@ function VerifySuccess() {
 
     await delay(3000);
     if (playerStatus) {
+      setTimeout(() => {
+        emailUser(currentUser.email, "playerWelcome");
+      }, 3000);
       history.push(`/${playerStatus}`);
     } else if (currentUserData && !currentUserData.startedChallenge) {
+      setTimeout(() => {
+        emailUser(currentUser.email, "challengerWelcome");
+      }, 3000);
       history.push("/actions");
     } else {
+      setTimeout(() => {
+        emailUser(currentUser.email, "challengerWelcome");
+      }, 3000);
       history.push("/progress");
     }
   }

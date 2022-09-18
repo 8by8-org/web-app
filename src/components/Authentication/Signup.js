@@ -8,7 +8,6 @@ import avatar4 from "../../assets/images/SignUpPage/avatar4.png";
 import { auth } from "./../../firebase";
 import { useAuth } from "./../../contexts/AuthContext";
 import { dummyPassword } from "../../constants";
-import { emailUser } from "./../../functions/Email";
 import { getUserType } from "./../../functions/UserType";
 import { addUserToDB } from "./AddUserToDB";
 import { useHistory } from "react-router-dom";
@@ -114,16 +113,6 @@ function Signup() {
         );
 
         window.localStorage.setItem("emailForSignIn", formData.email);
-
-        if (getUserType() === "player") {
-          setTimeout(() => {
-            emailUser(formData.email, "playerWelcome");
-          }, 3000);
-        } else {
-          setTimeout(() => {
-            emailUser(formData.email, "challengerWelcome");
-          }, 3000);
-        }
       } catch (e) {
         const errorMsg = errorMessage(e);
         if (errorMsg === "Please enter a correct email address.") {
