@@ -228,13 +228,9 @@ export default function Progress() {
                 <div className="img-bg">
                   <img src={couponData.logo} alt="Partner Logo" />
                 </div>
-                <p>{couponData.rewardConditions}</p>
+                <p>{couponData.rewardDescription} {couponData.redemptionDescription}</p>
                 <p>
-                  {couponData.rewardConditions} Expires{" "}
-                  {couponData.rewardEndDate === ""
-                    ? " never"
-                    : couponData.rewardEndDate}
-                  . Availability and terms subject to change.
+                  Availability and terms subject to change.
                 </p>
               </div>
             }
