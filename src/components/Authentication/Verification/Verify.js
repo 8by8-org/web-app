@@ -32,9 +32,21 @@ function Verify() {
 
   const resendEmailVerification = () => {
     if (currentUser) {
-      resendVerification(currentUser.email);
+      resendVerification(currentUser.email).catch((error) => {
+        if(error) {
+          console.log("Problem re-sending verification email.");
+          console.log(error);
+          console.log(error.message);
+        }
+      });
     } else {
-      sendSignin(email);
+      sendSignin(email).catch((error) => {
+        if(error) {
+          console.log("Problem re-sending sign in email.");
+          console.log(error);
+          console.log(error.message);
+        }
+      });
     }
   };
 

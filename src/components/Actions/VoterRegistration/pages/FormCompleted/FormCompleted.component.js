@@ -30,11 +30,6 @@ export const FormCompleted = () => {
   const ToggleMailRegModal = (e) => setShowMailRegModal(!showMailRegModal);
   const ToggleShowGetEmail = (e) => setShowGetEmail(true);
 
-  let redirect = "/progress";
-  if (currentUserData && currentUserData.invitedBy.length > 0) {
-    redirect = "/actions";
-  }
-
   useEffect(() => {
     setTimeout(() => {
       getUserDatabase().then((data) => {
@@ -121,8 +116,8 @@ export const FormCompleted = () => {
                   {error && <p className="error-message">{error}</p>}
                 </div>
               )}
-            <Link className="link--light register-form-text" to={redirect}>
-              Back to 8by8 Challenge
+            <Link className="link--light register-form-text" to={"/actions"}>
+              View More Actions
             </Link>
           </div>
         ) : (
@@ -135,10 +130,10 @@ export const FormCompleted = () => {
               className="tight-btn"
               onClick={(e) => {
                 e.preventDefault();
-                history.push(redirect);
+                history.push("/actions");
               }}
             >
-              GO TO 8BY8 CHALLENGE
+              VIEW MORE ACTIONS
             </button>
           </div>
         )}

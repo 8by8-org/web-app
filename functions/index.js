@@ -36,17 +36,33 @@ exports.sendVerification = functions.auth.user().onCreate((user) => {
 
 // resend verification email
 exports.resendVerification = functions.https.onCall((email) => {
-  sendVerificationEmail(email, "verification");
+  return new Promise((resolve, reject) => {
+    sendVerificationEmailWithPromise(email, "verification").then(() => {
+      resolve();
+    }).catch((error) => {
+      console.log(error);
+      console.log("Email address provided was: " + email);
+      reject(new functions.https.HttpsError("unknown", error.message));
+    });
+  });
 });
 
 // sign in email
 exports.sendSigninEmail = functions.https.onCall((email) => {
-  sendVerificationEmail(email, "sign in");
+  return new Promise((resolve, reject) => {
+    sendVerificationEmailWithPromise(email, "sign in").then(() => {
+      resolve();
+    }).catch((error) => {
+      console.log(error);
+      console.log("Email address provided was: " + email);
+      reject(new functions.https.HttpsError("unknown", error.message));
+    });
+  });
 });
 
 function sendVerificationEmail(email, type) {
   let test = false;
-  let actionUrl = "https://app.8by8.us/signin";
+  let actionUrl = "https://challenge.8by8.us/signin";
   // uncomment when testing
   //test = true;
   if (test) {
@@ -88,4 +104,64 @@ function sendVerificationEmail(email, type) {
         });
       });
   }
+}
+
+function sendVerificationEmailWithPromise(email, type) {
+  return new Promise((resolve, reject) => {
+    let test = false;
+    let actionUrl = "https://challenge.8by8.us/signin";
+    // uncomment when testing
+    //test = true;
+    if (test) {
+      actionUrl = "http://localhost:3000/signin";
+    }
+  
+    const actionCodeSettings = {
+      url: actionUrl,
+      handleCodeInApp: true,
+    };
+    if (type === "verification") {
+      admin
+        .auth()
+        .generateEmailVerificationLink(email, actionCodeSettings)
+        .then((link) => {
+          const URL = "https://usvotes-6vsnwycl4q-uw.a.run.app/email/";
+          let formData = new FormData();
+          formData.append("email", email);
+          formData.append("type", "verifyEmail");
+          formData.append("verifyLink", link);
+          fetch(URL, {
+            method: "POST",
+            body: formData,
+          }).then(() => {
+            resolve();
+          }).catch((error) => {
+            reject(error);
+          })
+        }).catch((error) => {
+          reject(error);
+        });
+    } else if (type === "sign in") {
+      admin
+        .auth()
+        .generateSignInWithEmailLink(email, actionCodeSettings)
+        .then((link) => {
+          const URL = "https://usvotes-6vsnwycl4q-uw.a.run.app/email/";
+          let formData = new FormData();
+          formData.append("email", email);
+          formData.append("type", "verifyEmail");
+          formData.append("verifyLink", link);
+          fetch(URL, {
+            method: "POST",
+            body: formData,
+          }).then(() => {
+            resolve();
+          }).catch((error) => {
+            reject(error);
+          });
+        }).catch((error) => {
+          reject(error);
+        });
+    }
+  });
 }

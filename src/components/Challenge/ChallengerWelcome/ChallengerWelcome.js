@@ -34,7 +34,10 @@ function ChallengerWelcome() {
           8 friends to register to vote in 8 days!
         </p>
         <button
-          onClick={() => history.push("/signup")}
+          onClick={() => {
+            console.log("This is firing.");
+            history.push("/signup")
+          }}
           className="gradient-button"
         >
           Get Started
