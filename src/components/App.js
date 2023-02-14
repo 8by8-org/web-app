@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect } from "react";
 import {
   BrowserRouter as Router,
   Redirect,
@@ -30,7 +30,16 @@ import { HomeAddress } from "./Actions/VoterRegistration/pages/HomeAddress/HomeA
 import { OtherInfo } from "./Actions/VoterRegistration/pages/OtherInfo/OtherInfo.component";
 import { FormCompleted } from "./Actions/VoterRegistration/pages/FormCompleted/FormCompleted.component";
 
+import ReactGA from 'react-ga4';
+const TRACKING_ID = "G-D5X343VVCL"; 
+ReactGA.initialize(TRACKING_ID);
+
 export default function App() {
+
+  useEffect(() => {
+    ReactGA.send({ hitType: "pageview", page: window.location.pathname + window.location.search });
+  }, [])
+
   return (
     <>
       <AuthProvider>
