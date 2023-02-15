@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect } from "react";
 import {
   BrowserRouter as Router,
   Redirect,
@@ -36,7 +36,16 @@ import { FormCompleted } from "./Actions/VoterRegistration/pages/FormCompleted/F
 import Rewards from "./Rewards/Rewards/Rewards";
 import ChooseReward from "./Rewards/ChooseReward/ChooseReward";
 
+import ReactGA from 'react-ga4';
+const TRACKING_ID = "G-D5X343VVCL"; 
+ReactGA.initialize(TRACKING_ID);
+
 export default function App() {
+
+  useEffect(() => {
+    ReactGA.send({ hitType: "pageview", page: window.location.pathname + window.location.search });
+  }, [])
+  
   return (
     <>
       <AuthProvider>
