@@ -16,7 +16,6 @@ const apiUrl = "https://usvotes-6vsnwycl4q-uw.a.run.app";
 export const HomeAddress = () => {
   const history = useHistory();
   const {
-    currentUser,
     currentUserData,
     voterRegistrationData,
     setVoterRegistrationData,

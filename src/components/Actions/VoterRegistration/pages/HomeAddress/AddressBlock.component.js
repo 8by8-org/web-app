@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState } from "react";
 import "../../VoterRegistration.scss";
 import "./AddressBlock.scss";
 import { Tooltip } from "../Tooltip/Tooltip.component";

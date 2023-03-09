@@ -1,10 +1,8 @@
-import {getChallengerDatabase, getUserDatabase, completedAction, choseReward} from "../../../functions/UserData";
+import {getChallengerDatabase, getUserDatabase, choseReward} from "../../../functions/UserData";
 import {useHistory} from "react-router-dom";
 import './ChooseReward.scss';
-import {useEffect, useState} from "react";
-import placeholderImage from "../../../assets/images/placeholder-image.jpg"
-import {database} from '../../../firebase';
-import {ref, child, get} from 'firebase/database';
+import {useState} from "react";
+import placeholderImage from "../../../assets/images/placeholder-image.jpg";
 import {getAllPartnerData} from "../../../functions/partnerData";
 import { AiOutlineClose } from "react-icons/ai";
 import {MdLocationPin} from "react-icons/md"
@@ -113,7 +111,7 @@ const ChooseReward = () => {
                                         
                                     </div>
                                     <div className="image-container col-3">
-                                       <a onClick={() => handleModal(partner.name)} > <img src={ partner.logo ? partner.logo : placeholderImage} alt={'Partner image'}/></a>
+                                       <a onClick={() => handleModal(partner.name)} > <img src={ partner.logo ? partner.logo : placeholderImage} alt="Partner"/></a>
                                     </div>
                                 </div>
                             </label>
@@ -133,7 +131,7 @@ const ChooseReward = () => {
                                                 </button>
                                             </div>
                                             <div className="content">
-                                            <img src={partner.logo ? partner.logo : placeholderImage } alt={'Partner image'}/>
+                                            <img src={partner.logo ? partner.logo : placeholderImage } alt="Partner"/>
                                                 <h3>{partner.name}</h3>
                                                 <p className="b6">
                                                     {partner.businessDescription}
@@ -170,7 +168,9 @@ const ChooseReward = () => {
                                         <p> {partner.rewardDescription}</p>
                                     </div>
                                     <div className="image-container col-3">
-                                        <a onClick={() => handleModal(partner.name)} ><img src={partner.logo ? partner.logo : placeholderImage } alt={'Partner image'}/></a>
+                                        <a onClick={() => handleModal(partner.name)} >
+                                            <img src={partner.logo ? partner.logo : placeholderImage } alt="Partner"/>
+                                        </a>
                                     </div>
                                 </div>
                             </label>
@@ -190,7 +190,7 @@ const ChooseReward = () => {
                                                 </button>
                                             </div>
                                             <div className="content">
-                                            <img src={partner.logo ? partner.logo : placeholderImage } alt={'Partner image'}/>
+                                            <img src={partner.logo ? partner.logo : placeholderImage } alt="Partner"/>
                                                 <h3>{partner.name}</h3>
                                                 <p className="b6">
                                                     {partner.businessDescription}

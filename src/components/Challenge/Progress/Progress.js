@@ -1,7 +1,6 @@
 import React, { useState, useEffect,  } from "react";
 import {
   completedAction,
-  getChallengerDatabase,
   getUserDatabase,
   restartChallenge,
 } from "./../../../functions/UserData";
@@ -29,7 +28,6 @@ export default function Progress() {
   const [completedBadges, setCompletedBadges] = useState(0);
   const [registeredVoter, setRegisteredVoter] = useState(false);
   const [openModal, setOpenModal] = useState(false);
-  const [canRedeem, setCanRedeem] = useState();
   const [alreadyRedeemed, setAlreadyRedeemed] = useState();
   const [couponData, setCouponData] = useState();
   const [button, setButton] = useState(
@@ -115,15 +113,12 @@ export default function Progress() {
         }
 
         if (data.badges.length >= 8) {
-          setCanRedeem(true);
           if (data.challengeReward === undefined) {
             setAlreadyRedeemed(false);
           } else {
             setAlreadyRedeemed(true);
             getPartnerData(data.challengeReward, setCouponData);
           }
-        } else {
-          setCanRedeem(false);
         }
 
         setDaysLeft(days);
