@@ -22,7 +22,6 @@ import { ErrorModal } from "../Utility/ErrorModal/ErrorModal";
 import "./Actions.scss";
 import { LoadingWheel } from "./../Utility/LoadingWheel/LoadingWheel.component";
 import { getPartnerData } from "../../functions/partnerData";
-import PopupModal from "../Utility/PopupModal/PopupModal";
 import stateVoteInfo from "../../data/state_vote_info.json";
 import axios from "axios";
 

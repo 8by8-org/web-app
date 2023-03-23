@@ -10,26 +10,23 @@
 import React, { useEffect, useRef, useState } from "react";
 import { useAuth } from "../../contexts/AuthContext";
 import { auth } from "../../firebase";
-import errorMessage from "./../../functions/errorMessage";
 import { useHistory } from "react-router-dom";
 import { Button, Form } from "react-bootstrap";
 import "./Signin.scss";
 import ReCAPTCHA from "react-google-recaptcha";
-import { dummyPassword } from "../../constants";
 import voteImg from "./../../assets/4-pages/Signin/Vote.png";
 import { getUserDatabase } from "../../functions/UserData";
 import { signInWithEmailLink } from "firebase/auth";
 
 import {
   getFunctions,
-  httpsCallable,
-  connectFunctionsEmulator,
+  httpsCallable
 } from "firebase/functions";
 
 export default function Login() {
   const { currentUser } = useAuth();
   const history = useHistory();
-  const [message, setMessage] = useState(null);
+  const [message] = useState(null);
   const [buttonMessage, setButtonMessage] = useState(" "); // leave blank to hide button
   const [reCaptchaPassed, setReCaptchaPassed] = useState(false);
 

@@ -25,7 +25,7 @@ function Verify() {
       history.push(`/`);
     }
     window.localStorage.setItem("verifying", "true");
-  }, [currentUser]);
+  }, [currentUser, history]);
 
   const resendVerification = httpsCallable(functions, "resendVerification");
   const sendSignin = httpsCallable(functions, "sendSigninEmail");
@@ -57,7 +57,7 @@ function Verify() {
         We just emailed you at {email}. Tap on the "Verify Now" button in your
         email to continue!
       </p>
-      <img src={Plane} height={175} />
+      <img src={Plane} height={175} alt="Paper Airplane" />
       <p>The email may take a few moments to arrive.</p>
       <p className="resend b6">
         Didn't receive the email?{" "}

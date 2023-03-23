@@ -79,8 +79,8 @@ function Signup() {
       confirmEmail: errorMsg.confirmEmail,
     });
     if (
-      (errorMsg.name != "" && errorMsg.email != "") ||
-      errorMsg.confirmEmail != ""
+      (errorMsg.name !== "" && errorMsg.email !== "") ||
+      errorMsg.confirmEmail !== ""
     ) {
       return true;
     }

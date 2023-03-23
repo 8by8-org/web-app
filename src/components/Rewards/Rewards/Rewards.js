@@ -26,14 +26,6 @@ const Rewards = () => {
 
 
     // Sample Data
-    const samplePartner = () => new Partner(
-        "Joe's Sandwhiches",
-        "#",
-        "",
-        "Restaurant",
-        "San Jose, CA"
-    );
-
     const Chefus = new Partner(
         "Chefus",
         "https://www.chefus.com/",
@@ -92,7 +84,7 @@ const Rewards = () => {
                     return (
                         <div className="sponsor" key={partner.id}>
                             <a href={partner.link}>
-                                <img src={partner.img === "" ? placeholderImage : partner.img} alt={`${partner.name} image`} />
+                                <img src={partner.img === "" ? placeholderImage : partner.img} alt={partner.name} />
                                 <h5>{partner.name}</h5>
                                 <p>{partner.type} {partner.location}</p>
                             </a>
@@ -103,7 +95,7 @@ const Rewards = () => {
                 { /* If we don't have any partners */}
                 {partners.length === 0 && (
                     <div className="sponsor">
-                        <img src={placeholderImage} alt="Placeholder image" />
+                        <img src={placeholderImage} alt="Placeholder" />
                         <p>
                             Unfortunately, we are not offering partner rewards at this time. You can still take the 8by8 Challenge to help the AAPI community!
                         </p>

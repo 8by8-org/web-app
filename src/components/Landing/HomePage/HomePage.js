@@ -20,7 +20,7 @@ export default function HomePage() {
     if (result) {
       history.push("/verifysuccess");
     }
-  }, []);
+  }, [history]);
 
   return (
     <div className="homepage">
