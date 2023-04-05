@@ -1,10 +1,10 @@
 import React, { useEffect } from "react";
-import { useAuth } from "./../../../contexts/AuthContext";
 import { useHistory } from "react-router-dom";
 import HighFive from "./../../../assets/4-pages/VerifySuccess/HighFive.png";
 import Loading from "./../../../assets/4-pages/VerifySuccess/Loading.gif";
-import "./VerifySuccess.scss";
+import { useAuth } from "./../../../contexts/AuthContext";
 import { emailUser } from "./../../../functions/Email";
+import "./VerifySuccess.scss";
 
 function VerifySuccess() {
   const { currentUser, currentUserData } = useAuth();
@@ -13,7 +13,7 @@ function VerifySuccess() {
 
   useEffect(() => {
     sendToPage();
-  }, []);
+  });
 
   async function sendToPage() {
     window.localStorage.removeItem("verifying");

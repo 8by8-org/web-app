@@ -1,11 +1,11 @@
-import {getChallengerDatabase, getUserDatabase, choseReward} from "../../../functions/UserData";
-import {useHistory} from "react-router-dom";
-import './ChooseReward.scss';
-import {useState} from "react";
-import placeholderImage from "../../../assets/images/placeholder-image.jpg";
-import {getAllPartnerData} from "../../../functions/partnerData";
+import { useState } from "react";
 import { AiOutlineClose } from "react-icons/ai";
-import {MdLocationPin} from "react-icons/md"
+import { MdLocationPin } from "react-icons/md";
+import { useHistory } from "react-router-dom";
+import placeholderImage from "../../../assets/images/placeholder-image.jpg";
+import { choseReward, getChallengerDatabase, getUserDatabase } from "../../../functions/UserData";
+import { getAllPartnerData } from "../../../functions/partnerData";
+import './ChooseReward.scss';
 
 const ChooseReward = () => {
     // Get the current player
@@ -111,7 +111,9 @@ const ChooseReward = () => {
                                         
                                     </div>
                                     <div className="image-container col-3">
-                                       <a onClick={() => handleModal(partner.name)} > <img src={ partner.logo ? partner.logo : placeholderImage} alt="Partner"/></a>
+                                        <button onClick={() => handleModal(partner.name)} > 
+                                            <img src={ partner.logo ? partner.logo : placeholderImage} alt="Partner"/>
+                                        </button>
                                     </div>
                                 </div>
                             </label>
@@ -168,9 +170,9 @@ const ChooseReward = () => {
                                         <p> {partner.rewardDescription}</p>
                                     </div>
                                     <div className="image-container col-3">
-                                        <a onClick={() => handleModal(partner.name)} >
+                                        <button onClick={() => handleModal(partner.name)} >
                                             <img src={partner.logo ? partner.logo : placeholderImage } alt="Partner"/>
-                                        </a>
+                                        </button>
                                     </div>
                                 </div>
                             </label>

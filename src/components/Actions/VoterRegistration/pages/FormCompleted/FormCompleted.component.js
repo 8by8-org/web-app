@@ -1,14 +1,14 @@
+import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useHistory } from "react-router";
-import { useAuth } from "../../../../../contexts/AuthContext";
-import axios from "axios";
-import "../../VoterRegistration.scss";
-import ScrollToTop from "../../../../../functions/ScrollToTop";
-import stateJson from "../../../../../data/state_vote_info.json";
 import { Link } from "react-router-dom";
-import PopupModal from "../../../../Utility/PopupModal/PopupModal";
+import { useAuth } from "../../../../../contexts/AuthContext";
+import stateJson from "../../../../../data/state_vote_info.json";
+import ScrollToTop from "../../../../../functions/ScrollToTop";
 import { getUserDatabase } from "../../../../../functions/UserData";
 import { LoadingWheel } from "../../../../Utility/LoadingWheel/LoadingWheel.component";
+import PopupModal from "../../../../Utility/PopupModal/PopupModal";
+import "../../VoterRegistration.scss";
 const apiUrl = "https://usvotes-6vsnwycl4q-uw.a.run.app";
 
 export const FormCompleted = () => {
@@ -38,7 +38,7 @@ export const FormCompleted = () => {
       getStateRegData();
       setIsLoading(false);
     }, 1000);
-  }, []);
+  });
 
   ScrollToTop();
 
@@ -90,8 +90,8 @@ export const FormCompleted = () => {
                     We can email you a PDF file of your completed form. Print it
                     out and mail it to your state to complete your voter
                     registration.{" "}
-                    <a
-                      className="link--light"
+                    <button
+                      className="link--light inlineButton"
                       onClick={async (e) => {
                         e.preventDefault();
                         setIsLoading(true);
@@ -111,7 +111,7 @@ export const FormCompleted = () => {
                       }}
                     >
                       Get email with PDF file.
-                    </a>
+                    </button>
                   </p>
                   {error && <p className="error-message">{error}</p>}
                 </div>
@@ -155,8 +155,8 @@ export const FormCompleted = () => {
                   <span className="bold"> State ID</span> or{" "}
                   <span className="bold">driver's license</span> ready. If you
                   do not have either of these, you can{" "}
-                  <a
-                    className="link--light"
+                  <button
+                    className="link--light inlineButton"
                     onClick={(e) => {
                       e.preventDefault();
                       ToggleExpectModal(e);
@@ -164,18 +164,17 @@ export const FormCompleted = () => {
                     }}
                   >
                     register by mail.
-                  </a>
+                  </button>
                 </p>
-                <a
+                <button
                   className="a-btn"
-                  target="_blank"
                   onClick={(e) => {
                     ToggleReminderModal(e);
+                    window.open({onlineRegLink}, "_blank", "noreferrer");
                   }}
-                  href={onlineRegLink}
                 >
                   GO TO STATE WEBSITE
-                </a>
+                </button>
                 <button
                   className="btnlink"
                   onClick={(e) => {
@@ -209,8 +208,8 @@ export const FormCompleted = () => {
                     asked a few additional questions online. Make sure to have
                     your State ID or driver's license ready. If you do not have
                     either of these, you can{" "}
-                    <a
-                      className="link--light"
+                    <button
+                      className="link--light inlineButton"
                       onClick={(e) => {
                         e.preventDefault();
                         ToggleExpectModal(e);
@@ -218,7 +217,7 @@ export const FormCompleted = () => {
                       }}
                     >
                       register by mail.
-                    </a>
+                    </button>
                   </p>
                   <h3 className="MargTop">
                     2. WAIT FOR THE STATE TO CONFIRM YOUR APPLICATION
@@ -228,20 +227,18 @@ export const FormCompleted = () => {
                     your application. You will receive a Voter Notification Card
                     from your county elections office.
                   </p>
-                  <a
-                    className="link-left"
-                    href={"https://vote.gov/register/" + userStateShort}
-                    target="_blank"
+                  <button
+                    className="link-left inlineButton"
+                    onClick={() => {window.open("https://vote.gov/register/" + {userStateShort}, "_blank", "noreferrer");}}
                   >
                     Voter registration resources
-                  </a>
-                  <a
+                  </button>
+                  <button
                     className="a-btn--tm40"
-                    target="_blank"
-                    href={onlineRegLink}
+                    onClick={() => {window.open({onlineRegLink}, "_blank", "noreferrer");}}
                   >
                     GO TO STATE WEBSITE
-                  </a>
+                  </button>
                 </div>
               </div>
             </>
@@ -296,19 +293,18 @@ export const FormCompleted = () => {
         <br />
         {allowOnlineReg && (
           <>
-            <a className="info-link" href={onlineRegLink} target="_blank">
+            <button className="info-link" onClick={() => {window.open({onlineRegLink}, "_blank", "noreferrer");}}>
               How to register online to vote
-            </a>
+            </button>
             <br />
           </>
         )}
-        <a
+        <button
           className="info-link"
-          href={"https://vote.gov/register/" + userStateShort}
-          target="_blank"
+          onClick={() => {window.open("https://vote.gov/register/" + {userStateShort}, "_blank", "noreferrer");}}
         >
           Voter registration resources
-        </a>
+        </button>
       </div>
     </>
   );

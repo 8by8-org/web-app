@@ -1,14 +1,14 @@
-import React, { useEffect, useState } from "react";
-import { useHistory } from "react-router-dom";
 import axios from "axios";
+import React, { useEffect, useState } from "react";
 import { IconContext } from "react-icons";
 import * as MdIcons from "react-icons/md";
-import "../../VoterRegistration.scss";
-import { LoadingWheel } from "../../../../Utility/LoadingWheel/LoadingWheel.component";
-import { AddressBlock } from "./AddressBlock.component";
-import { ProgressBar } from "../ProgressBar/ProgressBar.component";
+import { useHistory } from "react-router-dom";
 import { useAuth } from "../../../../../contexts/AuthContext";
 import ScrollToTop from "../../../../../functions/ScrollToTop";
+import { LoadingWheel } from "../../../../Utility/LoadingWheel/LoadingWheel.component";
+import "../../VoterRegistration.scss";
+import { ProgressBar } from "../ProgressBar/ProgressBar.component";
+import { AddressBlock } from "./AddressBlock.component";
 import { checkAddressValidity } from "./utils";
 
 const apiUrl = "https://usvotes-6vsnwycl4q-uw.a.run.app";
@@ -44,7 +44,7 @@ export const HomeAddress = () => {
     ) {
       history.push("/voterreg/yourname");
     }
-  }, []);
+  });
 
   ScrollToTop();
 
