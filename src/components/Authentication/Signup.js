@@ -1,16 +1,16 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import ReCAPTCHA from "react-google-recaptcha";
-import errorMessage from "./../../functions/errorMessage";
+import { useHistory } from "react-router-dom";
 import avatar1 from "../../assets/images/SignUpPage/avatar1.png";
 import avatar2 from "../../assets/images/SignUpPage/avatar2.png";
 import avatar3 from "../../assets/images/SignUpPage/avatar3.png";
 import avatar4 from "../../assets/images/SignUpPage/avatar4.png";
-import { auth } from "./../../firebase";
-import { useAuth } from "./../../contexts/AuthContext";
 import { dummyPassword } from "../../constants";
+import { useAuth } from "./../../contexts/AuthContext";
+import { auth } from "./../../firebase";
 import { getUserType } from "./../../functions/UserType";
+import errorMessage from "./../../functions/errorMessage";
 import { addUserToDB } from "./AddUserToDB";
-import { useHistory } from "react-router-dom";
 import "./Signup.scss";
 
 function Signup() {
@@ -30,7 +30,7 @@ function Signup() {
         history.push("/progress");
       }
     }
-  }, [currentUser]);
+  }, [currentUser, currentUserData, history, playerStatus]);
 
   const [formData, setFormData] = useState({
     name: "",

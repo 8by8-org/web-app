@@ -1,10 +1,10 @@
-import React, { useEffect, useState } from "react";
-import { useAuth } from "./../../../contexts/AuthContext";
-import { useHistory } from "react-router-dom";
 import { getFunctions, httpsCallable } from "firebase/functions";
-import Plane from "./../../../assets/4-pages/Verify/Plane.png";
-import "./Verify.scss";
+import React, { useEffect, useState } from "react";
+import { useHistory } from "react-router-dom";
 import PopupModal from "../../Utility/PopupModal/PopupModal";
+import Plane from "./../../../assets/4-pages/Verify/Plane.png";
+import { useAuth } from "./../../../contexts/AuthContext";
+import "./Verify.scss";
 
 function Verify() {
   const { currentUser, currentUserData } = useAuth();
@@ -25,7 +25,7 @@ function Verify() {
       history.push(`/`);
     }
     window.localStorage.setItem("verifying", "true");
-  }, [currentUser, history]);
+  }, [currentUser, history, currentUserData?.email]);
 
   const resendVerification = httpsCallable(functions, "resendVerification");
   const sendSignin = httpsCallable(functions, "sendSigninEmail");
