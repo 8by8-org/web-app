@@ -8,7 +8,7 @@ describe('Home', () => {
     // const { container } = render(<Home />);
     // expect(container).toMatchSnapshot();
 
-    //testing that failed tests prevent pushing
+    //testing that failed tests prevent pushing again
     expect(true).toBe(false);
   });
 });
