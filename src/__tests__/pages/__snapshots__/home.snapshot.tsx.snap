@@ -1,0 +1,637 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Home renders homepage unchanged 1`] = `
+<div>
+  <div
+    class="outer_container"
+  >
+    <div
+      class="inner_container"
+    >
+      <section
+        class="section_1"
+      >
+        <div
+          class="content_container"
+        >
+          <img
+            alt="8by8 Logo"
+            class="logo"
+            data-nimg="1"
+            decoding="async"
+            height="40"
+            loading="lazy"
+            src="/_next/image?url=%2Fimg.jpg&w=96&q=75"
+            srcset="/_next/image?url=%2Fimg.jpg&w=48&q=75 1x, /_next/image?url=%2Fimg.jpg&w=96&q=75 2x"
+            style="color: transparent;"
+            width="40"
+          />
+          <h1
+            class="color_white"
+          >
+            GET 
+            <u
+              class="underline"
+            >
+              8 AAPI FRIENDS
+            </u>
+             TO REGISTER TO VOTE IN 
+            <u
+              class="underline"
+            >
+              8 DAYS
+            </u>
+          </h1>
+          <button
+            class="challenge_btn"
+          >
+            Take the Challenge
+          </button>
+          <a
+            class="link"
+            href="/why8by8"
+          >
+            See why others are doing it
+          </a>
+        </div>
+      </section>
+      <div
+        class="curve_container"
+      >
+        <img
+          alt="yellow curve"
+          class="curve_1"
+          data-nimg="1"
+          decoding="async"
+          height="40"
+          id="why8by8"
+          loading="lazy"
+          src="/_next/image?url=%2Fimg.jpg&w=96&q=75"
+          srcset="/_next/image?url=%2Fimg.jpg&w=48&q=75 1x, /_next/image?url=%2Fimg.jpg&w=96&q=75 2x"
+          style="color: transparent;"
+          width="40"
+        />
+      </div>
+      <section
+        class="section_2"
+      >
+        <img
+          alt="why 8by8?"
+          class="speech_bubble"
+          data-nimg="1"
+          decoding="async"
+          height="40"
+          loading="lazy"
+          src="/_next/image?url=%2Fimg.jpg&w=96&q=75"
+          srcset="/_next/image?url=%2Fimg.jpg&w=48&q=75 1x, /_next/image?url=%2Fimg.jpg&w=96&q=75 2x"
+          style="color: transparent;"
+          width="40"
+        />
+        <img
+          alt="sign"
+          class="sign"
+          data-nimg="1"
+          decoding="async"
+          height="40"
+          loading="lazy"
+          src="/_next/image?url=%2Fimg.jpg&w=96&q=75"
+          srcset="/_next/image?url=%2Fimg.jpg&w=48&q=75 1x, /_next/image?url=%2Fimg.jpg&w=96&q=75 2x"
+          style="color: transparent;"
+          width="40"
+        />
+      </section>
+      <section
+        class="section_3"
+      >
+        <p>
+          In 2020, we saw an unprecedented
+           
+          <b>
+            150% spike in anti-AAPI (Asian American Pacific Islander) hate crimes
+          </b>
+          , a trend that is already continuing into 2021. This is both a national and a local problem.
+        </p>
+      </section>
+      <div
+        class="curve_container"
+      >
+        <img
+          alt="teal curve"
+          class="curve"
+          data-nimg="1"
+          decoding="async"
+          height="40"
+          loading="lazy"
+          src="/_next/image?url=%2Fimg.jpg&w=96&q=75"
+          srcset="/_next/image?url=%2Fimg.jpg&w=48&q=75 1x, /_next/image?url=%2Fimg.jpg&w=96&q=75 2x"
+          style="color: transparent;"
+          width="40"
+        />
+      </div>
+      <section
+        class="section_4"
+      >
+        <h2
+          class="h2"
+        >
+          <span
+            class="bold_shadow_text"
+          >
+            150%
+          </span>
+           spike in anti-Asian and anti-AAPI hate crimes in 2020
+        </h2>
+      </section>
+      <section
+        class="section_5"
+      >
+        <img
+          alt="solution?"
+          class="speech_bubble"
+          data-nimg="1"
+          decoding="async"
+          height="40"
+          loading="lazy"
+          src="/_next/image?url=%2Fimg.jpg&w=96&q=75"
+          srcset="/_next/image?url=%2Fimg.jpg&w=48&q=75 1x, /_next/image?url=%2Fimg.jpg&w=96&q=75 2x"
+          style="color: transparent;"
+          width="40"
+        />
+        <h1
+          class="section_heading"
+        >
+          We need
+          <br />
+           more aapi
+          <br />
+           voters
+        </h1>
+        <img
+          alt="mic"
+          class="mic"
+          data-nimg="1"
+          decoding="async"
+          height="40"
+          loading="lazy"
+          src="/_next/image?url=%2Fimg.jpg&w=96&q=75"
+          srcset="/_next/image?url=%2Fimg.jpg&w=48&q=75 1x, /_next/image?url=%2Fimg.jpg&w=96&q=75 2x"
+          style="color: transparent;"
+          width="40"
+        />
+      </section>
+      <section
+        class="section_6"
+      >
+        <h2
+          class="section_heading"
+        >
+          the path to fixing this problem starts with
+           
+          <u
+            class="underline"
+          >
+            closing the representation gap
+          </u>
+           In Asian-American communities.
+        </h2>
+        <h3
+          class="stat_text"
+        >
+          Asian American voter turnout rate has remained Below
+        </h3>
+        <div
+          class="stat_percentage_container_1"
+        >
+          <div
+            class="bold_shadow"
+          >
+            60%
+          </div>
+        </div>
+        <h3
+          class="stat_text"
+        >
+          Asian-Americans make up
+        </h3>
+        <div
+          class="stat_percentage_container_2"
+        >
+          <div
+            class="bold_shadow"
+          >
+            7%
+          </div>
+        </div>
+        <h3
+          class="stat_text_bottom"
+        >
+          of the population 
+        </h3>
+        <h3
+          class="stat_text"
+        >
+          but only
+        </h3>
+        <div
+          class="stat_percentage_container_3"
+        >
+          <div
+            class="bold_shadow"
+          >
+            3%
+          </div>
+        </div>
+        <h3
+          class="stat_text_bottom"
+        >
+          of Congress is Asian or AAPI 
+        </h3>
+      </section>
+      <div
+        class="curve_container"
+      >
+        <img
+          alt="black curve"
+          class="curve"
+          data-nimg="1"
+          decoding="async"
+          height="40"
+          loading="lazy"
+          src="/_next/image?url=%2Fimg.jpg&w=96&q=75"
+          srcset="/_next/image?url=%2Fimg.jpg&w=48&q=75 1x, /_next/image?url=%2Fimg.jpg&w=96&q=75 2x"
+          style="color: transparent;"
+          width="40"
+        />
+      </div>
+      <section
+        class="section_7"
+      >
+        <img
+          alt="we need your help!"
+          class="speech_bubble"
+          data-nimg="1"
+          decoding="async"
+          height="40"
+          loading="lazy"
+          src="/_next/image?url=%2Fimg.jpg&w=96&q=75"
+          srcset="/_next/image?url=%2Fimg.jpg&w=48&q=75 1x, /_next/image?url=%2Fimg.jpg&w=96&q=75 2x"
+          style="color: transparent;"
+          width="40"
+        />
+        <h2
+          class="section_heading"
+        >
+          we're asking everyone to join us in
+           
+          <u
+            class="underline"
+          >
+            taking the #8by8challenge
+          </u>
+           and registering 8 of their friends to vote in 8 days.
+        </h2>
+        <button
+          class="btn_gradient btn_wide"
+        >
+          Take the Challenge
+        </button>
+        <div
+          class="content_container"
+        >
+          <p
+            class="b2 color_white"
+          >
+            The 8by8 mission aims to build civic participation and bring awareness to the struggles of AAPI citizens, while encouraging community involvement and investment. Our approach involves working with community, business, and tech leaders to create voter registration solutions that work.
+          </p>
+          <a
+            class="link"
+            href="https://www.8by8.us/"
+            rel="noreferrer"
+            target="_blank"
+          >
+            Learn more about 8by8
+          </a>
+        </div>
+      </section>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`renders homepage unchanged 1`] = `
+<div>
+  <div
+    class="outer_container"
+  >
+    <div
+      class="inner_container"
+    >
+      <section
+        class="section_1"
+      >
+        <div
+          class="content_container"
+        >
+          <img
+            alt="8by8 Logo"
+            class="logo"
+            data-nimg="1"
+            decoding="async"
+            height="40"
+            loading="lazy"
+            src="/_next/image?url=%2Fimg.jpg&w=96&q=75"
+            srcset="/_next/image?url=%2Fimg.jpg&w=48&q=75 1x, /_next/image?url=%2Fimg.jpg&w=96&q=75 2x"
+            style="color: transparent;"
+            width="40"
+          />
+          <h1
+            class="color_white"
+          >
+            GET 
+            <u
+              class="underline"
+            >
+              8 AAPI FRIENDS
+            </u>
+             TO REGISTER TO VOTE IN 
+            <u
+              class="underline"
+            >
+              8 DAYS
+            </u>
+          </h1>
+          <button
+            class="challenge_btn"
+          >
+            Take the Challenge
+          </button>
+          <a
+            class="link"
+            href="/why8by8"
+          >
+            See why others are doing it
+          </a>
+        </div>
+      </section>
+      <div
+        class="curve_container"
+      >
+        <img
+          alt="yellow curve"
+          class="curve_1"
+          data-nimg="1"
+          decoding="async"
+          height="40"
+          id="why8by8"
+          loading="lazy"
+          src="/_next/image?url=%2Fimg.jpg&w=96&q=75"
+          srcset="/_next/image?url=%2Fimg.jpg&w=48&q=75 1x, /_next/image?url=%2Fimg.jpg&w=96&q=75 2x"
+          style="color: transparent;"
+          width="40"
+        />
+      </div>
+      <section
+        class="section_2"
+      >
+        <img
+          alt="why 8by8?"
+          class="speech_bubble"
+          data-nimg="1"
+          decoding="async"
+          height="40"
+          loading="lazy"
+          src="/_next/image?url=%2Fimg.jpg&w=96&q=75"
+          srcset="/_next/image?url=%2Fimg.jpg&w=48&q=75 1x, /_next/image?url=%2Fimg.jpg&w=96&q=75 2x"
+          style="color: transparent;"
+          width="40"
+        />
+        <img
+          alt="sign"
+          class="sign"
+          data-nimg="1"
+          decoding="async"
+          height="40"
+          loading="lazy"
+          src="/_next/image?url=%2Fimg.jpg&w=96&q=75"
+          srcset="/_next/image?url=%2Fimg.jpg&w=48&q=75 1x, /_next/image?url=%2Fimg.jpg&w=96&q=75 2x"
+          style="color: transparent;"
+          width="40"
+        />
+      </section>
+      <section
+        class="section_3"
+      >
+        <p>
+          In 2020, we saw an unprecedented
+           
+          <b>
+            150% spike in anti-AAPI (Asian American Pacific Islander) hate crimes
+          </b>
+          , a trend that is already continuing into 2021. This is both a national and a local problem.
+        </p>
+      </section>
+      <div
+        class="curve_container"
+      >
+        <img
+          alt="teal curve"
+          class="curve"
+          data-nimg="1"
+          decoding="async"
+          height="40"
+          loading="lazy"
+          src="/_next/image?url=%2Fimg.jpg&w=96&q=75"
+          srcset="/_next/image?url=%2Fimg.jpg&w=48&q=75 1x, /_next/image?url=%2Fimg.jpg&w=96&q=75 2x"
+          style="color: transparent;"
+          width="40"
+        />
+      </div>
+      <section
+        class="section_4"
+      >
+        <h2
+          class="h2"
+        >
+          <span
+            class="bold_shadow_text"
+          >
+            150%
+          </span>
+           spike in anti-Asian and anti-AAPI hate crimes in 2020
+        </h2>
+      </section>
+      <section
+        class="section_5"
+      >
+        <img
+          alt="solution?"
+          class="speech_bubble"
+          data-nimg="1"
+          decoding="async"
+          height="40"
+          loading="lazy"
+          src="/_next/image?url=%2Fimg.jpg&w=96&q=75"
+          srcset="/_next/image?url=%2Fimg.jpg&w=48&q=75 1x, /_next/image?url=%2Fimg.jpg&w=96&q=75 2x"
+          style="color: transparent;"
+          width="40"
+        />
+        <h1
+          class="section_heading"
+        >
+          We need
+          <br />
+           more aapi
+          <br />
+           voters
+        </h1>
+        <img
+          alt="mic"
+          class="mic"
+          data-nimg="1"
+          decoding="async"
+          height="40"
+          loading="lazy"
+          src="/_next/image?url=%2Fimg.jpg&w=96&q=75"
+          srcset="/_next/image?url=%2Fimg.jpg&w=48&q=75 1x, /_next/image?url=%2Fimg.jpg&w=96&q=75 2x"
+          style="color: transparent;"
+          width="40"
+        />
+      </section>
+      <section
+        class="section_6"
+      >
+        <h2
+          class="section_heading"
+        >
+          the path to fixing this problem starts with
+           
+          <u
+            class="underline"
+          >
+            closing the representation gap
+          </u>
+           In Asian-American communities.
+        </h2>
+        <h3
+          class="stat_text"
+        >
+          Asian American voter turnout rate has remained Below
+        </h3>
+        <div
+          class="stat_percentage_container_1"
+        >
+          <div
+            class="bold_shadow"
+          >
+            60%
+          </div>
+        </div>
+        <h3
+          class="stat_text"
+        >
+          Asian-Americans make up
+        </h3>
+        <div
+          class="stat_percentage_container_2"
+        >
+          <div
+            class="bold_shadow"
+          >
+            7%
+          </div>
+        </div>
+        <h3
+          class="stat_text_bottom"
+        >
+          of the population 
+        </h3>
+        <h3
+          class="stat_text"
+        >
+          but only
+        </h3>
+        <div
+          class="stat_percentage_container_3"
+        >
+          <div
+            class="bold_shadow"
+          >
+            3%
+          </div>
+        </div>
+        <h3
+          class="stat_text_bottom"
+        >
+          of Congress is Asian or AAPI 
+        </h3>
+      </section>
+      <div
+        class="curve_container"
+      >
+        <img
+          alt="black curve"
+          class="curve"
+          data-nimg="1"
+          decoding="async"
+          height="40"
+          loading="lazy"
+          src="/_next/image?url=%2Fimg.jpg&w=96&q=75"
+          srcset="/_next/image?url=%2Fimg.jpg&w=48&q=75 1x, /_next/image?url=%2Fimg.jpg&w=96&q=75 2x"
+          style="color: transparent;"
+          width="40"
+        />
+      </div>
+      <section
+        class="section_7"
+      >
+        <img
+          alt="we need your help!"
+          class="speech_bubble"
+          data-nimg="1"
+          decoding="async"
+          height="40"
+          loading="lazy"
+          src="/_next/image?url=%2Fimg.jpg&w=96&q=75"
+          srcset="/_next/image?url=%2Fimg.jpg&w=48&q=75 1x, /_next/image?url=%2Fimg.jpg&w=96&q=75 2x"
+          style="color: transparent;"
+          width="40"
+        />
+        <h2
+          class="section_heading"
+        >
+          we're asking everyone to join us in
+           
+          <u
+            class="underline"
+          >
+            taking the #8by8challenge
+          </u>
+           and registering 8 of their friends to vote in 8 days.
+        </h2>
+        <button
+          class="btn_gradient btn_wide"
+        >
+          Take the Challenge
+        </button>
+        <div
+          class="content_container"
+        >
+          <p
+            class="b2 color_white"
+          >
+            The 8by8 mission aims to build civic participation and bring awareness to the struggles of AAPI citizens, while encouraging community involvement and investment. Our approach involves working with community, business, and tech leaders to create voter registration solutions that work.
+          </p>
+          <a
+            class="link"
+            href="https://www.8by8.us/"
+            rel="noreferrer"
+            target="_blank"
+          >
+            Learn more about 8by8
+          </a>
+        </div>
+      </section>
+    </div>
+  </div>
+</div>
+`;

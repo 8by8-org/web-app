@@ -1,0 +1,70 @@
+@use '../../variables/font-families';
+@use '../../variables/font-sizes';
+@use '../../variables/colors';
+@use '../../variables/gradients';
+
+@mixin -btn-base {
+  font-family: font-families.$bebas-neue;
+  font-size: font-sizes.$lg;
+  text-align: center;
+  height: 64px;
+  border-radius: 40px;
+  border-width: 4px;
+  border-style: solid;
+  position: relative;
+}
+
+@mixin -btn-outline {
+  &::after {
+    content: "";
+    position: absolute;
+    border-radius: 40px;
+    top: -8px;
+    left: -8px;
+    right: -8px;
+    bottom: -8px;
+    border: colors.$white 4px solid;
+  }
+}
+
+@mixin -btn-inv-grad-text {
+  :first-child {
+    //a span element should be added inside the button to contain the text, these styles will apply to it
+    background: gradients.$yellow-teal;
+    background-clip: text;
+    -webkit-background-clip: text;
+    -moz-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    -moz-text-fill-color: transparent;
+    color: transparent;
+    font-size: inherit;
+  }
+} 
+
+.btn_gradient {
+  @include -btn-base;
+  @include -btn-outline;
+  background: gradients.$yellow-teal;
+  color: colors.$black-8by8;
+  border-color: colors.$black-8by8;
+  padding: 5px;
+}
+
+.btn_inverted {
+  @include -btn-base;
+  @include -btn-inv-grad-text;
+  background: colors.$black-8by8;
+  border-color: colors.$white;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+.btn_wide {
+  width: 100%;
+}
+
+.btn_narrow {
+  width: fit-content;
+}

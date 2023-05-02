@@ -1,0 +1,3 @@
+@use './colors';
+
+$yellow-teal : linear-gradient(270deg, colors.$yellow 0%, colors.$teal 100%);
