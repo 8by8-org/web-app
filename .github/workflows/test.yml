@@ -13,4 +13,6 @@ jobs:
         - uses: actions/setup-node@v3
           with:
             node-version: latest
-        - run: npm run test:ci
+        - run: |
+            npm ci 
+            npm run test:ci
