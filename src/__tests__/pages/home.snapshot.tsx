@@ -6,7 +6,6 @@ describe('Home', () => {
 
   it('renders homepage unchanged', () => {
     const { container } = render(<Home />);
-    expect(true).toBe(false);
     expect(container).toMatchSnapshot();
   });
 });
