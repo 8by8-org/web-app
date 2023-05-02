@@ -8,7 +8,7 @@ describe('Home', () => {
     // const { container } = render(<Home />);
     // expect(container).toMatchSnapshot();
 
-    //testing that failed tests prevent pushing again
-    expect(true).toBe(false);
+    //testing that lack of test coverage causes push to fail
+    expect(true).toBe(true);
   });
 });
