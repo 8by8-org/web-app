@@ -1,21 +1,21 @@
-import React, { useEffect, useState } from "react";
-import { useHistory } from "react-router-dom";
 import axios from "axios";
+import React, { useEffect, useState } from "react";
 import { IconContext } from "react-icons";
 import * as MdIcons from "react-icons/md";
-import "../../VoterRegistration.scss";
-import { LoadingWheel } from "../../../../Utility/LoadingWheel/LoadingWheel.component";
-import { AddressBlock } from "./AddressBlock.component";
-import { ProgressBar } from "../ProgressBar/ProgressBar.component";
+import { useHistory } from "react-router-dom";
 import { useAuth } from "../../../../../contexts/AuthContext";
 import ScrollToTop from "../../../../../functions/ScrollToTop";
+import { LoadingWheel } from "../../../../Utility/LoadingWheel/LoadingWheel.component";
+import "../../VoterRegistration.scss";
+import { ProgressBar } from "../ProgressBar/ProgressBar.component";
+import { AddressBlock } from "./AddressBlock.component";
+import { checkAddressValidity } from "./utils";
 
 const apiUrl = "https://usvotes-6vsnwycl4q-uw.a.run.app";
 
 export const HomeAddress = () => {
   const history = useHistory();
   const {
-    currentUser,
     currentUserData,
     voterRegistrationData,
     setVoterRegistrationData,
@@ -25,11 +25,6 @@ export const HomeAddress = () => {
   const [error, setError] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [showModal, setShowModal] = useState(false);
-  const [addressValidity, setAddressValidity] = useState({
-    home: false,
-    mailing: false,
-    previous: false,
-  });
 
   /*redirect the user to the form completed page if they've already register to vote
   using the 8x8 app, or to the appropriate previous page if that information is incomplete
@@ -49,7 +44,7 @@ export const HomeAddress = () => {
     ) {
       history.push("/voterreg/yourname");
     }
-  }, []);
+  });
 
   ScrollToTop();
 
@@ -62,25 +57,20 @@ export const HomeAddress = () => {
       {isLoading && <LoadingWheel overlay={true} />}
       <AddressBlock
         addressType={"home"}
+        error={error}
         title="HOME ADDRESS"
         tooltipText="Provide your home address. Do not put your mailing address here if it’s different from your home address. Do not use a PO Box or rural route without a box number. If you live in a rural area but don’t have a street address or have no address, you can show where you live on a map later on the printed form."
-        isValid={addressValidity}
-        setIsValid={setAddressValidity}
       />
       {hasMailingAddress && (
         <AddressBlock
           addressType={"mailing"}
           title="MAILING ADDRESS"
-          isValid={addressValidity}
-          setIsValid={setAddressValidity}
         />
       )}
       {hasChangeOfAddress && (
         <AddressBlock
           addressType={"previous"}
           title="PREVIOUS ADDRESS"
-          isValid={addressValidity}
-          setIsValid={setAddressValidity}
         />
       )}
       <div>
@@ -121,12 +111,6 @@ export const HomeAddress = () => {
       </div>
       <button
         className="next-btn"
-        disabled={
-          !addressValidity.home ||
-          (!addressValidity.mailing &&
-            voterRegistrationData.diff_mail_address) ||
-          (!addressValidity.previous && voterRegistrationData.change_of_address)
-        }
         onClick={async (event) => {
           event.preventDefault();
           const {
@@ -144,11 +128,15 @@ export const HomeAddress = () => {
             mail_city,
             mail_zip,
             mail_street,
+            mail_streetLine2,
+            mail_unit,
             change_of_address,
             prev_state,
             prev_city,
             prev_zip,
             prev_street,
+            prev_streetLine2,
+            prev_unit
           } = voterRegistrationData;
           let checksPassed = true;
           if (state.length === 0) {
@@ -217,9 +205,26 @@ export const HomeAddress = () => {
           }
           if (!checksPassed) {
             setError("Please complete all of the required fields");
+            window.scrollTo(0,0);
             return;
           }
-          setIsLoading(true);
+          //now check the addresses
+          let addressesAreValid = true;
+          try {
+            setIsLoading(true);
+            await checkAddressValidity(street, streetLine2, unit, city, state, zip);
+            if(diff_mail_address) await checkAddressValidity(mail_street, mail_streetLine2, mail_unit, mail_city, mail_state, mail_zip);
+            if(change_of_address) await checkAddressValidity(prev_street, prev_streetLine2, prev_unit, prev_city, prev_state, prev_zip);
+          } catch(e) {
+            console.log(e)
+            addressesAreValid = false;
+          }
+          if(!addressesAreValid) {
+            setError("You entered an invalid address. Try again.");
+            setIsLoading(false);
+            window.scrollTo(0,0);
+            return;
+          }
           const ymd = dob.split("-");
           const year = ymd[0];
           const month = ymd[1];
@@ -243,6 +248,7 @@ export const HomeAddress = () => {
           };
           try {
             const res = await axios.post(`${apiUrl}/registered/`, postBody);
+            console.log(res)
             setIsLoading(false);
             const { registered } = res.data;
             if (registered) {

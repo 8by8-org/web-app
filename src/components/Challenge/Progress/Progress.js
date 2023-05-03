@@ -1,10 +1,11 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect,  } from "react";
 import {
   completedAction,
   getUserDatabase,
   restartChallenge,
 } from "./../../../functions/UserData";
 import { useAuth } from "../../../contexts/AuthContext";
+import { usePartners } from "../../../contexts/PartnersContext";
 import { addInvitedBy } from "../../../functions/AddInvite";
 import { makePlayerChallenger } from "../../../functions/UserData";
 import Invite from "./../../Utility/Invite/Invite";
@@ -13,10 +14,13 @@ import PopupModal from "./../../Utility/PopupModal/PopupModal";
 import ConfettiAnimation from "../../Utility/Helpers/ConfettiAnimation";
 import CurveA from "./../../../assets/2-shapes/curve-a.svg";
 import BlobDay from "./../../../assets/4-pages/Progress/BlobDay.svg";
+import rewardsIllustration from "./../../../assets/images/rewardsIllustration.svg";
 import "./Progress.scss";
+import { getPartnerData } from "../../../functions/partnerData";
 
 export default function Progress() {
   const { currentUser } = useAuth();
+  const { partnersExist } = usePartners();
   const [challengeVoid, setChallengeVoid] = useState(false);
   const [challengeFinished, setChallengeFinished] = useState(false);
   const [daysLeft, setDaysLeft] = useState(0);
@@ -24,6 +28,8 @@ export default function Progress() {
   const [completedBadges, setCompletedBadges] = useState(0);
   const [registeredVoter, setRegisteredVoter] = useState(false);
   const [openModal, setOpenModal] = useState(false);
+  const [alreadyRedeemed, setAlreadyRedeemed] = useState();
+  const [couponData, setCouponData] = useState();
   const [button, setButton] = useState(
     <button className="gradient" onClick={() => toggleInvite.current()}>
       Invite friends
@@ -33,7 +39,6 @@ export default function Progress() {
   const [loading, setLoading] = useState(false);
 
   const toggleInvite = React.useRef();
-
   useEffect(() => {
     if (localStorage.getItem("player") && currentUser) {
       setTimeout(() => {
@@ -55,7 +60,7 @@ export default function Progress() {
 
       setButton(
         <button className="inverted" onClick={() => toggleInvite.current()}>
-          Share
+          <span>Share</span>
         </button>
       );
     }
@@ -69,7 +74,10 @@ export default function Progress() {
             restartChallenge();
             fetchUserData();
             setButton(
-              <button className="gradient" onClick={() => toggleInvite.current()}>
+              <button
+                className="gradient"
+                onClick={() => toggleInvite.current()}
+              >
                 Invite friends
               </button>
             );
@@ -102,6 +110,15 @@ export default function Progress() {
         const badgesLength = badgeArr.length;
         while (badgeArr.length < 8) {
           badgeArr.push(0);
+        }
+
+        if (data.badges.length >= 8) {
+          if (data.challengeReward === undefined) {
+            setAlreadyRedeemed(false);
+          } else {
+            setAlreadyRedeemed(true);
+            getPartnerData(data.challengeReward, setCouponData);
+          }
         }
 
         setDaysLeft(days);
@@ -167,17 +184,53 @@ export default function Progress() {
       {confettiAnimation}
       <section className="section-1 bg-black pt-32px pl-30px pb-80px">
         <h1>
-          Your <br /> challenge <br /> badges
+          {challengeFinished ? (
+            !alreadyRedeemed ? (
+              <>
+                You've Won! <br /> The <br />
+                Challenge
+              </>
+            ) : (
+              <>
+                You've Won! <br /> Here's <br /> Your <br /> Reward
+              </>
+            )
+          ) : (
+            <>
+              Your <br /> challenge <br /> badges
+            </>
+          )}
         </h1>
         <div className="days-blob-container">
-          <div className="days-label">
-            <p className="number-shadow">{daysLeft}</p>
-            <h3 className="text-black">
-              {daysLeft === 1 ? "Day" : "Days"} left
-            </h3>
-          </div>
-          <img className="blob" src={BlobDay} alt="days remaining blob" />
+          <img
+            className="blob"
+            src={challengeFinished ? rewardsIllustration : BlobDay}
+            alt="days remaining blob"
+          />
+          {!challengeFinished && (
+            <div className="days-label">
+              <p className="number-shadow">{daysLeft}</p>
+              <h3 className="text-black">
+                {daysLeft === 1 ? "Day" : "Days"} left
+              </h3>
+            </div>
+          )}
         </div>
+        {alreadyRedeemed && couponData && (
+          <div className="couponContainer">
+            {
+              <div>
+                <div className="img-bg">
+                  <img src={couponData.logo} alt="Partner Logo" />
+                </div>
+                <p>{couponData.rewardDescription} {couponData.redemptionDescription}</p>
+                <p>
+                  Availability and terms subject to change.
+                </p>
+              </div>
+            }
+          </div>
+        )}
       </section>
       <img className="curve" src={CurveA} alt="black curve" />
 
@@ -186,6 +239,16 @@ export default function Progress() {
           You completed {completedBadges === 8 ? " all " : " "}
           <span className="underline">{completedBadges}</span> badges
         </h3>
+        {challengeFinished && !alreadyRedeemed && partnersExist && (
+          <button
+            className="gradient"
+            onClick={() => {
+              document.location.href = "/choosereward?ref=challenger";
+            }}
+          >
+            Choose A Reward
+          </button>
+        )}
         {button}
         {!registeredVoter ? (
           <div>
@@ -225,6 +288,7 @@ export default function Progress() {
       {openModal && (
         <PopupModal
           setOpenModal={setOpenModal}
+          theme={"modalContainer"}
           content={
             <>
               <div className="b1">
@@ -238,7 +302,10 @@ export default function Progress() {
                   fetchUserData();
                   setOpenModal(false);
                   setButton(
-                    <button className="gradient" onClick={() => toggleInvite.current()}>
+                    <button
+                      className="gradient"
+                      onClick={() => toggleInvite.current()}
+                    >
                       Invite friends
                     </button>
                   );

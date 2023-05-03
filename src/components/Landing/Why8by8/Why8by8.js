@@ -29,11 +29,11 @@ export default function Why8by8() {
           </q>
           <aside>
             <span>—Arnab, High School Student</span>
-            <img src={Arnab} alt="Arnab Image"></img>
+            <img src={Arnab} alt="Arnab"></img>
           </aside>
         </div>
 
-        <div class="custom-shape-divider-top-1659139317">
+        <div className="custom-shape-divider-top-1659139317">
           <svg
             data-name="Layer 1"
             xmlns="http://www.w3.org/2000/svg"
@@ -42,7 +42,7 @@ export default function Why8by8() {
           >
             <path
               d="M985.66,92.83C906.67,72,823.78,31,743.84,14.19c-82.26-17.34-168.06-16.33-250.45.39-57.84,11.73-114,31.07-172,41.86A600.21,600.21,0,0,1,0,27.35V120H1200V95.8C1132.19,118.92,1055.71,111.31,985.66,92.83Z"
-              class="shape-fill"
+              className="shape-fill"
             ></path>
           </svg>
         </div>
@@ -55,7 +55,7 @@ export default function Why8by8() {
         </h3>
       </div>
       <div className="whiteMidsection">
-        <img src={TealCurve} className="tealCurve"></img>
+        <img src={TealCurve} className="tealCurve" alt="Teal Curve"></img>
         <q>
           It is was heart-breaking to know that the AAPI community, including my
           Indonesian friends, is still subjected to racism and discrimination. I
@@ -66,18 +66,18 @@ export default function Why8by8() {
         </q>
         <aside>
           <span>—Agustina, College Student</span>
-          <img src={Agustina} alt="Agustina Image"></img>
+          <img src={Agustina} alt="Agustina"></img>
         </aside>
-        <img src={BlurDivider} className="blur-divider"></img>
+        <img src={BlurDivider} className="blur-divider alt" alt="Blur Divider"></img>
         <h1> Types of Hate Crimes Against AAPI</h1>
         <div className="chart">
-          <img src={PieChart} />
+          <img src={PieChart} alt="Pie Chart"/>
         </div>
         <h3>
           <b>11% of these are considered civil rights violations</b>, where the
           AAPI community members were barred from transportation, faced
           discrimination from housing or in the workplace, etc.
-          <img src={BlurBlob} />
+          <img src={BlurBlob} alt="Blur Blob" />
         </h3>
         <div className="lastStat">
           <h3>
@@ -88,11 +88,11 @@ export default function Why8by8() {
             <br />
             Of All Reports
           </h3>
-          <img src={BlurBlob} className="blurBlob" />
+          <img src={BlurBlob} className="blurBlob" alt="Blur Blob"/>
         </div>
       </div>
       <div className="finalTealStats">
-        <img className="top-curve" src={TealTop} />
+        <img className="top-curve" src={TealTop} alt="Teal Top"/>
         <h2>Asians Have Historically Low Election Turnout</h2>
         <h1 className="bold-shadow">Below 60%</h1>
         <div className="stat">
@@ -119,6 +119,7 @@ export default function Why8by8() {
           src={TealWave}
           className="leftSpread"
           style={{ transform: "translateY(00%)" }}
+          alt="Teal Wave"
         />
       </div>
       <div className="closingQuotes">
@@ -132,7 +133,7 @@ export default function Why8by8() {
         </q>
         <aside>
           <span>—Luis, College Student</span>
-          <img className="img1" src={Luis} alt="Luis Image"></img>
+          <img className="img1" src={Luis} alt="Luis"></img>
         </aside>
         <div className="quote-gap"></div>
         <q>
@@ -145,18 +146,18 @@ export default function Why8by8() {
         </q>
         <aside>
           <span className="quote-gap-2">—Yudy, Partnership Lead at 8BY8</span>
-          <img src={Yudy} alt="Yudy Image"></img>
+          <img src={Yudy} alt="Yudy"></img>
         </aside>
 
         <div className="chefusQuote">
-          <img src={TealBottom} className="leftSpread tealBottom" />
+          <img src={TealBottom} className="leftSpread tealBottom" alt="Teal Bottom"/>
           <q>
             Folks at 8by8 are professional and dedicated to fight for Asian
             rights. Thank you so much for your hard work and keep thriving!
           </q>
           <aside>
             <span>—Xintao She, Chefus CEO</span>
-            <img className="logo" />
+            <img className="logo" alt="Chefus Logo"/>
           </aside>
           <img
             src={TealTop}
@@ -167,6 +168,7 @@ export default function Why8by8() {
               left: "0",
               zIndex: "9",
             }}
+            alt="Teal Top"
           />
         </div>
       </div>
@@ -185,7 +187,7 @@ export default function Why8by8() {
           That's a very small portion of AAPI voters who already make up 4% of
           the overall electorate! Your vote really counts!
         </h4>
-        <img src={VoteBubble} />
+        <img src={VoteBubble} alt="Vote Bubble"/>
       </div>
       <div className="linksBox">
         <a href="https://www.instagram.com/8by8vote/" target={"blank"}>

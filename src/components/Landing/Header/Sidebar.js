@@ -150,6 +150,7 @@ function Sidebar({sidebar, showSidebar}) {
             {openSignoutModal && (
                 <PopupModal
                     setOpenModal={setSignoutModal}
+                    theme={"modalContainer"}
                     content={
                         <>
                             <div className="b2">Are you sure you want to sign out?</div>

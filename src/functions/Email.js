@@ -1,6 +1,7 @@
 import { getUserDatabase, getChallengerDatabase } from "./UserData";
 
 const URL = "https://usvotes-6vsnwycl4q-uw.a.run.app/email/";
+const partnerLinks = "https://www.chefus.com/img/mobile.ab33ed92.png,https://www.specialtyfood.com/media/uploads/articles/PurelyBevCologo.jpg.370x370_q85.jpg";
 
 const stopEmail = false; // make false when testing emails
 
@@ -39,7 +40,13 @@ export async function emailUser(email, emailType) {
 
   // emails challenger when 8 badges earned
   else if (emailType === "challengeWon") {
-    formData.append("avatar", userData.avatar);
+    formData.append("partnerLinks", partnerLinks);
+    // if user is a challenger
+    if (userData.startedChallenge) {
+      formData.append("isChallenger", true);
+    } else {
+      formData.append("isChallenger", false);
+    }
   }
 
   // emails for action completion

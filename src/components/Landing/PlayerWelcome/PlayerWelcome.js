@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
+import { usePartners } from "../../../contexts/PartnersContext";
 import { getFirestore, getDoc, doc } from "firebase/firestore";
 import SignUp1 from "../../../assets/images/PlayerWelcome/SignUp1.png";
 import SignUp2 from "../../../assets/images/PlayerWelcome/SignUp2.png";
@@ -14,6 +15,7 @@ import { LoadingWheel } from "./../../Utility/LoadingWheel/LoadingWheel.componen
 export default function PlayerWelcome({ isShare }) {
   const history = useHistory();
   const { currentUser } = useAuth();
+  const { partnersExist } = usePartners();
   const [loading, setLoading] = useState(true);
   const [challengerInfo, setChallengerInfo] = useState(null);
 
@@ -149,6 +151,20 @@ export default function PlayerWelcome({ isShare }) {
         <div className="image">
           <img src={PlayerWelcome} alt="8by8 Logo" />
         </div>
+        {partnersExist && (
+        <>
+          <h3>4. Get a Reward!</h3>
+          <p className="text">
+            When your friend wins the challenge within 8 days, you win as well!
+            Then select and enjoy a reward from one of our amazing partners.
+          </p>
+          <img
+            src={StepFour}
+            alt="earn 8 badges in 8 days"
+            className="center-img"
+          />
+        </>
+        )}
         <button
           className="gradient"
           onClick={() => {

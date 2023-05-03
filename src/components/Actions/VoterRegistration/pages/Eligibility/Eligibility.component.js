@@ -59,6 +59,9 @@ export const Eligibility = () => {
         className={
           activeFields.zip ? "floating-label-active" : "floating-label-default"
         }
+        onClick={() => {
+          document.getElementById("zip").focus();
+        }}
       >
         Zip Code*
       </label>
@@ -120,7 +123,7 @@ export const Eligibility = () => {
           activeFields.dob ? "floating-label-active" : "floating-label-default"
         }
         onClick={() => {
-          setActiveFields({ ...activeFields, dob: true });
+          document.getElementById("dob").focus();
         }}
       >
         Date of Birth*
