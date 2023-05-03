@@ -101,7 +101,6 @@ export default function SignupPage() {
             }
           } catch (e) {
             const error = errorMessage(e);
-
             if (error === "Please enter a correct email address.") {
               setEmailError(error);
               setDuplicateError("");

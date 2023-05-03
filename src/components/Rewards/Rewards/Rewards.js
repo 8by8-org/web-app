@@ -1,7 +1,11 @@
 import CurveA from "../../../assets/2-shapes/curve-a.svg";
 import './Rewards.scss';
 import { useHistory } from "react-router-dom";
-import placeholderImage from "../../../assets/images/placeholder-image.jpg"
+import placeholderImage from "../../../assets/images/placeholder-image.jpg";
+import chefusLogo from "../../../assets/partner-logos/chefus.png";
+import purelyLogo from "../../../assets/partner-logos/purely.png";
+import saltalkLogo from "../../../assets/partner-logos/saltalk.png";
+import tippsyLogo from "../../../assets/partner-logos/tippsy.png";
 
 const Rewards = () => {
     const history = useHistory();
@@ -22,22 +26,44 @@ const Rewards = () => {
 
 
     // Sample Data
-    const samplePartner = () => new Partner(
-        "Joe's Sandwhiches",
-        "#",
+    const Chefus = new Partner(
+        "Chefus",
+        "https://www.chefus.com/",
+        chefusLogo,
+        "Online deliveries",
         "",
-        "Restaurant",
-        "San Jose, CA"
+       )
+
+    const Purely = new Partner(
+        "Purely Drinks",
+        "https://purelydrinks.com/",
+        purelyLogo,
+        "Online deliveries",
+        "",
     )
+
+    const Saltalk = new Partner(
+        "Saltalk",
+        "https://www.saltalk.com/",
+        saltalkLogo,
+        "Online deliveries",
+        "",
+    )
+
+    const Tippsy = new Partner(
+        "Tippsy",
+        "https://www.tippsysake.com/",
+        tippsyLogo,
+        "Online deliveries",
+        "",
+    )
+
 
     // Store the list of partners here
     // Generate them with the constructor
     // That way there is a key
     const partners = [
-        samplePartner(),
-        samplePartner(),
-        samplePartner(),
-        samplePartner()
+       Chefus, Purely, Saltalk, Tippsy
     ]
 
 
@@ -58,7 +84,7 @@ const Rewards = () => {
                     return (
                         <div className="sponsor" key={partner.id}>
                             <a href={partner.link}>
-                                <img src={partner.img === "" ? placeholderImage : partner.img} alt={`${partner.name} image`} />
+                                <img src={partner.img === "" ? placeholderImage : partner.img} alt={partner.name} />
                                 <h5>{partner.name}</h5>
                                 <p>{partner.type} {partner.location}</p>
                             </a>
@@ -69,7 +95,7 @@ const Rewards = () => {
                 { /* If we don't have any partners */}
                 {partners.length === 0 && (
                     <div className="sponsor">
-                        <img src={placeholderImage} alt="Placeholder image" />
+                        <img src={placeholderImage} alt="Placeholder" />
                         <p>
                             Unfortunately, we are not offering partner rewards at this time. You can still take the 8by8 Challenge to help the AAPI community!
                         </p>

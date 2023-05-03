@@ -114,7 +114,7 @@ export const OtherInfo = () => {
                 : "floating-label-default"
             }
             onClick={() => {
-              setActiveFields({ ...activeFields, otherParty: true });
+              document.getElementById("otherParty").focus();
             }}
           >
             Other Political Party*
@@ -194,6 +194,9 @@ export const OtherInfo = () => {
             ? "floating-label-active"
             : "floating-label-default"
         }
+        onClick={() => {
+          document.getElementById("idNumber").focus();
+        }}
       >
         ID Number*
       </label>

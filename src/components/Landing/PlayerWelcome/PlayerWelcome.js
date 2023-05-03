@@ -1,19 +1,22 @@
 import React, { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
+import { usePartners } from "../../../contexts/PartnersContext";
 import { getFirestore, getDoc, doc } from "firebase/firestore";
 import SignUp1 from "../../../assets/images/PlayerWelcome/SignUp1.png";
 import SignUp2 from "../../../assets/images/PlayerWelcome/SignUp2.png";
-import PlayerWelcome from "../../../assets/images/PlayerWelcome/Playerwelcome3.png";
+import Vote from "../../../assets/images/PlayerWelcome/Vote1.png";
 import BlackCurve from "../../../assets/images/PlayerWelcome/BlackCurve.svg";
 import "./PlayerWelcome.scss";
 import { auth } from "../../../firebase";
 import { dummyPassword } from "../../../constants";
 import { useAuth } from "../../../contexts/AuthContext";
 import { LoadingWheel } from "./../../Utility/LoadingWheel/LoadingWheel.component";
+import StepFour from "../../../assets/images/ChallengerWelcome/StepFour.png";
 
 export default function PlayerWelcome({ isShare }) {
   const history = useHistory();
   const { currentUser } = useAuth();
+  const { partnersExist } = usePartners();
   const [loading, setLoading] = useState(true);
   const [challengerInfo, setChallengerInfo] = useState(null);
 
@@ -61,12 +64,19 @@ export default function PlayerWelcome({ isShare }) {
   // If code that is gotten from the url is playerwelcome or isShare is true then, if there is challengerInfo in
   // local storage then set it to challengerInfo, else send the user to the signin page. For eveything else run getChallengerInfo.
   useEffect(() => {
-    code === "playerwelcome" || isShare
-      ? localStorage.getItem("challengerInfo")
-        ? setChallengerInfo(JSON.parse(localStorage.getItem("challengerInfo")))
-        : history.push(`/signin`)
-      : getChallengerInfo();
-  }, []);
+    if (currentUser?.uid === code) {
+      history.push(`/signin`);
+    } else {
+      code === "playerwelcome" || isShare
+        ? localStorage.getItem("challengerInfo")
+          ? setChallengerInfo(
+              JSON.parse(localStorage.getItem("challengerInfo"))
+            )
+          : history.push(`/signin`)
+        : getChallengerInfo();
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [history, code, isShare]);
 
   // Render page after challengerInfo is gotten.
   useEffect(() => {
@@ -75,8 +85,12 @@ export default function PlayerWelcome({ isShare }) {
 
   // If isShare is undefined, when playerwelcome page is rendered not in invite or share, then the buttons work.
   return loading === false ? (
-    <div className={"player-welcome" + ((isShare || isShare === false) ? " preview" : "")}>
-      <div className="top">
+    <div
+      className={
+        "player-welcome" + (isShare || isShare === false ? " preview" : "")
+      }
+    >
+      <div className="top" style={{ textAlign: "center" }}>
         <h1 className="top-heading">
           <span className="underline h1">Support</span>{" "}
           {challengerInfo && challengerInfo.name !== null
@@ -119,6 +133,15 @@ export default function PlayerWelcome({ isShare }) {
             </p>
           </div>
         )}
+        <p
+          onClick={() => {
+            history.push(`/why8by8`);
+          }}
+          className="link"
+          style={{ color: "#02DDC3", zIndex: "1", marginTop: "0.7em" }}
+        >
+          See why others are doing it
+        </p>
       </div>
       <img src={BlackCurve} className="curve" alt="Black Curve" />
       <div className="main-content">
@@ -147,8 +170,22 @@ export default function PlayerWelcome({ isShare }) {
           badge per friend.
         </p>
         <div className="image">
-          <img src={PlayerWelcome} alt="8by8 Logo" />
+          <img src={Vote} alt="8by8 Logo" />
         </div>
+        {partnersExist && (
+        <>
+          <h3>4. Get a Reward!</h3>
+          <p className="text">
+            When your friend wins the challenge within 8 days, you win as well!
+            Then select and enjoy a reward from one of our amazing partners.
+          </p>
+          <img
+            src={StepFour}
+            alt="earn 8 badges in 8 days"
+            className="center-img"
+          />
+        </>
+        )}
         <button
           className="gradient"
           onClick={() => {

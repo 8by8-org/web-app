@@ -62,6 +62,17 @@ export function getUserDatabaseByUID(uid) {
   });
 }
 
+export function getUserVoterRegistrationData(uid) {
+  return new Promise(async (resolve, reject) => {
+    let docRef = doc(db, "voter-registration-data", uid);
+    let docSnap = await getDoc(docRef);
+    if(docSnap.exists()) {
+      resolve(docSnap.data());
+    }
+    else reject();
+  });
+}
+
 // gets challenger's data from firebase
 export async function getChallengerDatabase() {
   const userData = await getUserDatabase();
@@ -74,6 +85,18 @@ export async function getChallengerDatabase() {
     //console.log("challenger db", docSnap.data());
     return docSnap.data();
   }
+}
+
+export async function choseReward(reward, typeOfReward){
+  const uid = auth.getAuth().currentUser.uid;
+  typeOfReward === "player" ?
+  await updateDoc(doc(db, "users", uid), {
+    playerReward : reward
+  })
+  :
+  await updateDoc(doc(db, "users", uid), {
+    challengeReward : reward
+  });
 }
 
 // call this function when user completes an action
@@ -156,7 +179,8 @@ export async function completedAction(action) {
     if (userData.badges.length === 8) {
       emailUser(userData.email, "challengeWon");
     }
-  } else {
+  }
+  else {
     throw new Error("specified action does not exist");
   }
 }

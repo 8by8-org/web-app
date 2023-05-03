@@ -1,17 +1,14 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState } from "react";
 import "../../VoterRegistration.scss";
 import "./AddressBlock.scss";
 import { Tooltip } from "../Tooltip/Tooltip.component";
 import { useAuth } from "../../../../../contexts/AuthContext";
-import { checkAddressValidity } from "./utils";
-import { LoadingWheelSm } from "./LoadingWheelSm.component";
 
 export const AddressBlock = ({
   addressType,
   title,
   tooltipText,
-  isValid,
-  setIsValid,
+  error
 }) => {
   //set the parent validity to false when a new, blank address block is rendered
   let prefix = "";
@@ -29,71 +26,13 @@ export const AddressBlock = ({
     zip: voterRegistrationData[`${prefix}zip`].length > 0,
   });
 
-  //holds a setTimeout function which fires after the user has stopped changing inputs and all inputs are complete
-  const timeoutFunction = useRef(null);
-
-  //0 = display nothing, 1 = loading, 2 = valid, 3 = failed
-  const [validityStatus, setValidityStatus] = useState(0);
-
-  const checkAddressOnChange = (field, value) => {
-    setIsValid({ ...isValid, [addressType]: false });
-    //clear the current timeout
-    if (timeoutFunction.current) {
-      clearTimeout(timeoutFunction.current);
-    }
-    timeoutFunction.current = setTimeout(() => {
-      //check to see if any fields are incomplete
-      const address = {
-        street: voterRegistrationData[`${prefix}street`],
-        streetLine2: voterRegistrationData[`${prefix}streetLine2`],
-        unit: voterRegistrationData[`${prefix}unit`],
-        city: voterRegistrationData[`${prefix}city`],
-        state: voterRegistrationData[`${prefix}state`],
-        zip: voterRegistrationData[`${prefix}zip`],
-      };
-      //get the most current value for the last field changed
-      if (field && value) {
-        address[field] = value;
-      }
-      if (
-        address.street.length === 0 ||
-        address.city.length === 0 ||
-        address.state.length === 0 ||
-        address.zip.length === 0
-      ) {
-        //if previously valid, mark as invalid, otherwise return
-        if (validityStatus === 2) {
-          setValidityStatus(3);
-          setIsValid({ ...isValid, [addressType]: false });
-        }
-        return;
-      }
-      //if all fields are complete
-      setValidityStatus(1); //set the validity status to loading
-      checkAddressValidity(
-        address,
-        () => {
-          setValidityStatus(2);
-          setIsValid({ ...isValid, [addressType]: true });
-        },
-        () => {
-          setValidityStatus(3);
-          setIsValid({ ...isValid, [addressType]: false });
-        }
-      );
-    }, 750);
-  };
-
-  useEffect(() => {
-    checkAddressOnChange();
-  }, []);
-
   return (
     <>
       <div className="horizontalContainer">
         <h2 className="register-form-title-small">{title}</h2>
         {tooltipText && <Tooltip text={tooltipText} />}
       </div>
+      {addressType === "home" && <span className="addressError">{error}</span>}
       <label
         htmlFor={`${prefix}street`}
         className={
@@ -101,6 +40,9 @@ export const AddressBlock = ({
             ? "floating-label-active"
             : "floating-label-default"
         }
+        onClick={() => {
+          document.getElementById(`${prefix}street`).focus();
+        }}
       >
         Street Address*
       </label>
@@ -129,7 +71,6 @@ export const AddressBlock = ({
           the label should float
           */
           setActiveFields({ ...activeFields, street: true });
-          checkAddressOnChange("street", event.target.value);
         }}
       />
       <br />
@@ -140,6 +81,9 @@ export const AddressBlock = ({
             ? "floating-label-active"
             : "floating-label-default"
         }
+        onClick={() => {
+          document.getElementById(`${prefix}street_line_2`).focus()
+        }}
       >
         Address Line 2
       </label>
@@ -161,7 +105,6 @@ export const AddressBlock = ({
             [`${prefix}streetLine2`]: event.target.value,
           });
           setActiveFields({ ...activeFields, streetLine2: true });
-          checkAddressOnChange("streetLine2", event.target.value);
         }}
       />
       <br />
@@ -170,6 +113,9 @@ export const AddressBlock = ({
         className={
           activeFields.unit ? "floating-label-active" : "floating-label-default"
         }
+        onClick={() => {
+          document.getElementById(`${prefix}home_unit`);
+        }}
       >
         Unit #
       </label>
@@ -191,7 +137,6 @@ export const AddressBlock = ({
             [`${prefix}unit`]: event.target.value,
           });
           setActiveFields({ ...activeFields, unit: true });
-          checkAddressOnChange("unit", event.target.value);
         }}
       />
       <br />
@@ -200,6 +145,9 @@ export const AddressBlock = ({
         className={
           activeFields.city ? "floating-label-active" : "floating-label-default"
         }
+        onClick={() => {
+          document.getElementById(`${prefix}city`);
+        }}
       >
         City*
       </label>
@@ -223,7 +171,6 @@ export const AddressBlock = ({
             [`${prefix}city`]: event.target.value,
           });
           setActiveFields({ ...activeFields, city: true });
-          checkAddressOnChange("city", event.target.value);
         }}
       />
       <br />
@@ -236,6 +183,9 @@ export const AddressBlock = ({
             ? "floating-label-active"
             : "floating-label-default"
         }
+        onClick={() => {
+          document.getElementById(`${prefix}state`).focus();
+        }}
       >
         State
       </label>
@@ -262,7 +212,6 @@ export const AddressBlock = ({
             [`${prefix}state`]: event.target.value,
           });
           setActiveFields({ ...activeFields, state: true });
-          checkAddressOnChange("state", event.target.value);
         }}
       >
         <option value="AL">Alabama</option>
@@ -323,6 +272,9 @@ export const AddressBlock = ({
         className={
           activeFields.zip ? "floating-label-active" : "floating-label-default"
         }
+        onClick={() => {
+          document.getElementById(`${prefix}zip`).focus();
+        }}
       >
         Zip Code*
       </label>
@@ -362,28 +314,8 @@ export const AddressBlock = ({
             [`${prefix}zip`]: event.target.value,
           });
           setActiveFields({ ...activeFields, zip: true });
-          checkAddressOnChange("zip", event.target.value);
         }}
       />
-      <br />
-      {(() => {
-        switch (validityStatus) {
-          case 0:
-            return null;
-          case 1:
-            return (
-              <p className="validating">
-                <LoadingWheelSm /> validating address...
-              </p>
-            );
-          case 2:
-            return <p className="isValid">✔ validated address</p>;
-          case 3:
-            return <p className="invalid">✖ invalid address</p>;
-          default:
-            return null;
-        }
-      })()}
       <br />
     </>
   );
