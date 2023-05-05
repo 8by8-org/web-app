@@ -1,0 +1,13 @@
+@use '../../variables/colors';
+
+.underline {
+  text-decoration: underline;
+  text-decoration-color: colors.$teal;
+  text-decoration-thickness: 10px;
+  text-decoration-skip-ink: none;
+  // non-iOS devices
+  @supports not (-webkit-touch-callout: none) {
+    text-decoration: underline colors.$teal 10px;
+    text-underline-offset: -5px;
+  }
+}

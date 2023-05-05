@@ -1,0 +1,71 @@
+@use '../../variables/font-families';
+@use '../../variables/font-sizes';
+@use '../../variables/font-weights';
+@use '../../variables/letter-spacings';
+@use '../../variables/line-heights';
+
+.h1, .h2, .h3, .b1, .b2, .b3, .b4, .b5, .b6 {
+  margin: 0;
+}
+
+.h1, .h2, .h3 {
+  font-family: font-families.$bebas-neue;
+  font-weight: font-weights.$regular;
+  letter-spacing: letter-spacings.$large;
+}
+
+.b1, .b2, .b3, .b4, .b5, .b6 {
+  font-family: font-families.$lato;
+  letter-spacing: letter-spacings.$regular;
+}
+
+.h1 {
+  font-size: font-sizes.$xxl;
+  line-height: line-heights.$xxl;
+}
+
+.h2 {
+  font-size: font-sizes.$xl;
+  line-height: line-heights.$xl;
+}
+
+.h3 {
+  font-size: font-sizes.$md;
+  line-height: line-heights.$md;
+}
+
+.b1 {
+  font-weight: font-weights.$bold;
+  font-size: font-sizes.$sm;
+  line-height: line-heights.$sm;
+}
+
+.b2 {
+  font-weight: font-weights.$regular;
+  font-size: font-sizes.$sm;
+  line-height: line-heights.$sm;
+}
+
+.b3 {
+  font-weight: font-weights.$black;
+  font-size: font-sizes.$xs;
+  line-height: line-heights.$xs;
+}
+
+.b4 {
+  font-weight: font-weights.$regular;
+  font-size: font-sizes.$xs;
+  line-height: line-heights.$xs;
+}
+
+.b5 {
+  font-weight: font-weights.$black;
+  font-size: font-sizes.$xxs;
+  line-height: line-heights.$xxs;
+}
+
+.b6 {
+  font-weight: font-weights.$regular;
+  font-size: font-sizes.$xxs;
+  line-height: line-heights.$xxs;
+}

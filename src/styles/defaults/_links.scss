@@ -1,0 +1,5 @@
+@use '../partials';
+
+a {
+  @extend .link;
+}

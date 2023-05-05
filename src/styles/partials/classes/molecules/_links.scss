@@ -1,0 +1,33 @@
+@use '../../variables/font-families';
+@use '../../variables/font-weights';
+@use '../../variables/font-sizes';
+@use '../../variables/letter-spacings';
+@use '../../variables/line-heights';
+@use '../../variables/colors';
+
+.link {
+  font-family: font-families.$lato;
+  font-weight: font-weights.$black;
+  font-size: font-sizes.$xs;
+  line-height: line-heights.$xs;
+  letter-spacing: letter-spacings.$regular;
+  color: colors.$black-text;
+  text-decoration: underline;
+  text-underline-offset: 0.5px;
+
+  &:hover {
+    color: colors.$black-text;
+    cursor: pointer;
+  }
+
+  &--light{
+    @extend .link;
+    font-weight: font-weights.$bold;
+  }
+
+  &-left {
+    @extend .link;
+    display: block;
+    text-align: left;
+  }
+}

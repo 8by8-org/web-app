@@ -1,0 +1,37 @@
+@use '../../variables/colors';
+
+.color_black_text {
+  color: colors.$black-text;
+}
+
+.color_black_8by8 {
+  color: colors.$black-8by8;
+}
+
+.color_yellow {
+  color: colors.$yellow;
+}
+
+.color_cream {
+  color: colors.$cream;
+}
+
+.color_teal {
+  color: colors.$teal;
+}
+
+.color_graphite {
+  color: colors.$graphite;
+}
+
+.color_smoke {
+  color: colors.$smoke;
+}
+
+.color_lightgrey {
+  color: colors.$lightgrey;
+}
+
+.color_white {
+  color: colors.$white;
+}

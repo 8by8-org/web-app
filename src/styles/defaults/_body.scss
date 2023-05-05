@@ -1,0 +1,8 @@
+@use '../partials';
+
+body {
+  background-color: partials.$color-white;
+  color: partials.$color-black-text;
+  padding: 0;
+  margin: 0;
+}
