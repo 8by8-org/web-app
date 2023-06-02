@@ -10,7 +10,7 @@ import SpeechBubble2 from "../../public/assets/images/HomePage/SpeechBubble2.png
 import Mic from "../../public/assets/images/HomePage/Mic.png";
 import SpeechBubble3 from "../../public/assets/images/HomePage/SpeechBubble3.png";
 import Curve3 from "../../public/assets/images/HomePage/Curve3.svg";
-import PageContainer from "@/components/page-container";
+import PageContainer from "@/components/utils/page-container";
 
 export default function Home() {
 
@@ -118,7 +118,7 @@ export default function Home() {
           8 of their friends to vote in 8 days.
         </h2>
         <button
-          className="btn_gradient btn_wide"
+          className="btn_gradient btn_wide btn_lg"
         >
           Take the Challenge
         </button>

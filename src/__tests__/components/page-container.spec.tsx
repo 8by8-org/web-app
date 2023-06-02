@@ -1,6 +1,6 @@
 import { render, screen, cleanup } from '@testing-library/react'
 import '@testing-library/jest-dom'
-import PageContainer from '@/components/page-container'
+import PageContainer from '@/components/utils/page-container'
 
 describe('PageContainer', () => {
   afterEach(() => cleanup());

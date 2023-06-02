@@ -1,0 +1,7 @@
+@mixin base {
+  z-index: 0;
+}
+
+@mixin surface {
+  z-index: 1;
+}
