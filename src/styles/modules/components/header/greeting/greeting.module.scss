@@ -1,8 +1,33 @@
 @use '../../../../partials';
 
 .standalone_greeting {
-  position: absolute;
-  top: 121px;
-  left: 30px;
+  margin-top: 62px;
+  margin-left: 30px;
   text-transform: uppercase;
+}
+
+.avatar_greeting {
+  margin-top: 43px;
+  margin-left: 30px;
+  display: flex;
+  align-items: center;
+
+  .blob {
+    width: 80px;
+    height: 80px;
+    background-image: url('../../../../../../public/assets/4-pages/Sidebar/Blob.svg');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .avatar {
+    width: 40px;
+    height: auto;
+  }
+  .text {
+    margin-left: 30px;
+  }
 }

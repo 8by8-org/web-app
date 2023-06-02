@@ -1,5 +1,7 @@
 import {createContext, PropsWithChildren, useState } from "react";
 import { User } from "@/models/User";
+import { Builder } from "builder-pattern";
+import { UserType } from "@/models/UserType";
 
 type UserContextType = {
   activeUser:ActiveUser;
@@ -11,7 +13,9 @@ type ActiveUser = User | null;
 export const UserContext = createContext<UserContextType>({activeUser: null});
 
 export function UserContextProvider({children}:PropsWithChildren) {
-  const [activeUser,setActiveUser] = useState<ActiveUser>(null);
+  const user = Builder(User).name("Joe").type(UserType.CHALLENGER).build();
+  
+  const [activeUser,setActiveUser] = useState<ActiveUser>(user);
 
   return <UserContext.Provider value={{activeUser}}>{children}</UserContext.Provider>
 }

@@ -1,0 +1,6 @@
+@use './hamburger-links' as *;
+
+.link_lg_top {
+  @include link-lg();
+  margin-top: 38px;
+}

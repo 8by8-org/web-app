@@ -1,0 +1,47 @@
+@use '../../../../partials';
+
+@mixin take-the-challenge-btn {
+  @extend .btn_gradient, .btn_sm;
+}
+
+@mixin -link-base {
+  color: partials.$color-white;
+  text-decoration: none;
+  display: inline-block;
+  margin-left: 48px;
+  :hover {
+    color: partials.$color-white;
+  }
+}
+
+@mixin link-lg {
+  @extend .h3;
+  @include -link-base();
+  text-transform: uppercase;
+}
+
+@mixin link-sm {
+  @extend .b1;
+  @include -link-base();
+}
+
+.link_lg {
+  @include link-lg();
+  margin-top: 18px;
+}
+
+.link_sm {
+  @include link-sm();
+  margin-bottom: 8px;
+}
+
+.link_sm_top {
+  @extend .link_sm;
+  margin-top: 48px;
+}
+
+@media screen and (max-height: 600px) {
+  .link_sm_top {
+    margin-top: 24px;
+  }
+}
