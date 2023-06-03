@@ -12,6 +12,7 @@
 @forward "mixins/z-indices" as z-index-*;
 
 @forward "classes/utils/color-utils" as color-util-*;
+@forward "classes/utils/display-utils" as display-*;
 
 @forward "classes/molecules/buttons" as button-*;
 @forward "classes/molecules/links" as link-*;

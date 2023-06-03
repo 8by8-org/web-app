@@ -1,8 +1,8 @@
-@use './hamburger-links' as *;
+@use '../index' as *;
 
 .take_the_challenge_btn {
   @include take-the-challenge-btn();
-  margin-top: 38px;
+  margin-top: 56px;
   margin-left: 30px;
 }
 

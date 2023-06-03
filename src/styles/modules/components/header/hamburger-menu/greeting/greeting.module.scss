@@ -1,4 +1,4 @@
-@use '../../../../partials';
+@use '../../../../../partials';
 
 .standalone_greeting {
   margin-top: 62px;
@@ -15,7 +15,7 @@
   .blob {
     width: 80px;
     height: 80px;
-    background-image: url('../../../../../../public/assets/4-pages/Sidebar/Blob.svg');
+    background-image: url('../../../../../../../public/assets/4-pages/Sidebar/Blob.svg');
     background-size: contain;
     background-repeat: no-repeat;
     background-position: center;

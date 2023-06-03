@@ -1,0 +1,5 @@
+@use '../../../partials';
+
+.popup_modal {
+  @include z-index-surface;
+}

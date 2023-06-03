@@ -1,4 +1,4 @@
-@use '../../../../partials';
+@use '../../../../../partials';
 
 @mixin take-the-challenge-btn {
   @extend .btn_gradient, .btn_sm;

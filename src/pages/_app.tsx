@@ -11,7 +11,7 @@ export default function App({ Component, pageProps }: AppProps) {
       <meta name="viewport" content="initial-scale=1.0, minimum-scale=1.0"/>
     </Head>
     <UserContextProvider> 
-      <Header isPreview={false} />
+      <Header />
       <Component {...pageProps} />
     </UserContextProvider>
     </>

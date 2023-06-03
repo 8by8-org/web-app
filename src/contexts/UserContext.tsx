@@ -14,7 +14,7 @@ export const UserContext = createContext<UserContextType>({activeUser: null});
 
 export function UserContextProvider({children}:PropsWithChildren) {
   const user = Builder(User).name("Joe").type(UserType.CHALLENGER).build();
-  
+
   const [activeUser,setActiveUser] = useState<ActiveUser>(user);
 
   return <UserContext.Provider value={{activeUser}}>{children}</UserContext.Provider>
