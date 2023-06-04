@@ -1,10 +1,10 @@
 import { useContext } from "react";
 import Image from "next/image";
 import { FaBars } from "react-icons/fa";
-import { HeaderContext } from "../header-context";
-import { HamburgerMenuState } from "../header-context";
-import styles from '@/styles/modules/components/header/icons-tray/icons-tray.module.scss';
-import feedback from "../../../../public/assets/4-pages/Header/Feedback.svg";
+import { HeaderContext } from "./header-context";
+import { HamburgerMenuState } from "./header-context";
+import styles from '@/styles/modules/components/header/icons-tray.module.scss';
+import feedback from "../../../public/assets/4-pages/Header/Feedback.svg";
 
 export default function IconsTray() {
   const {hamburgerMenuState, openHamburgerMenu, openHamburgerMenuBtnRef} = useContext(HeaderContext);

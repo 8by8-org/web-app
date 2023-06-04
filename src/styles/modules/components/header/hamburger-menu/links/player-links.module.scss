@@ -1,4 +1,4 @@
-@use '../index' as *;
+@use './link-utils' as *;
 
 .take_the_challenge_btn {
   @include take-the-challenge-btn();

@@ -2,7 +2,7 @@ import { useContext } from 'react';
 import { IoIosArrowForward } from 'react-icons/io';
 import { HeaderContext } from '../header-context';
 import { HamburgerMenuState } from '../header-context';
-import Greeting from './greeting/greeting';
+import Greeting from './greeting';
 import Links from './links/links';
 import styles from '@/styles/modules/components/header/hamburger-menu/hamburger-menu.module.scss';
 

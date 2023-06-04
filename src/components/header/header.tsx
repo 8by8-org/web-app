@@ -4,8 +4,9 @@ import { IconContext } from "react-icons";
 import { HeaderContextProvider } from "./header-context";
 import logo from "../../../public/assets/logos/white-logo.svg";
 import styles from "../../styles/modules/components/header/header.module.scss";
-import IconsTray from "./icons-tray/icons-tray";
+import IconsTray from "./icons-tray";
 import HamburgerMenu from "./hamburger-menu/hamburger-menu";
+import SignoutModal from "./signout-modal";
 
 export default function Header() {
   return (
@@ -20,6 +21,7 @@ export default function Header() {
           </div>
         </header>
         <HamburgerMenu />
+        <SignoutModal />
       </IconContext.Provider>
     </HeaderContextProvider>
   );

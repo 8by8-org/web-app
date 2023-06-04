@@ -1,6 +1,6 @@
-import HamburgerLink from "../link/hamburger-link";
-import SignoutBtn from "../signout-btn/signout-btn";
-import styles from '@/styles/modules/components/header/hamburger-menu/links/hybrid/hybrid-links.module.scss';
+import HamburgerLink from "./hamburger-link";
+import SignoutBtn from "./signout-btn";
+import styles from '@/styles/modules/components/header/hamburger-menu/links/hybrid-links.module.scss';
 
 export default function HybridLinks() {
   return (

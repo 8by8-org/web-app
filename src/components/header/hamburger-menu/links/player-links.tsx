@@ -1,15 +1,15 @@
-import HamburgerLink from "../link/hamburger-link";
-import SignoutBtn from "../signout-btn/signout-btn";
-import styles from '@/styles/modules/components/header/hamburger-menu/links/challenger/challenger-links.module.scss';
+import HamburgerLink from "./hamburger-link";
+import SignoutBtn from "./signout-btn";
+import styles from '@/styles/modules/components/header/hamburger-menu/links/player-links.module.scss';
 
-export default function ChallengerLinks() {
+export default function PlayerLinks() {
   return (
     <>
-      <HamburgerLink 
-        href={"/progress"}
-        className={styles.link_lg_top}
-      >
-        My Challenge
+      <HamburgerLink href="/challengerwelcome" className={styles.take_the_challenge_btn}>
+        Take The Challenge
+      </HamburgerLink>
+      <HamburgerLink href={"/actions"} className={styles.link_lg_top}>
+        Take Action
       </HamburgerLink>
       <HamburgerLink href={"/why8by8"} className={styles.link_lg}>Why 8by8</HamburgerLink>
       <HamburgerLink href={"/rewards"} className={styles.link_lg}>Rewards</HamburgerLink>

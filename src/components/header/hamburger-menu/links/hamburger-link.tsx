@@ -1,6 +1,6 @@
 import { PropsWithChildren, useContext } from "react";
 import Link from "next/link";
-import { HeaderContext } from "../../../header-context";
+import { HeaderContext } from "../../header-context";
 
 type HamburgerLinkProps = PropsWithChildren & {
   href:string;

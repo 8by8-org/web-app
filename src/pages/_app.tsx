@@ -1,6 +1,6 @@
 import type { AppProps } from 'next/app'
 import Head from 'next/head';
-import { UserContextProvider } from '@/contexts/UserContext';
+import { UserContextProvider } from '@/contexts/user-context';
 import Header from '@/components/header/header';
 import '@/styles/main.scss'
 

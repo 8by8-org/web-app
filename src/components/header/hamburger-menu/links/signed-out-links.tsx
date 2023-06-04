@@ -1,14 +1,16 @@
-import HamburgerLink from "../link/hamburger-link";
-import SignoutBtn from "../signout-btn/signout-btn";
-import styles from '@/styles/modules/components/header/hamburger-menu/links/player/player-links.module.scss';
+import HamburgerLink from "./hamburger-link";
+import styles from '@/styles/modules/components/header/hamburger-menu/links/signed-out-links.module.scss';
 
-export default function PlayerLinks() {
+export default function SignedOutLinks() {
   return (
     <>
       <HamburgerLink href="/challengerwelcome" className={styles.take_the_challenge_btn}>
         Take The Challenge
       </HamburgerLink>
-      <HamburgerLink href={"/actions"} className={styles.link_lg_top}>
+      <HamburgerLink
+        href={"/actions"}
+        className={styles.link_lg_top}
+      >
         Take Action
       </HamburgerLink>
       <HamburgerLink href={"/why8by8"} className={styles.link_lg}>Why 8by8</HamburgerLink>
@@ -16,7 +18,7 @@ export default function PlayerLinks() {
       <HamburgerLink href={"/faq"} className={styles.link_lg}>FAQS</HamburgerLink>
       <HamburgerLink href="/privacy" className={styles.link_sm_top}>Privacy Policy</HamburgerLink>
       <HamburgerLink href="/settings" className={styles.link_sm}>Settings</HamburgerLink>
-      <SignoutBtn />
+      <HamburgerLink href="/signup" className={styles.link_sm}>Sign up</HamburgerLink>
     </>
   );
 }

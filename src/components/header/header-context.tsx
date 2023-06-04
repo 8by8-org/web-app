@@ -8,9 +8,11 @@ import {
 
 type HeaderContextType = {
   hamburgerMenuState:HamburgerMenuState;
+  isSignoutModalShown:boolean;
   openHamburgerMenu:() => void;
   closeHamburgerMenu:() => void;
   openSignoutModal:() => void;
+  closeSignoutModal:() => void;
   hamburgerMenuRef:RefObject<HTMLElement>;
   openHamburgerMenuBtnRef:RefObject<HTMLButtonElement>;
   closeHamburgerMenuBtnRef:RefObject<HTMLButtonElement>;
@@ -27,6 +29,7 @@ export const HeaderContext = createContext<HeaderContextType>({} as HeaderContex
 
 export function HeaderContextProvider({children}:PropsWithChildren) {
   const [hamburgerMenuState, setHamburgerMenuState] = useState(HamburgerMenuState.closed);
+  const [isSignoutModalShown, setIsSignoutModalShown] = useState(false);
   const hamburgerMenuRef = useRef<HTMLElement>(null);
   const openHamburgerMenuBtnRef = useRef<HTMLButtonElement>(null);
   const closeHamburgerMenuBtnRef = useRef<HTMLButtonElement>(null);
@@ -45,7 +48,12 @@ export function HeaderContextProvider({children}:PropsWithChildren) {
       openHamburgerMenuBtnRef.current?.focus();
     }, {once: true});
   }
-  const openSignoutModal = () => {};
+  const openSignoutModal = () => {
+    setIsSignoutModalShown(true);
+  };
+  const closeSignoutModal = () => {
+    setIsSignoutModalShown(false);
+  }
 
   return (
     <HeaderContext.Provider
@@ -57,7 +65,9 @@ export function HeaderContextProvider({children}:PropsWithChildren) {
           closeHamburgerMenuBtnRef,
           openHamburgerMenu,
           closeHamburgerMenu,
-          openSignoutModal
+          isSignoutModalShown,
+          openSignoutModal,
+          closeSignoutModal
         }
       }
     >

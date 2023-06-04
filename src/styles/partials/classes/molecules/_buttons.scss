@@ -17,6 +17,7 @@
   border-style: solid;
   border-radius: 40px;
   border-width: 4px;
+  border-color: colors.$black-8by8;
 }
 
 @mixin -outline {
@@ -51,14 +52,13 @@
   @include -outline;
   background: gradients.$yellow-teal;
   color: colors.$black-8by8;
-  border-color: colors.$black-8by8;
 }
 
 .btn_inverted {
   @include -base;
   @include -gradient-text;
+  @include -outline;
   background: colors.$black-8by8;
-  border-color: colors.$white;
 }
 
 .btn_lg {
