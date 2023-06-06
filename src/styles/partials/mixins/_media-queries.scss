@@ -1,0 +1,25 @@
+@use '../variables/screen-sizes';
+
+@mixin screen-size-lg {
+  @media only screen and (min-width: screen-sizes.$lg) {
+    @content;
+  }
+}
+
+@mixin screen-size-md {
+  @media only screen and (min-width: screen-sizes.$md) {
+    @content;
+  }
+}
+
+@mixin screen-size-sm {
+  @media only screen and (min-width: screen-sizes.$sm) {
+    @content;
+  }
+}
+
+@mixin screen-size-xs {
+  @media only screen and (min-width: screen-sizes.$xs) {
+    @content;
+  }
+}
