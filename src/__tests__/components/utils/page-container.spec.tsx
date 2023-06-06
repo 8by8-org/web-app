@@ -3,7 +3,7 @@ import '@testing-library/jest-dom'
 import PageContainer from '@/components/utils/page-container'
 
 describe('PageContainer', () => {
-  afterEach(() => cleanup());
+  afterEach(cleanup);
 
   it('renders a child component', () => {
     render(<PageContainer><div data-testid="childComponent"></div></PageContainer>);

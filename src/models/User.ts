@@ -1,7 +1,7 @@
 import { UserType } from "./UserType";
 
-export class User {
-  name:string = "";
-  avatar:string = "";
-  type:UserType = UserType.CHALLENGER;
+export type User = {
+  name:string;
+  avatar:'1' | '2' | '3' | '4';
+  type:UserType;
 }

@@ -1,5 +1,7 @@
 @use '../../../partials';
 
+$animation-timing: 400ms;
+
 @mixin -base($background-color, $color) {
   display: flex;
   flex-direction: column;
@@ -12,11 +14,11 @@
   background-color: $background-color;
   color: $color;
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
-  animation: fade-in-translate-up 400ms ease-in-out forwards;
+  animation: fade-in-translate-up $animation-timing ease-in-out forwards;
   @include partials.z-index-surface;
   &::backdrop {
     background-color: rgba(0, 0, 0, 0.623); 
-    animation: fade-in 400ms ease-in-out forwards;
+    animation: fade-in $animation-timing ease-in-out forwards;
   }
 
   .close_btn_container {

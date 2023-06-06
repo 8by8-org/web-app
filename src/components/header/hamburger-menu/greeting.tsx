@@ -11,18 +11,19 @@ export default function Greeting() {
         <div className={styles.blob}>
           {activeUser.avatar ? (
               <Image
-                  alt="player avatar"
-                  className="avatar"
-                  src={
-                      require(`../../../../public/assets/3-avatars/avatar-${activeUser.avatar}.svg`)
-                          .default
-                  }
+                  alt="user avatar"
+                  className={styles.avatar}
+                  src={`/assets/3-avatars/avatar-${activeUser.avatar}.svg`}
+                  width={40}
+                  height={40}
               />
           ) : (
               <Image
-                  alt="player avatar"
+                  alt="user avatar"
                   className={styles.avatar}
-                  src={require(`../../../../public/assets/3-avatars/avatar-1.svg`).default}
+                  src={`/assets/3-avatars/avatar-1.svg`}
+                  width={40}
+                  height={40}
               />
           )}
         </div>

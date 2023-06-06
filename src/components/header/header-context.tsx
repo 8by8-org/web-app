@@ -6,7 +6,7 @@ import {
   PropsWithChildren
 } from 'react';
 
-type HeaderContextType = {
+export type HeaderContextType = {
   hamburgerMenuState:HamburgerMenuState;
   isSignoutModalShown:boolean;
   openHamburgerMenu:() => void;

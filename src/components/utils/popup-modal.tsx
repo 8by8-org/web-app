@@ -24,15 +24,21 @@ export default function PopupModal ({ariaLabel, theme, isOpen, closeModal, child
 
   return (
     <dialog
-      tabIndex={0}
       aria-label={ariaLabel}
+      role="dialog"
       className={styles[`popup_modal_${theme}_theme`]} ref={dialog}
+      onKeyDown={(event) => {
+        if(event.key === 'Escape') {
+          event.preventDefault();
+          closeModal();
+        }
+      }}
     >
         <div className={theme}>
           <div className={styles.close_btn_container}>
             <button
               className={styles.close_btn}
-              aria-label="close modal"
+              aria-label="close dialog"
               onClick={closeModal}
             >
               <AiOutlineClose />

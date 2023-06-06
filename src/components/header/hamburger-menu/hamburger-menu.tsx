@@ -8,7 +8,7 @@ import styles from '@/styles/modules/components/header/hamburger-menu/hamburger-
 
 
 export default function HamburgerMenu() {
-    const {hamburgerMenuState, hamburgerMenuRef,closeHamburgerMenuBtnRef, closeHamburgerMenu} = useContext(HeaderContext);
+    const {hamburgerMenuState, hamburgerMenuRef, closeHamburgerMenuBtnRef, closeHamburgerMenu} = useContext(HeaderContext);
 
     return (
       <div 
