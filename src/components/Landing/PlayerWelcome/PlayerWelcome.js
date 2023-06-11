@@ -12,6 +12,7 @@ import { dummyPassword } from "../../../constants";
 import { useAuth } from "../../../contexts/AuthContext";
 import { LoadingWheel } from "./../../Utility/LoadingWheel/LoadingWheel.component";
 import StepFour from "../../../assets/images/ChallengerWelcome/StepFour.png";
+import { addInvitedBy } from "../../../functions/AddInvite";
 
 export default function PlayerWelcome({ isShare }) {
   const history = useHistory();
@@ -75,8 +76,14 @@ export default function PlayerWelcome({ isShare }) {
           : history.push(`/signin`)
         : getChallengerInfo();
     }
+    // if user is logged in and challenger information in link does not match localStorage (new link is clicked)
+    // then get challenger information and update invited by
+    if(currentUser && code !== "playerwelcome" && localStorage.getItem("challengerInfo").challengerID !== code) {
+      getChallengerInfo().then(() => addInvitedBy());
+    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [history, code, isShare]);
+
 
   // Render page after challengerInfo is gotten.
   useEffect(() => {
