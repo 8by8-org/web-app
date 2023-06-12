@@ -1,0 +1,61 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ChallengerLinks renders challenger links unchanged 1`] = `
+<div>
+  <li>
+    <a
+      class="link_lg_top"
+      href="/progress"
+    >
+      My Challenge
+    </a>
+  </li>
+  <li>
+    <a
+      class="link_lg"
+      href="/why8by8"
+    >
+      Why 8by8
+    </a>
+  </li>
+  <li>
+    <a
+      class="link_lg"
+      href="/rewards"
+    >
+      Rewards
+    </a>
+  </li>
+  <li>
+    <a
+      class="link_lg"
+      href="/faq"
+    >
+      FAQS
+    </a>
+  </li>
+  <li>
+    <a
+      class="link_sm_top"
+      href="/privacy"
+    >
+      Privacy Policy
+    </a>
+  </li>
+  <li>
+    <a
+      class="link_sm"
+      href="/settings"
+    >
+      Settings
+    </a>
+  </li>
+  <li>
+    <button
+      class="signout_btn"
+    >
+      Sign out
+    </button>
+  </li>
+</div>
+`;

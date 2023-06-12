@@ -1,0 +1,28 @@
+.icons_tray {
+  height: 35px;
+  padding-right: 10px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.feedback_btn {
+  margin-right: 15px;
+  background: transparent;
+  border: none;
+}
+
+.feedback_btn_icon {
+  height: 30px;
+  width: 30px;
+  padding: 0;
+}
+
+.hamburger_btn {
+  height: 33px;
+  padding: 0;
+  font-size: 30px;
+  background-color: transparent;
+  border: none;
+}

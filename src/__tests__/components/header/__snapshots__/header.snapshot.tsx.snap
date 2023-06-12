@@ -1,0 +1,233 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Header renders the header unchanged 1`] = `
+<div>
+  <header
+    class="header"
+  >
+    <div
+      class="header_content"
+    >
+      <a
+        class="brand_link"
+        href="/"
+      >
+        <img
+          alt="8by8 logo"
+          class="brand_logo"
+          data-nimg="1"
+          decoding="async"
+          height="40"
+          loading="lazy"
+          src="/_next/image?url=%2Fimg.jpg&w=96&q=75"
+          srcset="/_next/image?url=%2Fimg.jpg&w=48&q=75 1x, /_next/image?url=%2Fimg.jpg&w=96&q=75 2x"
+          style="color: transparent;"
+          width="40"
+        />
+      </a>
+      <div
+        class="icons_tray"
+      >
+        <button
+          aria-label="open feedback form"
+          class="feedback_btn"
+        >
+          <img
+            alt="feedback icon"
+            class="feedback_btn_icon"
+            data-nimg="1"
+            decoding="async"
+            height="40"
+            loading="lazy"
+            src="/_next/image?url=%2Fimg.jpg&w=96&q=75"
+            srcset="/_next/image?url=%2Fimg.jpg&w=48&q=75 1x, /_next/image?url=%2Fimg.jpg&w=96&q=75 2x"
+            style="color: transparent;"
+            width="40"
+          />
+        </button>
+        <button
+          aria-label="open navigation menu"
+          class="hamburger_btn"
+        >
+          <svg
+            fill="currentColor"
+            height="1em"
+            stroke="currentColor"
+            stroke-width="0"
+            style="color: white;"
+            viewBox="0 0 448 512"
+            width="1em"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M16 132h416c8.837 0 16-7.163 16-16V76c0-8.837-7.163-16-16-16H16C7.163 60 0 67.163 0 76v40c0 8.837 7.163 16 16 16zm0 160h416c8.837 0 16-7.163 16-16v-40c0-8.837-7.163-16-16-16H16c-8.837 0-16 7.163-16 16v40c0 8.837 7.163 16 16 16zm0 160h416c8.837 0 16-7.163 16-16v-40c0-8.837-7.163-16-16-16H16c-8.837 0-16 7.163-16 16v40c0 8.837 7.163 16 16 16z"
+            />
+          </svg>
+        </button>
+      </div>
+    </div>
+  </header>
+  <div
+    class="hidden"
+  >
+    <div
+      class="hamburger_menu_inner_container"
+    >
+      <nav
+        class="hamburger_menu_closing"
+      >
+        <ul
+          class="hamburger_menu_items"
+        >
+          <li>
+            <button
+              aria-label="close navigation menu"
+              class="close_hamburger_btn"
+            >
+              <svg
+                fill="currentColor"
+                height="1em"
+                stroke="currentColor"
+                stroke-width="0"
+                style="color: white;"
+                viewBox="0 0 512 512"
+                width="1em"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M294.1 256L167 129c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.3 34 0L345 239c9.1 9.1 9.3 23.7.7 33.1L201.1 417c-4.7 4.7-10.9 7-17 7s-12.3-2.3-17-7c-9.4-9.4-9.4-24.6 0-33.9l127-127.1z"
+                />
+              </svg>
+            </button>
+          </li>
+          <h2
+            class="standalone_greeting"
+          >
+            Hi there!
+          </h2>
+          <li>
+            <a
+              class="take_the_challenge_btn"
+              href="/challengerwelcome"
+            >
+              Take The Challenge
+            </a>
+          </li>
+          <li>
+            <a
+              class="link_lg_top"
+              href="/actions"
+            >
+              Take Action
+            </a>
+          </li>
+          <li>
+            <a
+              class="link_lg"
+              href="/why8by8"
+            >
+              Why 8by8
+            </a>
+          </li>
+          <li>
+            <a
+              class="link_lg"
+              href="/rewards"
+            >
+              Rewards
+            </a>
+          </li>
+          <li>
+            <a
+              class="link_lg"
+              href="/faq"
+            >
+              FAQS
+            </a>
+          </li>
+          <li>
+            <a
+              class="link_sm_top"
+              href="/privacy"
+            >
+              Privacy Policy
+            </a>
+          </li>
+          <li>
+            <a
+              class="link_sm"
+              href="/settings"
+            >
+              Settings
+            </a>
+          </li>
+          <li>
+            <a
+              class="link_sm"
+              href="/signup"
+            >
+              Sign up
+            </a>
+          </li>
+        </ul>
+      </nav>
+    </div>
+  </div>
+  <dialog
+    aria-label="Are you sure you want to sign out?"
+    class="popup_modal_dark_theme"
+    role="dialog"
+  >
+    <div
+      class="dark"
+    >
+      <div
+        class="close_btn_container"
+      >
+        <button
+          aria-label="close dialog"
+          class="close_btn"
+        >
+          <svg
+            fill="currentColor"
+            height="1em"
+            stroke="currentColor"
+            stroke-width="0"
+            style="color: white;"
+            viewBox="0 0 1024 1024"
+            width="1em"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M563.8 512l262.5-312.9c4.4-5.2.7-13.1-6.1-13.1h-79.8c-4.7 0-9.2 2.1-12.3 5.7L511.6 449.8 295.1 191.7c-3-3.6-7.5-5.7-12.3-5.7H203c-6.8 0-10.5 7.9-6.1 13.1L459.4 512 196.9 824.9A7.95 7.95 0 0 0 203 838h79.8c4.7 0 9.2-2.1 12.3-5.7l216.5-258.1 216.5 258.1c3 3.6 7.5 5.7 12.3 5.7h79.8c6.8 0 10.5-7.9 6.1-13.1L563.8 512z"
+            />
+          </svg>
+        </button>
+      </div>
+      <div
+        class="content"
+      >
+        <p
+          class="b1"
+        >
+          Are you sure you want to sign out?
+        </p>
+        <button
+          class="btn_top"
+        >
+          <span>
+            Yes, but I'll be back
+          </span>
+        </button>
+        <button
+          class="btn_bottom"
+        >
+          <span>
+            No, I think I'll stay
+          </span>
+        </button>
+      </div>
+    </div>
+  </dialog>
+</div>
+`;

@@ -291,7 +291,7 @@ exports[`Home renders homepage unchanged 1`] = `
            and registering 8 of their friends to vote in 8 days.
         </h2>
         <button
-          class="btn_gradient btn_wide"
+          class="btn_gradient btn_wide btn_lg"
         >
           Take the Challenge
         </button>

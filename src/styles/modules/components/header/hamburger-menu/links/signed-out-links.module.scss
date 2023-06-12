@@ -1,0 +1,12 @@
+@use './link-utils' as *;
+
+.take_the_challenge_btn {
+  @include take-the-challenge-btn();
+  margin-top: 56px;
+  margin-left: 30px;
+}
+
+.link_lg_top {
+  @include link-lg();
+  margin-top: 27px;
+}

@@ -1,0 +1,69 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`PlayerLinks renders player links unchanged 1`] = `
+<div>
+  <li>
+    <a
+      class="take_the_challenge_btn"
+      href="/challengerwelcome"
+    >
+      Take The Challenge
+    </a>
+  </li>
+  <li>
+    <a
+      class="link_lg_top"
+      href="/actions"
+    >
+      Take Action
+    </a>
+  </li>
+  <li>
+    <a
+      class="link_lg"
+      href="/why8by8"
+    >
+      Why 8by8
+    </a>
+  </li>
+  <li>
+    <a
+      class="link_lg"
+      href="/rewards"
+    >
+      Rewards
+    </a>
+  </li>
+  <li>
+    <a
+      class="link_lg"
+      href="/faq"
+    >
+      FAQS
+    </a>
+  </li>
+  <li>
+    <a
+      class="link_sm_top"
+      href="/privacy"
+    >
+      Privacy Policy
+    </a>
+  </li>
+  <li>
+    <a
+      class="link_sm"
+      href="/settings"
+    >
+      Settings
+    </a>
+  </li>
+  <li>
+    <button
+      class="signout_btn"
+    >
+      Sign out
+    </button>
+  </li>
+</div>
+`;

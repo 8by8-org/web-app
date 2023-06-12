@@ -1,16 +1,18 @@
 @forward "variables/colors" as color-*;
+@forward "variables/navigation" as navigation-*;
 @forward "variables/font-families" as font-family-*;
 @forward "variables/font-sizes" as font-size-*;
 @forward "variables/font-weights" as font-weight-*;
 @forward "variables/gradients" as gradient-*;
 @forward "variables/letter-spacings" as letter-spacing-*;
 @forward "variables/line-heights" as line-height-*;
-@forward "variables/screen-sizes" as screen-size-*;
+@forward "variables/page-widths" as page-width-*;
 @forward "variables/spacings" as spacing-*;
 
-@forward "mixins/media-queries" as media-query-*;
+@forward "mixins/z-indices" as z-index-*;
 
 @forward "classes/utils/color-utils" as color-util-*;
+@forward "classes/utils/display-utils" as display-*;
 
 @forward "classes/molecules/buttons" as button-*;
 @forward "classes/molecules/links" as link-*;
