@@ -4,8 +4,8 @@
   display: flex;
   justify-content: center;
   width: 100%;
-  position: relative;
-  top: partials.$navigation-height;
+  height: 100%;
+  margin-top: partials.$navigation-height;
   min-width: partials.$page-width-min;
   @include partials.z-index-base();
 }

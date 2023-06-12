@@ -34,18 +34,18 @@ export default function PopupModal ({ariaLabel, theme, isOpen, closeModal, child
         }
       }}
     >
-        <div className={theme}>
-          <div className={styles.close_btn_container}>
-            <button
-              className={styles.close_btn}
-              aria-label="close dialog"
-              onClick={closeModal}
-            >
-              <AiOutlineClose />
-            </button>
-          </div>
-          <div className={styles.content}>{children}</div>
+      <div>
+        <div className={styles.close_btn_container}>
+          <button
+            className={styles.close_btn}
+            aria-label="close dialog"
+            onClick={closeModal}
+          >
+            <AiOutlineClose />
+          </button>
         </div>
+        <div className={styles.content}>{children}</div>
+      </div>
     </dialog>
   );
 }

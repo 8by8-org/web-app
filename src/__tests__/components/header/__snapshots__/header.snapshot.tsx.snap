@@ -178,9 +178,7 @@ exports[`Header renders the header unchanged 1`] = `
     class="popup_modal_dark_theme"
     role="dialog"
   >
-    <div
-      class="dark"
-    >
+    <div>
       <div
         class="close_btn_container"
       >
