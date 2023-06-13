@@ -49,7 +49,7 @@ describe('IconsTray', () => {
     );
     const feedbackBtn = screen.getByLabelText('open feedback form');
     await user.click(feedbackBtn);
-    expect(window.open).toHaveBeenCalledWith("https://forms.gle/r33L2NAKT69MrvsZ7", '_blank');
+    expect(window.open).toHaveBeenCalledWith('https://forms.gle/r33L2NAKT69MrvsZ7', '_blank');
   });
 
   it('calls openHamburgerMenu when the open hamburger button is clicked.', async () => {
