@@ -39,7 +39,6 @@ describe('IconsTray', () => {
   it('opens the feedback form when the feedback button is clicked.', async () => {
     const user = userEvent.setup();
     window.open = jest.fn();
-    jest.spyOn(window, 'open');
     render(
       <MockHeaderCtx 
         menuState={HamburgerMenuState.closed}
