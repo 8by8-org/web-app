@@ -1,0 +1,19 @@
+@use '../../partials';
+
+.container {
+  padding: 30px;
+
+  h1 {
+    margin-bottom: 10px;
+  }
+
+  h2 {
+    margin-bottom: 5px;
+  }
+
+  p {
+    @extend .b4;
+    line-height: 1.5;
+    margin-bottom: 20px;
+  }
+}
