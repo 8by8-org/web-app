@@ -1,4 +1,4 @@
-import React, { use } from "react";
+import React from "react";
 import { useContext } from "react";
 import { useRouter } from "next/router";
 import { UserContext } from "@/contexts/user-context";
@@ -102,6 +102,7 @@ function ChallengerWelcome() {
         <button
           onClick={() => router.push("/signup")}
           className="gradient-button"
+          id="get-started"
         >
           Get Started
         </button>

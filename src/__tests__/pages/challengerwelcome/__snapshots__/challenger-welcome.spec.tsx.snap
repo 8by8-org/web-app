@@ -170,6 +170,7 @@ exports[`ChallengerWelcome Matches DOM Snapshot 1`] = `
       />
       <button
         class="gradient-button"
+        id="get-started"
       >
         Get Started
       </button>
