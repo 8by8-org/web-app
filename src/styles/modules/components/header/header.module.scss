@@ -1,0 +1,36 @@
+@use "../../../partials";
+
+@mixin header-base {
+  background-color: partials.$color-black-8by8;
+  height: 57px;
+  width: 100%;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  @include partials.z-index-intermediate();
+}
+
+.header {
+  @include header-base();
+  position: fixed;
+  top: 0;
+}
+
+.header_content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  max-width: partials.$page-width-max;
+  width: 100%;
+}
+
+.brand_link {
+  height: 38px;
+  padding-left: 15px;
+}
+
+.brand_logo {
+  height: inherit;
+  width: auto;
+}

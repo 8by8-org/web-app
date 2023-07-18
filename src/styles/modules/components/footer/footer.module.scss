@@ -1,0 +1,39 @@
+@use '../../../partials';
+
+.footer_container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.footer {
+  background-color: partials.$color-black-8by8;
+  padding: 30px;
+  max-width: partials.$page-width-max;
+  min-width: partials.$page-width-min;
+}
+
+.icons {
+  padding: 22px 0;
+  display: flex;
+  justify-content: center;
+}
+
+.transparent_btn {
+  background-color: transparent;
+  border: none;
+  margin: 0 15px;
+  svg {
+    color: partials.$color-white;
+    font-size: 30px;
+  }
+}
+
+.description {
+  p {
+    @extend .b6;
+    color: partials.$color-white;
+    text-align: center;
+    margin: 5px;
+  }
+}

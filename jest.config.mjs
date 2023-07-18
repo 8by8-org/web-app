@@ -14,9 +14,11 @@ const config = {
   collectCoverage: true,
   //add directories here to include them in coverage reports and threshold
   collectCoverageFrom: [
-    './src/components/**', 
+    './src/components/**',
+    './src/contexts/**', 
     './src/pages/**', 
-    '!./src/pages/_app.tsx'], 
+    '!./src/pages/_app.tsx'
+  ], 
   coverageThreshold: { //require 100% code coverage for the tests to pass
     global: {
       branches: 100,

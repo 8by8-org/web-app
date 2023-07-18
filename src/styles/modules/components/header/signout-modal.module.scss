@@ -1,0 +1,11 @@
+@use '../../../partials';
+
+.btn_top {
+  @extend .btn_gradient, .btn_sm, .btn_wide;
+  margin-top: 40px;
+}
+
+.btn_bottom {
+  @extend .btn_inverted, .btn_sm, .btn_wide;
+  margin-top: 28px;
+}

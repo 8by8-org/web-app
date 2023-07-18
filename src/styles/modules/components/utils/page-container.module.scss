@@ -1,0 +1,16 @@
+@use '../../../partials';
+
+.outer_container {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  margin-top: partials.$navigation-height;
+  min-width: partials.$page-width-min;
+}
+
+.inner_container {
+  width: 100%;
+  max-width: partials.$page-width-max;
+  min-width: partials.$page-width-min;
+}

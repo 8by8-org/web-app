@@ -1,0 +1,8 @@
+@use './link-utils';
+
+.signout_btn {
+  @extend .link_sm;
+  padding: 0;
+  background-color: transparent;
+  border: none;
+}

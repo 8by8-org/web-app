@@ -72,6 +72,7 @@
 
     .challenge_btn {
       @extend .btn_gradient;
+      @extend .btn_lg;
       @extend .btn_wide;
       margin: 50px 0;
     }
@@ -80,7 +81,6 @@
       @extend .link;
       color: partials.$color-teal;
       padding-bottom: 2em;
-      z-index: 1;
       position: relative;
       top: -1.8em;
 
@@ -101,6 +101,7 @@
   .sign {
     width: 340px;
     max-width: 100vw;
+    height: auto;
     display: block;
     margin-left: auto;
     margin-right: auto;
@@ -146,12 +147,14 @@
   .speech_bubble {
     margin: 30px 0 0 30px;
     width: 225px;
+    height: auto;
   }
 
   .mic {
     width: 225px;
     max-width: calc(100vw / 2);
     min-width: 140px;
+    height: auto;
     margin-left: 20px;
   }
 }
