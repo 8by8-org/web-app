@@ -1,7 +1,5 @@
-// Figure out how to get the data of the friend user.
-// Add comments.
-
 import PageContainer from "@/components/utils/page-container";
+import { InviterContext } from "@/contexts/inviter-context";
 import { UserContext } from "@/contexts/user-context";
 import Image from "next/image";
 import Link from "next/link";
@@ -16,31 +14,27 @@ import styles from "../styles/modules/pages/playerwelcome.module.scss";
 
 export default function PlayerWelcome() {
   const router = useRouter()
-  const {activeUser} = useContext(UserContext);
-
-  // For share this page needs to get the code from the url and then use that to get the
-  // friends info. If playerwelcome then check local storage to see if there is a friend's
-  // information that the user is doing actions for. If none of those two then send the user
-  // to the signin page.
+  const { activeUser } = useContext(UserContext);
+  const { inviterInfo } = useContext(InviterContext);
 
   return (
     <PageContainer>
       <section className={styles.section_1}>
-
+        
         <h1 className={styles.top_header}>
           <u className="underline">Support</u>{" "}
-          {/* {challengerInfo && challengerInfo.name !== null
-            ? `${challengerInfo.name}'s`
-            : "the"}{" "} */}
+          {inviterInfo
+            ? `${inviterInfo.name}'s`
+            : "the"}{" "}
           8by8 Challenge!
         </h1>
 
         <p>
           <b className={styles.content}>
             Help{" "}
-            {/* {challengerInfo && challengerInfo.name !== null
-              ? challengerInfo.name
-              : "your friend"}{" "} */}
+            {inviterInfo
+              ? inviterInfo.name
+              : "your friend"}{" "}
             win their <u>8by8 Challenge</u> by registering to vote or taking
             other actions to #stopasianhate!
           </b>
@@ -54,7 +48,6 @@ export default function PlayerWelcome() {
           Get Started
         </button>
         
-        {/* When the user is signed in don't show signin buttons. */}
         {!activeUser && (
           <p className={styles.signin_line}>
             Already have an account?{" "}
@@ -122,7 +115,6 @@ export default function PlayerWelcome() {
           Get Started
         </button>
         
-        {/* When the user is signed in don't show signin buttons. */}
         {!activeUser && (
           <p className={styles.signin_line}>
             Already have an account?{" "}

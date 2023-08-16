@@ -20,6 +20,8 @@ exports[`PlayerWelcome renders player-welcome page unchanged 1`] = `
             Support
           </u>
            
+          the
+           
           8by8 Challenge!
         </h1>
         <p>
@@ -27,6 +29,8 @@ exports[`PlayerWelcome renders player-welcome page unchanged 1`] = `
             class="content"
           >
             Help
+             
+            your friend
              
             win their 
             <u>

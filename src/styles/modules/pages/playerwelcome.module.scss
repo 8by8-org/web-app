@@ -58,12 +58,10 @@
   .black_curve {
     width: 100%;
     height: auto;
-    -moz-drag-over: none;
-    -webkit-user-drag: none;
-    -moz-user-select: none;
-    -webkit-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
+    @extend .user-no-drag;
+    @extend .user-no-select;
+    position: relative;
+    vertical-align: middle;
   }
 }
 
