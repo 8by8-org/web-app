@@ -71,6 +71,7 @@ export default function PlayerWelcome() {
           src={BlackCurve}
           alt="Black Curve" 
           id="black_curve"
+          draggable={false}
         />
       </div>
 

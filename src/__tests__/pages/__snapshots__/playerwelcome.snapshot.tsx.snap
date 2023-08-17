@@ -72,6 +72,7 @@ exports[`PlayerWelcome renders player-welcome page unchanged 1`] = `
           class="black_curve"
           data-nimg="1"
           decoding="async"
+          draggable="false"
           height="40"
           id="black_curve"
           loading="lazy"
