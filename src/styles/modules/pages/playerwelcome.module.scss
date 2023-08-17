@@ -1,0 +1,101 @@
+@use "../../partials";
+
+.get_started_btn {
+  @extend .btn_gradient;
+  @extend .btn_lg;
+  @extend .btn_wide;
+  margin: 32px 0px 24px;
+}
+
+.signin_line {
+  @extend .b6;
+  letter-spacing: 0.28px;
+  margin-bottom: 24px;
+  a {
+    padding-left: 2px;
+  }
+}
+
+.section_1 {
+  background-color: partials.$color-black-8by8;
+  color: partials.$color-white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: left;
+  padding: 35px 30px 0px;
+
+  .top_header {
+    letter-spacing: 1.44px;
+    margin-bottom: 27px;
+  }
+
+  .content {
+    @extend .b1;
+    letter-spacing: 0.36px;
+  }
+
+  .teal_link {
+    @extend .link;
+    @extend .b5;
+    color: partials.$color-teal;
+    width: -moz-fit-content;
+    width: fit-content;
+    letter-spacing: 0.28px;
+
+    &:hover {
+      color: partials.$color-teal;
+    }
+  }
+}
+
+.curve_container {
+  height: 0px;
+  width: 100%;
+  display: block;
+  margin: 0px 0px 60px 0px;
+
+  .black_curve {
+    width: 100%;
+    height: auto;
+    @extend .user-no-drag;
+    @extend .user-no-select;
+    position: relative;
+    vertical-align: middle;
+  }
+}
+
+.section_2 {
+  background-color: partials.$color-white;
+  color: partials.$color-black-text;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: left;
+  padding: 0px 30px 16px;
+
+  h2 {
+    margin-bottom: 24px;
+    line-height: normal;
+    letter-spacing: 1.08px;
+  }
+
+  .step_header {
+    align-self: flex-start;
+    line-height: normal;
+    letter-spacing: 0.72px;
+  }
+
+  .step_text {
+    @extend .b2;
+    letter-spacing: 0.36px;
+  }
+
+  .image {
+    margin: 20px 0px;
+  }
+
+  .signin_link_black {
+    @extend .link;
+  }
+}

@@ -1,0 +1,207 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`PlayerWelcome renders player-welcome page unchanged 1`] = `
+<div>
+  <div
+    class="outer_container"
+  >
+    <div
+      class="inner_container"
+    >
+      <section
+        class="section_1"
+      >
+        <h1
+          class="top_header"
+        >
+          <u
+            class="underline"
+          >
+            Support
+          </u>
+           
+          the
+           
+          8by8 Challenge!
+        </h1>
+        <p>
+          <b
+            class="content"
+          >
+            Help
+             
+            your friend
+             
+            win their 
+            <u>
+              8by8 Challenge
+            </u>
+             by registering to vote or taking other actions to #stopasianhate!
+          </b>
+        </p>
+        <button
+          class="get_started_btn"
+          type="button"
+        >
+          Get Started
+        </button>
+        <p
+          class="signin_line"
+        >
+          Already have an account?
+           
+          <a
+            class="teal_link"
+            href="/signin"
+          >
+            Sign In
+          </a>
+        </p>
+        <a
+          class="teal_link"
+          href="/why8by8"
+        >
+          See why others are doing it
+        </a>
+      </section>
+      <div
+        class="curve_container"
+      >
+        <img
+          alt="Black Curve"
+          class="black_curve"
+          data-nimg="1"
+          decoding="async"
+          draggable="false"
+          height="40"
+          id="black_curve"
+          loading="lazy"
+          src="/_next/image?url=%2Fimg.jpg&w=96&q=75"
+          srcset="/_next/image?url=%2Fimg.jpg&w=48&q=75 1x, /_next/image?url=%2Fimg.jpg&w=96&q=75 2x"
+          style="color: transparent;"
+          width="40"
+        />
+      </div>
+      <section
+        class="section_2"
+      >
+        <h2
+          class="underline"
+        >
+          Here's how it works
+        </h2>
+        <h3
+          class="step_header"
+        >
+          1. Choose an action to take
+        </h3>
+        <p
+          class="step_text"
+        >
+          You can take any number of the available actions: register to vote, get election reminders or take the 8by8 challenge yourself. Pick one to start.
+        </p>
+        <img
+          alt="Take Action"
+          class="image"
+          data-nimg="1"
+          decoding="async"
+          height="40"
+          id="take_action"
+          loading="lazy"
+          src="/_next/image?url=%2Fimg.jpg&w=96&q=75"
+          srcset="/_next/image?url=%2Fimg.jpg&w=48&q=75 1x, /_next/image?url=%2Fimg.jpg&w=96&q=75 2x"
+          style="color: transparent;"
+          width="40"
+        />
+        <h3
+          class="step_header"
+        >
+          2. Your friend will earn a badge
+        </h3>
+        <p
+          class="step_text"
+        >
+          Any of the 3 actions will help your friend earn a badge and get closer to winning the challenge.
+        </p>
+        <img
+          alt="Friend Earns a Badge"
+          class="image"
+          data-nimg="1"
+          decoding="async"
+          height="40"
+          id="earn_badge"
+          loading="lazy"
+          src="/_next/image?url=%2Fimg.jpg&w=96&q=75"
+          srcset="/_next/image?url=%2Fimg.jpg&w=48&q=75 1x, /_next/image?url=%2Fimg.jpg&w=96&q=75 2x"
+          style="color: transparent;"
+          width="40"
+        />
+        <h3
+          class="step_header"
+        >
+          3. Come back and take more actions
+        </h3>
+        <p
+          class="step_text"
+        >
+          Whether it is to help the same friend or a different one, the more actions you take, the better! Note that you can only help earn one badge per friend.
+        </p>
+        <img
+          alt="More Actions"
+          class="image"
+          data-nimg="1"
+          decoding="async"
+          height="40"
+          id="more_actions"
+          loading="lazy"
+          src="/_next/image?url=%2Fimg.jpg&w=96&q=75"
+          srcset="/_next/image?url=%2Fimg.jpg&w=48&q=75 1x, /_next/image?url=%2Fimg.jpg&w=96&q=75 2x"
+          style="color: transparent;"
+          width="40"
+        />
+        <h3
+          class="step_header"
+        >
+          4. Get a Reward!
+        </h3>
+        <p
+          class="step_text"
+        >
+          When your friend wins the challenge within 8 days, you win as well! Then select and enjoy a reward from one of our amazing partners.
+        </p>
+        <img
+          alt="Get a Reward"
+          class="image"
+          data-nimg="1"
+          decoding="async"
+          height="40"
+          id="get_reward"
+          loading="lazy"
+          src="/_next/image?url=%2Fimg.jpg&w=96&q=75"
+          srcset="/_next/image?url=%2Fimg.jpg&w=48&q=75 1x, /_next/image?url=%2Fimg.jpg&w=96&q=75 2x"
+          style="color: transparent;"
+          width="40"
+        />
+        <button
+          class="get_started_btn"
+          type="button"
+        >
+          Get Started
+        </button>
+        <p
+          class="signin_line"
+        >
+          Already have an account?
+           
+          <a
+            class="signin_link_black"
+            href="/signin"
+          >
+            Sign In
+          </a>
+        </p>
+      </section>
+    </div>
+  </div>
+</div>
+`;
