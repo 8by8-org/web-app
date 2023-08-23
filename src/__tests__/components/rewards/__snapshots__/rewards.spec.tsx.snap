@@ -1,0 +1,214 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Rewards renders rewards component 1`] = `
+<div>
+  <div
+    class="Rewards"
+  >
+    <div
+      class="bg-black pt-32px pr-30px pl-30px pb-30px"
+    >
+      <h1>
+        Rewards
+      </h1>
+      <p
+        class="description-text"
+      >
+        Win the 8by8 challenge, and you'll recieve a reward from one of our amazing partners!
+      </p>
+    </div>
+    <img
+      alt="black curve"
+      class="curve"
+      src="[object Object]"
+    />
+    <div
+      class="sponsor-section"
+    >
+      <div
+        class="sponsor"
+      >
+        <img
+          alt="Placeholder"
+          data-nimg="1"
+          decoding="async"
+          height="40"
+          loading="lazy"
+          src="/_next/image?url=%2Fimg.jpg&w=96&q=75"
+          srcset="/_next/image?url=%2Fimg.jpg&w=48&q=75 1x, /_next/image?url=%2Fimg.jpg&w=96&q=75 2x"
+          style="color: transparent;"
+          width="40"
+        />
+        <p>
+          Unfortunately, we are not offering partner rewards at this time. You can still take the 8by8 Challenge to help the AAPI community!
+        </p>
+        <button
+          class="challenge-button"
+        >
+          Take the Challenge!
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Rewards renders rewards component with partners 1`] = `
+<div>
+  <div
+    class="Rewards"
+  >
+    <div
+      class="bg-black pt-32px pr-30px pl-30px pb-30px"
+    >
+      <h1>
+        Rewards
+      </h1>
+      <p
+        class="description-text"
+      >
+        Win the 8by8 challenge, and you'll recieve a reward from one of our amazing partners!
+      </p>
+    </div>
+    <img
+      alt="black curve"
+      class="curve"
+      src="[object Object]"
+    />
+    <div
+      class="sponsor-section"
+    >
+      <div
+        class="sponsor"
+      >
+        <a
+          href="https://www.chefus.com/"
+        >
+          <img
+            alt="Chefus"
+            data-nimg="1"
+            decoding="async"
+            height="40"
+            loading="lazy"
+            src="/_next/image?url=%2Fimg.jpg&w=96&q=75"
+            srcset="/_next/image?url=%2Fimg.jpg&w=48&q=75 1x, /_next/image?url=%2Fimg.jpg&w=96&q=75 2x"
+            style="color: transparent;"
+            width="40"
+          />
+          <h5>
+            Chefus
+          </h5>
+          <p>
+            Online deliveries
+             
+          </p>
+        </a>
+      </div>
+      <div
+        class="sponsor"
+      >
+        <a
+          href="https://purelydrinks.com/"
+        >
+          <img
+            alt="Purely Drinks"
+            data-nimg="1"
+            decoding="async"
+            height="40"
+            loading="lazy"
+            src="/_next/image?url=%2Fimg.jpg&w=96&q=75"
+            srcset="/_next/image?url=%2Fimg.jpg&w=48&q=75 1x, /_next/image?url=%2Fimg.jpg&w=96&q=75 2x"
+            style="color: transparent;"
+            width="40"
+          />
+          <h5>
+            Purely Drinks
+          </h5>
+          <p>
+            Online deliveries
+             
+          </p>
+        </a>
+      </div>
+      <div
+        class="sponsor"
+      >
+        <a
+          href="https://www.saltalk.com/"
+        >
+          <img
+            alt="Saltalk"
+            data-nimg="1"
+            decoding="async"
+            height="40"
+            loading="lazy"
+            src="/_next/image?url=%2Fimg.jpg&w=96&q=75"
+            srcset="/_next/image?url=%2Fimg.jpg&w=48&q=75 1x, /_next/image?url=%2Fimg.jpg&w=96&q=75 2x"
+            style="color: transparent;"
+            width="40"
+          />
+          <h5>
+            Saltalk
+          </h5>
+          <p>
+            Online deliveries
+             
+          </p>
+        </a>
+      </div>
+      <div
+        class="sponsor"
+      >
+        <a
+          href="https://www.tippsysake.com/"
+        >
+          <img
+            alt="Tippsy"
+            data-nimg="1"
+            decoding="async"
+            height="40"
+            loading="lazy"
+            src="/_next/image?url=%2Fimg.jpg&w=96&q=75"
+            srcset="/_next/image?url=%2Fimg.jpg&w=48&q=75 1x, /_next/image?url=%2Fimg.jpg&w=96&q=75 2x"
+            style="color: transparent;"
+            width="40"
+          />
+          <h5>
+            Tippsy
+          </h5>
+          <p>
+            Online deliveries
+             
+          </p>
+        </a>
+      </div>
+      <div
+        class="sponsor"
+      >
+        <a
+          href="https://www.example.com/"
+        >
+          <img
+            alt="Fake"
+            data-nimg="1"
+            decoding="async"
+            height="40"
+            loading="lazy"
+            src="/_next/image?url=%2Fimg.jpg&w=96&q=75"
+            srcset="/_next/image?url=%2Fimg.jpg&w=48&q=75 1x, /_next/image?url=%2Fimg.jpg&w=96&q=75 2x"
+            style="color: transparent;"
+            width="40"
+          />
+          <h5>
+            Fake
+          </h5>
+          <p>
+            Online deliveries
+             
+          </p>
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+`;
