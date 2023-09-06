@@ -13,6 +13,8 @@
 
 @forward "classes/utils/color-utils" as color-util-*;
 @forward "classes/utils/display-utils" as display-*;
+@forward "classes/utils/user-drag-utils" as user-drag-*;
+@forward "classes/utils/user-select-utils" as user-select-*;
 
 @forward "classes/molecules/buttons" as button-*;
 @forward "classes/molecules/links" as link-*;
