@@ -1,11 +1,12 @@
 //TODO: copy .scss code into styles folder
 
-import CurveA from "../../../assets/2-shapes/curve-a.svg";
+import CurveA from "../../public/assets/2-shapes/curve-a.svg";
 //import './Rewards.scss';
 import { useRouter } from "next/router";
-import placeholderImage from "../../../assets/images/placeholder-image.jpg";
+import placeholderImage from "../../public/assets/images/placeholder-image.jpg";
 import { StaticImageData } from "next/image";
 import Image from "next/image";
+import chefusLogo from "../../public/assets/partner-logos/chefus.png";
 
 import {Partner} from "@/models/Partner";
 
@@ -16,6 +17,15 @@ const Rewards = ({partners}: RewardsProps) => {
 
     // Consistent data type
     // Also includes key since we will be iterating over it
+    const Chefus = new Partner(
+        "Chefus",
+        "https://www.chefus.com/",
+        chefusLogo,
+        "Online deliveries",
+        "",
+       )
+
+    partners = [Chefus];
 
 
     return (
@@ -31,7 +41,7 @@ const Rewards = ({partners}: RewardsProps) => {
             <img className="curve" src={CurveA} alt="black curve" />
             <div className="sponsor-section">
                 { /* If we have partners */}
-                {partners.length > 0 && partners.map((partner) => {
+                {partners && partners.length > 0 && partners.map((partner) => {
                     return (
                         <div className="sponsor" key={partner.partnerID}>
                             <a href={partner.partnerLink}>
@@ -44,7 +54,7 @@ const Rewards = ({partners}: RewardsProps) => {
                 })}
 
                 { /* If we don't have any partners */}
-                {partners.length === 0 && (
+                {partners && partners.length === 0 && (
                     <div className="sponsor">
                         <Image src={placeholderImage} alt="Placeholder" />
                         <p>

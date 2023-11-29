@@ -3,7 +3,7 @@ import mockRouter from 'next-router-mock';
 
 import { render, screen, cleanup, fireEvent } from '@testing-library/react'
 import '@testing-library/jest-dom'
-import Rewards from "@/components/rewards/rewards";
+import Rewards from "@/pages/rewards";
 import {Partner} from "@/models/Partner";
 import chefusLogo from "../../../assets/partner-logos/chefus.png";
 import purelyLogo from "../../../assets/partner-logos/purely.png";

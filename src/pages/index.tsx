@@ -56,7 +56,7 @@ export default function Home() {
           national and a local problem.
         </p>
       </section>
-
+and
       <div className={styles.curve_container}>
         <Image className={styles.curve} src={Curve2} alt="teal curve" />
       </div>
