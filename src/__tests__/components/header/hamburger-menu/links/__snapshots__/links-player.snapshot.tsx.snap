@@ -45,7 +45,7 @@ exports[`Links--Player renders player links unchanged 1`] = `
   <li>
     <a
       class="link_sm_top"
-      href="/privacy"
+      href="/privacy-policy"
     >
       Privacy Policy
     </a>
