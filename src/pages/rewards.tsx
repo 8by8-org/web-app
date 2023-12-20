@@ -35,7 +35,7 @@ const Rewards = ({partners}: RewardsProps) => {
                     Rewards
                 </h1>
                 <p className="description-text">
-                    Win the 8by8 challenge, and you'll recieve a reward from one of our amazing partners!
+                    Win the 8by8 challenge, and you&apos;ll recieve a reward from one of our amazing partners!
                 </p>
             </div>
             <img className="curve" src={CurveA} alt="black curve" />
