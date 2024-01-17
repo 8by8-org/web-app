@@ -1,0 +1,38 @@
+@import "./../../styles/main.scss";
+
+.notif-background {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  pointer-events: none;
+}
+
+.Notification {
+  height: 50px;
+  width: 200px;
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  border-radius: 6px;
+  overflow: hidden;
+  border: 2px black solid;
+  position: fixed;
+  bottom: 20px;
+
+  .text {
+    font-size: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-grow: 1;
+  }
+}
+
+.Notification.show {
+  opacity: 1;
+}
+
+.Notification.none {
+  opacity: 0;
+  transition: 350ms;
+}
