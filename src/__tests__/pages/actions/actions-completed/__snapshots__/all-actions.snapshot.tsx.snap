@@ -1,0 +1,123 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Actions checks if the correct elements appear when the user has completed all the actions 1`] = `
+<div>
+  <div
+    class="outer_container"
+  >
+    <div
+      class="inner_container"
+    >
+      <div>
+        <canvas
+          data-testid="confetti animation"
+          height="0"
+          style="z-index: 2; position: absolute; pointer-events: none; top: 0px; left: 0px; bottom: 0px; right: 0px;"
+          width="0"
+        />
+        <section
+          class="section_1"
+        >
+          <div
+            class="actions_completed"
+          >
+            <h1
+              class="heading"
+            >
+              <span>
+                You are done! 
+                <br />
+                You Supported: 
+              </span>
+            </h1>
+            <div
+              class="avatar_container"
+            >
+              <div>
+                <img
+                  alt="Inviter Avatar"
+                  data-nimg="1"
+                  decoding="async"
+                  height="40"
+                  id="inviter-avatar"
+                  loading="lazy"
+                  src="/_next/image?url=%2Fimg.jpg&w=96&q=75"
+                  srcset="/_next/image?url=%2Fimg.jpg&w=48&q=75 1x, /_next/image?url=%2Fimg.jpg&w=96&q=75 2x"
+                  style="color: transparent;"
+                  width="40"
+                />
+                <img
+                  alt="Inviter Crown"
+                  class="crown"
+                  data-nimg="1"
+                  decoding="async"
+                  height="40"
+                  loading="lazy"
+                  src="/_next/image?url=%2Fimg.jpg&w=96&q=75"
+                  srcset="/_next/image?url=%2Fimg.jpg&w=48&q=75 1x, /_next/image?url=%2Fimg.jpg&w=96&q=75 2x"
+                  style="color: transparent;"
+                  width="40"
+                />
+              </div>
+              <h3
+                class="inviter_name"
+                id="inviter-name"
+              >
+                Test Name
+              </h3>
+            </div>
+          </div>
+        </section>
+        <div
+          class="curve_container"
+        >
+          <img
+            alt="White Curve"
+            class="white_curve"
+            data-nimg="1"
+            decoding="async"
+            draggable="false"
+            height="40"
+            id="white_curve"
+            loading="lazy"
+            src="/_next/image?url=%2Fimg.jpg&w=96&q=75"
+            srcset="/_next/image?url=%2Fimg.jpg&w=48&q=75 1x, /_next/image?url=%2Fimg.jpg&w=96&q=75 2x"
+            style="color: transparent;"
+            width="40"
+          />
+        </div>
+        <section
+          class="section_2"
+        >
+          <div>
+            <button
+              class="first_button"
+              type="button"
+            >
+              <span>
+                See Your Challenge
+              </span>
+            </button>
+            <button
+              class="second_button"
+              type="button"
+            >
+              <span>
+                Share About Your Actions
+              </span>
+            </button>
+            <button
+              class="second_button"
+              type="button"
+            >
+              <span>
+                Get your registration form again
+              </span>
+            </button>
+          </div>
+        </section>
+      </div>
+    </div>
+  </div>
+</div>
+`;

@@ -1,0 +1,17 @@
+@use "../../../partials";
+
+.heading {
+  @extend .b1;
+  margin-bottom: 16px;
+}
+
+.text {
+  @extend .b4;
+  margin-bottom: 16px;
+}
+
+.ok_btn {
+  @extend .btn_gradient;
+  @extend .btn_sm;
+  width: 130px;
+}

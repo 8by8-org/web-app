@@ -1,0 +1,148 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Actions checks if the correct elements appear when the user has registered to vote and signed up for election reminders 1`] = `
+<div>
+  <div
+    class="outer_container"
+  >
+    <div
+      class="inner_container"
+    >
+      <div>
+        <section
+          class="section_1"
+        >
+          <div
+            class="status"
+          >
+            <h1
+              class="heading"
+            >
+              <span>
+                You 
+                <br />
+                Took 
+                <br />
+                Action! 
+              </span>
+            </h1>
+            <div
+              class="avatar_container"
+            >
+              <div>
+                <img
+                  alt="Inviter Avatar"
+                  data-nimg="1"
+                  decoding="async"
+                  height="40"
+                  id="inviter-avatar"
+                  loading="lazy"
+                  src="/_next/image?url=%2Fimg.jpg&w=96&q=75"
+                  srcset="/_next/image?url=%2Fimg.jpg&w=48&q=75 1x, /_next/image?url=%2Fimg.jpg&w=96&q=75 2x"
+                  style="color: transparent;"
+                  width="40"
+                />
+                <img
+                  alt="Inviter Crown"
+                  class="crown"
+                  data-nimg="1"
+                  decoding="async"
+                  height="40"
+                  loading="lazy"
+                  src="/_next/image?url=%2Fimg.jpg&w=96&q=75"
+                  srcset="/_next/image?url=%2Fimg.jpg&w=48&q=75 1x, /_next/image?url=%2Fimg.jpg&w=96&q=75 2x"
+                  style="color: transparent;"
+                  width="40"
+                />
+              </div>
+              <h3
+                class="inviter_name"
+                id="inviter-name"
+              >
+                Test Name
+              </h3>
+            </div>
+          </div>
+        </section>
+        <div
+          class="curve_container"
+        >
+          <img
+            alt="White Curve"
+            class="white_curve"
+            data-nimg="1"
+            decoding="async"
+            draggable="false"
+            height="40"
+            id="white_curve"
+            loading="lazy"
+            src="/_next/image?url=%2Fimg.jpg&w=96&q=75"
+            srcset="/_next/image?url=%2Fimg.jpg&w=48&q=75 1x, /_next/image?url=%2Fimg.jpg&w=96&q=75 2x"
+            style="color: transparent;"
+            width="40"
+          />
+        </div>
+        <section
+          class="section_2"
+        >
+          <div>
+            <h3
+              class="subheading"
+            >
+              <span>
+                Test Name
+                 GOT A BADGE!
+                <br />
+                 HERE ARE OTHER ACTIONS TO HELP 
+                <br />
+                 THE AAPI COMMUNITY. 
+                <br />
+              </span>
+            </h3>
+            <button
+              class="first_button"
+              type="button"
+            >
+              <span>
+                Take the challenge
+              </span>
+            </button>
+            <div>
+              <h6
+                class="text"
+              >
+                Voting matters towards better AAPI 
+                <br />
+                representation in our country. You can help 
+                <br />
+                the community by encouring others to 
+                <br />
+                register! Take the challenge on your own! 
+                <br />
+              </h6>
+              <div
+                class="links_container"
+              >
+                <div>
+                  <button
+                    class="button_link"
+                    type="button"
+                  >
+                    Get your registration form again
+                  </button>
+                </div>
+                <button
+                  class="button_link"
+                  type="button"
+                >
+                  Share about your actions
+                </button>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+    </div>
+  </div>
+</div>
+`;
