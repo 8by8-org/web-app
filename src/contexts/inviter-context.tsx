@@ -7,7 +7,7 @@ export type InviterContextType = {
 
 type InviterInfo = Inviter | null;
 
-//setting the default context to {activeUser:null} allows for testing unwrapped components
+//setting the default context to {inviterInfo:null} allows for testing unwrapped components
 export const InviterContext = createContext<InviterContextType>({inviterInfo: null});
 
 export function InviterContextProvider({children}:PropsWithChildren) {

@@ -1,0 +1,12 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ConfettiAnimation renders the ConfettiAnimation unchanged. 1`] = `
+<div>
+  <canvas
+    data-testid="confetti animation"
+    height="0"
+    style="z-index: 2; position: absolute; pointer-events: none; top: 0px; left: 0px; bottom: 0px; right: 0px;"
+    width="0"
+  />
+</div>
+`;
