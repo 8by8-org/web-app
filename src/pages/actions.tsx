@@ -1,6 +1,3 @@
-// Image for reward does not appear properly.
-// Voter form modal needs testing
-
 import ConfettiAnimation from "@/components/confetti-animation/confetti-animation";
 import ErrorModal from "@/components/error-modal/error-modal";
 import PageContainer from "@/components/utils/page-container";

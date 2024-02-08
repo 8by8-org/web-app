@@ -16,13 +16,31 @@ jest.mock('next/router', () => ({
 describe('Actions', () => {
   afterEach(cleanup);
     
-  it('checks if the correct elements appear when the user has signed up for election reminders and the inviter has finished their challenge and no rewards are available', async () => {
+  it('checks if the voter form modal appears when the user has registered to vote and clicks on the \"Get your registration form again\" button', async () => {
     const userInfo = Builder<User>().name('Test').avatar('1').registeredVoter(true).notifyElectionReminders(false).startedChallenge(false).build();
     const userCtxValue = Builder<UserContextType>().activeUser(userInfo).build();
     const inviter = Builder<Inviter>().name('Test Name').avatar(1).finishedChallenge(true).build();
     const inviterCtxValue = Builder<InviterContextType>().inviterInfo(inviter).build();
 
     const user = userEvent.setup();
+
+    HTMLDialogElement.prototype.show = jest.fn(function mock(
+      this: HTMLDialogElement
+    ) {
+      this.open = true;
+    });
+    
+    HTMLDialogElement.prototype.showModal = jest.fn(function mock(
+      this: HTMLDialogElement
+    ) {
+      this.open = true;
+    });
+    
+    HTMLDialogElement.prototype.close = jest.fn(function mock(
+      this: HTMLDialogElement
+    ) {
+      this.open = false;
+    });
 
     const { container } = render(
       <UserContext.Provider value={userCtxValue}>

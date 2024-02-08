@@ -80,10 +80,13 @@
 
     .rewardLogo {
       position: relative;
-      object-fit: contain;
-      margin-bottom: 25px;
-      width: 190px;
+      margin-bottom: 15px;
+      width: 205px;
       height: 125px;
+
+      img {
+        object-fit: contain;
+      }
     }
 
     .content {
